@@ -1,0 +1,30 @@
+.register-form .form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.input-box {
+  width: 100%;
+  padding: 0.5rem;
+  padding-right: 2.5rem; /* Add padding to the right for the icon */
+  box-sizing: border-box;
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 0.75rem; /* Adjust as necessary */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.25rem; /* Adjust size as necessary */
+}
+.error {
+  color: red;
+}
+.form-container {
+  width: 350px;
+}
