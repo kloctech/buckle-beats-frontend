@@ -8,17 +8,13 @@ import image5 from '../../assets/image5.jpg.jpg';
 import image7 from '../../assets/image7.jpg.jpg'
 import image6 from '../../assets/image6.jpg.jpg'
 import image8 from '../../assets/image8.jpg.jpg'
-import video1 from '../../assets/video1.mp4.webm'
-import video2 from '../../assets/video2.mp4.mp4'
-import  video3 from '../../assets/video3.mp4.mp4'
+
 import Loader from '../../loader';
 import Navbar from '../navbar/navbar';
 const mediaContentMap = [
    { type: 'image', url: image1, heading: "Get your teams on WeTransfer", features: ["Stay consistent with team-wide branding"], buttonText: "Subscribe" },
    { type: 'image', url: image2, heading: "Share large files easily", features: ["Fast and secure file transfer"], buttonText: "Get Started" },
-   { type: 'video', url: video1, heading: "Collaborate with your team", features: ["Real-time collaboration tools"], buttonText: "Collaborate Now" },
-   { type: 'video', url: video2, heading: "Work seamlessly from anywhere", features: ["Flexible remote work solutions"], buttonText: "Work Now" },
-   { type: 'video', url: video3, heading: "Innovate together", features: ["Tools to enhance creativity"], buttonText: "Innovate Now" },
+      
    { type: 'image', url: image3, heading: "Backup your files", features: ["Secure and reliable backup solutions"], buttonText: "Backup Now" },
    { type: 'image', url: image4, heading: "Access files anywhere", features: ["Sync files across devices"], buttonText: "Access Now" },
    { type: 'image', url: image5, heading: "High-speed transfers", features: ["No delay, high-speed uploads"], buttonText: "Transfer Now" },
