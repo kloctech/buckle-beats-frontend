@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import "../../styles/login/login.css";
+import "../../styles/login/login.scss";
 import { Link } from "react-router-dom";
 import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
@@ -61,7 +61,6 @@ const LoginPage = () => {
                 },
               })}
             />
-            {/* //"👁️" "🙈"*/}
             <span className="toggle-password" onClick={togglePasswordVisibility}>
               {showPassword ? <VisibilityOffTwoToneIcon /> : <VisibilityTwoToneIcon />}
             </span>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import "../../styles/register/register.css";
+import "../../styles/register/register.scss";
 
 const RegisterForm = () => {
   const {
@@ -12,10 +12,6 @@ const RegisterForm = () => {
   } = useForm();
 
   const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevState) => !prevState);
-  };
 
   const onSubmit = async (data) => {
     try {
@@ -33,19 +29,18 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="register-form" style={{ width: "40vw", margin: "auto" }}>
-      <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
+    <div className="login-main-container">
+      <form className="login-content" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
-          <label htmlFor="name">Name:</label>
-          <input className="input-box" type="text" id="name" {...register("name", { required: "Name is required" })} />
+          <input className="input-box" type="text" id="name" placeholder="Name" {...register("name", { required: "Name is required" })} />
           {errors.name && <span className="error">{errors.name.message}</span>}
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
           <input
             className="input-box"
             type="email"
             id="email"
+            placeholder="Email"
             {...register("email", {
               required: "Email is required",
               pattern: {
@@ -57,12 +52,12 @@ const RegisterForm = () => {
           {errors.email && <span className="error">{errors.email.message}</span>}
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
           <div className="password-input-container">
             <input
               className="input-box"
               type={showPassword ? "text" : "password"}
               id="password"
+              placeholder="Password"
               {...register("password", {
                 required: "Password is required",
                 minLength: {
@@ -79,11 +74,11 @@ const RegisterForm = () => {
           {errors.password && <span className="error">{errors.password.message}</span>}
         </div>
         <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password:</label>
           <input
             className="input-box"
             type="password"
             id="confirmPassword"
+            placeholder="Confirm Password"
             {...register("confirmPassword", {
               required: "Confirm Password is required",
               validate: (value) => value === getValues("password") || "Passwords do not match",
@@ -91,7 +86,9 @@ const RegisterForm = () => {
           />
           {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" className="button">
+          Register
+        </button>
       </form>
     </div>
   );

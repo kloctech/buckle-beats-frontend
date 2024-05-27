@@ -1,0 +1,81 @@
+@import "../../styles/variables/variable.scss";
+.login-container {
+  height: $height-full;
+  max-width: $max-width-medium;
+  background-color: $background-color;
+  margin: auto;
+  @include center-content;
+}
+
+.login-content {
+  max-width: $max-width-small;
+  margin: auto;
+  height: 70vh;
+  background-color: transparent;
+}
+
+.login-form {
+  width: $max-width-small;
+  margin: 0 auto;
+  padding: $padding-medium;
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.form-group {
+  margin-bottom: $padding-medium;
+  position: relative;
+}
+
+.form-group input {
+  @include input-style;
+}
+
+.password-group {
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: $font-size-medium;
+  user-select: none;
+}
+
+.error-message {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  color: $error-color;
+  font-size: $font-size-small;
+}
+
+.forgot-password {
+  font-size: $font-size-small;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: end;
+
+  a {
+    color: $text-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.button {
+  @include button-style;
+}
+
+.welcome-heading {
+  color: $text-color;
+  text-align: center;
+}
