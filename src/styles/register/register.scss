@@ -1,140 +1,140 @@
-@import '../../index.scss';
+@import "../../index.scss";
 @mixin box-shadow($shadow: 0 0 15px rgba(0, 0, 0, 0.5)) {
-   box-shadow: $shadow;
- }
- 
- @mixin transition($property: all, $duration: 0.3s, $ease: ease-in-out) {
-   transition: $property $duration $ease;
- }
- 
- @mixin input-styles {
-   padding: 10px;
-   border: none;
-   border-radius: 5px;
-   font-size: 16px;
-   width: 100%;
-   color: var(--text-color)
- }
- 
- @mixin flex-center {
-   display: flex;
-   justify-content: center;
-   align-items: center;
- }
- 
- @mixin position-absolute($top: auto, $right: auto, $bottom: auto, $left: auto) {
-   position: absolute;
-   top: $top;
-   right: $right;
-   bottom: $bottom;
-   left: $left;
- }
- 
- @mixin text-center {
-   text-align: center;
- }
+  box-shadow: $shadow;
+}
+
+@mixin transition($property: all, $duration: 0.3s, $ease: ease-in-out) {
+  transition: $property $duration $ease;
+}
+
+@mixin input-styles {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  color: var(--text-color);
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin position-absolute($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin text-center {
+  text-align: center;
+}
 .regestation-container {
-   height: 100vh;
-   max-width: 350px;
-   background-color: #232323;
-   margin: auto;
-   @include flex-center;
-   @include box-shadow;
- }
- 
- .paw-prints .paw-print {
-   width: 50px;
-   height: 50px;
-   background-image: url('https://www.loomly.com/hs-fs/hubfs/Imported_Blog_Media/earth-Apr-03-2024-12-19-31-1897-AM.gif?width=540&height=540&name=earth-Apr-03-2024-12-19-31-1897-AM.gif');
-   background-size: cover;
-   @include position-absolute;
-   animation: movePaws 25s infinite;
- }
- 
- .paw1 {
-   top: 10px;
-   left: 20px;
-   animation-delay: 0s;
- }
- 
- .paw2 {
-   top: 60px;
-   left: 100px;
-   animation-delay: 1s;
- }
- 
- .paw3 {
-   bottom: 100px;
-   left: 30px;
-   animation-delay: 2s;
- }
- 
- .paw4 {
-   bottom: 60px;
-   left: 20px;
-   animation-delay: 3s;
- }
- 
- @keyframes movePaws {
-   0% {
-     transform: translateY(0);
-   }
-   50% {
-     transform: translateY(-10px);
-   }
-   100% {
-     transform: translateY(0);
-   }
- }
- 
- .dog-icon {
-   width: 120px;
-   height: 120px;
-   background-image: url('https://www.loomly.com/hs-fs/hubfs/Imported_Blog_Media/earth-Apr-03-2024-12-19-31-1897-AM.gif?width=540&height=540&name=earth-Apr-03-2024-12-19-31-1897-AM.gif');
-   background-size: cover;
-   margin: 0 auto 20px;
- }
- 
- .form-container {
-   padding: 20px;
-   color: white;
-   width: 100%;
- }
- 
- h1 {
-   @include text-center;
-   margin-bottom: 20px;
-   font-size: larger;
-   font-weight: 500;
-   color: #ffffff;
- }
- 
- form {
-   display: flex;
-   flex-direction: column;
- }
- 
- .input-container {
-   margin-bottom: 1rem;
- }
- 
- input {
-   @include input-styles;
- }
- 
- .password-container {
-   position: relative;
- }
- 
- input[type="password"],
- input[type="text"],
- input[type="email"] {
-   flex: 1;
-   padding-right: 40px; // Space for the eye icon
- }
- 
- .show-password {
-   background: none;
+  height: 100vh;
+  max-width: 350px;
+  background-color: #232323;
+  margin: auto;
+  @include flex-center;
+  @include box-shadow;
+}
+
+.paw-prints .paw-print {
+  width: 50px;
+  height: 50px;
+  background-image: url("https://www.loomly.com/hs-fs/hubfs/Imported_Blog_Media/earth-Apr-03-2024-12-19-31-1897-AM.gif?width=540&height=540&name=earth-Apr-03-2024-12-19-31-1897-AM.gif");
+  background-size: cover;
+  @include position-absolute;
+  animation: movePaws 25s infinite;
+}
+
+.paw1 {
+  top: 10px;
+  left: 20px;
+  animation-delay: 0s;
+}
+
+.paw2 {
+  top: 60px;
+  left: 100px;
+  animation-delay: 1s;
+}
+
+.paw3 {
+  bottom: 100px;
+  left: 30px;
+  animation-delay: 2s;
+}
+
+.paw4 {
+  bottom: 60px;
+  left: 20px;
+  animation-delay: 3s;
+}
+
+@keyframes movePaws {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.dog-icon {
+  width: 120px;
+  height: 120px;
+  background-image: url("https://www.loomly.com/hs-fs/hubfs/Imported_Blog_Media/earth-Apr-03-2024-12-19-31-1897-AM.gif?width=540&height=540&name=earth-Apr-03-2024-12-19-31-1897-AM.gif");
+  background-size: cover;
+  margin: 0 auto 20px;
+}
+
+.form-container {
+  padding: 20px;
+  color: white;
+  width: 100%;
+}
+
+h1 {
+  @include text-center;
+  margin-bottom: 20px;
+  font-size: larger;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container {
+  margin-bottom: 1rem;
+}
+
+input {
+  @include input-styles;
+}
+
+.password-container {
+  position: relative;
+}
+
+input[type="password"],
+input[type="text"],
+input[type="email"] {
+  flex: 1;
+  padding-right: 40px; // Space for the eye icon
+}
+
+.show-password {
+  background: none;
   border: none;
   color: #232323;
   font-size: 20px;
@@ -143,31 +143,31 @@
   right: 10px;
   top: 50%; // Center vertically
   transform: translateY(-50%); // Adjust vertically
- }
- 
- .forgot-password {
-   // @include text-center(right);
-   margin-bottom: 20px;
-   cursor: pointer;
- }
- 
- .login-button {
-   padding: 10px;
-   border: none;
-   border-radius: 5px;
-   background-color: #17a2b8;
-   color: white;
-   font-size: 18px;
-   margin-top: 30px;
-   cursor: pointer;
-   @include transition(background-color);
- 
-   &:hover {
-     background-color: #138496;
-   }
- }
- 
- .error {
-   color: #f03355;
-   font-size: 0.875rem;
- }
+}
+
+.forgot-password {
+  // @include text-center(right);
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.login-button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #17a2b8;
+  color: white;
+  font-size: 18px;
+  margin-top: 30px;
+  cursor: pointer;
+  @include transition(background-color);
+
+  &:hover {
+    background-color: #138496;
+  }
+}
+
+.error {
+  color: #f03355;
+  font-size: 0.875rem;
+}
