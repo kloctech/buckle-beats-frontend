@@ -15,7 +15,7 @@ const RegisterForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post("http://localhost:7000/api/user", {
+      await axios.post(`${process.env.REACT_APP_PRODUCTION_URL}/api/user`, {
         name: data.name,
         email: data.email,
         password: data.password,

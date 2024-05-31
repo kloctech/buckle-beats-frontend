@@ -1,0 +1,20 @@
+@import "../../styles/variables/variable.scss";
+
+.verify-email-container {
+  width: $min-width;
+  padding: 10px;
+  background-color: $background-color;
+  color: $text-color;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.verify-email-main-container {
+  height: $height-full;
+  flex-direction: column;
+  @include center-content;
+}
+.verify-email-heading {
+  text-align: center;
+}
