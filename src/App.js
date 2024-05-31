@@ -8,6 +8,8 @@ import Home from "./pages/home";
 import Blog from './pages/blog'
 import About from "./pages/about";
 import BackgroundChanger from "./components/home/home";
+import ForgotPassword from "./components/forget-password-link/forgot-password-link";
+import ChangePassword from "./components/forgot-password/forgot-password";
 const App = () => {
   return (
     <ThemeProvider>
@@ -21,6 +23,8 @@ const App = () => {
         <Route path="/home" element = {<Home/>}/>
         <Route path="/blog" element = {<Blog/>} />
         <Route path="/about" element ={<About/>} />
+        <Route path='/forgot-password-link'  element = {<ForgotPassword/>}/>
+        <Route path ='/forgot-password' element= {<ChangePassword/>}/>
       </Routes>
     </Router>
     </ThemeProvider>
