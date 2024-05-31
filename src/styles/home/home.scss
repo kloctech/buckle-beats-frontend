@@ -1,0 +1,160 @@
+@import '../login/login.scss';
+
+.container {
+  width: 80vw;
+  height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.background-changer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.background-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5); /* Optional overlay background */
+}
+
+.content {
+  display: flex;
+  color: white;
+  width: 80%;
+  max-width: 1200px;
+  justify-content: space-between;
+}
+
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.message-box {
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  margin-left: -100px;
+  height: 60vh;
+  width: 20vw;
+}
+
+.message-box h1 {
+  margin: 0;
+}
+
+.message-box p {
+  margin: 10px 0;
+}
+
+.message-box button {
+  background: blue;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  width: 30vw;
+}
+
+.right-panel .heading {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.right-panel .features {
+  list-style: none;
+  padding: 0;
+}
+
+.right-panel .features li {
+  margin: 10px 0;
+}
+
+.right-panel button {
+  background: white;
+  color: black;
+  border: 1px solid black;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.play-pause-btn {
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+.loader {
+   width: 50px;
+   aspect-ratio: 1;
+   display: grid;
+   border-radius: 50%;
+   background: conic-gradient(#25b09b 25%,#f03355 0 50%,#514b82 0 75%,#ffa516 0);
+   animation: l22 2s infinite linear;
+ }
+ .loader::before,
+ .loader::after {
+    content: "";
+    grid-area: 1/1;
+    margin: 15%;
+    border-radius: 50%;
+    background: inherit;
+    animation: inherit;
+ }
+ .loader::after {
+    margin: 25%;
+    animation-duration: 3s;
+ }
+ @keyframes l22 {
+   100% {transform: rotate(1turn)}
+ }

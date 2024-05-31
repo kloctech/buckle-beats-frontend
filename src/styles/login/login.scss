@@ -1,7 +1,8 @@
+
 .login-container {
   height: 100vh;
   max-width: 350px;
-  background-color: #232323;
+  background-color:var(--text-color);
   margin: auto;
   display: flex;
   align-items: center;
@@ -10,7 +11,12 @@
   max-width: 300px;
   margin: auto;
   height: 70vh;
-  background-color: transparent;
+  background-color: transparent
+}
+.input-box {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
 }
 .login-form {
   width: 300px;
@@ -18,7 +24,7 @@
   padding: 20px;
   /* border: 1px solid #ccc; */
   border-radius: 10px;
-  background-color: transparent;
+  background-color: var(--text-color);
 }
 
 .form-group {
@@ -33,10 +39,12 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
+  background-color: var(--text-color);
 }
 
 .password-group {
   position: relative;
+  
 }
 
 .toggle-password {
@@ -48,3 +56,4 @@
   font-size: 16px;
   user-select: none;
 }
+
