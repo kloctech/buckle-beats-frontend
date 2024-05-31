@@ -10,13 +10,14 @@
 }
 .regestation-container{
   width: 100vw;
+
 }
 .form-container {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 100vh;
+  height: 92vh;
   max-width: 380px;  // Increased width
   width: 90vw;       // Increased width for responsiveness
   margin: auto;
@@ -140,6 +141,9 @@ h1 {
 @media screen and (max-width:600px) {
   .regestation-container{
     background-color: #212530;
+  }
+  .form-container{
+    height: 100vh;
   }
   .background-iamge-container-paws{
     left: -80px;
