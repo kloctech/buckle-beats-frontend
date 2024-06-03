@@ -13,6 +13,7 @@ import NotFound from "./components/not-found/not-found";
 
 import ForgotPassword from "./components/forget-password-link/forgot-password-link";
 import ChangePassword from "./components/forgot-password/forgot-password";
+import { Toaster } from "react-hot-toast";
 const App = () => {
   const [loading, setLoading] = useState(true);
 
@@ -30,6 +31,7 @@ const App = () => {
 
   return (
     <ThemeProvider>
+      <Toaster/>
       <Router>
         <Navbar />
         <Routes>

@@ -4,13 +4,11 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import '../../styles/register/register.scss'
 import { useForm } from "react-hook-form";
 import cat from '../../assets/cat@1x-25fps.gif';
-import footprints from '../../assets/Bag Steps@512p-25fps.gif'
 import bag from '../../assets/bagimage.gif'
 import dog from '../../assets/dog.gif'
 import cycle from '../../assets/cycle.gif'
-import paws from '../../assets/paws work@512p-25fps.gif'
-import tyres from '../../assets/tyre path@512p-25fps.gif'
-import steps from '../../assets/Bag Steps@512p-25fps.gif'
+import toast from "react-hot-toast";
+
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -31,7 +29,7 @@ const RegisterForm = () => {
     return () => clearInterval(imageInterval);
   }, []);
 
-  const getClassName1 = () => {
+  const  getBackgroundClassName = () => {
     switch (currentImageIndex) {
       case 0:
         return "background-iamge-container-steps";
@@ -44,19 +42,7 @@ const RegisterForm = () => {
         return "";
     }
   };
-  const getBackgroundClassName = () => {
-    switch (currentImageIndex) {
-      case 0:
-        return "background-image-steps";
-      case 1:
-        return "background-image-tyres";
-      case 2:
-      case 3:
-        return "background-image-paws";
-      default:
-        return "";
-    }
-  };
+ 
 const getClassName = () => {
     switch (currentImageIndex) {
       case 0:
@@ -78,6 +64,7 @@ const getClassName = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -111,20 +98,19 @@ const getClassName = () => {
         password: "",
         confirmPassword: "",
       });
-      alert(response.data.resultMessage.en);
+      toast.success(response?.data?.resultMessage?.en)
+      reset()
+      
     } catch (error) {
       setResponseMessage("Error registering user");
-      alert(error.response.data.resultMessage.en);
+      toast.error(error.response.data.resultMessage.en);
     }
   };
 
   return (
     <div className="regestation-container">
-      {/* <div className={`form-container ${getClassName1()}`}> */}
       <div className="form-container">
-        {/* <div className={`${getClassName1()}`}> </div> */}
-        <div className={`${getClassName1()}`}></div>
-
+        <div className={`${getBackgroundClassName()}`}></div>
         <h1>Welcome!</h1>
         <form onSubmit={handleSubmit(onformSubmit)} >
           <div className="input-container">
@@ -172,7 +158,7 @@ const getClassName = () => {
               className="show-password"
               onClick={togglePasswordVisibility}
             >
-              {passwordVisible ? <AiFillEyeInvisible /> : <AiFillEye />}
+              {passwordVisible ? <AiFillEye /> : <AiFillEyeInvisible />}
             </button>
             {errors.password && <span className="error">{errors.password.message}</span>}
           </div>
@@ -192,7 +178,7 @@ const getClassName = () => {
               className="show-password"
               onClick={toggleConfirmPasswordVisibility}
             >
-              {confirmPasswordVisible ? <AiFillEyeInvisible /> : <AiFillEye />}
+              {confirmPasswordVisible ? <AiFillEye /> : <AiFillEyeInvisible />}
             </button>
             {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
           </div>

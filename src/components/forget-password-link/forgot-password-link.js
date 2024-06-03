@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import '../../styles/forgot-password/forgot-password.scss';
+import toast from "react-hot-toast";
 
 const ForgotPasswordLink = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -13,20 +14,14 @@ const ForgotPasswordLink = () => {
     const url = process.env.REACT_APP_PRODUCTION_URL
     try {
       const response = await axios.post(`${url}/api/user/forgot-password-link`, { email: data.email });
-      
-      if (response.status === 200) {
-        setMessage(response?.data?.resultMessage?.en);
-        alert(response?.data?.resultMessage?.en)
+      toast.success(response?.data?.resultMessage?.en)
+      setMessage(response?.data?.resultMessage?.en);
+      setError("");
 
-        setError("");
-      } else {
-        setError("Error sending reset link. Please try again.");
-        setMessage("");
-      }
     } catch (err) {
       setError(error.response?.data?.resultMessage?.en);
       setMessage("");
-      alert(error.response?.data?.resultMessage?.en)
+      toast.error(error.response?.data?.resultMessage?.en)
     }
   };
 

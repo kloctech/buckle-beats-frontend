@@ -3,6 +3,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import '../../styles/forgot-password/forgot-password.scss';
+import toast from "react-hot-toast";
 
 const ForgotPassword = () => {
   const {
@@ -51,12 +52,12 @@ const ForgotPassword = () => {
       reset()
       setResponseMessage("")
 
-      alert(response.data.resultMessage.en);
+      toast.success(response.data.resultMessage.en);
     } catch (error) {
       console.log(error)
-      setErrorMessage(error.response?.data?.resultMessage?.en );
+      setErrorMessage(error.response?.data?.resultMessage?.en);
       setResponseMessage("");
-      alert(error);
+      toast.error(error.response?.data?.resultMessage?.en);
     }
   };
 
@@ -86,7 +87,7 @@ const ForgotPassword = () => {
               className="show-password"
               onClick={togglePasswordVisibility}
             >
-              {passwordVisible ? <AiFillEyeInvisible /> : <AiFillEye />}
+              {passwordVisible ? <AiFillEye /> : <AiFillEyeInvisible />}
             </button>
             {errors.password && <span className="error">{errors.password.message}</span>}
           </div>
@@ -106,7 +107,7 @@ const ForgotPassword = () => {
               className="show-password"
               onClick={toggleConfirmPasswordVisibility}
             >
-              {confirmPasswordVisible ? <AiFillEyeInvisible /> : <AiFillEye />}
+              {confirmPasswordVisible ? <AiFillEye/> : <AiFillEyeInvisible />}
             </button>
             {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
           </div>
