@@ -26,7 +26,7 @@ const RegisterForm = () => {
   useEffect(() => {
     const imageInterval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 7000); // Change image every 7 seconds
+    },7000); // Change image every 7 seconds
 
     return () => clearInterval(imageInterval);
   }, []);

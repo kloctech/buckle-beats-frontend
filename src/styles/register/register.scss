@@ -8,6 +8,19 @@
   width: 100%;
   color: var(--text-color);
 }
+@mixin backgroudImageContainer($image,$lefPadding,$backgroundSize){
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+  opacity: 25%;
+  background-size: $backgroundSize;
+  left: $lefPadding;
+  background-image: url($image);
+}
 .regestation-container{
   width: 100vw;
 
@@ -18,8 +31,8 @@
   justify-content: center;
   flex-direction: column;
   height: 92vh;
-  max-width: 380px;  // Increased width
-  width: 90vw;       // Increased width for responsiveness
+  max-width: 380px; 
+  width: 90vw;       
   margin: auto;
   position: relative;
   z-index: 1;
@@ -37,46 +50,16 @@
 }
 
 .background-iamge-container-paws {
-  background-image: url('../../assets/paws work@512p-25fps.gif');
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  position: absolute;
-  top: 0;
-  left: -55px;
-  width: 100%;
-  height: 100%;
-  background-size: 31vh;
-  opacity: 25%;
-  z-index: -1;
+  @include backgroudImageContainer('../../assets//Paws.gif',-30px,40vh);
+ 
 }
 
 .background-iamge-container-tyres {
-  background-image: url('../../assets/tyre path@512p-25fps.gif');
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  position: absolute;
-  top: 0;
-  left: 0px;
-  bottom: 2px;
-  height: 100%;
-  width: 100%;
-  background-size: 30vh;
-  opacity: 50%;
-  z-index: -1;
+  @include backgroudImageContainer('../../assets/tyre path@512p-25fps.gif', 0px,30vh )
 }
 
 .background-iamge-container-steps {
-  background-image: url('../../assets/Bag Steps@512p-25fps.gif');
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  position: absolute;
-  top: 0;
-  left: -5px;
-  width: 100%;
-  height: 100%;
-  background-size: 14vh;
-  opacity: 25%;
-  z-index: -1;
+  @include backgroudImageContainer('../../assets/Bag Steps@512p-25fps.gif',-5px ,14vh ) 
 }
 
 h1 {
@@ -146,6 +129,7 @@ h1 {
     height: 100vh;
   }
   .background-iamge-container-paws{
-    left: -80px;
+    left: -65px;
+    background-size: 44vh;
   }
 }

@@ -60,17 +60,11 @@ const mediaContentMap = [
 
   const { type, url, heading, features, buttonText } = mediaContentMap[currentMediaIndex];
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  
 
   return (
     <div className="container">
-      {isLoading ? (
-        <div className="loader-container">
-          <Loader />
-        </div>
-      ) : (
+       
         <div className="background-changer">
           {type === 'video' ? (
             <video ref={videoRef} src={url} autoPlay loop muted className="background-media" />
@@ -102,7 +96,7 @@ const mediaContentMap = [
           </div>
          
         </div>
-      )}
+     
        {type === 'video' && (
                 <button className="play-pause-btn" onClick={handlePlayPause}>
                   {isPlaying ? 'Pause' : 'Play'}
