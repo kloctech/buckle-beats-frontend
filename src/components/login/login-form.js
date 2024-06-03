@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "../../styles/login/login.scss";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
+import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 
 const LoginPage = () => {
   const {
@@ -12,38 +12,17 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-const [responseMessage, setResponseMessage] = useState("")
+
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  const onSubmitLoginForm = async(data) => {
-    const url =  process.env.REACT_APP_PRODUCTION_URL
-    try {
-      const response = await axios.post(`${url}/api/user/login`, {
-        
-        email: data.email,
-        password: data.password,
-        
-      });
-
-      setResponseMessage("User registered successfully! Please check your email for verification.");
-      // setFormData({
-      //   name: "",
-      //   email: "",
-      //   password: "",
-      //   confirmPassword: "",
-      // });
-      alert(response.resultMessage.en);
-    } catch (error) {
-      console.log(error.response.data.resultMessage.en)
-      setResponseMessage("Error registering user");
-      alert(error.response.data.resultMessage.en);
-    }
+  const onSubmitLoginForm = (data) => {
+    console.log(data);
   };
 
   return (
-    <div className="login-main-containera">
+    <div className="login-main-container">
       <div className="login-container">
         <form onSubmit={handleSubmit(onSubmitLoginForm)} className="login-form">
           <h4 className="welcome-heading">Welcome!</h4>
@@ -51,7 +30,6 @@ const [responseMessage, setResponseMessage] = useState("")
           <div className="form-group email-group">
             <input
               type="email"
-              style={{backgroundColor:'white'}}
               id="email"
               name="email"
               placeholder="Email"
@@ -70,8 +48,6 @@ const [responseMessage, setResponseMessage] = useState("")
               type={showPassword ? "text" : "password"}
               id="password"
               name="password"
-              style={{backgroundColor:'white'}}
-              
               placeholder="Password"
               {...register("password", {
                 required: "Password is required",
@@ -86,13 +62,13 @@ const [responseMessage, setResponseMessage] = useState("")
               })}
             />
             <span className="toggle-password" onClick={togglePasswordVisibility}>
-              {showPassword ? <AiFillEye/> : <AiFillEyeInvisible />}
+              {showPassword ? <VisibilityOffTwoToneIcon /> : <VisibilityTwoToneIcon />}
             </span>
             {errors.password && <span className="error-message">{errors.password.message}</span>}
           </div>
           {errors.password && <br />}
           <p className="forgot-password">
-            <Link to="/forgot-password-link">Forgot password?</Link>
+            <Link to="/forgot-password">Forgot password?</Link>
           </p>
           <button className="button" type="submit">
             Login

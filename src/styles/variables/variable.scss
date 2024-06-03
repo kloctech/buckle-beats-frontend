@@ -1,0 +1,52 @@
+// Color Variables
+$background-color: #232323;
+$primary-color: #6bc6ae;
+$secondary-color: #434850;
+$hover-color: #5aa895;
+$error-color: red;
+$text-color: white;
+$border-color: #ccc;
+$font-size-small: 12px;
+$font-size-medium: 16px;
+
+// Dimensions
+$border-radius: 5px;
+$padding-small: 10px;
+$padding-medium: 20px;
+$height-full: 100vh;
+$max-width-small: 300px;
+$max-width-medium: 350px;
+
+// Mixins
+@mixin center-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin input-style {
+  width: calc(100% - 5px);
+  padding: $padding-small;
+  font-size: $font-size-medium;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  box-sizing: border-box;
+}
+
+@mixin button-style {
+  background-color: $primary-color;
+  height: 45px;
+  width: 100%;
+  border: 5px solid $secondary-color;
+  color: $text-color;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: $font-size-medium;
+  font-weight: 700;
+  text-align: center;
+
+  &:hover {
+    background-color: $hover-color;
+    border-color: #333;
+  }
+}

@@ -1,50 +1,39 @@
-
+@import "../../styles/variables/variable.scss";
 .login-container {
-  height: 100vh;
-  max-width: 350px;
-  background-color:var(--text-color);
+  height: $height-full;
+  max-width: $max-width-medium;
+  background-color: $background-color;
   margin: auto;
-  display: flex;
-  align-items: center;
+  @include center-content;
 }
+
 .login-content {
-  max-width: 300px;
+  max-width: $max-width-small;
   margin: auto;
   height: 70vh;
-  background-color: transparent
+  background-color: transparent;
 }
-.input-box {
-  // width: 100%;
-  // padding: 0.5rem;
-  // margin-top: 0.5rem;
-}
+
 .login-form {
-  width: 300px;
+  width: $max-width-small;
   margin: 0 auto;
-  padding: 20px;
-  /* border: 1px solid #ccc; */
+  padding: $padding-medium;
   border-radius: 10px;
-  background-color: var(--text-color);
+  background-color: transparent;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: $padding-medium;
   position: relative;
 }
 
 .form-group input {
-  width: calc(100% - 5px);
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-  background-color: var(--text-color);
+  @include input-style;
 }
 
 .password-group {
   position: relative;
-  
+  margin-bottom: 5px;
 }
 
 .toggle-password {
@@ -53,7 +42,41 @@
   right: 10px;
   transform: translateY(-50%);
   cursor: pointer;
-  font-size: 16px;
+  font-size: $font-size-medium;
   user-select: none;
+  color: black;
 }
 
+.error-message {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  color: $error-color;
+  font-size: $font-size-small;
+}
+
+.forgot-password {
+  font-size: $font-size-small;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: end;
+
+  a {
+    color: $text-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.button {
+  @include button-style;
+}
+
+.welcome-heading {
+  color: $text-color;
+  text-align: center;
+}
