@@ -10,6 +10,9 @@ import About from "./pages/about";
 import BackgroundChanger from "./components/home/home";
 import Preloader from "./components/preloader/preloader";
 import NotFound from "./components/not-found/not-found";
+import VerifyEmail from "./components/verify-email/verify-email";
+import routes from "./routes/main-route";
+import { Toaster } from "react-hot-toast";
 
 import ForgotPassword from "./components/forget-password-link/forgot-password-link";
 import ChangePassword from "./components/forgot-password/forgot-password";
@@ -30,23 +33,16 @@ const App = () => {
   }
 
   return (
-    <ThemeProvider>
-      <Toaster/>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<BackgroundChanger />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterForm />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/about" element={<About />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path='/forgot-password-link'  element = {<ForgotPassword/>}/>
-        <Route path ='/forgot-password' element= {<ChangePassword/>}/>
+    <Router>
+      <Toaster />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/account" element={<VerifyEmail />} />
+        <Route path="*" element={<NotFound />} />
+        {routes}
       </Routes>
-      </Router>
-    </ThemeProvider>
+    </Router>
   );
 };
 
