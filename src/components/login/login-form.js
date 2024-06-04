@@ -118,7 +118,7 @@ const LoginPage = () => {
           </div>
           {errors.password && <br />}
           <p className="forgot-password">
-            <Link to="/forgot-password">Forgot password?</Link>
+            <Link to="/forgot-password-link">Forgot password?</Link>
           </p>
           <img src={images[currentImageIndex]} alt="cycling images" style={{ height: "110px", marginBottom: "-22px", marginLeft: "18%" }} />
           <button className="button" type="submit">
