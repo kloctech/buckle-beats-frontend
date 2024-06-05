@@ -14,6 +14,7 @@ import NotFound from "./components/not-found/not-found";
 import ForgotPassword from "./components/forget-password-link/forgot-password-link";
 import ChangePassword from "./components/forgot-password/forgot-password";
 import { Toaster } from "react-hot-toast";
+import QrCode from "./components/qr-code/qr-code";
 const App = () => {
   const [loading, setLoading] = useState(true);
 
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
           <Route path='/forgot-password-link'  element = {<ForgotPassword/>}/>
         <Route path ='/forgot-password' element= {<ChangePassword/>}/>
+        <Route path  = '/qr-code' element = {<QrCode/>}/>
       </Routes>
       </Router>
     </ThemeProvider>

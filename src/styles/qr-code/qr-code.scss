@@ -1,0 +1,149 @@
+.app {
+   text-align: center;
+  background-color: #2d2f36;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin: auto;
+  width: 30vw;
+  position: relative;
+ }
+ 
+ .item-list {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   gap: 20px;
+   z-index: 2;
+   justify-content: center;
+ }
+ 
+ .item-card {
+   display: flex;
+   
+   background-color: #edeff3;
+   border-radius: 10px;
+   padding: 20px;
+   height: 170px;
+   width:13vw;
+   text-align: center;
+   display: flex;
+   color: #2d2f36;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   justify-content: center;
+   border:1px solid #0ff;
+   margin-top: 10px;
+ }
+ 
+ .item-image {
+   width: 70px;
+   height: 70px;
+   object-fit: cover;
+   margin-top: 10px;
+   // background-image:url('../../assets/bag.gif');
+   border-radius: 80px;
+   // margin-top: 40px;
+   
+ }
+ .switch-container{
+   display: flex;
+   width: 13vw;
+   border-radius: 10px;
+    background-color:#58D7B5;
+   ;
+   margin-top:40px;
+   // margin-bottom: -15px;
+   justify-content:space-around
+   
+
+ }
+ .lost-mode-text {
+   margin-top: 5px;
+   font-weight: 500;
+   font-size:20px;
+   color: rgb(246, 248, 248);
+ }
+ 
+ .footer-buttons {
+   display: flex;
+  justify-content: space-evenly;
+  padding: 10px 0;
+  background-color:#58D7B5;
+border-top-left-radius: 30px;
+border-top-right-radius: 30px;
+  position: absolute;
+  max-width: 500px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20
+ }
+ 
+ .shop-button {
+   background-color: #58D7B5;
+   border: none;
+   color: #2d2f36;
+   padding: 10px 20px;
+   border-radius: 5px;
+   cursor: pointer;
+   font-weight: bold;
+ }
+ .activate-qr-button {
+background-color: #2d2f36;
+   border: none;
+   color: white;
+   border-radius: 5px;
+   width: 11vw;
+
+   cursor: pointer;
+ }
+ 
+ .shop-button:hover, .activate-qr-button:hover {
+   background-color: #00a392;
+ }
+ .toggle-container {
+   width: 40px;
+   height: 18px;
+   background-color: #ffffff;
+   border-radius: 25px;
+   margin-top: 10px;
+   cursor: pointer;
+   position: relative;
+ }
+ 
+ .toggle-button {
+   width: 10px;
+   height: 10px;
+   background-color: rgb(212, 65, 65);
+   border-radius: 50%;
+   position: absolute;
+   top: 4px;
+   left: 1px;
+   transition: left 0.3s;
+ }
+ 
+ .toggle-button.active {
+   left: 26px;
+   background-color: #00c4b4;
+ }
+ 
+@media  screen and (max-width:'540px') {
+   .item-card{
+      width: 45vw;
+   }
+   .switch-container{
+      width: 45vw;
+   }
+   .app{
+    width: 100vw;
+  margin:0px;
+   }
+   .activate-qr-button{
+    width: 45vw;
+   }
+}
