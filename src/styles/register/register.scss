@@ -1,5 +1,5 @@
 @import '../../index.scss';
-
+@import '../variables/variable.scss';
 @mixin input-styles {
   padding: 10px;
   border: none;
@@ -30,7 +30,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 92vh;
+  height:100vh;
   max-width: 380px; 
   width: 90vw;       
   margin: auto;
@@ -81,7 +81,9 @@ h1 {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
+.email-container{
+  margin-bottom: 20px;
+}
 .password-container {
   position: relative;
 }
@@ -94,8 +96,8 @@ h1 {
   cursor: pointer;
   position: absolute;
   right: 10px;
-  top: 50%;
-  transform: translateY(-90%);
+  top: 30%;
+  transform: translateY(-50%);
 }
 
 .forgot-password {
@@ -103,23 +105,17 @@ h1 {
   cursor: pointer;
 }
 
-.login-button {
-  padding: 10px;
-  width: 320px;
-  border: none;
-  border-radius: 5px;
-  background-color: #6bc6ae;
-  color: white;
-  font-size: 18px;
-  // margin-left: -22px;
-  border: 5px solid #434850;
-  border-radius: 10px;
-  cursor: pointer;
+.register-button {
+ @include button-style ;
+ width:300px
 }
 
 .error {
-  color: #f03355;
-  font-size: 0.875rem;
+  position: absolute;
+  top: 60%;
+  left: 0;
+  color: $error-color;
+  font-size: $font-size-small;
 }
 @media screen and (max-width:600px) {
   .regestation-container{
@@ -132,4 +128,20 @@ h1 {
     left: -65px;
     background-size: 44vh;
   }
+}
+.Login{
+  font-size: $font-size-small;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  // text-align: end;
+  a {
+    color: $text-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+ 
 }

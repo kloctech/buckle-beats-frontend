@@ -8,9 +8,6 @@ import image5 from '../../assets/image5.jpg.jpg';
 import image7 from '../../assets/image7.jpg.jpg'
 import image6 from '../../assets/image6.jpg.jpg'
 import image8 from '../../assets/image8.jpg.jpg'
-
-import Loader from '../../loader';
-import Navbar from '../navbar/navbar';
 const mediaContentMap = [
    { type: 'image', url: image1, heading: "Get your teams on WeTransfer", features: ["Stay consistent with team-wide branding"], buttonText: "Subscribe" },
    { type: 'image', url: image2, heading: "Share large files easily", features: ["Fast and secure file transfer"], buttonText: "Get Started" },

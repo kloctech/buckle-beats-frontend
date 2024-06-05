@@ -1,7 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { Switch } from '@mui/material';
 import axios from 'axios';
-import { styled } from '@mui/system';
 import  '../../styles/qr-code/qr-code.scss'
 import bag from '../../assets/bag.gif'
 import bagpic from '../../assets/bag1.jpeg'
@@ -45,7 +43,7 @@ const QrCode = () => {
 
   useEffect(() => {
     fetchItems();
-  }, []);
+  }, [page]);
 
   const fetchItems = async () => {
     try {
