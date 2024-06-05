@@ -1,13 +1,5 @@
 @import '../../index.scss';
-
-@mixin input-styles {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  width: 100%;
-  color: var(--text-color);
-}
+@import '../variables//variable.scss';
 @mixin backgroudImageContainer($image,$lefPadding,$backgroundSize){
   background-repeat: no-repeat;
   background-position: bottom left;
@@ -30,13 +22,13 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 92vh;
+  height: 100vh;
   max-width: 380px; 
   width: 90vw;       
   margin: auto;
   position: relative;
   z-index: 1;
-  background-color: #212530;
+  background-color:$background-color;
   padding: 40px;
 }
 
@@ -66,7 +58,7 @@ h1 {
   margin-bottom: 20px;
   font-size: larger;
   font-weight: 500;
-  color: #ffffff;
+  color:$text-color;
 }
 
 // input {
@@ -78,7 +70,7 @@ h1 {
   padding: 11px;
   margin-bottom: 20px;
   // margin-left: -22px;
-  border: 1px solid #ccc;
+  border: 1px solid $border-color;
   border-radius: 5px;
 }
 
@@ -106,13 +98,14 @@ h1 {
 .login-button {
   padding: 10px;
   width: 320px;
+  
   border: none;
   border-radius: 5px;
-  background-color: #6bc6ae;
-  color: white;
+  background-color: $primary-color;
+  color:$text-color;
   font-size: 18px;
   // margin-left: -22px;
-  border: 5px solid #434850;
+  border: 5px solid $secondary-color;
   border-radius: 10px;
   cursor: pointer;
 }
@@ -123,7 +116,7 @@ h1 {
 }
 @media screen and (max-width:600px) {
   .regestation-container{
-    background-color: #212530;
+    background-color: $background-color;
   }
   .form-container{
     height: 100vh;

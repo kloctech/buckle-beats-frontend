@@ -35,7 +35,6 @@ const App = () => {
     <Router>
       <Toaster />
       <Routes>
-        <Route path="/" element={<BackgroundChanger />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/account" element={<VerifyEmail />} />
