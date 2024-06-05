@@ -23,9 +23,9 @@ const ItemCard = ({ item, onToggle }) => (
   <div className="item-card">
    <div style={{display:'flex',flexDirection:"column",justifyContent:'center',alignItems:"center"}}>
    <img src={item.image} alt={item.name} className="item-image" />
-<h5 style={{fontSize:'14px'}}>{item.name}</h5>
+<h5 style={{fontSize:'12px',color:'#1B3E51'}}>{item.name}</h5>
     <div className='switch-container'> 
-    <span className="lost-mode-text">{item.lost ? 'Lost Mode' : 'Found'}</span>
+    <span className="lost-mode-text">{item.lost ? 'Lost Mode' : 'Lost Mode'}</span>
 
     <div className="toggle-container" onClick={() => onToggle(item.id)}>
       <div className={`toggle-button ${item.lost ? 'active' : ''}`}></div>
@@ -74,7 +74,7 @@ const QrCode = () => {
         dataLength={itemList.length}
         next={fetchItems}
         hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
+        // loader={<h4>Loading...</h4>}
         endMessage={
           <p style={{ textAlign: 'center' }}>
             <b>Yay! You have seen it all</b>
