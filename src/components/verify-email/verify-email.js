@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 const VerifyEmail = () => {
   const [code, setCode] = useState(null);
   const [token, setToken] = useState(null);
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -22,11 +22,11 @@ const VerifyEmail = () => {
       });
       toast.success(response.data.resultMessage.en);
       console.log(response.data.resultMessage.en);
-      setMessage(response.data.resultMessage.en);
+      // setMessage(response.data.resultMessage.en);
     } catch (error) {
       toast.error(error.response.data.resultMessage.en);
       console.error(error.response ? error.response.data.resultMessage.en : error.message);
-      setMessage(error.response ? error.response.data.resultMessage.en : error.message);
+      // setMessage(error.response ? error.response.data.resultMessage.en : error.message);
     }
   };
 
