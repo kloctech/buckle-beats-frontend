@@ -10,18 +10,18 @@ const ForgotPasswordLink = () => {
   const [error, setError] = useState("");
 
   const onSubmit = async (data) => {
-    console.log(data)
-    const url = process.env.REACT_APP_PRODUCTION_URL
+    const url = process.env.REACT_APP_PRODUCTION_URL;
+
     try {
-      const response = await axios.post(`${url}/api/user/forgot-password-link`, { email: data.email });
-      toast.success(response?.data?.resultMessage?.en)
+      const response = await axios.post(`${url}/api/user/forgot-password-link`,  { email: data.email });
+      console.log(response)
+      toast.success(response?.data?.resultMessage?.en);
       setMessage(response?.data?.resultMessage?.en);
       setError("");
-
     } catch (err) {
-      setError(error.response?.data?.resultMessage?.en);
+      setError(err.response?.data?.resultMessage?.en);
       setMessage("");
-      toast.error(error.response?.data?.resultMessage?.en)
+      toast.error(err.response?.data?.resultMessage?.en);
     }
   };
 

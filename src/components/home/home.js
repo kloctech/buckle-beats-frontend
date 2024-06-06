@@ -64,7 +64,6 @@ const mediaContentMap = [
 
   return (
     <div className="container">
-       
         <div className="background-changer">
           {type === 'video' ? (
             <video ref={videoRef} src={url} autoPlay loop muted className="background-media" />
