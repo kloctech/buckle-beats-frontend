@@ -1,5 +1,6 @@
 @import "../../index.scss";
 @import "../variables//variable.scss";
+
 @mixin backgroudImageContainer($image, $lefPadding, $backgroundSize) {
   background-repeat: no-repeat;
   background-position: bottom left;
@@ -13,9 +14,11 @@
   left: $lefPadding;
   background-image: url($image);
 }
+
 .regestation-container {
   width: 100vw;
 }
+
 .form-container {
   display: flex;
   align-items: center;
@@ -115,15 +118,76 @@ h1 {
   color: #f03355;
   font-size: 0.875rem;
 }
+
 @media screen and (max-width: 600px) {
   .regestation-container {
     background-color: $background-color;
   }
+
   .form-container {
     height: 100vh;
   }
+
   .background-iamge-container-paws {
     left: -65px;
     background-size: 44vh;
+  }
+}
+
+/*modal*/
+
+.MuiModal-backdrop,
+.MuiModal-root {
+  max-width: $max-width;
+  width: 100%;
+  margin: auto;
+}
+
+.MuiModal-backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.MuiModal-root {
+  .box-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    background-color: white;
+    padding: 40px 25px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h3 {
+    color: #183E51;
+    font-size: 22px;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #183E51;
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+
+  .cta-button {
+    width: 60%;
+    padding: 0.5rem;
+    background-color: #6bc6ae;
+    border:1px solid #6bc6ae;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
   }
 }
