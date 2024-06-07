@@ -5,10 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import axios from "axios";
-import cat from "../../assets/cat@1x-25fps.gif";
+// import backGroundSteps from "../../assets/Bag Steps@512p-25fps.gif";
+import cat from "../../assets/Cat-gif.gif";
 import bag from "../../assets/bagimage.gif";
-import cycle from "../../assets/cycle.gif";
-import dog from "../../assets/dog.gif";
+import cycle from "../../assets/Bicycle-gif.gif";
+import dog from "../../assets/dog-gif.gif";
 import { CircularProgress } from "@mui/material";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
@@ -29,6 +30,21 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
 
+  const getImageClassName = () => {
+    switch (currentImageIndex) {
+      case 0:
+        return "bag-gif";
+      case 1:
+        return "cycle-gif";
+      case 2:
+        return "cat-gif";
+      case 3:
+        return "dog-gif";
+      default:
+        return "";
+    }
+  };
+
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
@@ -36,7 +52,7 @@ const LoginPage = () => {
   useEffect(() => {
     const imageInterval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 2500);
+    }, 4000);
 
     return () => clearInterval(imageInterval);
   }, []);
@@ -44,16 +60,17 @@ const LoginPage = () => {
   const onSubmitLoginForm = async (data) => {
     const api = `${process.env.REACT_APP_PRODUCTION_URL}/api/user/login`;
     setLoading(true);
-    
+    // setMessage("");
     const accessTokenExpirationTime = 1;
-    const refreshTokenExpirationTime = 30;
+    const refreshTokenExpirationTime = 1;
 
     try {
       const response = await axios.post(api, data);
       const { accessToken, refreshToken } = response.data;
 
       console.log(response.data.resultMessage.en);
-      toast.success(response.data.resultMessage.en);
+      toast.success(response.data.resultMessage.en, { duration: 5000 });
+      // setMessage(response.data.resultMessage.en);
 
       Cookies.set("accessToken", accessToken, { expires: accessTokenExpirationTime });
       Cookies.set("refreshToken", refreshToken, { expires: refreshTokenExpirationTime });
@@ -61,10 +78,12 @@ const LoginPage = () => {
       navigate("/");
     } catch (error) {
       console.error(error.response ? error.response.data.resultMessage.en : error.message);
-      toast.error(error.response.data.resultMessage.en);
+      // setMessage(error.response.data.resultMessage.en);
+      toast.error(error.response.data.resultMessage.en, { duration: 5000 });
       setLoading(false);
     }
   };
+
   //className={`${classNames[currentImageIndex]}`}
   return (
     <div className="login-main-container">
@@ -73,7 +92,7 @@ const LoginPage = () => {
           <div className={`login-container background-common-styles ${classNames[currentImageIndex]}`}></div>
           <h4 className="welcome-heading">Welcome!</h4>
           <br />
-          <div className="form-group email-group">
+          <div className="form-group-login email-group">
             <input
               type="email"
               id="email"
@@ -89,7 +108,7 @@ const LoginPage = () => {
             />
             {errors.email && <span className="error-message">{errors.email.message}</span>}
           </div>
-          <div className="form-group password-group">
+          <div className="form-group-login password-group">
             <input
               type={showPassword ? "text" : "password"}
               id="password"
@@ -103,8 +122,7 @@ const LoginPage = () => {
                 },
                 pattern: {
                   value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[.!@$%^&*])[^\s]{8,}$/,
-                  // message: "Password must contain at least one letter and one number",
-                  message: "Password must contain at least one digit,one uppercase letter, and one special character",
+                  message: "Password needs a number, an uppercase letter, and a symbol.",
                 },
               })}
             />
@@ -114,17 +132,21 @@ const LoginPage = () => {
             {errors.password && <span className="error-message">{errors.password.message}</span>}
           </div>
           {errors.password && <br />}
-          <p className="forgot-password">
-            <Link to="/forgot-password-link">Forgot password?</Link>
+          <p className={`forgot-password-login ${errors.password ? "error-margin" : ""}`}>
+            <Link to="/forgot-password">Forgot password?</Link>
           </p>
-          <img src={images[currentImageIndex]} alt="cycling images" style={{ height: "110px", marginBottom: "-22px", marginLeft: "18%" }} />
-          <button className="button" type="submit">
+          <img src={images[currentImageIndex]} className={`${getImageClassName()}`} alt="cycling images" />
+          <button className="login-button" type="submit">
             {loading ? <CircularProgress size={25} sx={{ color: "white" }} /> : "Login"}
           </button>
+          <p className="signup-navigation-text">
+            <Link to="/register">SignUp</Link>
+          </p>
         </form>
       </div>
     </div>
   );
 };
-
+//images[currentImageIndex]
+//className={`${getImageClassName()}`}
 export default LoginPage;

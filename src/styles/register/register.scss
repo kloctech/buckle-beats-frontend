@@ -21,9 +21,8 @@
   left: $lefPadding;
   background-image: url($image);
 }
-.regestation-container{
+.regestation-container {
   width: 100vw;
-
 }
 .form-container {
   display: flex;
@@ -36,6 +35,7 @@
   margin: auto;
   position: relative;
   z-index: 1;
+  background-color: $background-color;
   background-color: $background-color;
   padding: 40px;
 }
@@ -79,7 +79,7 @@
 }
 
 .background-iamge-container-tyres {
-  @include backgroudImageContainer('../../assets/tyre path@512p-25fps.gif', 0px,30vh )
+  @include backgroudImageContainer("../../assets/tyre path@512p-25fps.gif", 0px, 30vh);
 }
 
 .background-iamge-container-steps {
@@ -90,7 +90,7 @@ h1 {
   margin-bottom: 20px;
   font-size: larger;
   font-weight: 500;
-  color: #ffffff;
+  color: $text-color;
 }
 
 // input {
@@ -102,7 +102,7 @@ h1 {
   padding: 11px;
   margin-bottom: 20px;
   // margin-left: -22px;
-  border: 1px solid #ccc;
+  border: 1px solid $border-color;
   border-radius: 5px;
 }
 .email-container{
@@ -153,10 +153,10 @@ margin-top: auto;
   .regestation-container{
     background-color: $background-color;
   }
-  .form-container{
+  .form-container {
     height: 100vh;
   }
-  .background-iamge-container-paws{
+  .background-iamge-container-paws {
     left: -65px;
     background-size: 44vh;
   }
