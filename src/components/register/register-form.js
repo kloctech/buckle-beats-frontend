@@ -7,15 +7,25 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import cat from "../../assets/Cat.gif";
 import bag from "../../assets/bagimage.gif";
-import dog from "../../assets/dog 1.gif";
+import dog from '../../assets/dog.gif'
 import cycle from "../../assets/Bicycle LT_1.gif";
 import toast from "react-hot-toast";
+import { FaCheckCircle} from "react-icons/fa";
 
 const RegisterForm = () => {
   
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const images = [bag, cycle, cat, dog];
+const [currentImageIndex, setCurrentImageIndex] = useState(0);
+const [isRegistred,setIsRegistred]  = useState(true)
+const [passwordVisible, setPasswordVisible] = useState(false);
+const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+const {
+  register,
+  handleSubmit,
+  watch,
+  reset,
+  formState: { errors },
+} = useForm();
+const images = [bag, cycle, cat, dog];
 
   useEffect(() => {
     const imageInterval = setInterval(() => {
@@ -56,17 +66,7 @@ const RegisterForm = () => {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[.!@$%^&*])[^\s]{8,}$/;
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm();
-
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-
+ 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -85,8 +85,10 @@ const RegisterForm = () => {
         password: data.password,
         platform: "Android",
       });
-      toast.success(response?.data?.resultMessage?.en);
-      reset();
+      toast.success(response?.data?.resultMessage?.en, {
+        duration: 5000, 
+      });      reset();
+      setIsRegistred(true)
     } catch (error) {
       toast.error(error.response.data.resultMessage.en);
     }
@@ -94,7 +96,10 @@ const RegisterForm = () => {
 
   return (
     <div className="regestation-container">
-      <div className="form-container">
+      {isRegistred ? <div className="form-container">
+        {/* <FaCheckCircle className="verification-icon" /> */}
+        <FaCheckCircle className="verification-message" ></FaCheckCircle>
+         <h6 style={{color:"#E4E9F1"}}>Please check your email and complete the verification process to log in.</h6> </div> : <div className="form-container">
         <div className={`${getBackgroundClassName()}`}></div>
         <h1>Welcome!</h1>
         <form onSubmit={handleSubmit(onformSubmit)}>
@@ -163,7 +168,7 @@ const RegisterForm = () => {
             <Link to="/Login">Already have an accout? Login</Link>
           </p>
         </form>
-      </div>
+      </div> }
     </div>
   );
 };
