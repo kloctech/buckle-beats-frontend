@@ -5,10 +5,10 @@ import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import "../../styles/register/register.scss";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import cat from "../../assets/cat@1x-25fps.gif";
+import cat from "../../assets/Cat.gif";
 import bag from "../../assets/bagimage.gif";
-import dog from "../../assets/dog.gif";
-import cycle from "../../assets/cycle.gif";
+import dog from "../../assets/dog 1.gif";
+import cycle from "../../assets/Bicycle LT_1.gif";
 import toast from "react-hot-toast";
 
 const RegisterForm = () => {
@@ -20,10 +20,10 @@ const RegisterForm = () => {
   useEffect(() => {
     const imageInterval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 7000); // Change image every 7 seconds
+    }, 5000); // Change image every 7 seconds
 
     return () => clearInterval(imageInterval);
-  }, [currentImageIndex]);
+  }, [images.length]);
 
   const getBackgroundClassName = () => {
     switch (currentImageIndex) {
@@ -127,7 +127,7 @@ const RegisterForm = () => {
                 required: "Password is required",
                 pattern: {
                   value: passwordRegex,
-                  message: "Password must be at least 8 characters long, contain a digit, an uppercase letter, a lowercase letter, and a special character",
+                  message: "Password must be at least 8 characters contains a digit, an uppercase letter, and a special character.",
                 },
               })}
               placeholder="Password"
@@ -137,7 +137,7 @@ const RegisterForm = () => {
             </button>
             {errors.password && <span className="error">{errors.password.message}</span>}
           </div>
-          <div className="password-container">
+          <div className={`password-container form-group ${errors.password ? "with-error" : ""}`}>
             <input
               className="input-box"
               type={confirmPasswordVisible ? "text" : "password"}
@@ -160,8 +160,8 @@ const RegisterForm = () => {
           <button type="submit" className="register-button">
             SignUp
           </button>
-          <p className="Login">
-            <Link to="/Login">Login</Link>
+          <p className="Login">     
+            <Link to="/Login">Already have an accout? Login</Link>
           </p>
         </form>
       </div>

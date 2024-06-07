@@ -11,7 +11,7 @@ import image8 from '../../assets/image8.jpg.jpg'
 const mediaContentMap = [
    { type: 'image', url: image1, heading: "Get your teams on WeTransfer", features: ["Stay consistent with team-wide branding"], buttonText: "Subscribe" },
    { type: 'image', url: image2, heading: "Share large files easily", features: ["Fast and secure file transfer"], buttonText: "Get Started" },
-      
+
    { type: 'image', url: image3, heading: "Backup your files", features: ["Secure and reliable backup solutions"], buttonText: "Backup Now" },
    { type: 'image', url: image4, heading: "Access files anywhere", features: ["Sync files across devices"], buttonText: "Access Now" },
    { type: 'image', url: image5, heading: "High-speed transfers", features: ["No delay, high-speed uploads"], buttonText: "Transfer Now" },
@@ -23,7 +23,6 @@ const mediaContentMap = [
  const BackgroundChanger = () => {
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -36,13 +35,7 @@ const mediaContentMap = [
     return () => clearInterval(intervalId);
   }, []);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000); 
-
-    return () => clearTimeout(timer);
-  }, []);
+ 
 
   const handlePlayPause = () => {
     if (videoRef.current) {
@@ -73,9 +66,9 @@ const mediaContentMap = [
               <div className="left-panel">
                 <div className="message-box">
                   <h1>You're almost there</h1>
-                  <p>
+                  {/* <p>
                     To continue, please agree to our <a href="#">Terms of Service</a>, and acknowledge our <a href="#">Privacy Policy</a>.
-                  </p>
+                  </p> */}
                   <button>I agree</button>
                 </div>
               </div>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
+import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import '../../styles/forgot-password/forgot-password.scss';
 import toast from "react-hot-toast";
 
@@ -16,8 +17,6 @@ const ForgotPassword = () => {
   
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  const [responseMessage, setResponseMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const [token, setToken] = useState("");
   
   useEffect(() => {
@@ -35,7 +34,7 @@ const ForgotPassword = () => {
 
   const onSubmit = async (data) => {
     const url = process.env.REACT_APP_PRODUCTION_URL
-    console.log(url)
+   
     
     try {
       const response = await axios.post(
@@ -47,16 +46,12 @@ const ForgotPassword = () => {
           }
         }
       );
-      setResponseMessage(response?.data?.resultMessage?.en);
-      setErrorMessage("");
-      reset()
-      setResponseMessage("")
-
       toast.success(response.data.resultMessage.en);
+
+      reset()
+
     } catch (error) {
-      console.log(error)
-      setErrorMessage(error.response?.data?.resultMessage?.en);
-      setResponseMessage("");
+      
       toast.error(error.response?.data?.resultMessage?.en);
     }
   };
@@ -68,7 +63,7 @@ const ForgotPassword = () => {
       <div className="forgot-password-form">
         <h2 className="forgot-password-heading">Forgot Password</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="input-container password-container">
+          <div className="form-group-reg password-container">
             <input
               className="input-box"
               type={passwordVisible ? 'text' : 'password'}
@@ -87,11 +82,11 @@ const ForgotPassword = () => {
               className="show-password"
               onClick={togglePasswordVisibility}
             >
-              {passwordVisible ? <AiFillEye /> : <AiFillEyeInvisible />}
+              {passwordVisible ? <VisibilityOffTwoToneIcon /> : < VisibilityTwoToneIcon />}
             </button>
             {errors.password && <span className="error">{errors.password.message}</span>}
           </div>
-          <div className="input-container password-container">
+          <div className="form-group-reg password-container">
             <input
               className="input-box"
               type={confirmPasswordVisible ? 'text' : 'password'}
@@ -107,15 +102,14 @@ const ForgotPassword = () => {
               className="show-password"
               onClick={toggleConfirmPasswordVisibility}
             >
-              {confirmPasswordVisible ? <AiFillEye/> : <AiFillEyeInvisible />}
+              {confirmPasswordVisible ? <VisibilityOffTwoToneIcon /> : < VisibilityTwoToneIcon />}
             </button>
             {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
           </div>
           <button className="button" type="submit">
             Submit
           </button>
-          {responseMessage && <p className="message">{responseMessage}</p>}
-          {errorMessage && <p className="error">{errorMessage}</p>}
+         
         </form>
       </div>
     </div>

@@ -17,7 +17,7 @@ export const ThemeProvider = ({children}) => {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-  }, [isDarkMode]);
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{theme, toggleTheme}}>

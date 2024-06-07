@@ -1,42 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import '../../styles/forgot-password/forgot-password.scss';
+import '../../styles/login/login.scss';
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const ForgotPasswordLink = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
+  const { register, handleSubmit,reset, formState: { errors } } = useForm();
+  
 
   const onSubmit = async (data) => {
-    console.log(data)
     const url = process.env.REACT_APP_PRODUCTION_URL
     try {
       const response = await axios.post(`${url}/api/user/forgot-password-link`, { email: data.email });
       toast.success(response?.data?.resultMessage?.en)
-      setMessage(response?.data?.resultMessage?.en);
-      setError("");
+  reset()
 
-    } catch (err) {
-      setError(error.response?.data?.resultMessage?.en);
-      setMessage("");
+    } catch (error) {
       toast.error(error.response?.data?.resultMessage?.en)
     }
   };
 
   return (
     <div className="forgot-password-main-container">
-      <div className="forgot-password-form">
-        <h2 className="forgot-password-heading">Forgot Password</h2>
+      <div className="form-container">
         <form onSubmit={handleSubmit(onSubmit)}>
+        <h2 className="welcome-heading" style={{marginBottom:"40px"}}>Forgot Password</h2>
           <div className="form-group">
             <input
               className="input-box"
               type="email"
               id="email"
               name="email"
-              placeholder="Enter your email"
+              placeholder="Email"
               {...register('email', {
                 required: "Email is required",
                 pattern: {
@@ -50,8 +47,9 @@ const ForgotPasswordLink = () => {
           <button className="button" type="submit">
             Submit
           </button>
-          {message && <p className="message">{message}</p>}
-          {error && <p className="error">{error}</p>}
+          <p className="Login">
+            <Link to="/Login">Login</Link>
+          </p>
         </form>
       </div>
     </div>

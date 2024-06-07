@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import axios from "axios";
-import backGroundSteps from "../../assets/Bag Steps@512p-25fps.gif";
 import cat from "../../assets/cat@1x-25fps.gif";
 import bag from "../../assets/bagimage.gif";
 import cycle from "../../assets/cycle.gif";
@@ -24,7 +23,7 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -45,7 +44,7 @@ const LoginPage = () => {
   const onSubmitLoginForm = async (data) => {
     const api = `${process.env.REACT_APP_PRODUCTION_URL}/api/user/login`;
     setLoading(true);
-    setMessage("");
+    
     const accessTokenExpirationTime = 1;
     const refreshTokenExpirationTime = 30;
 
@@ -55,7 +54,6 @@ const LoginPage = () => {
 
       console.log(response.data.resultMessage.en);
       toast.success(response.data.resultMessage.en);
-      setMessage(response.data.resultMessage.en);
 
       Cookies.set("accessToken", accessToken, { expires: accessTokenExpirationTime });
       Cookies.set("refreshToken", refreshToken, { expires: refreshTokenExpirationTime });
@@ -63,7 +61,6 @@ const LoginPage = () => {
       navigate("/");
     } catch (error) {
       console.error(error.response ? error.response.data.resultMessage.en : error.message);
-      setMessage(error.response.data.resultMessage.en);
       toast.error(error.response.data.resultMessage.en);
       setLoading(false);
     }
