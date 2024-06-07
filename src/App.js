@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "./components/login/login-form";
 import RegisterForm from "./components/register/register-form";
-import { ThemeProvider } from "./theme-context";
-import Navbar from "./components/navbar/navbar";
-import Home from "./pages/home";
-import Blog from "./pages/blog";
-import About from "./pages/about";
-import BackgroundChanger from "./components/home/home";
+// import { ThemeProvider } from "./theme-context";
+// import Navbar from "./components/navbar/navbar";
+// import Home from "./pages/home";
+// import Blog from "./pages/blog";
+// import About from "./pages/about";
+// import BackgroundChanger from "./components/home/home";
 import Preloader from "./components/preloader/preloader";
 import NotFound from "./components/not-found/not-found";
 import VerifyEmail from "./components/verify-email/verify-email";
-import routes from "./routes/main-route";
+import mainRoutes from "./routes/main-route";
 
-import ForgotPassword from "./components/forget-password-link/forgot-password-link";
-import ChangePassword from "./components/forgot-password/forgot-password";
+import ChangePassword from "./components/forget-password-link/forgot-password-link";
+import ForgotPassword from "./components/forgot-password/forgot-password";
 import { Toaster } from "react-hot-toast";
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -41,7 +41,7 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
         <Route path="/forgot-password-link" element={<ForgotPassword />} />
         <Route path="/forgot-password" element={<ChangePassword />} />
-        {routes}
+        {mainRoutes}
       </Routes>
     </Router>
   );

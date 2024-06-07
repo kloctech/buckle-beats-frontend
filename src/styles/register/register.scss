@@ -1,6 +1,6 @@
-@import '../../index.scss';
-@import '../variables//variable.scss';
-@mixin backgroudImageContainer($image,$lefPadding,$backgroundSize){
+@import "../../index.scss";
+@import "../variables//variable.scss";
+@mixin backgroudImageContainer($image, $lefPadding, $backgroundSize) {
   background-repeat: no-repeat;
   background-position: bottom left;
   position: absolute;
@@ -13,9 +13,8 @@
   left: $lefPadding;
   background-image: url($image);
 }
-.regestation-container{
+.regestation-container {
   width: 100vw;
-
 }
 .form-container {
   display: flex;
@@ -23,16 +22,19 @@
   justify-content: center;
   flex-direction: column;
   height: 100vh;
-  max-width: 380px; 
-  width: 90vw;       
+  max-width: 380px;
+  width: 90vw;
   margin: auto;
   position: relative;
   z-index: 1;
-  background-color:$background-color;
+  background-color: $background-color;
   padding: 40px;
 }
 
-.bag-icon, .cycle-icon, .cat-icon, .dog-icon {
+.bag-icon,
+.cycle-icon,
+.cat-icon,
+.dog-icon {
   width: 160px;
   height: 80px;
   margin: auto;
@@ -42,23 +44,22 @@
 }
 
 .background-iamge-container-paws {
-  @include backgroudImageContainer('../../assets//Paws.gif',-30px,40vh);
- 
+  @include backgroudImageContainer("../../assets//Paws.gif", -30px, 40vh);
 }
 
 .background-iamge-container-tyres {
-  @include backgroudImageContainer('../../assets/tyre path@512p-25fps.gif', 0px,30vh )
+  @include backgroudImageContainer("../../assets/tyre path@512p-25fps.gif", 0px, 30vh);
 }
 
 .background-iamge-container-steps {
-  @include backgroudImageContainer('../../assets/Bag Steps@512p-25fps.gif',-5px ,14vh ) 
+  @include backgroudImageContainer("../../assets/Bag Steps@512p-25fps.gif", -5px, 14vh);
 }
 
 h1 {
   margin-bottom: 20px;
   font-size: larger;
   font-weight: 500;
-  color:$text-color;
+  color: $text-color;
 }
 
 // input {
@@ -95,14 +96,14 @@ h1 {
   cursor: pointer;
 }
 
-.login-button {
+.register-button {
   padding: 10px;
   width: 320px;
-  
+
   border: none;
   border-radius: 5px;
   background-color: $primary-color;
-  color:$text-color;
+  color: $text-color;
   font-size: 18px;
   // margin-left: -22px;
   border: 5px solid $secondary-color;
@@ -114,14 +115,14 @@ h1 {
   color: #f03355;
   font-size: 0.875rem;
 }
-@media screen and (max-width:600px) {
-  .regestation-container{
+@media screen and (max-width: 600px) {
+  .regestation-container {
     background-color: $background-color;
   }
-  .form-container{
+  .form-container {
     height: 100vh;
   }
-  .background-iamge-container-paws{
+  .background-iamge-container-paws {
     left: -65px;
     background-size: 44vh;
   }

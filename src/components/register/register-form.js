@@ -10,12 +10,6 @@ import cycle from "../../assets/cycle.gif";
 import toast from "react-hot-toast";
 
 const RegisterForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const images = [bag, cycle, cat, dog];
@@ -26,7 +20,7 @@ const RegisterForm = () => {
     }, 7000); // Change image every 7 seconds
 
     return () => clearInterval(imageInterval);
-  }, []);
+  }, [images.length]);
 
   const getBackgroundClassName = () => {
     switch (currentImageIndex) {
@@ -69,7 +63,7 @@ const RegisterForm = () => {
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  const [responseMessage, setResponseMessage] = useState("");
+  // const [responseMessage, setResponseMessage] = useState("");
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -90,17 +84,10 @@ const RegisterForm = () => {
         platform: "Android",
       });
 
-      setResponseMessage("User registered successfully! Please check your email for verification.");
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
       toast.success(response?.data?.resultMessage?.en);
       reset();
     } catch (error) {
-      setResponseMessage("Error registering user");
+      //setResponseMessage("Error registering user");
       toast.error(error.response.data.resultMessage.en);
     }
   };
@@ -167,7 +154,7 @@ const RegisterForm = () => {
             {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <img alt="image" className={`${getClassName()}`} src={images[currentImageIndex]}></img>
+            <img alt="background" className={`${getClassName()}`} src={images[currentImageIndex]}></img>
             {/* <img src={images[currentImageIndex]} alt="cycling images" style={{ height: "110px", marginBottom: "0px", marginLeft: "23px" }} /> */}
           </div>
           <button type="submit" className="login-button">
