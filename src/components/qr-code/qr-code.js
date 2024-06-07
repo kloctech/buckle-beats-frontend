@@ -1,10 +1,9 @@
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState} from 'react';
 import '../../styles/qr-code/qr-code.scss'
 import bag from '../../assets/bag.gif'
 import bagpic from '../../assets/bag1.jpeg'
-import InfiniteScroll from 'react-infinite-scroll-component';
+import Hamburger from '../hamburger-searchbar/hamburger-searchbar';
 
 const items = [
   { id: 1, name: 'BAG', image: bagpic, lost: false },
@@ -41,27 +40,7 @@ const ItemCard = ({ item, onToggle }) => (
 
 const QrCode = () => {
   const [itemList, setItemList] = useState(items);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-
-  useEffect(() => {
-    fetchItems();
-  });
-
-  const fetchItems = async () => {
-    try {
-      const response = await axios.get(`https://api.example.com/items?page=${page}&limit=6`);
-      const newItems = response.data.items;
-      setItemList((prevItems) => [...prevItems, ...newItems]);
-      if (newItems.length === 0 || newItems.length < 6) {
-        setHasMore(false);
-      }
-      setPage(prevPage => prevPage + 1);
-    } catch (error) {
-      console.error("Error fetching items:", error);
-    }
-  };
-
+  
   const handleToggle = (id) => {
     const updatedItems = itemList.map(item =>
       item.id === id ? { ...item, lost: !item.lost } : item
@@ -71,17 +50,7 @@ const QrCode = () => {
 
   return (
     <div className="app">
-      <InfiniteScroll
-        dataLength={itemList.length}
-        next={fetchItems}
-        hasMore={hasMore}
-        // loader={<h4>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: 'center' }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-      ></InfiniteScroll>
+      <Hamburger/>
       <div className="item-list">
         {itemList.map(item => (
           <ItemCard key={item.id} item={item} onToggle={handleToggle} />

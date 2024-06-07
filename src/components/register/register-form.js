@@ -15,7 +15,7 @@ import { FaCheckCircle} from "react-icons/fa";
 const RegisterForm = () => {
   
 const [currentImageIndex, setCurrentImageIndex] = useState(0);
-const [isRegistred,setIsRegistred]  = useState(true)
+const [isRegistred,setIsRegistred]  = useState(false)
 const [passwordVisible, setPasswordVisible] = useState(false);
 const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 const {
