@@ -20,7 +20,7 @@ const RegisterForm = () => {
   useEffect(() => {
     const imageInterval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000); // Change image every 7 seconds
+    }, 7000); // Change image every 7 seconds
 
     return () => clearInterval(imageInterval);
   }, [images.length]);
@@ -155,7 +155,6 @@ const RegisterForm = () => {
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <img alt="dog" className={`${getClassName()}`} src={images[currentImageIndex]}></img>
-            {/* <img src={images[currentImageIndex]} alt="cycling images" style={{ height: "110px", marginBottom: "0px", marginLeft: "23px" }} /> */}
           </div>
           <button type="submit" className="register-button">
             SignUp
