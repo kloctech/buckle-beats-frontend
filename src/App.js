@@ -11,10 +11,10 @@ import RegisterForm from "./components/register/register-form";
 import Preloader from "./components/preloader/preloader";
 import NotFound from "./components/not-found/not-found";
 import VerifyEmail from "./components/verify-email/verify-email";
-import routes from "./routes/main-route";
+import mainRoutes from "./routes/main-route";
 
-import ForgotPassword from "./components/forget-password-link/forgot-password-link";
-import ChangePassword from "./components/forgot-password/forgot-password";
+import ChangePassword from "./components/forget-password-link/forgot-password-link";
+import ForgotPassword from "./components/forgot-password/forgot-password";
 import { Toaster } from "react-hot-toast";
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -41,7 +41,7 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
         <Route path="/forgot-password-link" element={<ForgotPassword />} />
         <Route path="/forgot-password" element={<ChangePassword />} />
-        {routes}
+        {mainRoutes}
       </Routes>
     </Router>
   );

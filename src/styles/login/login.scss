@@ -1,7 +1,7 @@
 @import "../../styles/variables/variable.scss";
 .login-main-container {
   position: relative;
-  height: 100vh;
+  height: 92.5vh;
 }
 
 .login-container {
@@ -13,6 +13,14 @@
   z-index: 1;
   position: relative;
   overflow: overlay;
+}
+@media (min-width: 600px) {
+  .login-container {
+    max-width: 340px;
+  }
+  .login-main-container {
+    height: 100vh;
+  }
 }
 .background-common-styles {
   background-repeat: no-repeat;
@@ -27,7 +35,9 @@
   z-index: -1;
 }
 .background-steps {
-  background-image: url("../../assets/Bag Steps@512p-25fps.gif");
+  background-image: url("../../assets/steps.gif");
+  background-size: 50vh;
+  margin-left: -95px;
 }
 
 .background-cycle-route {
@@ -39,6 +49,45 @@
   background-image: url("../../assets/Paws.gif");
   background-size: 45vh;
   margin-left: -45px;
+}
+
+.bag-gif {
+  // width: 160px;
+  height: 100px;
+  margin: auto;
+  margin-bottom: -20px;
+  background-size: cover;
+  background-color: transparent;
+  margin-left: 21.5%;
+}
+
+.cat-gif {
+  width: 120px;
+  height: 120px;
+  margin-bottom: -40px;
+  background-color: transparent;
+  background-size: cover;
+  margin-left: 27%;
+  z-index: -1000;
+}
+
+.dog-gif {
+  width: 120px;
+  height: 100px;
+  margin: auto;
+  margin-bottom: -30px;
+  background-size: cover;
+  background-color: transparent;
+  margin-left: 32%;
+}
+.cycle-gif {
+  width: 120px;
+  height: 100px;
+  margin: auto;
+  margin-bottom: -31px;
+  background-size: cover;
+  background-color: transparent;
+  margin-left: 32%;
 }
 
 .login-content {
@@ -117,7 +166,7 @@
   text-align: center;
 }
 .signup-navigation-text {
-  color: white;
+  color: $text-color;
   text-align: center;
   text-decoration: none;
   font-size: $font-size-small;
@@ -131,4 +180,9 @@
       text-decoration: underline;
     }
   }
+}
+.login-image-gif {
+  height: 110px;
+  margin-left: 21%;
+  margin-bottom: -22px;
 }

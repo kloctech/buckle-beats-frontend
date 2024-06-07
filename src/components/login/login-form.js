@@ -6,10 +6,10 @@ import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import axios from "axios";
 // import backGroundSteps from "../../assets/Bag Steps@512p-25fps.gif";
-import cat from "../../assets/cat@1x-25fps.gif";
+import cat from "../../assets/Cat-gif.gif";
 import bag from "../../assets/bagimage.gif";
-import cycle from "../../assets/cycle.gif";
-import dog from "../../assets/dog.gif";
+import cycle from "../../assets/Bicycle-gif.gif";
+import dog from "../../assets/dog-gif.gif";
 import { CircularProgress } from "@mui/material";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
@@ -30,6 +30,21 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
 
+  const getImageClassName = () => {
+    switch (currentImageIndex) {
+      case 0:
+        return "bag-gif";
+      case 1:
+        return "cycle-gif";
+      case 2:
+        return "cat-gif";
+      case 3:
+        return "dog-gif";
+      default:
+        return "";
+    }
+  };
+
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
@@ -37,7 +52,7 @@ const LoginPage = () => {
   useEffect(() => {
     const imageInterval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 2500);
+    }, 4000);
 
     return () => clearInterval(imageInterval);
   }, []);
@@ -47,14 +62,14 @@ const LoginPage = () => {
     setLoading(true);
     // setMessage("");
     const accessTokenExpirationTime = 1;
-    const refreshTokenExpirationTime = 30;
+    const refreshTokenExpirationTime = 1;
 
     try {
       const response = await axios.post(api, data);
       const { accessToken, refreshToken } = response.data;
 
       console.log(response.data.resultMessage.en);
-      toast.success(response.data.resultMessage.en);
+      toast.success(response.data.resultMessage.en, { duration: 5000 });
       // setMessage(response.data.resultMessage.en);
 
       Cookies.set("accessToken", accessToken, { expires: accessTokenExpirationTime });
@@ -64,10 +79,11 @@ const LoginPage = () => {
     } catch (error) {
       console.error(error.response ? error.response.data.resultMessage.en : error.message);
       // setMessage(error.response.data.resultMessage.en);
-      toast.error(error.response.data.resultMessage.en);
+      toast.error(error.response.data.resultMessage.en, { duration: 5000 });
       setLoading(false);
     }
   };
+
   //className={`${classNames[currentImageIndex]}`}
   return (
     <div className="login-main-container">
@@ -117,9 +133,9 @@ const LoginPage = () => {
           </div>
           {errors.password && <br />}
           <p className={`forgot-password-login ${errors.password ? "error-margin" : ""}`}>
-            <Link to="/forgot-password-link">Forgot password?</Link>
+            <Link to="/forgot-password">Forgot password?</Link>
           </p>
-          <img src={images[currentImageIndex]} alt="cycling images" style={{ height: "110px", marginBottom: "-22px", marginLeft: "18%" }} />
+          <img src={images[currentImageIndex]} className={`${getImageClassName()}`} alt="cycling images" />
           <button className="login-button" type="submit">
             {loading ? <CircularProgress size={25} sx={{ color: "white" }} /> : "Login"}
           </button>
@@ -131,5 +147,6 @@ const LoginPage = () => {
     </div>
   );
 };
-
+//images[currentImageIndex]
+//className={`${getImageClassName()}`}
 export default LoginPage;
