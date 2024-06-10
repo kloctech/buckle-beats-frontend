@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from '@mui/material/Modal';
 
-const EnableQRCode = ({closeModal, openModal , heading, text}) => {
+const EnableQRCode = ({closeModal, openModal , heading, text, id}) => {
   return (
     <Modal
     open={openModal}
@@ -11,7 +11,7 @@ const EnableQRCode = ({closeModal, openModal , heading, text}) => {
       <div class="box-container">
         <h3>{heading || "Turn on Lost Mode?"}</h3>
         <p>{text || "Your contact information and  message will be shared"}</p>
-        <button onClick={closeModal} className="cta-button" type="submit">
+        <button onClick={() => closeModal(id)} className="cta-button" type="submit">
             Turn On
           </button>
       </div>
