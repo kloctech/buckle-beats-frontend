@@ -9,7 +9,7 @@
     align-items: center;
     padding: 10px;
     background-color: $background-color;
-    // width: 90vw;
+    width: 90vw;
     margin: auto;
     .hamburger {
       display: flex;
@@ -101,7 +101,7 @@
   }
   @media screen and (max-width: "430px") {
     .mobile-header {
-      width: 100vw;
+      width: 90vw;
     }
   }
 }
