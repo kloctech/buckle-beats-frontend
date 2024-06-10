@@ -1,59 +1,80 @@
+import React, { useEffect, useState, useCallback } from 'react';
+import '../../styles/qr-code/qr-code.scss';
+import Cookies from "js-cookie";
+import axios from 'axios';
 
-import React, { useState} from 'react';
-import '../../styles/qr-code/qr-code.scss'
-import bag from '../../assets/bag.gif'
-import bagpic from '../../assets/bag1.jpeg'
-
-const items = [
-  { id: 1, name: 'BAG', image: bagpic, lost: false },
-  { id: 2, name: 'PHONE', image: bagpic, lost: false },
-  { id: 3, name: 'BICYCLE', image: bag, lost: false },
-  { id: 4, name: 'KEYS', image: bag, lost: false },
-  { id: 5, name: 'PASSPORT', image: bag, lost: false },
-  { id: 6, name: 'WALLET', image: bag, lost: false },
-  { id: 1, name: 'BAG', image: bagpic, lost: false },
-  { id: 2, name: 'PHONE', image: bagpic, lost: false },
-  { id: 3, name: 'BICYCLE', image: bag, lost: false },
-  { id: 4, name: 'KEYS', image: bag, lost: false },
-  { id: 5, name: 'PASSPORT', image: bag, lost: false },
-  { id: 6, name: 'WALLET', image: bag, lost: false },
-  
-
-];
 const ItemCard = ({ item, onToggle }) => (
   <div className="item-card">
-    <img src={item.image} alt={item.name} className="item-image" />
+    <img src={item?.qr_code_url} alt={item.name} className="item-image" />
     <h5 style={{ fontSize: '12px', color: '#1B3E51', marginTop: "6px", fontWeight: '640' }}>{item.name}</h5>
     <div className='switch-container'>
-      <span className="lost-mode-text">{item.lost ? 'Lost Mode' : 'Lost Mode'}</span>
+      <span className="lost-mode-text">{item?.is_lost ? 'Lost Mode' : 'Lost Mode'}</span>
       <div className="toggle-container" onClick={() => onToggle(item.id)}>
-        <div className={`toggle-button ${item.lost ? 'active' : ''}`}></div>
+        <div className={`toggle-button ${item?.lost ? 'active' : ''}`}></div>
       </div>
     </div>
   </div>
 );
 
-
-
-
-
 const QrCode = () => {
-  const [itemList, setItemList] = useState(items);
-  
+  const [qrCodes, setQrCodes] = useState([]);
+  const [name, setName] = useState("");
+  const [page, setPage] = useState(1);
+  const [limit] = useState(6);
+  const [loading, setLoading] = useState(false);
+
+  const fetchQrCodes = useCallback(async (pageNum) => {
+    const url = process.env.REACT_APP_PRODUCTION_URL;
+    const token = Cookies.get("accessToken");
+
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        `${url}/api/qrcode?name=${name}&page=${pageNum}&limit=${limit}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+      console.log(response)
+      setQrCodes(response?.data?.qrCodes);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching QR codes:", error);
+      setLoading(false);
+    }
+  }, [name, limit]);
+
+  useEffect(() => {
+    fetchQrCodes(page);
+  }, [fetchQrCodes, page]);
+
   const handleToggle = (id) => {
-    const updatedItems = itemList.map(item =>
-      item.id === id ? { ...item, lost: !item.lost } : item
+    const updatedItems = qrCodes.map(item =>
+      item.id === id ? { ...item, lost: !item.is_lost } : item
     );
-    setItemList(updatedItems);
+    setQrCodes(updatedItems);
   };
 
+  const handleScroll = () => {
+    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) return;
+    setPage(prevPage => prevPage + 1);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [loading]);
+console.log(page,limit)
   return (
     <div className="app">
       <div className="item-list">
-        {itemList.map(item => (
+        {qrCodes.map(item => (
           <ItemCard key={item.id} item={item} onToggle={handleToggle} />
         ))}
       </div>
+      {loading && <div>Loading more items...</div>}
       <div className="footer-buttons">
         <button className="shop-button">Shop Now</button>
         <button className="activate-qr-button">Activate QR</button>
