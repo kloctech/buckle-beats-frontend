@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
+import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import "../../styles/register/register.scss";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import cat from "../../assets/cat@1x-25fps.gif";
+import cat from "../../assets/Cat.gif";
 import bag from "../../assets/bagimage.gif";
-import dog from "../../assets/dog.gif";
-import cycle from "../../assets/cycle.gif";
+import dog from '../../assets/dog.gif'
+import cycle from "../../assets/Bicycle LT_1.gif";
 import toast from "react-hot-toast";
+import { FaCheckCircle} from "react-icons/fa";
 
 const RegisterForm = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const images = [bag, cycle, cat, dog];
+  
+const [currentImageIndex, setCurrentImageIndex] = useState(0);
+const [isRegistred,setIsRegistred]  = useState(false)
+const [passwordVisible, setPasswordVisible] = useState(false);
+const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+const {
+  register,
+  handleSubmit,
+  watch,
+  reset,
+  formState: { errors },
+} = useForm();
+const images = [bag, cycle, cat, dog];
 
   useEffect(() => {
     const imageInterval = setInterval(() => {
@@ -53,18 +66,7 @@ const RegisterForm = () => {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[.!@$%^&*])[^\s]{8,}$/;
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm();
-
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  // const [responseMessage, setResponseMessage] = useState("");
-
+ 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -83,26 +85,29 @@ const RegisterForm = () => {
         password: data.password,
         platform: "Android",
       });
-
-      toast.success(response?.data?.resultMessage?.en);
-      reset();
+      toast.success(response?.data?.resultMessage?.en, {
+        duration: 5000, 
+      });      reset();
+      setIsRegistred(true)
     } catch (error) {
-      //setResponseMessage("Error registering user");
-      toast.error(error.response.data.resultMessage.en);
+      toast.error(error.response.data.resultMessage.en,{ duration: 5000 });
     }
   };
 
   return (
     <div className="regestation-container">
-      <div className="form-container">
+      {isRegistred ? <div className="form-container">
+        {/* <FaCheckCircle className="verification-icon" /> */}
+        <FaCheckCircle className="verification-message" ></FaCheckCircle>
+         <h6 style={{color:"#E4E9F1"}}>Please check your email and complete the verification process to log in.</h6> </div> : <div className="form-container">
         <div className={`${getBackgroundClassName()}`}></div>
         <h1>Welcome!</h1>
         <form onSubmit={handleSubmit(onformSubmit)}>
-          <div className="input-container">
+          <div className="form-group">
             <input className="input-box" type="text" id="name" {...register("name", { required: "Name is required" })} placeholder="Name" />
             {errors.name && <span className="error">{errors.name.message}</span>}
           </div>
-          <div>
+          <div className="form-group">
             <input
               className="input-box"
               type="email"
@@ -118,7 +123,7 @@ const RegisterForm = () => {
             />
             {errors.email && <span className="error">{errors.email.message}</span>}
           </div>
-          <div className="password-container">
+          <div className="password-container form-group">
             <input
               className="input-box"
               type={passwordVisible ? "text" : "password"}
@@ -127,17 +132,17 @@ const RegisterForm = () => {
                 required: "Password is required",
                 pattern: {
                   value: passwordRegex,
-                  message: "Password must be at least 8 characters long, contain a digit, an uppercase letter, a lowercase letter, and a special character",
+                  message: "Password must be at least 8 characters contains a digit, an uppercase letter, and a special character.",
                 },
               })}
               placeholder="Password"
             />
             <button type="button" className="show-password" onClick={togglePasswordVisibility}>
-              {passwordVisible ? <AiFillEye /> : <AiFillEyeInvisible />}
+              {passwordVisible ?<VisibilityOffTwoToneIcon/> : <VisibilityTwoToneIcon />}
             </button>
             {errors.password && <span className="error">{errors.password.message}</span>}
           </div>
-          <div className="password-container">
+          <div className={`password-container form-group ${errors.password ? "with-error" : ""}`}>
             <input
               className="input-box"
               type={confirmPasswordVisible ? "text" : "password"}
@@ -149,19 +154,21 @@ const RegisterForm = () => {
               placeholder="Confirm Password"
             />
             <button type="button" className="show-password" onClick={toggleConfirmPasswordVisibility}>
-              {confirmPasswordVisible ? <AiFillEye /> : <AiFillEyeInvisible />}
+              {confirmPasswordVisible ? <VisibilityOffTwoToneIcon/> : <VisibilityTwoToneIcon />}
             </button>
             {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <img alt="background" className={`${getClassName()}`} src={images[currentImageIndex]}></img>
-            {/* <img src={images[currentImageIndex]} alt="cycling images" style={{ height: "110px", marginBottom: "0px", marginLeft: "23px" }} /> */}
+            <img alt="dog" className={`${getClassName()}`} src={images[currentImageIndex]}></img>
           </div>
-          <button type="submit" className="login-button">
+          <button type="submit" className="register-button">
             SignUp
           </button>
+          <p className="Login">     
+            <Link to="/Login">Already have an accout? Login</Link>
+          </p>
         </form>
-      </div>
+      </div> }
     </div>
   );
 };

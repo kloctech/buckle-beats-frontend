@@ -1,13 +1,14 @@
 // Color Variables
-$background-color: #212530;
-$primary-color: #6bc6ae;
+$background-color: #183e51;
+$primary-color: #58d7b5;
 $secondary-color: #434850;
 $hover-color: #5aa895;
-$error-color: rgb(213, 49, 49);
+$error-color: rgb(250, 111, 104);
 $text-color: white;
 $border-color: #ccc;
 $font-size-small: 12px;
 $font-size-medium: 16px;
+
 
 // Dimensions
 $border-radius: 5px;
@@ -15,7 +16,7 @@ $padding-small: 10px;
 $padding-medium: 20px;
 $height-full: 100vh;
 $min-width: 300px;
-$max-width: 400px;
+$max-width: 450px;
 
 // Mixins
 @mixin center-content {
