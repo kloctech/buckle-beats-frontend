@@ -1,10 +1,10 @@
 import React from "react";
 import Modal from '@mui/material/Modal';
 
-const ModalComponent = ({closeModal, isModal , heading, text}) => {
+const ModalComponent = ({closeModal, openModal , heading, text}) => {
   return (
     <Modal
-    open={isModal}
+    open={openModal}
     aria-labelledby="modal-modal-title"
     aria-describedby="modal-modal-description"
     >
