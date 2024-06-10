@@ -1,10 +1,11 @@
 import React from "react";
 import Modal from '@mui/material/Modal';
 
-const EnableQRCode = ({closeModal, openModal , heading, text, id}) => {
+const EnableQRCode = ({closeModal, openModal , heading, text, id,qr_planet_id,is_lost}) => {
   return (
+    
     <Modal
-    open={openModal}
+    open={openModal && !is_lost}
     aria-labelledby="modal-modal-title"
     aria-describedby="modal-modal-description"
     >

@@ -86,7 +86,7 @@ const ForgotPassword = () => {
             </button>
             {errors.password && <span className="error">{errors.password.message}</span>}
           </div>
-          <div className="form-group-reg password-container">
+          <div className={`password-container form-group ${errors.password ? "with-error" : ""}`}>
             <input
               className="input-box"
               type={confirmPasswordVisible ? 'text' : 'password'}
