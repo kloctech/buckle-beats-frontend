@@ -169,6 +169,26 @@ margin-top: auto;
   }
 }
 
+.Login{
+  font-size: $font-size-small;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  // text-align: end;
+  a {
+    color: $text-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+  .verification-message{
+    color: $primary-color;
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
 /*modal*/
 
 .MuiModal-backdrop,
