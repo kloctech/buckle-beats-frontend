@@ -5,7 +5,7 @@ const EnableQRCode = ({closeModal, openModal , heading, text, id,qr_planet_id,is
   return (
     
     <Modal
-    open={openModal && !is_lost}
+    open={openModal}
     aria-labelledby="modal-modal-title"
     aria-describedby="modal-modal-description"
     >
