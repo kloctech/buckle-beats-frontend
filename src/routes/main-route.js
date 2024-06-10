@@ -4,12 +4,12 @@ import ProtectedRoute from "../middleware/protected-route";
 
 import WithLogoutButton from "../components/withLogout/withLogout";
 import ForgotPassword from "../components/forgot-password/forgot-password";
-import QrCode from "../components/qr-code/qr-code";
+import Hamburger from "../components/hamburger-searchbar/hamburger-searchbar";
 
 const routes = (
   <>
     <Route exact element={<ProtectedRoute />}>
-      <Route exact path="/" element={<QrCode />} />
+      <Route exact path="/" element={<Hamburger />} />
       <Route element={<WithLogoutButton />} />
       <Route path="/forgot-password-link" element={<ForgotPassword />} />
     </Route>

@@ -3,7 +3,6 @@ import React, { useState} from 'react';
 import '../../styles/qr-code/qr-code.scss'
 import bag from '../../assets/bag.gif'
 import bagpic from '../../assets/bag1.jpeg'
-import Hamburger from '../hamburger-searchbar/hamburger-searchbar';
 
 const items = [
   { id: 1, name: 'BAG', image: bagpic, lost: false },
@@ -50,7 +49,6 @@ const QrCode = () => {
 
   return (
     <div className="app">
-      <Hamburger/>
       <div className="item-list">
         {itemList.map(item => (
           <ItemCard key={item.id} item={item} onToggle={handleToggle} />

@@ -90,7 +90,7 @@ const images = [bag, cycle, cat, dog];
       });      reset();
       setIsRegistred(true)
     } catch (error) {
-      toast.error(error.response.data.resultMessage.en);
+      toast.error(error.response.data.resultMessage.en,{ duration: 5000 });
     }
   };
 

@@ -14,11 +14,11 @@ const ForgotPasswordLink = () => {
     const url = process.env.REACT_APP_PRODUCTION_URL
     try {
       const response = await axios.post(`${url}/api/user/forgot-password-link`, { email: data.email });
-      toast.success(response?.data?.resultMessage?.en)
+      toast.success(response?.data?.resultMessage?.en,{ duration: 5000 })
   reset()
 
     } catch (error) {
-      toast.error(error.response?.data?.resultMessage?.en)
+      toast.error(error.response?.data?.resultMessage?.en,{ duration: 5000 })
     }
   };
 

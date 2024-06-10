@@ -4,15 +4,14 @@
    text-align: center;
   background-color:$background-color;
   color: white;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
   margin: auto;
   width: 25vw;
-  // height: 100vh;
+  height: 83.5vh;
+padding-top: 20px;
   position: relative;
  }
  .item-list {
@@ -21,8 +20,8 @@
   gap: 17px;
   z-index: 2;
   justify-content: center;
-  height: 70vh;
- overflow-y: scroll;
+  // height: 100%;
+  overflow-y: scroll;
  scrollbar-width: thin;
  -ms-overflow-style: none;  
  scrollbar-width: none;
@@ -37,6 +36,7 @@
   background-color: #edeff3;
   border-radius: 5px;
   width: 140px;
+  
   border:1px solid#58D7B5;
 } 
  
@@ -103,8 +103,9 @@ border-top-right-radius: 30px;
   left: 0;
   right: 0;
   z-index: 30;
+  opacity: 0.97;
   // position: fixed;
- }
+   }
  
  .shop-button {
    background-color:#58D7B5;

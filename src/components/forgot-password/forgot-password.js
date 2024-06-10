@@ -46,13 +46,13 @@ const ForgotPassword = () => {
           }
         }
       );
-      toast.success(response.data.resultMessage.en);
+      toast.success(response.data.resultMessage.en,{ duration: 5000 });
 
       reset()
 
     } catch (error) {
       
-      toast.error(error.response?.data?.resultMessage?.en);
+      toast.error(error.response?.data?.resultMessage?.en,{ duration: 5000 });
     }
   };
 
