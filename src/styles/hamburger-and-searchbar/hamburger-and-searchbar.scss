@@ -1,7 +1,7 @@
 @import "../../styles/variables/variable.scss";
 
 .main-qrcode-container {
-  background-color: $background-color;
+  // background-color: $background-color;
   height: calc(100vh - 57px);
   .mobile-header {
     display: flex;
@@ -9,7 +9,7 @@
     align-items: center;
     padding: 10px;
     background-color: $background-color;
-    width: 90vw;
+    // width: 90vw;
     margin: auto;
     .hamburger {
       display: flex;
@@ -89,9 +89,29 @@
       }
     }
   }
+  @media screen and (max-width: 1000px) {
+    .mobile-header {
+      width: 50vw;
+    }
+  }
+  @media screen and (min-width: 1000px) {
+    .mobile-header {
+      width: 320px;
+    }
+  }
+  @media screen and (max-width: "430px") {
+    .mobile-header {
+      width: 100vw;
+    }
+  }
 }
 @media screen and (min-width: 576px) {
   .main-qrcode-container {
     height: 100vh;
+  }
+}
+@media screen and (max-width: 430px) {
+  .header-container {
+    background-color: #183e51;
   }
 }
