@@ -12,10 +12,10 @@ import Preloader from "./components/preloader/preloader";
 import NotFound from "./components/not-found/not-found";
 import VerifyEmail from "./components/verify-email/verify-email";
 import mainRoutes from "./routes/main-route";
-
-import ChangePassword from "./components/forget-password-link/forgot-password-link";
+import ForgotPasswordLink from "./components/forget-password-link/forgot-password-link";
 import ForgotPassword from "./components/forgot-password/forgot-password";
 import { Toaster } from "react-hot-toast";
+
 const App = () => {
   const [loading, setLoading] = useState(true);
 
@@ -39,8 +39,8 @@ const App = () => {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/account" element={<VerifyEmail />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/forgot-password-link" element={<ForgotPassword />} />
-        <Route path="/forgot-password" element={<ChangePassword />} />
+        <Route path="/forgot-password-link" element={<ForgotPasswordLink/>} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         {mainRoutes}
       </Routes>
     </Router>

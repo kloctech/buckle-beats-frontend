@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import axios from "axios";
-// import backGroundSteps from "../../assets/Bag Steps@512p-25fps.gif";
 import cat from "../../assets/Cat-gif.gif";
 import bag from "../../assets/bagimage.gif";
 import cycle from "../../assets/Bicycle-gif.gif";

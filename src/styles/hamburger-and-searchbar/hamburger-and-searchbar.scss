@@ -1,13 +1,16 @@
 @import "../../styles/variables/variable.scss";
 
 .main-qrcode-container {
+  background-color: $background-color;
+  height: calc(100vh - 57px);
   .mobile-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
     background-color: $background-color;
-
+    width: 90vw;
+    margin: auto;
     .hamburger {
       display: flex;
       flex-direction: column;
@@ -85,5 +88,10 @@
         border-bottom: none;
       }
     }
+  }
+}
+@media screen and (min-width: 576px) {
+  .main-qrcode-container {
+    height: 100vh;
   }
 }

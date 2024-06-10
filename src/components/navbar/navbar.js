@@ -3,8 +3,6 @@ import {Link} from "react-router-dom";
 import { useTheme } from "../../theme-context";
 import { MdLightMode } from "react-icons/md";
 import { FaMoon } from "react-icons/fa";
-
-import { MdOutlineLightMode } from "react-icons/md";
 import '../../styles/navbar/navbar.scss'
 const Navbar = () => {
   const {theme, toggleTheme} = useTheme();
@@ -17,8 +15,7 @@ const Navbar = () => {
     <nav className={`navbar ${theme}`}>
       <div>
       <Link to="/register">Register</Link>
-
-        <Link to="/login">Login</Link>
+        <Link to="/login">Login</Link> 
         <Link to="/home">Home</Link>
         
       </div>

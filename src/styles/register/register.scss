@@ -1,6 +1,14 @@
-@import "../../index.scss";
-@import "../variables//variable.scss";
-@mixin backgroudImageContainer($image, $lefPadding, $backgroundSize) {
+@import '../../index.scss';
+@import '../variables/variable.scss';
+@mixin input-styles {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  color: var(--text-color);
+}
+@mixin backgroudImageContainer($image,$lefPadding,$backgroundSize){
   background-repeat: no-repeat;
   background-position: bottom left;
   position: absolute;
@@ -21,30 +29,53 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 100vh;
-  max-width: 380px;
-  width: 90vw;
+  height:100vh;
+  max-width: 340px; 
+  // width: 90vw;       
   margin: auto;
   position: relative;
   z-index: 1;
   background-color: $background-color;
+  background-color: $background-color;
   padding: 40px;
 }
 
-.bag-icon,
-.cycle-icon,
-.cat-icon,
-.dog-icon {
+.bag-icon{
   width: 160px;
-  height: 80px;
+  height: 100px;
   margin: auto;
-  margin-bottom: -15px;
+  margin-bottom: -20px;
   background-size: cover;
   background-color: transparent;
 }
-
+.cycle-icon{
+  width: 160px;
+  // height: 80px;
+  margin: auto;
+  margin-bottom: -50px;
+  background-size: cover;
+  background-color: transparent;
+}
+.dog-icon{
+  width: 160px;
+  // height: 80px;
+  margin: auto;
+  margin-bottom: -46px;
+  background-size: cover;
+  background-color: transparent;
+}
+.cat-icon{
+  width: 160px;
+  // height: 80px;
+ 
+  margin-bottom: -50px;
+  background-size: cover;
+  background-color: transparent;
+  margin-left: 45px
+}
 .background-iamge-container-paws {
-  @include backgroudImageContainer("../../assets//Paws.gif", -30px, 40vh);
+  @include backgroudImageContainer('../../assets//Paws.gif',-10px,43vh);
+ 
 }
 
 .background-iamge-container-tyres {
@@ -52,7 +83,7 @@
 }
 
 .background-iamge-container-steps {
-  @include backgroudImageContainer("../../assets/Bag Steps@512p-25fps.gif", -5px, 14vh);
+  @include backgroudImageContainer('../../assets/steps.gif',-90px ,44vh ) 
 }
 
 h1 {
@@ -74,9 +105,12 @@ h1 {
   border: 1px solid $border-color;
   border-radius: 5px;
 }
-
+.email-container{
+  margin-bottom: 20px;
+}
 .password-container {
   position: relative;
+margin-top: auto;
 }
 
 .show-password {
@@ -87,8 +121,8 @@ h1 {
   cursor: pointer;
   position: absolute;
   right: 10px;
-  top: 50%;
-  transform: translateY(-90%);
+  top: 30%;
+  transform: translateY(-50%);
 }
 
 .forgot-password {
@@ -97,26 +131,26 @@ h1 {
 }
 
 .register-button {
-  padding: 10px;
-  width: 320px;
-
-  border: none;
-  border-radius: 5px;
-  background-color: $primary-color;
-  color: $text-color;
-  font-size: 18px;
-  // margin-left: -22px;
-  border: 5px solid $secondary-color;
-  border-radius: 10px;
-  cursor: pointer;
+ @include button-style ;
+ width:300px
+}
+.form-group {
+  margin-bottom:0.3rem;
+}
+.form-group.with-error {
+ margin-top: 22px; // Adjust the value as needed
 }
 
 .error {
-  color: #f03355;
-  font-size: 0.875rem;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  
+  color: $error-color;
+  font-size: $font-size-small;
 }
-@media screen and (max-width: 600px) {
-  .regestation-container {
+@media screen and (max-width:600px) {
+  .regestation-container{
     background-color: $background-color;
   }
   .form-container {
@@ -126,4 +160,28 @@ h1 {
     left: -65px;
     background-size: 44vh;
   }
+  .background-iamge-container-steps{
+    left: -160px;
+  }
+}
+.Login{
+  font-size: $font-size-small;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  // text-align: end;
+  a {
+    color: $text-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+ 
+}
+.verification-message{
+  color: $primary-color;
+  font-size: 2rem;
+  margin-bottom: 30px;
 }
