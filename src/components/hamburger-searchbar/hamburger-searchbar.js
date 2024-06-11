@@ -4,7 +4,7 @@ import { IoSearch } from "react-icons/io5";
 import BuckleBeatsIcon from "../../assets/Bucklebeats Icon.svg";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
-import QrCode from "../qr-code/qr-code";
+import QrCodes from "../qr-codes/qr-codes";
 
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -30,15 +30,12 @@ const Hamburger = () => {
       if (response.ok) {
         Cookies.remove("accessToken");
         Cookies.remove("refreshToken");
-        console.log(response);
         toast.success("Successfully logout");
         window.location.href = "/login";
       } else {
-        console.error("Failed to logout");
         toast.error("Failed to logout");
       }
     } catch (error) {
-      console.error("Error during logout:", error);
     }
   };
   const handleMenuItemClick = (menuItem) => {
@@ -48,7 +45,7 @@ const Hamburger = () => {
   const renderSelectedComponent = () => {
     switch (selectedMenuItem) {
       case "qr-codes-screen":
-        return <QrCode searchInput={searchInput}/>;
+        return <QrCodes searchInput={searchInput}/>;
       case "item2":
         return <MenuItem2 />;
       case "item3":

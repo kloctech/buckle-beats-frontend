@@ -67,7 +67,6 @@ const LoginPage = () => {
       const response = await axios.post(api, data);
       const { accessToken, refreshToken } = response.data;
 
-      console.log(response.data.resultMessage.en);
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       // setMessage(response.data.resultMessage.en);
 
@@ -76,7 +75,6 @@ const LoginPage = () => {
       setLoading(false);
       navigate("/");
     } catch (error) {
-      console.error(error.response ? error.response.data.resultMessage.en : error.message);
       // setMessage(error.response.data.resultMessage.en);
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });
       setLoading(false);

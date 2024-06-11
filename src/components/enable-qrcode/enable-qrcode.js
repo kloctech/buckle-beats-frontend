@@ -2,7 +2,6 @@ import React from "react";
 import Modal from '@mui/material/Modal';
 
 const EnableQRCode = ({closeModal, openModal , heading, text, id,qr_planet_id,is_lost}) => {
-  console.log(id)
   return (
     
     <Modal
