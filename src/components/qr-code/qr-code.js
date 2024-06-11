@@ -91,7 +91,7 @@ const QrCode = ({ searchInput }) => {
       console.error("Error fetching QR codes:", error);
       setLoading(false);
     }
-  }, [limit]);
+  }, [page,limit]);
 
   useEffect(() => {
     if (debouncedSearchInput.length >= 3 ) {
