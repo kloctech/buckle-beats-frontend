@@ -1,9 +1,7 @@
 @import "../../styles/variables/variable.scss";
 
 .verify-email-container {
-  min-width: $min-width;
-  width: 100vw;
-  // padding: 10px;
+  //min-width: $min-width;
   background-color: $background-color;
   color: $text-color;
   height: 92.5vh;
@@ -12,20 +10,21 @@
   justify-content: center;
 }
 .verify-email-main-container {
-  height: 90vh;
-  flex-direction: column;
-  @include center-content;
+  margin: auto;
+  width: 100vw;
+  max-width: 440px;
+  height: calc(100vh - 57px);
 }
 
-@media (min-width: 600px) {
-  .verify-email-container {
-    max-width: 340px;
-    height: 100vh;
-  }
-  .verify-email-main-container {
-    height: 100vh;
-  }
-}
+// @media (min-width: 600px) {
+//   .verify-email-container {
+//     max-width: 340px;
+//     height: 100vh;
+//   }
+//   .verify-email-main-container {
+//     height: 100vh;
+//   }
+// }
 .verify-email-heading {
   text-align: center;
 }
@@ -38,13 +37,30 @@
 
   &.success {
     color: $primary-color;
+    width: 100%;
   }
 
   &.error {
     color: $error-color;
+    width: 100%;
   }
 
   .verification-icon {
     margin-right: 10px;
   }
+}
+
+@media screen and (min-width: 440px) {
+  .verify-email-main-container {
+    width: 340px;
+    height: 100vh;
+  }
+  .verify-email-container {
+    height: 100vh;
+  }
+}
+@media screen and (max-width: 440px) {
+  // .mobile-header {
+  //   width: 85%;
+  // }
 }

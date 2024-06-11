@@ -35,7 +35,6 @@ const VerifyEmail = () => {
     <div className="verify-email-main-container">
       <div className="verify-email-container">
         <div>
-          {/* <h4 className="verify-email-heading">Verify Email</h4> */}
           {verificationStatus === "success" ? (
             <div className="verification-message success">
               <FaCheckCircle className="verification-icon" />
@@ -49,8 +48,6 @@ const VerifyEmail = () => {
           ) : (
             <div style={{ textAlign: "center" }}>
               <p>LOADING</p>
-              {/* <CircularProgress sx={{ color: "#58d7b5" }} /> */}
-              {/* <Preloader /> */}
             </div>
           )}
         </div>
