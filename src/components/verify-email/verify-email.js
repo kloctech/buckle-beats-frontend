@@ -23,9 +23,11 @@ const VerifyEmail = () => {
       });
       setVerificationStatus("success");
       // toast.success(response.data.resultMessage.en, { duration: 5000 });
+      console.log(response.data.resultMessage.en);
     } catch (error) {
       setVerificationStatus("error");
       // toast.error(error.response.data.resultMessage.en, { duration: 5000 });
+      console.error(error.response ? error.response.data.resultMessage.en : error.message);
     }
   };
 
