@@ -34,7 +34,7 @@ const VerifyEmail = () => {
   return (
     <div className="verify-email-main-container">
       <div className="verify-email-container">
-        <div>
+        <div className="content-container">
           {/* <h4 className="verify-email-heading">Verify Email</h4> */}
           {verificationStatus === "success" ? (
             <div className="verification-message success">
