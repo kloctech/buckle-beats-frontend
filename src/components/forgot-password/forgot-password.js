@@ -5,7 +5,7 @@ import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import '../../styles/forgot-password/forgot-password.scss';
 import toast from "react-hot-toast";
-
+import { useNavigate } from "react-router-dom";
 const ForgotPassword = () => {
   const {
     register,
@@ -28,7 +28,7 @@ const ForgotPassword = () => {
     const searchParams = new URLSearchParams(window.location.search);
     setToken(searchParams.get("token"));
   }, []);
-
+const navigate = useNavigate ()
   useEffect(() => {
     if (confirmPassword && confirmPassword !== password) {
       setError("confirmPassword", {
@@ -62,8 +62,8 @@ const ForgotPassword = () => {
         }
       );
       toast.success(response.data.resultMessage.en, { duration: 5000 });
-
       reset();
+      navigate('/login')
 
     } catch (error) {
       toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
