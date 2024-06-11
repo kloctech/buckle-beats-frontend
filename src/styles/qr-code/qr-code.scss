@@ -26,7 +26,13 @@ padding-top: 20px;
  -ms-overflow-style: none;  
  scrollbar-width: none;
 }
-
+.no-data-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
+  height: 100vh; /* Full viewport height */
+}
 .item-list::-webkit-scrollbar {
  display: none;
 }
@@ -58,8 +64,8 @@ padding-top: 20px;
 //  }
  
  .item-image {
-   width: 60px;
-   height: 60px;
+   width: 65px;
+   height: 65px;
    object-fit: cover;
    margin-top: 20px;
    // background-image:url('../../assets/bag.gif');
@@ -158,6 +164,7 @@ font-size: small;
    left: 20px;
    background-color:#58D7B5
  }
+ 
  @media screen and (max-width:1000px){
   .app{
     width: 50vw;

@@ -9,6 +9,7 @@ import QrCode from "../qr-code/qr-code";
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState("qr-codes-screen");
+  const [searchInput, setSearchInput] = useState("");
 
   const MenuItem2 = () => <div>Component for Menu Item 2</div>;
   const MenuItem3 = () => <div>Component for Menu Item 3</div>;
@@ -47,7 +48,7 @@ const Hamburger = () => {
   const renderSelectedComponent = () => {
     switch (selectedMenuItem) {
       case "qr-codes-screen":
-        return <QrCode />;
+        return <QrCode searchInput={searchInput}/>;
       case "item2":
         return <MenuItem2 />;
       case "item3":
@@ -56,6 +57,7 @@ const Hamburger = () => {
         return null;
     }
   };
+  const handleInputChange = (e) => { setSearchInput(e.target.value); };
   return (
     <div className="main-qrcode-container">
       <div className="header-container">
@@ -67,7 +69,7 @@ const Hamburger = () => {
           </div>
           <div className="search-container">
             <div className="search-input-wrapper">
-              <input type="text" />
+              <input type="text"  onChange={handleInputChange}/>
               <img src={BuckleBeatsIcon} alt="heart" className="search-bg-icon" />
               <IoSearch className="search-icon" />
             </div>
