@@ -129,7 +129,6 @@ background-color: #222831;
    color:#ffffff;
    border-radius: 5px;
    width: 11vw;
-   height: 5vh;
    font-weight: 400;
 font-size: small;
    cursor: pointer;
@@ -165,12 +164,23 @@ font-size: small;
    background-color:#58D7B5
  }
  
- @media screen and (max-width:1000px){
+ @media screen and (max-width:1024px){
   .app{
+    width: 320px;
+  }
+ }
+ @media screen and (max-width:850px) {
+  .app{
+
     width: 50vw;
   }
  }
-@media  screen and (max-width:'430px') {
+ @media  screen and (max-width:600px) {
+  .app{
+    width: 60vw;
+  }
+ }
+@media  screen and (max-width:'450px') {
    .item-card{
       width: 40vw;
    }

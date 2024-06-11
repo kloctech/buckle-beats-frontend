@@ -5,54 +5,62 @@ import axios from 'axios';
 import EnableQRCode from '../enable-qrcode/enable-qrcode';
 import toast from 'react-hot-toast';
 
-const ItemCard = ({ item ,fetchQrCodes}) => {
+
+const ItemCard = ({ item, fetchQrCodes }) => {
   const [qrcode, setQRcode] = useState(null);
   const [activeId, setActiveId] = useState(null);
-  const handleOpen = (id) => {
-    if (activeId !== id) {
-      setQRcode(id);
-      setActiveId(id);
+
+  const handleOpen = async (id) => {
+    if (item.is_lost) {
+      await handleTurnOn(id);
     } else {
-      setQRcode(null);
-      setActiveId(null);
+      // Open the popup
+      if (activeId !== id) {
+        setQRcode(id);
+        setActiveId(id);
+      } else {
+        setQRcode(null);
+        setActiveId(null);
+      }
     }
   };
 
   const handleClose = () => {
     setQRcode(null);
   };
+
   const handleTurnOn = async (qr_planet_id) => {
     const token = Cookies.get("accessToken");
     const url = process.env.REACT_APP_PRODUCTION_URL;
+
     try {
       const response = await axios.put(
         `${url}/api/qrcode/change-status`,
         { code: qr_planet_id },
         { headers: { Authorization: `Bearer ${token}` } }
-      )
+      );
       toast.success(response.data.resultMessage.en, { duration: 5000 });
-      handleClose()
-      fetchQrCodes("")
+      handleClose();
+      fetchQrCodes(""); // Refresh the QR codes list
     } catch (error) {
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });
     }
   };
-  console.log(item.qr_planet_id)
+
   return (
     <div className="item-card">
       <img src={item?.image_url} alt={item.name} className="item-image" />
       <h5 style={{ fontSize: '12px', color: '#1B3E51', marginTop: "6px", fontWeight: '640' }}>{item.name}</h5>
-      <div className='switch-container'>
+      <div className="switch-container">
         <span className="lost-mode-text">{item.is_lost ? 'Lost Mode' : 'Lost Mode'}</span>
         <div className="toggle-container" onClick={() => handleOpen(item?.qr_planet_id)}>
-          <div className={`toggle-button ${item.is_lost===true ? 'active' : ''}`}></div>
+          <div className={`toggle-button ${item.is_lost === true ? 'active' : ''}`}></div>
         </div>
       </div>
-        <EnableQRCode openModal={qrcode === item.qr_planet_id} closeModal={() => handleTurnOn(item.qr_planet_id)} id={item.id} is_lost={item?.is_lost} />
+      <EnableQRCode openModal={qrcode === item.qr_planet_id} closeModal={() => handleTurnOn(item.qr_planet_id)} id={item.id} is_lost={item?.is_lost} />
     </div>
   );
 };
-
 
 const QrCode = ({ searchInput }) => {
   const [qrCodes, setQrCodes] = useState([]);
