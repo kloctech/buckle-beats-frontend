@@ -14,7 +14,7 @@
 padding-top: 20px;
   position: relative;
  }
- .item-list {
+ .qr-codes-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 17px;
@@ -33,11 +33,11 @@ padding-top: 20px;
   margin-bottom: 100px;
   height: 100vh; /* Full viewport height */
 }
-.item-list::-webkit-scrollbar {
+.qr-codes-container::-webkit-scrollbar {
  display: none;
 }
 
- .item-card {
+ .qr-code-card {
  
   background-color: #edeff3;
   border-radius: 5px;
@@ -46,31 +46,12 @@ padding-top: 20px;
   border:1px solid#58D7B5;
 } 
  
-//  .item-card {
-//    display: flex;
-//    background-color: #edeff3;
-//    border-radius: 5px;
-//    height:22vh;
-//    width:10vw;
-//    text-align: center;
-//    display: flex;
-//    color: #2d2f36;
-//    flex-direction: column;
-//    align-items: center;
-//    justify-content: center;
-//    justify-content: center;
-//    border:1px solid#58D7B5;
-//   //  margin-top: 10px;
-//  }
- 
- .item-image {
+ .qr-code-image {
    width: 65px;
    height: 65px;
    object-fit: cover;
    margin-top: 20px;
-   // background-image:url('../../assets/bag.gif');
    border-radius: 80px;
-   // margin-top: 40px;
    
  }
  .switch-container{
@@ -166,22 +147,12 @@ font-size: small;
  
  @media screen and (max-width:1024px){
   .app{
-    width: 320px;
-  }
- }
- @media screen and (max-width:850px) {
-  .app{
 
     width: 50vw;
   }
  }
- @media  screen and (max-width:600px) {
-  .app{
-    width: 60vw;
-  }
- }
-@media  screen and (max-width:'450px') {
-   .item-card{
+@media  screen and (max-width:'430px') {
+   .qr-code-card{
       width: 40vw;
    }
    .switch-container{
@@ -196,7 +167,7 @@ font-size: small;
    .activate-qr-button{
     width: 45vw;
    }
-   .item-image{
+   .qr-code-image{
     width: 70px;
     height:70px;
     // border-radius: 15;
