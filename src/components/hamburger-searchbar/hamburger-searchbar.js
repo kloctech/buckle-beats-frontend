@@ -5,7 +5,6 @@ import BuckleBeatsIcon from "../../assets/Bucklebeats Icon.svg";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import QrCode from "../qr-code/qr-code";
-import { backdropClasses } from "@mui/material";
 
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
