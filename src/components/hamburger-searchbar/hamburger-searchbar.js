@@ -5,7 +5,6 @@ import BuckleBeatsIcon from "../../assets/Bucklebeats Icon.svg";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import QrCode from "../qr-code/qr-code";
-import { backdropClasses } from "@mui/material";
 
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -49,7 +48,7 @@ const Hamburger = () => {
   const renderSelectedComponent = () => {
     switch (selectedMenuItem) {
       case "qr-codes-screen":
-        return <QrCode searchInput={searchInput} />;
+        return <QrCode searchInput={searchInput}/>;
       case "item2":
         return <MenuItem2 />;
       case "item3":
@@ -70,7 +69,7 @@ const Hamburger = () => {
           </div>
           <div className="search-container">
             <div className="search-input-wrapper">
-              <input type="text" />
+              <input type="text"  onChange={handleInputChange}/>
               <img src={BuckleBeatsIcon} alt="heart" className="search-bg-icon" />
               <IoSearch className="search-icon" />
             </div>
