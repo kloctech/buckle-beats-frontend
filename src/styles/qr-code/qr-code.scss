@@ -26,7 +26,13 @@ padding-top: 20px;
  -ms-overflow-style: none;  
  scrollbar-width: none;
 }
-
+.no-data-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
+  height: 100vh; /* Full viewport height */
+}
 .item-list::-webkit-scrollbar {
  display: none;
 }
