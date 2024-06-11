@@ -130,7 +130,7 @@ const LoginPage = () => {
           </div>
           {errors.password && <br />}
           <p className={`forgot-password-login ${errors.password ? "error-margin" : ""}`}>
-            <Link to="/forgot-password">Forgot password?</Link>
+            <Link to="/forgot-password-link">Forgot password?</Link>
           </p>
           <img src={images[currentImageIndex]} className={`${getImageClassName()}`} alt="cycling images" />
           <button className="login-button" type="submit">
