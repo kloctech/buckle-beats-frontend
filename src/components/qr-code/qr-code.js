@@ -38,23 +38,21 @@ const ItemCard = ({ item }) => {
   };
 
   return (
-    <div className="item-card">
-      <img src={item?.image_url} alt={item.name} className="item-image" />
-      <h5 style={{ fontSize: "12px", color: "#1B3E51", marginTop: "6px", fontWeight: "640" }}>{item.name}</h5>
-      <div className="switch-container">
-        <span className="lost-mode-text">{item.is_lost ? "Lost Mode" : "Lost Mode"}</span>
-        <div className="toggle-container" onClick={() => handleOpen(item?.qr_planet_id)}>
-          <div className={`toggle-button ${item.is_lost ? "active" : ""}`}></div>
+    <div>
+      <div className="item-card">
+        <img src={item?.image_url} alt={item.name} className="item-image" />
+        <h5 style={{ fontSize: "12px", color: "#1B3E51", marginTop: "6px", fontWeight: "640" }}>{item.name}</h5>
+        <div className="switch-container">
+          <span className="lost-mode-text">{item.is_lost ? "Lost Mode" : "Lost Mode"}</span>
+          <div className="toggle-container" onClick={() => handleOpen(item?.qr_planet_id)}>
+            <div className={`toggle-button ${item.is_lost ? "active" : ""}`}></div>
+          </div>
         </div>
+        <EnableQRCode openModal={qrcode === item.qr_planet_id} closeModal={() => handleTurnOn(item.id, item.qr_planet_id)} id={item.id} />
       </div>
-      <EnableQRCode openModal={qrcode === item.qr_planet_id} closeModal={() => handleTurnOn(item.id, item.qr_planet_id)} id={item.id} />
     </div>
-  </div>
-);
-
-
-
-
+  );
+};
 
 const QrCode = ({ searchInput }) => {
   const [qrCodes, setQrCodes] = useState([]);
