@@ -26,15 +26,16 @@ const QrCodes = ({ searchInput }) => {
   }, [searchInput]);
 
   const fetchQrCodes = useCallback(
-    async (pageNum, searchQuery) => {
+    async (page, searchQuery) => {
       const url = process.env.REACT_APP_PRODUCTION_URL;
       const token = Cookies.get("accessToken");
 
       try {
         setLoading(true);
-        const response = await axios.get(`${url}/api/qrcode?name=${searchQuery}&page=${pageNum}&limit=${limit}`, {
+        const response = await axios.get(`${url}/api/qrcode?name=${searchQuery}&page=${page}&limit=${limit}`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            "ngrok-skip-browser-warning": "69420",
           },
         });
 
@@ -42,7 +43,7 @@ const QrCodes = ({ searchInput }) => {
         //   setEmptyApiResult(false);
         // }
 
-        if (pageNum === 1) {
+        if (page === 1) {
           setQrCodes(response.data.qrCodes);
         } else {
           setQrCodes((prevQrCodes) => [...prevQrCodes, ...response.data.qrCodes]);
@@ -91,7 +92,7 @@ const QrCodes = ({ searchInput }) => {
             <h1>No data found</h1>
           </div>
         ) : (
-          qrCodes.map((item) => <QrCodeCard key={item._id} qrCodeData={item} fetchQrCodes={fetchQrCodes} />)
+          qrCodes.map((item) => <QrCodeCard key={item._id} qrCodeData={item} fetchQrCodes={fetchQrCodes} page={page}/>)
         )}
       </div>
       {loading && <div>Loading more items...</div>}
