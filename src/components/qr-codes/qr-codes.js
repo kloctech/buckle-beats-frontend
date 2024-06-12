@@ -1,14 +1,19 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import "../../styles/qr-code/qr-code.scss";
 import Cookies from "js-cookie";
 import axios from "axios";
 import QrCodeCard from "../qr-code-card/qr-code-card";
+
 const QrCodes = ({ searchInput }) => {
   const [qrCodes, setQrCodes] = useState([]);
   const [page, setPage] = useState(1);
-  const [limit] = useState(6);
+  const [limit] = useState(8);
   const [loading, setLoading] = useState(false);
   const [debouncedSearchInput, setDebouncedSearchInput] = useState(searchInput);
+  const itemListRef = useRef(null);
+  const [prevScrollTop, setPrevScrollTop] = useState(0);
+  const scrollThreshold = 1;
+  // const [emptyApiResult, setEmptyApiResult] = useState(true);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -21,49 +26,67 @@ const QrCodes = ({ searchInput }) => {
   }, [searchInput]);
 
   const fetchQrCodes = useCallback(
-    async (searchQuery) => {
+    async (pageNum, searchQuery) => {
       const url = process.env.REACT_APP_PRODUCTION_URL;
       const token = Cookies.get("accessToken");
 
       try {
         setLoading(true);
-        const response = await axios.get(`${url}/api/qrcode?name=${searchQuery}&page=${page}&limit=${limit}`, {
+        const response = await axios.get(`${url}/api/qrcode?name=${searchQuery}&page=${pageNum}&limit=${limit}`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            "ngrok-skip-browser-warning": "6024",
           },
         });
-        setQrCodes(response.data.qrCodes);
-      } catch (error) {
+
+        // if (response.data.qrCodes.length === 0) {
+        //   setEmptyApiResult(false);
+        // }
+
+        if (pageNum === 1) {
+          setQrCodes(response.data.qrCodes);
+        } else {
+          setQrCodes((prevQrCodes) => [...prevQrCodes, ...response.data.qrCodes]);
+        }
         setLoading(false);
-      } finally {
+      } catch (error) {
+        console.error("Error fetching QR codes:", error);
         setLoading(false);
       }
     },
-    [page, limit]
+    [limit]
   );
 
   useEffect(() => {
-    if (debouncedSearchInput.length >= 3) {
-      setPage(1);
-      fetchQrCodes(debouncedSearchInput);
-    }
+    fetchQrCodes(1, debouncedSearchInput);
   }, [debouncedSearchInput, fetchQrCodes]);
 
+  const handleScroll = useCallback(() => {
+    const itemList = itemListRef.current;
+    const currentScrollTop = itemList.scrollTop;
+
+    if (currentScrollTop > prevScrollTop && itemList.scrollHeight - itemList.scrollTop - itemList.clientHeight <= scrollThreshold && !loading) {
+      setPage((prevPage) => prevPage + 1);
+    }
+
+    setPrevScrollTop(currentScrollTop);
+  }, [loading, prevScrollTop, scrollThreshold]);
+
   useEffect(() => {
-    if ((debouncedSearchInput.length >= 3 || debouncedSearchInput.length === 0) && page > 1) {
-      fetchQrCodes(debouncedSearchInput);
+    const itemList = itemListRef.current;
+    itemList.addEventListener("scroll", handleScroll);
+    return () => itemList.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
+
+  useEffect(() => {
+    if (page > 1) {
+      fetchQrCodes(page, debouncedSearchInput);
     }
   }, [page, debouncedSearchInput, fetchQrCodes]);
 
-  useEffect(() => {
-    if (debouncedSearchInput.length < 3) {
-      fetchQrCodes("");
-    }
-  }, [debouncedSearchInput, fetchQrCodes]);
-
   return (
     <div className="app">
-      <div className="qr-codes-container">
+      <div className="qr-codes-container" ref={itemListRef}>
         {qrCodes?.length === 0 ? (
           <div className="no-data-container">
             <h1>No data found</h1>

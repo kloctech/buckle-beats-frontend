@@ -44,7 +44,7 @@ const Hamburger = () => {
   const renderSelectedComponent = () => {
     switch (selectedMenuItem) {
       case "qr-codes-screen":
-        return <QrCodes searchInput={searchInput} />;
+        return <QrCodes searchInput={searchInput.length >= 3 ? searchInput : ""} />;
       case "item2":
         return <MenuItem2 />;
       case "item3":

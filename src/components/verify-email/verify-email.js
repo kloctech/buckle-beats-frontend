@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../styles/verify-email/verify-email.scss";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const VerifyEmail = () => {
   const [verificationStatus, setVerificationStatus] = useState(null);
-
+  const [message, setMessage] = useState("");
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get("code");
@@ -22,11 +23,9 @@ const VerifyEmail = () => {
         code,
       });
       setVerificationStatus("success");
-      // toast.success(response.data.resultMessage.en, { duration: 5000 });
-      console.log(response.data.resultMessage.en);
+      setMessage(response.data.resultMessage.en);
     } catch (error) {
       setVerificationStatus("error");
-      // toast.error(error.response.data.resultMessage.en, { duration: 5000 });
       console.error(error.response ? error.response.data.resultMessage.en : error.message);
     }
   };
@@ -38,7 +37,12 @@ const VerifyEmail = () => {
           {verificationStatus === "success" ? (
             <div className="verification-message success">
               <FaCheckCircle className="verification-icon" />
-              <span>Successfully Verified</span>
+              <span>{message}</span>
+              <p>
+                <Link className="login-after-verify" to="/login">
+                  Login
+                </Link>
+              </p>
             </div>
           ) : verificationStatus === "error" ? (
             <div className="verification-message error">
