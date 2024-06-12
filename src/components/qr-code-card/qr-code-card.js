@@ -48,7 +48,7 @@ const QrCodeCard = ({ qrCodeData, fetchQrCodes }) => {
       <img src={qrCodeData?.image_url} alt={qrCodeData.name} className="qr-code-image" />
       <h5 style={{ fontSize: '12px', color: '#1B3E51', marginTop: "6px", fontWeight: '640' }}>{qrCodeData?.name}</h5>
       <div className="switch-container">
-        <span className="lost-mode-text">{qrCodeData?.is_lost ? 'Lost Mode' : 'Normal Mode'}</span>
+        <span className="lost-mode-text">{qrCodeData?.is_lost ? 'Lost Mode' : 'Lost Mode'}</span>
         <div className="toggle-container" onClick={() => handleOpen(qrCodeData?.qr_planet_id)}>
           <div className={`toggle-button ${qrCodeData?.is_lost ? 'active' : ''}`}></div>
         </div>
