@@ -35,7 +35,6 @@ const QrCodes = ({ searchInput }) => {
         const response = await axios.get(`${url}/api/qrcode?name=${searchQuery}&page=${pageNum}&limit=${limit}`, {
           headers: {
             Authorization: `Bearer ${token}`,
-            "ngrok-skip-browser-warning": "6024",
           },
         });
 
