@@ -7,6 +7,7 @@ const EnableQRCode = ({closeModal, openModal , heading, text, id}) => {
     open={openModal}
     aria-labelledby="modal-modal-title"
     aria-describedby="modal-modal-description"
+    id="modal-title"
     >
       <div class="box-container">
         <h3>{heading || "Turn on Lost Mode?"}</h3>
@@ -15,7 +16,7 @@ const EnableQRCode = ({closeModal, openModal , heading, text, id}) => {
             Turn On
           </button>
       </div>
-    </Modal>
+    </Modal>    
   );
 };
 

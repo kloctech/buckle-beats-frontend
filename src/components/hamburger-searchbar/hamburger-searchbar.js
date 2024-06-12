@@ -1,21 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/hamburger-and-searchbar/hamburger-and-searchbar.scss";
 import { IoSearch } from "react-icons/io5";
 import BuckleBeatsIcon from "../../assets/Bucklebeats Icon.svg";
 import Cookies from 'js-cookie'
-import toast  from "react-hot-toast";
+import toast from "react-hot-toast";
 import QrCode from "../qr-code/qr-code";
 
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState("qr-codes-screen");
+  const [submenuOpen, setSubmenuOpen] = useState(false);
 
   const MenuItem2 = () => <div>Component for Menu Item 2</div>;
   const MenuItem3 = () => <div>Component for Menu Item 3</div>;
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+    setSubmenuOpen(false);
   };
+  const toggleSubmenu = () => {
+    setSubmenuOpen(!submenuOpen);
+  };
+  const handleClosemenu = () => {
+    setMenuOpen(false);
+  };
+
+  const handleBackClick = () => {
+    setSubmenuOpen(false);
+  };
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [menuOpen]);
   const onClickLogout = async () => {
     const accessToken = Cookies.get("accessToken");
     try {
@@ -44,6 +63,8 @@ const Hamburger = () => {
     setSelectedMenuItem(menuItem);
     setMenuOpen(false);
   };
+
+
   const renderSelectedComponent = () => {
     switch (selectedMenuItem) {
       case "qr-codes-screen":
@@ -72,27 +93,48 @@ const Hamburger = () => {
           </div>
         </div>
       </header>
-     {menuOpen && (
-        <div className="menu">
-          <p className="menu-item" onClick={() => handleMenuItemClick("qr-codes-screen")}>
-            Menu Item 1
-          </p>
-          <p className="menu-item" onClick={() => handleMenuItemClick("item2")}>
-            Menu Item 2
-          </p>
-          <p className="menu-item" onClick={() => handleMenuItemClick("item3")}>
-            Menu Item 3
-          </p>
-          <p className="menu-item" onClick={onClickLogout}>
-            Logout
-          </p>
-        </div>
-      )}
+      <div className={menuOpen ? 'active menu-wrapper' : 'inactive menu-wrapper'}>
+        <div className="close-menu" onClick={handleClosemenu}>X</div>
+        {menuOpen && (
+          <div className="menu-list">
+            {!submenuOpen ? (
+            <div className="menu-list-item">
+              <div className="menu-text" onClick={() => handleMenuItemClick("qr-codes-screen")}>
+                QR Code
+              </div>
+              <div className="menu-text" onClick={toggleSubmenu}>
+                Account
+                {submenuOpen ? <span>&#9660;</span> : <span>&#9658;</span>}
+              </div>
+              <div className="menu-item" onClick={onClickLogout}>
+                Logout
+              </div>
+            </div>
+          ) : (
+            <div className="menu-list-item">
+              <div className="menu-back" onClick={handleBackClick}>
+                Back
+              </div>
+              <div className="menu-text">
+                Subpage 1
+              </div>
+            </div>
+          )}
+          </div>
+        )}
+
+      </div>
+
+
       <div className="qrcodes-containers">
         {renderSelectedComponent()}
       </div>
+
     </div>
+
   );
 };
 
 export default Hamburger;
+
+

@@ -191,18 +191,18 @@ margin-top: auto;
   }
 /*modal*/
 
-.MuiModal-backdrop,
-.MuiModal-root {
+#modal-title .MuiModal-backdrop,
+#modal-title.MuiModal-root {
   max-width: $max-width;
   width: 100%;
   margin: auto;
 }
 
-.MuiModal-backdrop {
+#modal-title  .MuiModal-backdrop {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.MuiModal-root {
+#modal-title.MuiModal-root {
   .box-container {
     position: absolute;
     top: 50%;
