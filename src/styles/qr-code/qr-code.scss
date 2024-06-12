@@ -10,9 +10,11 @@
   align-items: center;
   margin: auto;
   width: 25vw;
-  height: 83.5vh;
 padding-top: 20px;
   position: relative;
+  @media(min-width:600px){
+    height: 83.5vh;
+  }
  }
  .item-list {
   display: grid;
@@ -20,6 +22,7 @@ padding-top: 20px;
   gap: 17px;
   z-index: 2;
   justify-content: center;
+  margin-bottom: 5rem;
   // height: 100%;
   overflow-y: scroll;
  scrollbar-width: thin;
@@ -97,14 +100,16 @@ padding-top: 20px;
   background-color:#58D7B5;
 border-top-left-radius: 30px;
 border-top-right-radius: 30px;
-  position: absolute;
+  position: fixed;
   max-width: 500px;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 30;
   opacity: 0.97;
-  // position: fixed;
+ @media(min-width:600px){
+     position: absolute;
+  }
    }
  
  .shop-button {
