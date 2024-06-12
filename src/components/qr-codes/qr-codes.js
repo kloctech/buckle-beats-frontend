@@ -1,10 +1,8 @@
-
-import React, { useEffect, useState, useCallback } from 'react';
-import '../../styles/qr-code/qr-code.scss';
+import React, { useEffect, useState, useCallback } from "react";
+import "../../styles/qr-code/qr-code.scss";
 import Cookies from "js-cookie";
-import axios from 'axios';
-import QrCodeCard from '../qr-code-card/qr-code-card'; // Update the path if necessary
-
+import axios from "axios";
+import QrCodeCard from "../qr-code-card/qr-code-card";
 const QrCodes = ({ searchInput }) => {
   const [qrCodes, setQrCodes] = useState([]);
   const [page, setPage] = useState(1);
@@ -22,31 +20,31 @@ const QrCodes = ({ searchInput }) => {
     };
   }, [searchInput]);
 
-  const fetchQrCodes = useCallback(async (searchQuery) => {
-    const url = process.env.REACT_APP_PRODUCTION_URL;
-    const token = Cookies.get("accessToken");
+  const fetchQrCodes = useCallback(
+    async (searchQuery) => {
+      const url = process.env.REACT_APP_PRODUCTION_URL;
+      const token = Cookies.get("accessToken");
 
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        `${url}/api/qrcode?name=${searchQuery}&page=${page}&limit=${limit}`,
-        {
+      try {
+        setLoading(true);
+        const response = await axios.get(`${url}/api/qrcode?name=${searchQuery}&page=${page}&limit=${limit}`, {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
-      setQrCodes(response.data.qrCodes);
-    } catch (error) {
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  }, [page, limit]);
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setQrCodes(response.data.qrCodes);
+      } catch (error) {
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [page, limit]
+  );
 
   useEffect(() => {
     if (debouncedSearchInput.length >= 3) {
-      setPage(1); 
+      setPage(1);
       fetchQrCodes(debouncedSearchInput);
     }
   }, [debouncedSearchInput, fetchQrCodes]);
@@ -59,7 +57,7 @@ const QrCodes = ({ searchInput }) => {
 
   useEffect(() => {
     if (debouncedSearchInput.length < 3) {
-      fetchQrCodes('');
+      fetchQrCodes("");
     }
   }, [debouncedSearchInput, fetchQrCodes]);
 
@@ -67,9 +65,11 @@ const QrCodes = ({ searchInput }) => {
     <div className="app">
       <div className="qr-codes-container">
         {qrCodes?.length === 0 ? (
-          <div className="no-data-container"><h1>No data found</h1></div>
+          <div className="no-data-container">
+            <h1>No data found</h1>
+          </div>
         ) : (
-          qrCodes.map((item) => <QrCodeCard  key={item._id} qrCodeData={item} fetchQrCodes={fetchQrCodes} />)
+          qrCodes.map((item) => <QrCodeCard key={item._id} qrCodeData={item} fetchQrCodes={fetchQrCodes} />)
         )}
       </div>
       {loading && <div>Loading more items...</div>}
