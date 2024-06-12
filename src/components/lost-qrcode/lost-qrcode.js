@@ -29,7 +29,7 @@ const LostQRCode = () => {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
 

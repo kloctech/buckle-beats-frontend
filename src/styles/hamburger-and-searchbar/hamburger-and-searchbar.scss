@@ -6,6 +6,7 @@
 }
 
 .main-qrcode-container {
+  overflow: hidden;
   margin: auto;
   width: 100vw;
   max-width: 440px;
@@ -105,6 +106,7 @@
   .main-qrcode-container {
     width: 340px;
     height: 100vh;
+    position: relative;
   }
   .mobile-header {
     width: 92%;
