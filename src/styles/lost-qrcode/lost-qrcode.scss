@@ -56,13 +56,14 @@
 
   &-list {
     margin: 2rem auto 1rem;
-    max-width: 220px;
+
     padding: 0;
 
     li {
       list-style: none;
       padding-bottom: 0.8rem;
-
+     display:flex;
+     align-items: center;
       span {
         font-size: 15.24px;
         font-weight: 400;
