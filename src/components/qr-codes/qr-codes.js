@@ -92,7 +92,7 @@ const QrCodes = ({ searchInput }) => {
             <div className="no-data-image">
             <img src={NoDataIcon} alt="no-data Icon" />
             </div>
-            <h1>No QR Code found</h1>      
+            <h1>No QR code found</h1>      
           </div>
         ) : (
           qrCodes.map((item) => <QrCodeCard key={item._id} qrCodeData={item} fetchQrCodes={fetchQrCodes} />)
