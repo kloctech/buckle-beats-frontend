@@ -91,7 +91,7 @@ const LoginPage = () => {
           <br />
           <div className="form-group-login email-group">
             <input
-              type="email"
+              
               id="email"
               name="email"
               placeholder="Email"

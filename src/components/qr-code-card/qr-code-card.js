@@ -5,10 +5,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import EnableQRCode from "../enable-qrcode/enable-qrcode";
 
-const QrCodeCard = ({ qrCodeData, fetchQrCodes,page }) => {
+const QrCodeCard = ({ qrCodeData, fetchQrCodes, page, searchQuery, updateQrCodeStatus }) => {
   const [qrcode, setQRcode] = useState(null);
   const [activeId, setActiveId] = useState(null);
-console.log(page)
+
   const handleOpen = async (id) => {
     if (qrCodeData?.is_lost) {
       await handleTurnOn(id);
@@ -33,7 +33,8 @@ console.log(page)
       const response = await axios.put(`${url}/api/qrcode/change-status`, { code: qr_planet_id }, { headers: { Authorization: `Bearer ${token}` } });
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       handleClose();
-      fetchQrCodes(page,""); // Refresh the QR codes list
+      updateQrCodeStatus(qr_planet_id, !qrCodeData.is_lost); // Update the specific QR code status
+      fetchQrCodes(page, searchQuery); // Refresh the QR codes list with the correct parameters
     } catch (error) {
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });
     }

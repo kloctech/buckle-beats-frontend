@@ -13,11 +13,11 @@ const QrCodes = ({ searchInput }) => {
   const itemListRef = useRef(null);
   const [prevScrollTop, setPrevScrollTop] = useState(0);
   const scrollThreshold = 1;
-  // const [emptyApiResult, setEmptyApiResult] = useState(true);
 
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearchInput(searchInput);
+      setPage(1); // Reset the page to 1 when the search query changes
     }, 500);
 
     return () => {
@@ -38,10 +38,6 @@ const QrCodes = ({ searchInput }) => {
             "ngrok-skip-browser-warning": "69420",
           },
         });
-
-        // if (response.data.qrCodes.length === 0) {
-        //   setEmptyApiResult(false);
-        // }
 
         if (page === 1) {
           setQrCodes(response.data.qrCodes);
@@ -84,6 +80,14 @@ const QrCodes = ({ searchInput }) => {
     }
   }, [page, debouncedSearchInput, fetchQrCodes]);
 
+  const updateQrCodeStatus = (qr_planet_id, is_lost) => {
+    setQrCodes((prevQrCodes) =>
+      prevQrCodes.map((qrCode) =>
+        qrCode.qr_planet_id === qr_planet_id ? { ...qrCode, is_lost } : qrCode
+      )
+    );
+  };
+
   return (
     <div className="app">
       <div className="qr-codes-container" ref={itemListRef}>
@@ -92,7 +96,16 @@ const QrCodes = ({ searchInput }) => {
             <h1>No data found</h1>
           </div>
         ) : (
-          qrCodes.map((item) => <QrCodeCard key={item._id} qrCodeData={item} fetchQrCodes={fetchQrCodes} page={page}/>)
+          qrCodes.map((item) => (
+            <QrCodeCard
+              key={item._id}
+              qrCodeData={item}
+              fetchQrCodes={fetchQrCodes}
+              page={page}
+              searchQuery={debouncedSearchInput}
+              updateQrCodeStatus={updateQrCodeStatus}
+            />
+          ))
         )}
       </div>
       {loading && <div>Loading more items...</div>}
