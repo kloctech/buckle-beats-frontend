@@ -2,9 +2,57 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import "../../styles/qr-code/qr-code.scss";
 import Cookies from "js-cookie";
 import axios from "axios";
-import QrCodeCard from "../qr-code-card/qr-code-card";
+import EnableQRCode from "../enable-qrcode/enable-qrcode";
+import toast from "react-hot-toast";
 
-const QrCodes = ({ searchInput }) => {
+const ItemCard = ({ item }) => {
+  const [qrcode, setQRcode] = useState(null);
+  const [activeId, setActiveId] = useState(null);
+
+  const handleOpen = (id) => {
+    if (activeId !== id) {
+      setQRcode(id);
+      setActiveId(id);
+    } else {
+      setQRcode(null);
+      setActiveId(null);
+    }
+  };
+
+  const handleClose = () => {
+    setQRcode(null);
+  };
+
+  const handleTurnOn = async (id, qr_planet_id) => {
+    const token = Cookies.get("accessToken");
+    const url = process.env.REACT_APP_PRODUCTION_URL;
+
+    try {
+      const response = await axios.put(`${url}/api/qrcode/change-status`, { code: qr_planet_id }, { headers: { Authorization: `Bearer ${token}` } });
+      toast.success(response.data.resultMessage.en, { duration: 2000 });
+      handleClose();
+    } catch (error) {
+      console.error("Error making API call:", error);
+      toast.error(error.response.data.resultMessage.en, { duration: 5000 });
+    }
+  };
+
+  return (
+    <div className="item-card">
+      <img src={item?.image_url} alt={item.name} className="item-image" />
+      <h5 style={{ fontSize: "12px", color: "#1B3E51", marginTop: "6px", fontWeight: "640" }}>{item.name}</h5>
+      <div className="switch-container">
+        <span className="lost-mode-text">{item.is_lost ? "Lost Mode" : "Lost Mode"}</span>
+        <div className="toggle-container" onClick={() => handleOpen(item?.qr_planet_id)}>
+          <div className={`toggle-button ${item.is_lost ? "active" : ""}`}></div>
+        </div>
+      </div>
+      <EnableQRCode openModal={qrcode === item.qr_planet_id} closeModal={() => handleTurnOn(item.id, item.qr_planet_id)} id={item.id} />
+    </div>
+  );
+};
+
+const QrCode = ({ searchInput }) => {
   const [qrCodes, setQrCodes] = useState([]);
   const [page, setPage] = useState(1);
   const [limit] = useState(8);
@@ -13,7 +61,6 @@ const QrCodes = ({ searchInput }) => {
   const itemListRef = useRef(null);
   const [prevScrollTop, setPrevScrollTop] = useState(0);
   const scrollThreshold = 1;
-  // const [emptyApiResult, setEmptyApiResult] = useState(true);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -26,24 +73,19 @@ const QrCodes = ({ searchInput }) => {
   }, [searchInput]);
 
   const fetchQrCodes = useCallback(
-    async (page, searchQuery) => {
+    async (pageNum, searchQuery) => {
       const url = process.env.REACT_APP_PRODUCTION_URL;
       const token = Cookies.get("accessToken");
 
       try {
         setLoading(true);
-        const response = await axios.get(`${url}/api/qrcode?name=${searchQuery}&page=${page}&limit=${limit}`, {
+        const response = await axios.get(`${url}/api/qrcode?name=${searchQuery}&page=${pageNum}&limit=${limit}`, {
           headers: {
             Authorization: `Bearer ${token}`,
-            "ngrok-skip-browser-warning": "69420",
+            "ngrok-skip-browser-warning": "6024",
           },
         });
-
-        // if (response.data.qrCodes.length === 0) {
-        //   setEmptyApiResult(false);
-        // }
-
-        if (page === 1) {
+        if (pageNum === 1) {
           setQrCodes(response.data.qrCodes);
         } else {
           setQrCodes((prevQrCodes) => [...prevQrCodes, ...response.data.qrCodes]);
@@ -79,21 +121,17 @@ const QrCodes = ({ searchInput }) => {
   }, [handleScroll]);
 
   useEffect(() => {
-    if (page > 1) {
+    if (page > 1 || debouncedSearchInput.length >= 3) {
       fetchQrCodes(page, debouncedSearchInput);
     }
   }, [page, debouncedSearchInput, fetchQrCodes]);
 
   return (
     <div className="app">
-      <div className="qr-codes-container" ref={itemListRef}>
-        {qrCodes?.length === 0 ? (
-          <div className="no-data-container">
-            <h1>No data found</h1>
-          </div>
-        ) : (
-          qrCodes.map((item) => <QrCodeCard key={item._id} qrCodeData={item} fetchQrCodes={fetchQrCodes} page={page}/>)
-        )}
+      <div className="item-list" ref={itemListRef}>
+        {qrCodes.map((item) => (
+          <ItemCard key={item.id} item={item} />
+        ))}
       </div>
       {loading && <div>Loading more items...</div>}
       <div className="footer-buttons">
@@ -104,4 +142,4 @@ const QrCodes = ({ searchInput }) => {
   );
 };
 
-export default QrCodes;
+export default QrCode;
