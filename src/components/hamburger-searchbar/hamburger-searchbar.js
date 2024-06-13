@@ -5,6 +5,8 @@ import BuckleBeatsIcon from "../../assets/Bucklebeats Icon.svg";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import QrCodes from "../qr-codes/qr-codes";
+import Logo from "../../assets/logo.png";
+import RightArrow from "../../assets/right-arrow.png";
 
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -98,34 +100,40 @@ const Hamburger = () => {
         </div>
         
       <div className={menuOpen ? 'active menu-wrapper' : 'inactive menu-wrapper'}>
-      <div className="menu-list">
-    
-        <div className="close-menu" onClick={handleClosemenu}>X</div>
+      <div className="close-menu" onClick={handleClosemenu}>X</div>
+      <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
+      <div className="menu-container">
+      
         {menuOpen && (
-          <div className="menu-list">
-            {!submenuOpen ? (
-            <div className="menu-list-item">
-              <div className="menu-text" onClick={() => handleMenuItemClick("qr-codes-screen")}>
-                QR Code
+          <div className={`menu-list  ${submenuOpen ? "submenu-visible": ""}`}>
+            
+            <div  className="menu-list-item">
+               <div className="menu-text" >
+                <h4>ACCOUNT</h4>
+                <div className={`menu-link`} onClick={toggleSubmenu}>Manage Account
+                {!submenuOpen && <span><img src={RightArrow} alt="rightarrow Icon" /></span>}
+                </div>
               </div>
-              <div className="menu-text" onClick={toggleSubmenu}>
-                Account
-                {submenuOpen ? <span>&#9660;</span> : <span>&#9658;</span>}
+              <div className="menu-text" >
+                <h4>QRs</h4>
+                <div className="menu-link" onClick={() => handleMenuItemClick("qr-codes-screen")}>
+                  Activate & Manage QRs 
+                </div>
               </div>
-              <div className="menu-item" onClick={onClickLogout}>
-                Logout
+              <div className="menu-text menu-logout" onClick={onClickLogout}>
+                Sign Out
               </div>
             </div>
-          ) : (
-            <div className="menu-list-item">
-              <div className="menu-back" onClick={handleBackClick}>
-                Back
+          
+            <div className={`submenu ${submenuOpen ? "is-visible": ""}`}>
+              <div className="menu-back menu-text" onClick={handleBackClick}>
+                 Back
               </div>
               <div className="menu-text">
-                Subpage 1
+                Romi Mathew
               </div>
             </div>
-          )}
+          
           </div>
         )}
      </div>
