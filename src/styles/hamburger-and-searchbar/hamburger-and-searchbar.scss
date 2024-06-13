@@ -160,6 +160,13 @@
       left: 100%;
       padding: 4rem 2rem 2rem;
       width: 100%;
+      opacity: 0;
+      &.is-visible{
+        opacity: 1;
+        transition: opacity 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
     }
   }
   &-text, &-logout{
