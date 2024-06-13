@@ -1,15 +1,21 @@
 @import "../../styles/variables/variable.scss";
 
+.header-flex-container {
+  width: 100vw;
+}
+
 .main-qrcode-container {
-  background-color: $background-color;
+  margin: auto;
+  width: 100vw;
+  max-width: 440px;
   height: calc(100vh - 57px);
+  background-color: $background-color;
   .mobile-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: $background-color;
-    width: 90vw;
+    // width: 93%;
     margin: auto;
     .hamburger {
       display: flex;
@@ -42,6 +48,10 @@
           border: 1px solid $primary-color;
           background-color: transparent;
           color: $primary-color;
+
+          &:focus-visible {
+            outline: 1px solid #0dc392 !important; // Remove default outline
+          }
         }
 
         .search-icon {
@@ -60,7 +70,6 @@
           transform: translateY(-50%);
           height: 25px;
           width: 25px;
-          // color: $primary-color;
         }
       }
     }
@@ -91,12 +100,6 @@
     }
   }
 }
-@media screen and (min-width: 576px) {
-  .main-qrcode-container {
-    height: 100vh;
-  }
-}
-
 .menu {
   &-wrapper {
     background: #fff;
@@ -118,5 +121,19 @@
   }
   &-text{
     color:#000;
+  }
+}
+@media screen and (min-width: 440px) {
+  .main-qrcode-container {
+    width: 340px;
+    height: 100vh;
+  }
+  .mobile-header {
+    width: 92%;
+  }
+}
+@media screen and (max-width: 440px) {
+  .mobile-header {
+    width: 85%;
   }
 }

@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import "../../styles/hamburger-and-searchbar/hamburger-and-searchbar.scss";
 import { IoSearch } from "react-icons/io5";
 import BuckleBeatsIcon from "../../assets/Bucklebeats Icon.svg";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 import toast from "react-hot-toast";
-import QrCode from "../qr-code/qr-code";
+import QrCodes from "../qr-codes/qr-codes";
 
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState("qr-codes-screen");
   const [submenuOpen, setSubmenuOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
 
   const MenuItem2 = () => <div>Component for Menu Item 2</div>;
   const MenuItem3 = () => <div>Component for Menu Item 3</div>;
@@ -48,16 +49,12 @@ const Hamburger = () => {
       if (response.ok) {
         Cookies.remove("accessToken");
         Cookies.remove("refreshToken");
-        console.log(response);
         toast.success("Successfully logout");
         window.location.href = "/login";
       } else {
-        console.error("Failed to logout");
         toast.error("Failed to logout");
       }
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
+    } catch (error) {}
   };
   const handleMenuItemClick = (menuItem) => {
     setSelectedMenuItem(menuItem);
@@ -68,7 +65,7 @@ const Hamburger = () => {
   const renderSelectedComponent = () => {
     switch (selectedMenuItem) {
       case "qr-codes-screen":
-        return <QrCode />;
+        return <QrCodes searchInput={searchInput.length >= 3 ? searchInput : ""} />;
       case "item2":
         return <MenuItem2 />;
       case "item3":
@@ -77,22 +74,28 @@ const Hamburger = () => {
         return null;
     }
   };
+  const handleInputChange = (e) => {
+    setSearchInput(e.target.value);
+  };
   return (
-    <div className="main-qrcode-container">
-      <header className="mobile-header">
-        <div className="hamburger" onClick={toggleMenu}>
-          <div className="burger"></div>
-          <div className="burger"></div>
-          <div className="burger"></div>
+    <div className="header-flex-container">
+      <div className="main-qrcode-container">
+        <div className="header-container">
+          <header className="mobile-header">
+            <div className="hamburger" onClick={toggleMenu}>
+              <div className="burger"></div>
+              <div className="burger"></div>
+              <div className="burger"></div>
+            </div>
+            <div className="search-container">
+              <div className="search-input-wrapper">
+                <input type="text" onChange={handleInputChange} />
+                <img src={BuckleBeatsIcon} alt="heart" className="search-bg-icon" />
+                <IoSearch className="search-icon" />
+              </div>
+            </div>
+          </header>
         </div>
-        <div className="search-container">
-          <div className="search-input-wrapper">
-            <input type="text" />
-            <img src={BuckleBeatsIcon} alt="heart" className="search-bg-icon" />
-            <IoSearch className="search-icon" />
-          </div>
-        </div>
-      </header>
       <div className={menuOpen ? 'active menu-wrapper' : 'inactive menu-wrapper'}>
         <div className="close-menu" onClick={handleClosemenu}>X</div>
         {menuOpen && (
@@ -129,7 +132,7 @@ const Hamburger = () => {
       <div className="qrcodes-containers">
         {renderSelectedComponent()}
       </div>
-
+      </div>
     </div>
 
   );
