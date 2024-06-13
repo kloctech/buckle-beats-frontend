@@ -5,7 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import EnableQRCode from "../enable-qrcode/enable-qrcode";
 
-const QrCodeCard = ({ qrCodeData, fetchQrCodes }) => {
+const QrCodeCard = ({ qrCodeData, fetchQrCodes, page, searchQuery, updateQrCodeStatus }) => {
   const [qrcode, setQRcode] = useState(null);
   const [activeId, setActiveId] = useState(null);
 
@@ -33,7 +33,8 @@ const QrCodeCard = ({ qrCodeData, fetchQrCodes }) => {
       const response = await axios.put(`${url}/api/qrcode/change-status`, { code: qr_planet_id }, { headers: { Authorization: `Bearer ${token}` } });
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       handleClose();
-      fetchQrCodes(""); // Refresh the QR codes list
+      updateQrCodeStatus(qr_planet_id, !qrCodeData.is_lost); // Update the specific QR code status
+      fetchQrCodes(page, searchQuery); // Refresh the QR codes list with the correct parameters
     } catch (error) {
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });
     }
@@ -44,7 +45,7 @@ const QrCodeCard = ({ qrCodeData, fetchQrCodes }) => {
       <img src={qrCodeData?.image_url} alt={qrCodeData.name} className="qr-code-image" />
       <h5 style={{ fontSize: "12px", color: "#1B3E51", marginTop: "6px", fontWeight: "640" }}>{qrCodeData?.name}</h5>
       <div className="switch-container">
-        <span className="lost-mode-text">{qrCodeData?.is_lost ? "Lost Mode" : "Normal Mode"}</span>
+        <span className="lost-mode-text">Lost Mode</span>
         <div className="toggle-container" onClick={() => handleOpen(qrCodeData?.qr_planet_id)}>
           <div className={`toggle-button ${qrCodeData?.is_lost ? "active" : ""}`}></div>
         </div>
