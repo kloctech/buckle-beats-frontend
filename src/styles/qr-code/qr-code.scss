@@ -1,7 +1,4 @@
 @import "../../styles/variables/variable.scss";
-.qr-codes-container, .qrcodes-containers ,.app {
-  height:100%;
-} 
 .app {
   text-align: center;
   background-color: $background-color;
@@ -11,22 +8,18 @@
   justify-content: space-between;
   align-items: center;
   margin: auto;
-  width: 33vw;
-padding-top: 20px;
+  width: 100%;
+  height: calc(100vh - 123px);
+  padding-top: 20px;
   position: relative;
-  @media(min-width:600px){
-    height: 83.5vh;
-    width: 25vw;
-  }
- }
- .item-list {
-  display: grid;
+}
+.qr-codes-container {
+  display: flex;
+  flex-wrap: wrap;
   grid-template-columns: repeat(2, 1fr);
   gap: 17px;
   z-index: 2;
   justify-content: center;
-  margin-bottom: 5rem;
-  // height: 100%;
   overflow-y: scroll;
   scrollbar-width: thin;
   -ms-overflow-style: none;
@@ -35,20 +28,9 @@ padding-top: 20px;
 .no-data-container {
   display: flex;
   align-items: center;
-  flex-direction: column;
   justify-content: center;
-  margin-bottom: 0;
-  height: calc(100% - 130px);
-  h1{
-    line-height: 1.3;
-  }
-}
-.no-data-image{
-  margin-bottom: 0.7rem;
-  img{
-    width: 55px;
-    filter: brightness(0) invert(1);
-  }
+  margin-bottom: 100px;
+  height: 100vh;
 }
 .qr-codes-container::-webkit-scrollbar {
   display: none;
@@ -95,16 +77,13 @@ padding-top: 20px;
   background-color: $primary-color;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
-  position: fixed;
+  position: absolute;
   max-width: 100%;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 30;
   opacity: 0.95;
-  @media(min-width:600px){
-    position: absolute;
- }
 }
 
 .shop-button {
@@ -162,4 +141,9 @@ padding-top: 20px;
   .app {
     height: 89vh;
   }
+}
+.no-data-image {
+  margin-bottom: 0.7rem;
+  width: 55px;
+  filter: brightness(0) invert(1);
 }

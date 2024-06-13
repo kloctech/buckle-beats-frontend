@@ -93,12 +93,11 @@ const QrCodes = ({ searchInput }) => {
     <div className="app">
       <div className="qr-codes-container" ref={itemListRef}>
         {qrCodes?.length === 0 ? (   
-          <div className="no-data-container">
-            <div className="no-data-image">
-            <img src={NoDataIcon} alt="no-data Icon" />
-            </div>
-            <h1>No QR code found</h1>      
-          </div>
+         
+         <div style={{ marginTop: "30vh" }}>
+         <img src={NoDataIcon} alt="no-data-found" className="no-data-image" />
+         <h1>No data found</h1>
+       </div>
         ) : (
           qrCodes.map((item) => (
             <QrCodeCard
