@@ -3,6 +3,7 @@ import "../../styles/qr-code/qr-code.scss";
 import Cookies from "js-cookie";
 import axios from "axios";
 import QrCodeCard from "../qr-code-card/qr-code-card";
+import { useNavigate } from "react-router-dom";
 
 const QrCodes = ({ searchInput }) => {
   const [qrCodes, setQrCodes] = useState([]);
@@ -14,7 +15,7 @@ const QrCodes = ({ searchInput }) => {
   const [prevScrollTop, setPrevScrollTop] = useState(0);
   const scrollThreshold = 1;
   // const [emptyApiResult, setEmptyApiResult] = useState(true);
-
+  const navigate = useNavigate()
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearchInput(searchInput);
@@ -83,7 +84,9 @@ const QrCodes = ({ searchInput }) => {
       fetchQrCodes(page, debouncedSearchInput);
     }
   }, [page, debouncedSearchInput, fetchQrCodes]);
-
+const handleClick = () =>{
+  navigate('/qr-scanner')
+}
   return (
     <div className="app">
       <div className="qr-codes-container" ref={itemListRef}>
@@ -98,7 +101,7 @@ const QrCodes = ({ searchInput }) => {
       {loading && <div>Loading more items...</div>}
       <div className="footer-buttons">
         <button className="shop-button">Shop Now</button>
-        <button className="activate-qr-button">Activate QR</button>
+        <button className="activate-qr-button" onClick={handleClick}>Activate QR</button>
       </div>
     </div>
   );
