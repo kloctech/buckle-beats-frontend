@@ -14,7 +14,8 @@
   position: relative;
 }
 .qr-codes-container {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   grid-template-columns: repeat(2, 1fr);
   gap: 17px;
   z-index: 2;
@@ -140,4 +141,9 @@
   .app {
     height: 89vh;
   }
+}
+.no-data-image {
+  margin-bottom: 0.7rem;
+  width: 55px;
+  filter: brightness(0) invert(1);
 }

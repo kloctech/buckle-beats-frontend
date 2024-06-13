@@ -2,13 +2,15 @@
 
 .header-flex-container {
   width: 100vw;
+  height:100%;
 }
 
 .main-qrcode-container {
+  overflow: hidden;
   margin: auto;
   width: 100vw;
   max-width: 440px;
-  height: calc(100vh - 57px);
+  height:100%;
   background-color: $background-color;
   .mobile-header {
     display: flex;
@@ -104,6 +106,7 @@
   .main-qrcode-container {
     width: 340px;
     height: 100vh;
+    position: relative;
   }
   .mobile-header {
     width: 92%;

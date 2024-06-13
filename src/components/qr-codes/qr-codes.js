@@ -3,6 +3,7 @@ import "../../styles/qr-code/qr-code.scss";
 import Cookies from "js-cookie";
 import axios from "axios";
 import QrCodeCard from "../qr-code-card/qr-code-card";
+import NoDataIcon from "../../assets/no-data-found.png"
 
 const QrCodes = ({ searchInput }) => {
   const [qrCodes, setQrCodes] = useState([]);
@@ -91,10 +92,12 @@ const QrCodes = ({ searchInput }) => {
   return (
     <div className="app">
       <div className="qr-codes-container" ref={itemListRef}>
-        {qrCodes?.length === 0 ? (
-          <div className="no-data-container">
-            <h1>No data found</h1>
-          </div>
+        {qrCodes?.length === 0 ? (   
+         
+         <div style={{ marginTop: "30vh" }}>
+         <img src={NoDataIcon} alt="no-data-found" className="no-data-image" />
+         <h1>No data found</h1>
+       </div>
         ) : (
           qrCodes.map((item) => (
             <QrCodeCard
