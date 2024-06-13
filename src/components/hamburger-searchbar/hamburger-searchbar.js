@@ -96,7 +96,10 @@ const Hamburger = () => {
             </div>
           </header>
         </div>
+        
       <div className={menuOpen ? 'active menu-wrapper' : 'inactive menu-wrapper'}>
+      <div className="menu-list">
+    
         <div className="close-menu" onClick={handleClosemenu}>X</div>
         {menuOpen && (
           <div className="menu-list">
@@ -125,7 +128,7 @@ const Hamburger = () => {
           )}
           </div>
         )}
-
+     </div>
       </div>
 
 
