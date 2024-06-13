@@ -5,25 +5,41 @@ import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import '../../styles/forgot-password/forgot-password.scss';
 import toast from "react-hot-toast";
-
+import { useNavigate } from "react-router-dom";
 const ForgotPassword = () => {
   const {
     register,
     handleSubmit,
     watch,
     reset,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm();
-  
+
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [token, setToken] = useState("");
-  
+
+  const password = watch('password');
+  const confirmPassword = watch('confirmPassword');
+
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     setToken(searchParams.get("token"));
   }, []);
-  
+const navigate = useNavigate ()
+  useEffect(() => {
+    if (confirmPassword && confirmPassword !== password) {
+      setError("confirmPassword", {
+        type: "validate",
+        message: "Passwords do not match"
+      });
+    } else {
+      clearErrors("confirmPassword");
+    }
+  }, [confirmPassword, password, setError, clearErrors]);
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -33,9 +49,8 @@ const ForgotPassword = () => {
   };
 
   const onSubmit = async (data) => {
-    const url = process.env.REACT_APP_PRODUCTION_URL
-   
-    
+    const url = process.env.REACT_APP_PRODUCTION_URL;
+
     try {
       const response = await axios.post(
         `${url}/api/user/forgot-password`,
@@ -46,13 +61,12 @@ const ForgotPassword = () => {
           }
         }
       );
-      toast.success(response.data.resultMessage.en,{ duration: 5000 });
-
-      reset()
+      toast.success(response.data.resultMessage.en, { duration: 5000 });
+      reset();
+      navigate('/login')
 
     } catch (error) {
-      
-      toast.error(error.response?.data?.resultMessage?.en,{ duration: 5000 });
+      toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
     }
   };
 
@@ -109,7 +123,6 @@ const ForgotPassword = () => {
           <button className="button" type="submit">
             Submit
           </button>
-         
         </form>
       </div>
     </div>
