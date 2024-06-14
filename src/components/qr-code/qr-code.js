@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useEffect, useState, useCallback } from "react";
-=======
 import React, { useEffect, useState, useCallback, useRef } from "react";
->>>>>>> master
 import "../../styles/qr-code/qr-code.scss";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -40,11 +36,7 @@ const ItemCard = ({ item }) => {
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });
     }
   };
-<<<<<<< HEAD
-  console.log(item.qr_planet_id);
-=======
 
->>>>>>> master
   return (
     <div className="item-card">
       <img src={item?.image_url} alt={item.name} className="item-image" />
@@ -52,21 +44,10 @@ const ItemCard = ({ item }) => {
       <div className="switch-container">
         <span className="lost-mode-text">{item.is_lost ? "Lost Mode" : "Lost Mode"}</span>
         <div className="toggle-container" onClick={() => handleOpen(item?.qr_planet_id)}>
-<<<<<<< HEAD
-          {/* <div className={`toggle-button ${item.is_lost ? 'active' : ''}`} ></div> */}
-          <div className={`toggle-button ${item.is_lost === true ? "active" : ""}`}></div>
-        </div>
-      </div>
-      <EnableQRCode openModal={qrcode === item.qr_planet_id} closeModal={() => handleTurnOn(item.id, item.qr_planet_id)} id={item.id} />
-
-      {/* <EnableQRCode openModal={qrcode === item.id} closeModal={() => handleTurnOn(item.id, item.qr_planet_id)} id={item.id} qr_planet_id={item.qr_planet_id} /> */}
-      {/* <EnableQRCode openModal={qrcode === item.qr_planet_id} closeModal={() => handleTurnOn(item.id,item?.qr_planet_id)} id={item.id} /> */}
-=======
           <div className={`toggle-button ${item.is_lost ? "active" : ""}`}></div>
         </div>
       </div>
       <EnableQRCode openModal={qrcode === item.qr_planet_id} closeModal={() => handleTurnOn(item.id, item.qr_planet_id)} id={item.id} />
->>>>>>> master
     </div>
   );
 };
@@ -101,10 +82,7 @@ const QrCode = ({ searchInput }) => {
         const response = await axios.get(`${url}/api/qrcode?name=${searchQuery}&page=${pageNum}&limit=${limit}`, {
           headers: {
             Authorization: `Bearer ${token}`,
-<<<<<<< HEAD
-=======
             "ngrok-skip-browser-warning": "6024",
->>>>>>> master
           },
         });
         if (pageNum === 1) {
@@ -120,30 +98,11 @@ const QrCode = ({ searchInput }) => {
     },
     [limit]
   );
-<<<<<<< HEAD
-
-  // Initial fetch with name=''
-  useEffect(() => {
-    fetchQrCodes(1, "");
-  }, []);
-=======
->>>>>>> master
 
   useEffect(() => {
     fetchQrCodes(1, debouncedSearchInput);
   }, [debouncedSearchInput, fetchQrCodes]);
 
-<<<<<<< HEAD
-  const handleScroll = () => {
-    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) return;
-    setPage((prevPage) => prevPage + 1);
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [loading]);
-=======
   const handleScroll = useCallback(() => {
     const itemList = itemListRef.current;
     const currentScrollTop = itemList.scrollTop;
@@ -160,7 +119,6 @@ const QrCode = ({ searchInput }) => {
     itemList.addEventListener("scroll", handleScroll);
     return () => itemList.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
->>>>>>> master
 
   useEffect(() => {
     if (page > 1 || debouncedSearchInput.length >= 3) {
@@ -168,18 +126,6 @@ const QrCode = ({ searchInput }) => {
     }
   }, [page, debouncedSearchInput, fetchQrCodes]);
 
-<<<<<<< HEAD
-  useEffect(() => {
-    if (debouncedSearchInput.length < 3) {
-      setPage(1);
-      fetchQrCodes(1, "");
-    }
-  }, [debouncedSearchInput, fetchQrCodes]);
-
-  return (
-    <div className="app">
-      <div className="item-list">{qrCodes && qrCodes.map((item) => <ItemCard key={item.id} item={item} />)}</div>
-=======
   return (
     <div className="app">
       <div className="item-list" ref={itemListRef}>
@@ -187,7 +133,6 @@ const QrCode = ({ searchInput }) => {
           <ItemCard key={item.id} item={item} />
         ))}
       </div>
->>>>>>> master
       {loading && <div>Loading more items...</div>}
       <div className="footer-buttons">
         <button className="shop-button">Shop Now</button>

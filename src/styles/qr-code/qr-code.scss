@@ -14,7 +14,7 @@
   position: relative;
 }
 .qr-codes-container {
-  display: flex;
+  display: grid;
   flex-wrap: wrap;
   grid-template-columns: repeat(2, 1fr);
   gap: 17px;
@@ -24,7 +24,12 @@
   scrollbar-width: thin;
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  &.no-qr-codes {
+    display: flex;
+  }
 }
+
 .no-data-container {
   display: flex;
   align-items: center;
@@ -106,7 +111,7 @@
   font-weight: 400;
   font-size: small;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .shop-button:hover,
@@ -145,5 +150,6 @@
 .no-data-image {
   margin-bottom: 0.7rem;
   width: 55px;
+  // margin-left: 9rem;
   filter: brightness(0) invert(1);
 }
