@@ -1,0 +1,82 @@
+.add-qr,.edit-qr {
+  height: 100%;
+
+  h1 {
+    text-align: center;
+  }
+
+  &-box {
+    background-color: #fff;
+    color: #183E51;
+    padding: 1.5rem 1rem;
+    border: 1px solid #58D7B5;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+
+    p {
+      font-size: 13px;
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: 0;
+    }
+  }
+
+  select {
+    width: calc(100% - 5px);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    color:rgb(117,117,117);
+  }
+  .mobile-group{
+    display: flex;
+    select{
+      width: 22%;
+      padding-left: 5px;
+      font-size: 16px;
+      padding-right: 5px;
+      @media(min-width:600px){
+        padding-right: 1px;
+      }
+    }
+    input{
+      width: 73%;
+      margin-left: 9px;
+    }
+  }
+}
+
+.edit-detail{
+  position: absolute;
+  top: 6px;
+  right: 9px;
+  svg{
+   fill: #58d7b5;
+   width:21px;
+  }
+}
+.button-row{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+ }
+ .cta-button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: small;
+  text-decoration: none;
+  color:#fff;
+  width: 47%;
+  text-align: center;
+ }
+ .delete-btn{
+  background-color: transparent;
+  border:1px solid #222831;
+ }
+ .edit-btn{
+  background-color: #58d7b5;
+  border: 0;
+ }

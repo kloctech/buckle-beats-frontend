@@ -4,6 +4,9 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import toast from "react-hot-toast";
 import EnableQRCode from "../enable-qrcode/enable-qrcode";
+import { FaUserEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 
 const QrCodeCard = ({ qrCodeData, fetchQrCodes, page, searchQuery, updateQrCodeStatus }) => {
   const [qrcode, setQRcode] = useState(null);
@@ -44,6 +47,7 @@ const QrCodeCard = ({ qrCodeData, fetchQrCodes, page, searchQuery, updateQrCodeS
     <div className="qr-code-card">
       <img src={qrCodeData?.image_url} alt={qrCodeData.name} className="qr-code-image" />
       <h5 style={{ fontSize: "12px", color: "#1B3E51", marginTop: "6px", fontWeight: "640" }}>{qrCodeData?.name}</h5>
+      <div className="edit-detail"><Link to="/edit-qr-code"><FaUserEdit /></Link></div>
       <div className="switch-container">
         <span className="lost-mode-text">Lost Mode</span>
         <div className="toggle-container" onClick={() => handleOpen(qrCodeData?.qr_planet_id)}>
