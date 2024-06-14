@@ -51,7 +51,7 @@ const AddQRCode = () => {
           <div className="form-group-login mobile-group">
           <select>
               <option value="+44" >+44</option>
-              <option value="+1">+1</option>>
+              <option value="+1">+1</option>
               <option value="+971">+971</option>
             </select>  
               <input
