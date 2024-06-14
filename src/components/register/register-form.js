@@ -137,7 +137,7 @@ const RegisterForm = () => {
             <div className="form-group">
               <input
                 className="input-box"
-                type="email"
+                // type="email"
                 id="email"
                 {...register("email", {
                   required: "Email is required",
@@ -170,7 +170,7 @@ const RegisterForm = () => {
               </button>
               {errors.password && <span className="error">{errors.password.message}</span>}
             </div>
-            <div className={`password-container form-group ${errors?.password?.message && errors?.password?.message !== "Password is required" ? "with-error" : ""}`}>
+            <div className={`password-container form-group ${errors?.password?.message && errors?.password.message !=="Password is required" ? "with-error" : ""}`}>
               <input
                 className="input-box"
                 type={confirmPasswordVisible ? "text" : "password"}

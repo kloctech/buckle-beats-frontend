@@ -1,0 +1,96 @@
+@import "../../styles/variables/variable.scss";
+
+
+.lostqrcode {
+  &-container {
+    height: 100%;
+    max-width: $max-width;
+    background-color: #222831;
+    margin: auto;
+    @include center-content;
+    z-index: 1;
+    position: relative;
+    overflow: overlay;
+  }
+
+  &-image {
+    padding-top: 40px;
+    text-align: center;
+  }
+
+  &-main-container {
+
+    padding: 0 2rem;
+
+    h3 {
+      font-size: 17.94px;
+      font-weight: 400;
+      text-align: center;
+      color: #fff;
+      margin: 1.8rem 0;
+    }
+
+    h4 {
+      font-size: 15.24px;
+      font-weight: 400;
+      text-align: center;
+      color: #FB6F68;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &-box {
+    background-color: #fff;
+    color: #183E51;
+    padding: 1.5rem 1rem;
+    border: 1px solid #58D7B5;
+    border-radius: 4px;
+
+    p {
+      font-size: 13px;
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: 0;
+    }
+  }
+
+  &-list {
+    margin: 2rem auto 1rem;
+
+    padding: 0;
+
+    li {
+      list-style: none;
+      padding-bottom: 0.8rem;
+     display:flex;
+     align-items: center;
+      span {
+        font-size: 15.24px;
+        font-weight: 400;
+        text-align: left;
+        color: #FFFFFF;
+        padding-left: 10px;
+      }
+    }
+  }
+
+  &-content {
+    font-size: 13px;
+    font-weight: 400;
+    text-align: left;
+    color: #fff;
+    margin-bottom: 2rem;
+  }
+}
+
+
+  html,body,#root{
+    height: 100%;
+  }
+
+
+@media (min-width: 600px) {
+  .lostqrcode-container {
+    max-width: 340px;
+  }
+}

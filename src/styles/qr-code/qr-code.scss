@@ -15,6 +15,7 @@
 }
 .qr-codes-container {
   display: grid;
+  flex-wrap: wrap;
   grid-template-columns: repeat(2, 1fr);
   gap: 17px;
   z-index: 2;
@@ -23,7 +24,12 @@
   scrollbar-width: thin;
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  &.no-qr-codes {
+    display: flex;
+  }
 }
+
 .no-data-container {
   display: flex;
   align-items: center;
@@ -140,4 +146,10 @@
   .app {
     height: 89vh;
   }
+}
+.no-data-image {
+  margin-bottom: 0.7rem;
+  width: 55px;
+  // margin-left: 9rem;
+  filter: brightness(0) invert(1);
 }

@@ -15,6 +15,7 @@ import mainRoutes from "./routes/main-route";
 import ForgotPasswordLink from "./components/forget-password-link/forgot-password-link";
 import ForgotPassword from "./components/forgot-password/forgot-password";
 import { Toaster } from "react-hot-toast";
+import LostQRCode from "./components/lost-qrcode/lost-qrcode";
 // import QrCodeScanner from "./components/qr-code-scanner/qr-code-scanner";
 import QrCodeScanner from "./components/qr-code-scanner/qr-code-scanner";
 
@@ -44,6 +45,7 @@ const App = () => {
         <Route path="/forgot-password-link" element={<ForgotPasswordLink/>} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path ='/qr-scanner' element = {<QrCodeScanner/>}/>
+        <Route path="/qr-code/:id" element={<LostQRCode />} />
         {mainRoutes}
       </Routes>
     </Router>

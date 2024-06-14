@@ -30,7 +30,7 @@ const ForgotPasswordLink = () => {
           <div className="form-group">
             <input
               className="input-box"
-              type="email"
+              // type="email"
               id="email"
               name="email"
               placeholder="Email"
