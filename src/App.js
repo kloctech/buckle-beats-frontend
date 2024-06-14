@@ -15,6 +15,7 @@ import mainRoutes from "./routes/main-route";
 import ForgotPasswordLink from "./components/forget-password-link/forgot-password-link";
 import ForgotPassword from "./components/forgot-password/forgot-password";
 import { Toaster } from "react-hot-toast";
+// import QrCodeScanner from "./components/qr-code-scanner/qr-code-scanner";
 import QrCodeScanner from "./components/qr-code-scanner/qr-code-scanner";
 
 const App = () => {

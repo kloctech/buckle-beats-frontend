@@ -1,72 +1,51 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Html5QrcodeScanner } from 'html5-qrcode';
+import React, { useState, useRef, useEffect } from 'react';
+import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
 
-const QrCodeScanner = () => {
-  const [scanResult, setScanResult] = useState(null);
-  const scannerRef = useRef(null);
+function QrCodeScanner() {
+  const [result, setResult] = useState('');
+  const [error, setError] = useState('');
+  const videoRef = useRef(null);
+  const codeReaderRef = useRef(null); // Use ref to store the code reader instance
 
   useEffect(() => {
-    if (!scannerRef.current) {
-      const scanner = new Html5QrcodeScanner('reader', {
-        qrbox: {
-          width: 250,
-          height: 250,
-        },
-        fps: 5,
-      });
+    const codeReader = new BrowserMultiFormatReader();
+    codeReaderRef.current = codeReader;
 
-      const success = (result) => {
-        setScanResult(result);
-        if (scannerRef.current) {
-          scannerRef.current.clear();
-          scannerRef.current = null;
-        }
-      };
-
-      const error = (err) => {
-        console.warn(err);
-      };
-
-      scanner.render(success, error);
-      scannerRef.current = scanner;
-    }
+    codeReader.decodeFromVideoDevice(undefined, videoRef.current, (result, err) => {
+      if (result) {
+        setResult(result.getText());
+        setError('');
+      }
+      if (err && !(err instanceof NotFoundException)) {
+        console.error('QR Scan Error:', err);
+        setError('Error accessing camera or scanning QR code.');
+      }
+    });
 
     return () => {
-      if (scannerRef.current) {
-        scannerRef.current.clear().catch(err => console.error("Failed to clear html5QrCodeScanner. Reason: ", err));
-        scannerRef.current = null;
+      if (codeReaderRef.current) {
+        codeReaderRef.current.reset();
       }
     };
   }, []);
 
-  const handleStopScanning = () => {
-    if (scannerRef.current) {
-      scannerRef.current.clear().catch(err => console.error("Failed to clear html5QrCodeScanner. Reason: ", err));
-      scannerRef.current = null;
+  useEffect(() => {
+    if (result && codeReaderRef.current) {
+      codeReaderRef.current.reset(); // Stop the video stream
     }
-  };
+  }, [result]);
 
   return (
-    <div style={{ textAlign: 'center', padding: '20px' }}>
-      <h1>Scan QR Codes</h1>
-      {scanResult ? (
-        <div>
-          <p>Scan success! Here is the URL:</p>
-          <a href={scanResult} target="_blank" rel="noopener noreferrer">{scanResult}</a>
-        </div>
+    <div className="form-container">
+      <h1>QR Code Scanner</h1>
+      {!result ? (
+        <video ref={videoRef} style={{ width: '100%' }} />
       ) : (
-        <div>
-          <div id="reader" style={{ position: 'relative', width: '100%', maxWidth: '400px', margin: '0 auto' }}>
-            <div className="qr-corner top-left"></div>
-            <div className="qr-corner top-right"></div>
-            <div className="qr-corner bottom-left"></div>
-            <div className="qr-corner bottom-right"></div>
-          </div>
-          <button onClick={handleStopScanning} style={{ marginTop: '20px' }}>Stop Scanning</button>
-        </div>
+        <p>Success: <a href={result}>{result}</a></p>
       )}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
-};
+}
 
 export default QrCodeScanner;
