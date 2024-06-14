@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
-
+import '../../styles/qr-code-scanner/qr-code-scanner.scss'
 function QrCodeScanner() {
   const [result, setResult] = useState('');
   const [error, setError] = useState('');
@@ -39,9 +39,11 @@ function QrCodeScanner() {
     <div className="form-container">
       <h1>QR Code Scanner</h1>
       {!result ? (
-        <video ref={videoRef} style={{ width: '100%',borderRadius: '50%'  }} />
+        <div className="video-container">
+          <video ref={videoRef} autoPlay />
+        </div>
       ) : (
-        <p><a href={result}>{result}</a></p>
+        <p style={{color:'#58d7b5'}}><a href={result}  style={{color:'#58d7b5'}}>{result}</a></p>
       )}
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
