@@ -41,9 +41,11 @@ function QrCodeScanner() {
     <div className="qr-scanner form-container">
       <h1>QR Code Scanner</h1>
       {!result ? (
-        <video ref={videoRef} style={{ width: '100%',borderRadius: '50%'  }} />
+        <div className="video-container">
+          <video ref={videoRef} autoPlay />
+        </div>
       ) : (
-        <><p className="result-text"><a  href={result}>{result}</a></p>
+        <> <p style={{color:'#58d7b5'}} className='result-text'><a href={result}  style={{color:'#58d7b5'}}>{result}</a></p>
         <div className="button-row"> 
         <Link to="/" className="cta-button cancel-btn">Cancel</Link>
         <Link to="/add-qr-code" className="cta-button next-btn">Next</Link>
