@@ -23,7 +23,7 @@ const QrCodeCard = ({ qrCodeData, fetchQrCodes, page, searchQuery, updateQrCodeS
     }
   };
 
-  const handleClose = () => setQRcode(null);
+  const handleClose = () => {setQRcode(null);setActiveId(null);}
 
   const handleTurnOn = async (qr_planet_id) => {
     const token = Cookies.get("accessToken");
@@ -50,7 +50,7 @@ const QrCodeCard = ({ qrCodeData, fetchQrCodes, page, searchQuery, updateQrCodeS
           <div className={`toggle-button ${qrCodeData?.is_lost ? "active" : ""}`}></div>
         </div>
       </div>
-      <EnableQRCode openModal={qrcode === qrCodeData?.qr_planet_id} closeModal={() => handleTurnOn(qrCodeData?.qr_planet_id)} id={qrCodeData?._id} is_lost={qrCodeData?.is_lost} />
+      <EnableQRCode handleClose={handleClose} openModal={qrcode === qrCodeData?.qr_planet_id} closeModal={() => handleTurnOn(qrCodeData?.qr_planet_id)} id={qrCodeData?._id} is_lost={qrCodeData?.is_lost} />
     </div>
   );
 };
