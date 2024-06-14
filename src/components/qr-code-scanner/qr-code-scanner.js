@@ -39,7 +39,7 @@ function QrCodeScanner() {
     <div className="form-container">
       <h1>QR Code Scanner</h1>
       {!result ? (
-        <video ref={videoRef} style={{ width: '100%',borderRadius: '70%'  }} />
+        <video ref={videoRef} style={{ width: '100%',borderRadius: '50%'  }} />
       ) : (
         <p><a href={result}>{result}</a></p>
       )}
