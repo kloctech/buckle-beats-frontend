@@ -10,10 +10,10 @@ const EnableQRCode = ({closeModal, openModal , heading, text, id,qr_planet_id,is
     aria-describedby="modal-modal-description"
     >
       <div class="box-container">
-        <h3>{is_lost ?  "Turn off Lost Mode?" : "Turn on  Lost Mode?"}</h3>
+        <h3>{heading || "Turn on Lost Mode?"}</h3>
         <p>{text || "Your contact information and  message will be shared"}</p>
         <button onClick={() => closeModal(id)} className="cta-button" type="submit">
-            {is_lost ? "Turn off" :"Turn on"}
+            Turn On
           </button>
       </div>
     </Modal>
