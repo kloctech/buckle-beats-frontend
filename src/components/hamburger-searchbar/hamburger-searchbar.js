@@ -100,10 +100,9 @@ const Hamburger = () => {
         </div>
         
       <div className={menuOpen ? 'active menu-wrapper' : 'inactive menu-wrapper'}>
+     <div className="menu-container">
       <div className="close-menu" onClick={handleClosemenu}>X</div>
       <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
-      <div className="menu-container">
-      
         {menuOpen && (
           <div className={`menu-list  ${submenuOpen ? "submenu-visible": ""}`}>
             
