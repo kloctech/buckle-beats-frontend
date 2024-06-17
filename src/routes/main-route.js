@@ -13,7 +13,7 @@ const routes = (
       <Route exact path="/" element={<Hamburger />} />
       <Route element={<WithLogoutButton />} />
       <Route path="/forgot-password-link" element={<ForgotPassword />} />
-      <Route path="/add-qr-code" element={<AddQRCode />} />
+      <Route path="/add-qr-code/:id" element={<AddQRCode />} />
     </Route>
   </>
 );
