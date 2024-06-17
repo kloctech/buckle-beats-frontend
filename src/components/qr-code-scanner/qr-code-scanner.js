@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
 import '../../styles/qr-code-scanner/qr-code-scanner.scss'
+import { Link } from 'react-router-dom';
 function QrCodeScanner() {
   const [result, setResult] = useState('');
   const [error, setError] = useState('');

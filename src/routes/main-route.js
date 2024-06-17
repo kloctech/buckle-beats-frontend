@@ -14,7 +14,7 @@ const routes = (
       <Route exact path="/" element={<Hamburger />} />
       <Route element={<WithLogoutButton />} />
       <Route path="/forgot-password-link" element={<ForgotPassword />} />
-      <Route path="/edit-qr-code" element={<EditQRCode />} />
+      <Route path="/edit-qr-code/:id" element={<EditQRCode />} />
     </Route>
   </>
 );
