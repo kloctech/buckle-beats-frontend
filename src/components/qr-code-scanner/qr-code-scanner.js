@@ -42,16 +42,6 @@ function QrCodeScanner() {
     };
   }, []);
 
-  const stopVideoStream = () => {
-    if (videoRef.current && videoRef.current.srcObject) {
-      const stream = videoRef.current.srcObject;
-      const tracks = stream.getTracks();
-
-      tracks.forEach(track => track.stop());
-      videoRef.current.srcObject = null;
-    }
-  };
-
   const handleNextClick = () => {
     if (result) {
       navigate(`/add-qr-code/${result}`);
@@ -67,7 +57,7 @@ function QrCodeScanner() {
       <h1>QR Code Scanner</h1>
       {!result ? (
         <div className="video-container">
-          <video ref={videoRef} autoPlay playsInline />
+          <video ref={videoRef} autoPlay />
         </div>
       ) : (
         <>

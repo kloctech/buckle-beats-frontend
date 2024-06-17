@@ -172,7 +172,6 @@ const EditQRCode = () => {
               <option value="" disabled>Category</option>
               <option value="A">Category A</option>
               <option value="B">Category B</option>
-              <option value="Electronics">Electronics</option>
             </select>
           </div>
 

@@ -6,7 +6,7 @@ import WithLogoutButton from "../components/withLogout/withLogout";
 import ForgotPassword from "../components/forgot-password/forgot-password";
 import Hamburger from "../components/hamburger-searchbar/hamburger-searchbar";
 import EditQRCode from "../components/edit-qr-code/edit-qr-code";
-
+import AddQRCode from '../components/add-qr-code/add-qr-code'
 
 const routes = (
   <>
