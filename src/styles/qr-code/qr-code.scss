@@ -94,12 +94,14 @@
 .shop-button {
   background-color: #58d7b5;
   border: none;
-  color: #2d2f36;
-  padding: 10px 20px;
+  color:#222831;
   border-radius: 5px;
-  cursor: pointer;
+  width: 100px;
+  height: 30px;
   font-weight: 500;
   font-size: small;
+  cursor: pointer;
+  margin-top: 5px;
 }
 .activate-qr-button {
   background-color: #222831;
@@ -114,10 +116,10 @@
   margin-top: 5px;
 }
 
-.shop-button:hover,
-.activate-qr-button:hover {
-  background-color: #00a392;
-}
+
+// .activate-qr-button:hover {
+//   background-color: #00a392;
+// }
 .toggle-container {
   width: 30px;
   height: 13px;
