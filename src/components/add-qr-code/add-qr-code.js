@@ -1,12 +1,15 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import "../../styles/add-edit-qrcode/add-edit-qrcode.scss";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 const AddQRCode = () => {
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -19,6 +22,7 @@ const AddQRCode = () => {
   const { id } = useParams();
 
   const onSubmitAddQRForm = async (data) => {
+    setLoading(true);
     data.mobile_number = `${countryCodeRef.current.value} ${data.mobile_number}`;
     data.code = id;
 
@@ -31,10 +35,13 @@ const AddQRCode = () => {
           Authorization: `Bearer ${accessToken}`,
         },
       });
+
       navigate("/");
       toast.success(response.data.resultMessage.en, { duration: 5000 });
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });
     }
   };
@@ -118,7 +125,7 @@ const AddQRCode = () => {
               {...register("default_message", { required: false })}
             />
           </div>
-          <button className="login-button save-btn">Save</button>
+          <button className="login-button save-btn"> {loading ? <CircularProgress size={25} sx={{ color: "white" }} /> : "Save"}</button>
         </form>
       </div>
     </div>

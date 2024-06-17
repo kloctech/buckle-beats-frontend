@@ -48,6 +48,10 @@ function QrCodeScanner() {
     }
   };
 
+  window.addEventListener("popstate", function (event) {
+    window.location.reload();
+  });
+
   return (
     <div className="qr-scanner form-container">
       <h1>QR Code Scanner</h1>
