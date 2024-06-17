@@ -4,11 +4,15 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import toast from "react-hot-toast";
 import EnableQRCode from "../enable-qrcode/enable-qrcode";
+import { FaUserEdit } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+
 
 const QrCodeCard = ({ qrCodeData, fetchQrCodes, page, searchQuery, updateQrCodeStatus }) => {
   const [qrcode, setQRcode] = useState(null);
+  console.log(qrCodeData)
   const [activeId, setActiveId] = useState(null);
-
+const navigate =  useNavigate()
   const handleOpen = async (id) => {
     if (qrCodeData?.is_lost) {
       await handleTurnOn(id);
@@ -39,12 +43,17 @@ const QrCodeCard = ({ qrCodeData, fetchQrCodes, page, searchQuery, updateQrCodeS
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });
     }
   };
-
+  const handleEdit = () => {
+    navigate(`/edit-qr-code/${qrCodeData?.qr_planet_id}`, { state: { qrCodeData } });
+  };
   return (
     <div className="qr-code-card">
       <img src={qrCodeData?.image_url} alt={qrCodeData.name} className="qr-code-image" />
       <h5 style={{ fontSize: "12px", color: "#1B3E51", marginTop: "6px", fontWeight: "640" }}>{qrCodeData?.name}</h5>
-      <div className="switch-container">
+      <div className="edit-detail" >
+          <FaUserEdit onClick={handleEdit} />
+        </div>  
+        <div className="switch-container">
         <span className="lost-mode-text">Lost Mode</span>
         <div className="toggle-container" onClick={() => handleOpen(qrCodeData?.qr_planet_id)}>
           <div className={`toggle-button ${qrCodeData?.is_lost ? "active" : ""}`}></div>
