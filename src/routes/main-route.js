@@ -5,6 +5,7 @@ import ProtectedRoute from "../middleware/protected-route";
 import WithLogoutButton from "../components/withLogout/withLogout";
 import ForgotPassword from "../components/forgot-password/forgot-password";
 import Hamburger from "../components/hamburger-searchbar/hamburger-searchbar";
+import ManageProfile from "../components/manage-profile/manage-profile";
 
 const routes = (
   <>
@@ -12,6 +13,7 @@ const routes = (
       <Route exact path="/" element={<Hamburger />} />
       <Route element={<WithLogoutButton />} />
       <Route path="/forgot-password-link" element={<ForgotPassword />} />
+      <Route path="/manage-profile" element={<ManageProfile />} />
     </Route>
   </>
 );
