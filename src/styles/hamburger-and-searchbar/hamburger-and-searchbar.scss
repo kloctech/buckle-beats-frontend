@@ -19,6 +19,9 @@
     padding: 10px 0;
     // width: 93%;
     margin: auto;
+    @media(min-width:600px){
+      padding: 10px;
+    }
     .hamburger {
       display: flex;
       flex-direction: column;
