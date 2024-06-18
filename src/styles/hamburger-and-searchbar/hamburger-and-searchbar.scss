@@ -2,7 +2,7 @@
 
 .header-flex-container {
   width: 100vw;
-  height:100%;
+  height: 100%;
 }
 
 .main-qrcode-container {
@@ -10,8 +10,10 @@
   margin: auto;
   width: 100vw;
   max-width: 440px;
-  height:100%;
+  height: 100%;
   background-color: $background-color;
+  position: relative;
+
   .mobile-header {
     display: flex;
     justify-content: space-between;
@@ -19,6 +21,7 @@
     padding: 10px;
     // width: 93%;
     margin: auto;
+
     .hamburger {
       display: flex;
       flex-direction: column;
@@ -26,6 +29,8 @@
       width: 30px;
       height: 35px;
       cursor: pointer;
+      background-color: transparent;
+      transition: background-color 0.2s ease-in 0.4s;
 
       .burger {
         width: 100%;
@@ -40,6 +45,7 @@
 
       .search-input-wrapper {
         position: relative;
+
         input {
           width: 250px;
           padding: 10px;
@@ -64,6 +70,7 @@
           width: 25px;
           color: $primary-color;
         }
+
         .search-bg-icon {
           position: absolute;
           top: 50%;
@@ -75,30 +82,141 @@
       }
     }
   }
-  .menu {
-    background-color: $background-color;
-    border: 1px solid $border-color;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    width: 280px;
 
-    .menu-item {
+  // .menu {
+  //   background-color: $background-color;
+  //   border: 1px solid $border-color;
+  //   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  //   position: absolute;
+  //   top: 60px;
+  //   left: 0;
+  //   right: 0;
+  //   z-index: 1000;
+  //   width: 280px;
+
+  //   .menu-item {
+  //     cursor: pointer;
+  //   }
+
+  //   p {
+  //     color: $primary-color;
+  //     padding: 10px;
+  //     margin: 0;
+  //     border-bottom: 1px solid $border-color;
+
+  //     &:last-child {
+  //       border-bottom: none;
+  //     }
+  //   }
+  // }
+}
+.menu {
+  &-wrapper {
+    background: #183e51;
+    position: fixed;
+    transition: all 0.6s linear;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    z-index: 40;
+    height: 100%;
+    top: 0;
+
+    &.inactive {
+      left: -100%;
+    }
+
+    &.active {
+      left: 0;
+    }
+
+    @media (min-width: 600px) {
+      position: absolute;
+    }
+    .close-menu {
+      position: absolute;
+      top: 4.2rem;
+      right: 2rem;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 800;
+      background-color: #434850;
+      padding: 10px 15px;
+      border-radius: 3px;
       cursor: pointer;
     }
-
-    p {
-      color: $primary-color;
-      padding: 10px;
-      margin: 0;
-      border-bottom: 1px solid $border-color;
-      &:last-child {
-        border-bottom: none;
+    &-image {
+      margin: 5rem 2rem 0;
+      @media (min-width: 440px) {
+        margin-right: 3rem;
       }
     }
+    .submenu {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      padding: 4rem 2rem 2rem;
+      width: 100%;
+      opacity: 0;
+      &.is-visible {
+        opacity: 1;
+        transition: opacity 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+    }
+  }
+  &-text,
+  &-logout {
+    color: #fff;
+    padding-bottom: 1rem;
+    font-size: 17px;
+  }
+  &-logout {
+    margin-top: 1rem;
+    color: #fff;
+    text-decoration: underline;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  &-container {
+    width: 100%;
+    position: relative;
+  }
+
+  &-list {
+    padding: 4rem 2rem 2rem;
+    width: 100%;
+    transform: translateX(0%);
+    transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+    &.submenu-visible {
+      transform: translateX(-100%);
+    }
+    h4 {
+      color: #fff;
+      line-height: 2;
+      border-bottom: 2px solid #58d7b5;
+      font-size: 18px;
+    }
+  }
+  &-link {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    span {
+      padding-right: 1rem;
+      img {
+        width: 14px;
+        filter: brightness(0) invert(1);
+      }
+    }
+  }
+  &-back {
+    color: #fff;
+    text-decoration: underline;
+    transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+    cursor: pointer;
   }
 }
 
@@ -107,13 +225,21 @@
     width: 340px;
     height: 100vh;
     position: relative;
+    overflow: hidden;
   }
+
   .mobile-header {
     width: 92%;
   }
 }
+
 @media screen and (max-width: 440px) {
   .mobile-header {
     width: 85%;
+  }
+}
+@media screen and (max-width: 360px) {
+  .mobile-header {
+    width: 89%;
   }
 }

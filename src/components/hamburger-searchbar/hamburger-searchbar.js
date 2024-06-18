@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/hamburger-and-searchbar/hamburger-and-searchbar.scss";
 import { IoSearch } from "react-icons/io5";
 import BuckleBeatsIcon from "../../assets/Bucklebeats Icon.svg";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import QrCodes from "../qr-codes/qr-codes";
+import Logo from "../../assets/logo.png";
+import RightArrow from "../../assets/right-arrow.png";
 
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState("qr-codes-screen");
+  const [submenuOpen, setSubmenuOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
   const MenuItem2 = () => <div>Component for Menu Item 2</div>;
@@ -16,7 +19,25 @@ const Hamburger = () => {
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+    setSubmenuOpen(false);
   };
+  const toggleSubmenu = () => {
+    setSubmenuOpen(!submenuOpen);
+  };
+  const handleClosemenu = () => {
+    setMenuOpen(false);
+  };
+
+  const handleBackClick = () => {
+    setSubmenuOpen(false);
+  };
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [menuOpen]);
   const onClickLogout = async () => {
     const accessToken = Cookies.get("accessToken");
     try {
@@ -30,6 +51,7 @@ const Hamburger = () => {
       if (response.ok) {
         Cookies.remove("accessToken");
         Cookies.remove("refreshToken");
+
         toast.success("Successfully logout");
         window.location.href = "/login";
       } else {
@@ -41,6 +63,7 @@ const Hamburger = () => {
     setSelectedMenuItem(menuItem);
     setMenuOpen(false);
   };
+
   const renderSelectedComponent = () => {
     switch (selectedMenuItem) {
       case "qr-codes-screen":
@@ -75,22 +98,49 @@ const Hamburger = () => {
             </div>
           </header>
         </div>
-        {menuOpen && (
-          <div className="menu">
-            <p className="menu-item" onClick={() => handleMenuItemClick("qr-codes-screen")}>
-              Menu Item 1
-            </p>
-            <p className="menu-item" onClick={() => handleMenuItemClick("item2")}>
-              Menu Item 2
-            </p>
-            <p className="menu-item" onClick={() => handleMenuItemClick("item3")}>
-              Menu Item 3
-            </p>
-            <p className="menu-item" onClick={onClickLogout}>
-              Logout
-            </p>
+
+        <div className={menuOpen ? "active menu-wrapper" : "inactive menu-wrapper"}>
+          <div className="menu-container">
+            <div className="close-menu" onClick={handleClosemenu}>
+              X
+            </div>
+            <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
+            {menuOpen && (
+              <div className={`menu-list  ${submenuOpen ? "submenu-visible" : ""}`}>
+                <div className="menu-list-item">
+                  <div className="menu-text">
+                    <h4>ACCOUNT</h4>
+                    <div className={`menu-link`} onClick={toggleSubmenu}>
+                      Manage Account
+                      {!submenuOpen && (
+                        <span>
+                          <img src={RightArrow} alt="rightarrow Icon" />
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div className="menu-text">
+                    <h4>QRs</h4>
+                    <div className="menu-link" onClick={() => handleMenuItemClick("qr-codes-screen")}>
+                      Activate & Manage QRs
+                    </div>
+                  </div>
+                  <div className="menu-text menu-logout" onClick={onClickLogout}>
+                    Sign Out
+                  </div>
+                </div>
+
+                <div className={`submenu ${submenuOpen ? "is-visible" : ""}`}>
+                  <div className="menu-back menu-text" onClick={handleBackClick}>
+                    Back
+                  </div>
+                  <div className="menu-text">Romi Mathew</div>
+                </div>
+              </div>
+            )}
           </div>
-        )}
+        </div>
+
         <div className="qrcodes-containers">{renderSelectedComponent()}</div>
       </div>
     </div>

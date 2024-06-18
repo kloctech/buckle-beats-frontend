@@ -7,12 +7,10 @@ import EnableQRCode from "../enable-qrcode/enable-qrcode";
 import { FaUserEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-
-const QrCodeCard = ({ qrCodeData, fetchQrCodes, page, searchQuery, updateQrCodeStatus }) => {
+const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, updateQrCodeStatus }) => {
   const [qrcode, setQRcode] = useState(null);
-  console.log(qrCodeData)
   const [activeId, setActiveId] = useState(null);
-const navigate =  useNavigate()
+  const navigate = useNavigate();
   const handleOpen = async (id) => {
     if (qrCodeData?.is_lost) {
       await handleTurnOn(id);
@@ -27,7 +25,10 @@ const navigate =  useNavigate()
     }
   };
 
-  const handleClose = () => {setQRcode(null);setActiveId(null);}
+  const handleClose = () => {
+    setQRcode(null);
+    setActiveId(null);
+  };
 
   const handleTurnOn = async (qr_planet_id) => {
     const token = Cookies.get("accessToken");
@@ -38,7 +39,7 @@ const navigate =  useNavigate()
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       handleClose();
       updateQrCodeStatus(qr_planet_id, !qrCodeData.is_lost); // Update the specific QR code status
-      fetchQrCodes(page, searchQuery); // Refresh the QR codes list with the correct parameters
+      getQrCodesWithOutSearch(page, searchQuery); // Refresh the QR codes list with the correct parameters
     } catch (error) {
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });
     }
@@ -50,10 +51,10 @@ const navigate =  useNavigate()
     <div className="qr-code-card">
       <img src={qrCodeData?.image_url} alt={qrCodeData.name} className="qr-code-image" />
       <h5 style={{ fontSize: "12px", color: "#1B3E51", marginTop: "6px", fontWeight: "640" }}>{qrCodeData?.name}</h5>
-      <div className="edit-detail" >
-          <FaUserEdit onClick={handleEdit} />
-        </div>  
-        <div className="switch-container">
+      <div className="edit-detail">
+        <FaUserEdit onClick={handleEdit} />
+      </div>
+      <div className="switch-container">
         <span className="lost-mode-text">Lost Mode</span>
         <div className="toggle-container" onClick={() => handleOpen(qrCodeData?.qr_planet_id)}>
           <div className={`toggle-button ${qrCodeData?.is_lost ? "active" : ""}`}></div>
