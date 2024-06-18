@@ -132,7 +132,6 @@
 }
 .edit-btn {
   background-color: #58d7b5;
-  border: 0;
 }
 .save-btn {
   padding: 10px 20px;
@@ -156,4 +155,16 @@
 .disabled-btn {
   background-color: $hover-color;
   cursor: not-allowed;
+}
+.header-container {
+  display: flex;
+  align-items: center;
+  // margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    padding: 10px; 
+  }
 }
