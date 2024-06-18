@@ -7,7 +7,7 @@ import EnableQRCode from "../enable-qrcode/enable-qrcode";
 import { FaUserEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const QrCodeCard = ({ qrCodeData, fetchQrCodes, page, searchQuery, updateQrCodeStatus }) => {
+const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, updateQrCodeStatus }) => {
   const [qrcode, setQRcode] = useState(null);
   const [activeId, setActiveId] = useState(null);
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ const QrCodeCard = ({ qrCodeData, fetchQrCodes, page, searchQuery, updateQrCodeS
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       handleClose();
       updateQrCodeStatus(qr_planet_id, !qrCodeData.is_lost); // Update the specific QR code status
-      fetchQrCodes(page, searchQuery); // Refresh the QR codes list with the correct parameters
+      getQrCodesWithOutSearch(page, searchQuery); // Refresh the QR codes list with the correct parameters
     } catch (error) {
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });
     }

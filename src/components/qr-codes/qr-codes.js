@@ -149,7 +149,7 @@ const QrCodes = ({ searchInput }) => {
             <h1>No data found</h1>
           </div>
         ) : (
-          qrCodes.map((item) => <QrCodeCard key={item._id} qrCodeData={item} fetchQrCodes={fetchQrCodes} page={page} searchQuery={debouncedSearchInput} updateQrCodeStatus={updateQrCodeStatus} />)
+          qrCodes.map((item) => <QrCodeCard key={item._id} qrCodeData={item} getQrCodesWithOutSearch={getQrCodesWithOutSearch} page={page} searchQuery={debouncedSearchInput} updateQrCodeStatus={updateQrCodeStatus} />)
         )}
       </div>
       {loading && <div>Loading more items...</div>}
