@@ -8,32 +8,32 @@ function QrCodeScanner() {
   const [error, setError] = useState("");
   const videoRef = useRef(null);
   const codeReaderRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const codeReader = new BrowserMultiFormatReader();
     codeReaderRef.current = codeReader;
 
-    // Start video stream
-    const startVideo = async () => {
+    const startDecoding = async () => {
       try {
         await codeReader.decodeFromVideoDevice(undefined, videoRef.current, (result, err) => {
           if (result) {
-            setResult(result.getText());
-            setError('');
-            stopVideoStream();
+            setResult(result.getText().split("/").pop());
+            setError("");
+            codeReader.reset();
           }
           if (err && !(err instanceof NotFoundException)) {
-            console.error('QR Scan Error:', err);
-            setError('Error accessing camera or scanning QR code.');
+            console.error("QR Scan Error:", err);
+            setError("Error accessing camera or scanning QR code.");
           }
         });
       } catch (error) {
-        console.error('Error starting video:', error);
-        setError('It was not possible to start the video stream.');
+        console.error("Camera initialization error:", error);
+        setError("Error initializing camera.");
       }
     };
 
-    startVideo();
+    startDecoding();
 
     return () => {
       if (codeReaderRef.current) {
@@ -42,19 +42,9 @@ function QrCodeScanner() {
     };
   }, []);
 
-  const stopVideoStream = () => {
-    if (videoRef.current && videoRef.current.srcObject) {
-      const stream = videoRef.current.srcObject;
-      const tracks = stream.getTracks();
-
-      tracks.forEach(track => track.stop());
-      videoRef.current.srcObject = null;
-    }
-  };
-
-  useEffect(() => {
-    if (result && codeReaderRef.current) {
-      codeReaderRef.current.reset(); // Ensure the code reader is reset
+  const handleNextClick = () => {
+    if (result) {
+      navigate(`/add-qr-code/${result}`);
     }
   };
 
@@ -67,20 +57,25 @@ function QrCodeScanner() {
       <h1>QR Code Scanner</h1>
       {!result ? (
         <div className="video-container">
-          <video ref={videoRef} autoPlay playsInline />
+          <video ref={videoRef} autoPlay />
         </div>
       ) : (
         <>
-          <p style={{ color: '#58d7b5' }} className='result-text'>
-            <a href={result} style={{ color: '#58d7b5' }}>{result}</a>
+          {" "}
+          <p style={{ color: "#58d7b5" }} className="result-text">
+            {result}
           </p>
           <div className="button-row">
-            <Link to="/" className="cta-button cancel-btn">Cancel</Link>
-            <Link to={result} className="cta-button next-btn">Next</Link>
+            <button onClick={() => navigate("/")} className="cta-button cancel-btn">
+              Cancel
+            </button>
+            <button onClick={handleNextClick} className="cta-button next-btn">
+              Next
+            </button>
           </div>
         </>
       )}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 }

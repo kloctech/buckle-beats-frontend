@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import "../../styles/add-edit-qrcode/add-edit-qrcode.scss";
-import EnableQRCode from "../enable-qrcode/enable-qrcode";
+import { useForm, useWatch } from "react-hook-form";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { BiArrowBack } from "react-icons/bi";
+import EnableQRCode from "../enable-qrcode/enable-qrcode";
+import "../../styles/add-edit-qrcode/add-edit-qrcode.scss";
 
 const EditQRCode = () => {
   const [qrcode, setQRcode] = useState(null);
   const [activeId, setActiveId] = useState(null);
+  const [initialValues, setInitialValues] = useState({});
+  
   const location = useLocation();
   const { qrCodeData } = location.state || {};
   const navigate = useNavigate();
+  const categories =["Electonics","Pets","Fashion","Grocery"]
   const url = process.env.REACT_APP_PRODUCTION_URL;
   const token = Cookies.get("accessToken");
 
@@ -37,19 +41,34 @@ const EditQRCode = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    control,
   } = useForm({
     defaultValues: {
       ...qrCodeData,
       mobile_number: mobileNumber,
       countryCode: countryCode,
     },
-    mode: "onChange", // Set validation mode to onChange
+    mode: "onChange",
   });
 
   useEffect(() => {
     setValue("countryCode", countryCode);
     setValue("mobile_number", mobileNumber);
-  }, [countryCode, mobileNumber, setValue]);
+    setInitialValues({
+      name: qrCodeData.name,
+      email: qrCodeData.email,
+      mobile_number: mobileNumber,
+      countryCode: countryCode,
+      category: qrCodeData.category,
+      default_message: qrCodeData.default_message,
+    });
+  }, [countryCode, mobileNumber, setValue, qrCodeData]);
+
+  const watchedValues = useWatch({ control });
+
+  const isEdited = Object.keys(initialValues).some(
+    (key) => watchedValues[key] !== initialValues[key]
+  );
 
   const onSubmitAddQRForm = async (data) => {
     const mobile_number = `${data.countryCode} ${data.mobile_number}`;
@@ -70,7 +89,7 @@ const EditQRCode = () => {
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       navigate('/');
     } catch (error) {
-      toast.error(error.response.data.resultMessage.en)
+      toast.error(error.response.data.resultMessage.en);
     }
   };
 
@@ -99,7 +118,7 @@ const EditQRCode = () => {
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       navigate('/');
     } catch (error) {
-      toast.error(error.response.data.resultMessage.en)
+      toast.error(error.response.data.resultMessage.en);
     }
   };
 
@@ -108,11 +127,24 @@ const EditQRCode = () => {
     handleClose(); // Close modal after deletion
   };
 
+  const handleClick = () => {
+    navigate('/');
+  };
+
   return (
     <div className="login-main-container edit-qr">
       <div className="login-container">
         <form onSubmit={handleSubmit(onSubmitAddQRForm)} className="login-form">
-          <h1>Edit QR Details</h1>
+          <div className="header-container">
+            <BiArrowBack 
+              style={{ color: "#ffffff", fontSize: '20px', cursor: 'pointer' }} 
+              onClick={handleClick} 
+            />
+            <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+              <h1 style={{ marginRight: 0 }}>Edit QR Details</h1>
+            </div>
+          </div>
+
           <div className="form-group-login name-group">
             <input
               name="name"
@@ -161,17 +193,17 @@ const EditQRCode = () => {
                   message: "Invalid mobile number",
                 },
               })}
-              type="tel" // Specify input type as tel to trigger numeric keyboard on mobile
-              inputMode="numeric" // Set input mode to numeric to restrict keyboard to numbers
+              type="tel"
+              inputMode="numeric"
             />
             {errors.mobile_number && <span className="error-message">{errors.mobile_number.message}</span>}
           </div>
 
           <div className="form-group-login select-group">
             <select {...register("category")}>
-              <option value="" disabled>Category</option>
-              <option value="A">Category A</option>
-              <option value="B">Category B</option>
+            {categories?.map((category, index) => ( 
+            <option key={index} value={category}>{category}</option>
+          ))}
             </select>
           </div>
 
@@ -181,21 +213,34 @@ const EditQRCode = () => {
               className="add-qr-box"
               name="default_message"
               placeholder="Default Message"
-              {...register("default_message", {
-                required: "Default message is required",
-              })}
+              {...register("default_message")}
             />
             {errors.default_message && <span className="error-message">{errors.default_message.message}</span>}
           </div>
 
           <div className="button-row">
-            <button type="button" onClick={() => handleOpen("test")} className="cta-button delete-btn">Delete</button>
-            <button type="submit" className="cta-button edit-btn">Edit</button>
+            <button 
+              type="button" 
+              onClick={() => handleOpen("test")} 
+              className="cta-button delete-btn"
+            >
+              Delete
+            </button>
+            <button 
+              type="submit" 
+              className="cta-button edit-btn"
+              style={{
+                backgroundColor: isEdited ? "" : "#5aa895",
+                cursor: isEdited ? "pointer" : "default"
+              }}
+              disabled={!isEdited}
+            >
+              Edit
+            </button>
           </div>
         </form>
       </div>
 
-      {/* Modal for QR deletion */}
       <EnableQRCode
         handleClose={handleClose}
         openModal={qrcode === "test"}
@@ -204,7 +249,7 @@ const EditQRCode = () => {
         heading="QR Deletion"
         text={`Delete this QR code is permanent. Confirm action?`}
         buttonText="Delete"
-        onConfirm={handleConfirmDelete} // Add onConfirm prop to handle delete
+        onConfirm={handleConfirmDelete}
       />
     </div>
   );

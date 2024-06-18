@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 
 const QrCodeCard = ({ qrCodeData, fetchQrCodes, page, searchQuery, updateQrCodeStatus }) => {
   const [qrcode, setQRcode] = useState(null);
-  console.log(qrCodeData)
   const [activeId, setActiveId] = useState(null);
 const navigate =  useNavigate()
   const handleOpen = async (id) => {

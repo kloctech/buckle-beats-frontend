@@ -3,8 +3,6 @@ import Modal from '@mui/material/Modal';
 import Backdrop from '@mui/material/Backdrop';
 
 const EnableQRCode = ({ onConfirm, closeModal, openModal, heading, text, id, handleClose, buttonText, qr_planet_id, is_lost }) => {
-
-  console.log(buttonText);
   
   const handleButtonClick = () => {
     if (buttonText === "Delete") {
@@ -21,6 +19,14 @@ const EnableQRCode = ({ onConfirm, closeModal, openModal, heading, text, id, han
     aria-labelledby="modal-modal-title"
     aria-describedby="modal-modal-description"
     id="modal-title"
+    onClose={handleClose}
+    closeAfterTransition
+    slots={{ backdrop: Backdrop }}
+    slotProps={{
+      backdrop: {
+        timeout: 500,
+      },
+    }}
     >
       <div className="box-container">
         <h3>{heading || "Turn on Lost Mode?"}</h3>

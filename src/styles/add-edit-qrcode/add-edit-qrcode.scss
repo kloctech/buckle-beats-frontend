@@ -134,3 +134,17 @@
   background-color: #58d7b5;
   border: 0;
  }
+ 
+
+ .header-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  @media (max-width: 768px) { 
+    top: 0;
+    left: 0; 
+    width: 100%; 
+    padding: 10px
+  }
+}
