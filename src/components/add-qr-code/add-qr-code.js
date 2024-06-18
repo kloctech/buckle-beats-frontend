@@ -99,7 +99,7 @@ const AddQRCode = () => {
                 },
               })}
             />
-            {errors.mobile && <span className="error-message">{errors.mobile.message}</span>}
+            {errors.mobile_number && <span className="error-message">{errors.mobile_number.message}</span>}
           </div>
           <div className="form-group-login select-group">
             <select
@@ -111,8 +111,10 @@ const AddQRCode = () => {
               <option value="" disabled>
                 Category
               </option>
-              <option value="A">Category A</option>
-              <option value="B">Category B</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Fashion">Fashion</option>
+              <option value="Pets">Pets</option>
+              <option value="grocery">Grocery</option>
             </select>
           </div>
           <div>
@@ -125,7 +127,14 @@ const AddQRCode = () => {
               {...register("default_message", { required: false })}
             />
           </div>
-          <button className="login-button save-btn"> {loading ? <CircularProgress size={25} sx={{ color: "white" }} /> : "Save"}</button>
+          <div className="button-container">
+            <button onClick={() => navigate("/")} type="button" className="cta-button delete-btn">
+              Cancel
+            </button>
+            <button type="submit" className="cta-button edit-btn">
+              {loading ? <CircularProgress size={25} sx={{ color: "white" }} /> : "Save"}
+            </button>
+          </div>
         </form>
       </div>
     </div>

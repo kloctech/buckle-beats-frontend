@@ -33,9 +33,9 @@ const Hamburger = () => {
   };
   useEffect(() => {
     if (menuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
   }, [menuOpen]);
   const onClickLogout = async () => {
@@ -51,6 +51,7 @@ const Hamburger = () => {
       if (response.ok) {
         Cookies.remove("accessToken");
         Cookies.remove("refreshToken");
+
         toast.success("Successfully logout");
         window.location.href = "/login";
       } else {
@@ -62,7 +63,6 @@ const Hamburger = () => {
     setSelectedMenuItem(menuItem);
     setMenuOpen(false);
   };
-
 
   const renderSelectedComponent = () => {
     switch (selectedMenuItem) {
@@ -98,56 +98,53 @@ const Hamburger = () => {
             </div>
           </header>
         </div>
-        
-      <div className={menuOpen ? 'active menu-wrapper' : 'inactive menu-wrapper'}>
-     <div className="menu-container">
-      <div className="close-menu" onClick={handleClosemenu}>X</div>
-      <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
-        {menuOpen && (
-          <div className={`menu-list  ${submenuOpen ? "submenu-visible": ""}`}>
-            
-            <div  className="menu-list-item">
-               <div className="menu-text" >
-                <h4>ACCOUNT</h4>
-                <div className={`menu-link`} onClick={toggleSubmenu}>Manage Account
-                {!submenuOpen && <span><img src={RightArrow} alt="rightarrow Icon" /></span>}
+
+        <div className={menuOpen ? "active menu-wrapper" : "inactive menu-wrapper"}>
+          <div className="menu-container">
+            <div className="close-menu" onClick={handleClosemenu}>
+              X
+            </div>
+            <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
+            {menuOpen && (
+              <div className={`menu-list  ${submenuOpen ? "submenu-visible" : ""}`}>
+                <div className="menu-list-item">
+                  <div className="menu-text">
+                    <h4>ACCOUNT</h4>
+                    <div className={`menu-link`} onClick={toggleSubmenu}>
+                      Manage Account
+                      {!submenuOpen && (
+                        <span>
+                          <img src={RightArrow} alt="rightarrow Icon" />
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div className="menu-text">
+                    <h4>QRs</h4>
+                    <div className="menu-link" onClick={() => handleMenuItemClick("qr-codes-screen")}>
+                      Activate & Manage QRs
+                    </div>
+                  </div>
+                  <div className="menu-text menu-logout" onClick={onClickLogout}>
+                    Sign Out
+                  </div>
+                </div>
+
+                <div className={`submenu ${submenuOpen ? "is-visible" : ""}`}>
+                  <div className="menu-back menu-text" onClick={handleBackClick}>
+                    Back
+                  </div>
+                  <div className="menu-text">Romi Mathew</div>
                 </div>
               </div>
-              <div className="menu-text" >
-                <h4>QRs</h4>
-                <div className="menu-link" onClick={() => handleMenuItemClick("qr-codes-screen")}>
-                  Activate & Manage QRs 
-                </div>
-              </div>
-              <div className="menu-text menu-logout" onClick={onClickLogout}>
-                Sign Out
-              </div>
-            </div>
-          
-            <div className={`submenu ${submenuOpen ? "is-visible": ""}`}>
-              <div className="menu-back menu-text" onClick={handleBackClick}>
-                 Back
-              </div>
-              <div className="menu-text">
-                Romi Mathew
-              </div>
-            </div>
-          
+            )}
           </div>
-        )}
-     </div>
-      </div>
+        </div>
 
-
-      <div className="qrcodes-containers">
-        {renderSelectedComponent()}
-      </div>
+        <div className="qrcodes-containers">{renderSelectedComponent()}</div>
       </div>
     </div>
-
   );
 };
 
 export default Hamburger;
-
-

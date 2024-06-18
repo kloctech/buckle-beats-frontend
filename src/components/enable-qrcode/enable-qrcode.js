@@ -1,9 +1,9 @@
 import React from "react";
-import Modal from '@mui/material/Modal';
-import Backdrop from '@mui/material/Backdrop';
+import Modal from "@mui/material/Modal";
+import Backdrop from "@mui/material/Backdrop";
+import "../../styles/qr-code-scanner/qr-code-scanner.scss";
 
 const EnableQRCode = ({ onConfirm, closeModal, openModal, heading, text, id, handleClose, buttonText, qr_planet_id, is_lost }) => {
-  
   const handleButtonClick = () => {
     if (buttonText === "Delete") {
       onConfirm();
@@ -15,18 +15,18 @@ const EnableQRCode = ({ onConfirm, closeModal, openModal, heading, text, id, han
 
   return (
     <Modal
-    open={openModal}
-    aria-labelledby="modal-modal-title"
-    aria-describedby="modal-modal-description"
-    id="modal-title"
-    onClose={handleClose}
-    closeAfterTransition
-    slots={{ backdrop: Backdrop }}
-    slotProps={{
-      backdrop: {
-        timeout: 500,
-      },
-    }}
+      open={openModal}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+      id="modal-title"
+      onClose={handleClose}
+      closeAfterTransition
+      slots={{ backdrop: Backdrop }}
+      slotProps={{
+        backdrop: {
+          timeout: 500,
+        },
+      }}
     >
       <div className="box-container">
         <h3>{heading || "Turn on Lost Mode?"}</h3>
@@ -35,7 +35,7 @@ const EnableQRCode = ({ onConfirm, closeModal, openModal, heading, text, id, han
           {buttonText || "Turn On"}
         </button>
       </div>
-    </Modal>    
+    </Modal>
   );
 };
 
