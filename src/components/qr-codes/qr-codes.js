@@ -1,11 +1,10 @@
-
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import "../../styles/qr-code/qr-code.scss";
 import Cookies from "js-cookie";
 import axios from "axios";
 import QrCodeCard from "../qr-code-card/qr-code-card";
 import NoDataIcon from "../../assets/no-data-found.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const QrCodes = ({ searchInput }) => {
   const [qrCodes, setQrCodes] = useState([]);
@@ -15,9 +14,14 @@ const QrCodes = ({ searchInput }) => {
   const [debouncedSearchInput, setDebouncedSearchInput] = useState(searchInput);
   const itemListRef = useRef(null);
   const [prevScrollTop, setPrevScrollTop] = useState(0);
-  const scrollThreshold = 50;
+  const scrollThreshold = 1;
   const [isEmptyResult, setIsEmptyResult] = useState(false);
-const navigate = useNavigate()
+
+  const location = useLocation();
+  const userId = location.state?.userId;
+  const navigate = useNavigate();
+  const token = Cookies.get("accessToken");
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearchInput(searchInput);
@@ -30,14 +34,13 @@ const navigate = useNavigate()
     };
   }, [searchInput]);
 
-  const fetchQrCodes = useCallback(
-    async (page, searchQuery) => {
+  const getQrCodesWithOutSearch = useCallback(
+    async (page = 1) => {
       const url = process.env.REACT_APP_PRODUCTION_URL;
-      const token = Cookies.get("accessToken");
 
       try {
         setLoading(true);
-        const response = await axios.get(`${url}/api/qrcode?name=${searchQuery}&page=${page}&limit=${limit}`, {
+        const response = await axios.get(`${url}/api/qrcode/${userId}?page=${page}&limit=${limit}`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "ngrok-skip-browser-warning": "69420",
@@ -54,17 +57,53 @@ const navigate = useNavigate()
           setQrCodes((prevQrCodes) => [...prevQrCodes, ...response.data.qrCodes]);
         }
         setLoading(false);
+      } catch (err) {
+        console.log(err);
+        setLoading(false);
+      }
+    },
+    [limit, token, userId]
+  );
+
+  const fetchQrCodes = useCallback(
+    async (page, searchQuery) => {
+      const url = process.env.REACT_APP_PRODUCTION_URL;
+
+      try {
+        setLoading(true);
+        const response = await axios.get(`${url}/api/qrcode/search?name=${searchQuery}&page=${page}&limit=${limit}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "ngrok-skip-browser-warning": "69420",
+          },
+        });
+
+        if (response.data.qrCodes.length === 0) {
+          setIsEmptyResult(true);
+        }
+
+        if (page === 1) {
+          setQrCodes(response.data.qrCodes);
+        } else {
+          //setQrCodes((prevQrCodes) => [...prevQrCodes, ...response.data.qrCodes]);
+          setQrCodes(response.data.qrCodes);
+        }
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching QR codes:", error);
         setLoading(false);
       }
     },
-    [limit]
+    [limit, token]
   );
 
   useEffect(() => {
-    fetchQrCodes(1, debouncedSearchInput);
-  }, [debouncedSearchInput, fetchQrCodes]);
+    if (debouncedSearchInput) {
+      fetchQrCodes(1, debouncedSearchInput);
+    } else {
+      getQrCodesWithOutSearch(1);
+    }
+  }, [debouncedSearchInput, fetchQrCodes, getQrCodesWithOutSearch]);
 
   const handleScroll = useCallback(() => {
     const itemList = itemListRef.current;
@@ -85,20 +124,25 @@ const navigate = useNavigate()
 
   useEffect(() => {
     if (page > 1) {
-      fetchQrCodes(page, debouncedSearchInput);
+      if (debouncedSearchInput) {
+        fetchQrCodes(page, debouncedSearchInput);
+      } else {
+        getQrCodesWithOutSearch(page);
+      }
     }
-  }, [page, debouncedSearchInput, fetchQrCodes]);
+  }, [page, debouncedSearchInput, fetchQrCodes, getQrCodesWithOutSearch]);
 
   const updateQrCodeStatus = (qr_planet_id, is_lost) => {
     setQrCodes((prevQrCodes) => prevQrCodes.map((qrCode) => (qrCode.qr_planet_id === qr_planet_id ? { ...qrCode, is_lost } : qrCode)));
   };
-const handleClick = () =>{
-  navigate('/qr-scanner')
-}
+
+  const handleClick = () => {
+    navigate("/qr-scanner");
+  };
+
   return (
     <div className="app">
       <div className={`qr-codes-container ${qrCodes.length === 0 ? "no-qr-codes" : ""}`} ref={itemListRef}>
-        {" "}
         {qrCodes?.length === 0 ? (
           <div style={{ marginTop: "30vh", marginLeft: "0px" }}>
             <img src={NoDataIcon} alt="no-data-found" className="no-data-image" />
@@ -111,7 +155,9 @@ const handleClick = () =>{
       {loading && <div>Loading more items...</div>}
       <div className="footer-buttons">
         <button className="shop-button">Shop Now</button>
-        <button className="activate-qr-button" onClick={handleClick}>Activate QR</button>
+        <button className="activate-qr-button" onClick={handleClick}>
+          Activate QR
+        </button>
       </div>
     </div>
   );

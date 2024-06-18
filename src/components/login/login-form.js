@@ -69,11 +69,11 @@ const LoginPage = () => {
 
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       // setMessage(response.data.resultMessage.en);
-
+      console.log(response.data.user._id);
       Cookies.set("accessToken", accessToken, { expires: accessTokenExpirationTime });
       Cookies.set("refreshToken", refreshToken, { expires: refreshTokenExpirationTime });
       setLoading(false);
-      navigate("/");
+      navigate("/", { state: { userId: response.data.user._id } });
     } catch (error) {
       // setMessage(error.response.data.resultMessage.en);
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });
@@ -91,7 +91,6 @@ const LoginPage = () => {
           <br />
           <div className="form-group-login email-group">
             <input
-              
               id="email"
               name="email"
               placeholder="Email"
