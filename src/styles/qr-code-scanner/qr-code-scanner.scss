@@ -1,46 +1,114 @@
-/* CSS for QR code scanner with four corners */
+/* QrCodeScanner.css */
+
+.form-container {
+  text-align: center;
+ max-width:350px;
+}
+
+.video-container {
+  width: 50vw;
+  height: 50vw;
+  max-width: 300px;
+  max-height: 300px;
+  // margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  color:#58d7b5;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 600px) {
+  .form-container{
+    max-width: 450px;
+  }
+  .video-container {
+    width: 70vw;
+    height: 70vw;
+  }
+}
+
 
 #reader {
-   position: relative;
-   width: 100%;
-   max-width: 400px;
-   margin: 0 auto;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.qr-corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 5px solid white;
+  box-sizing: border-box;
+  z-index: 10; /* Ensure corners are on top */
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.top-right {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+@media(max-width:600px){
+ .qr-scanner{
+   height: 100%;
+   max-width: inherit;
  }
- 
- .qr-corner {
-   position: absolute;
-   width: 30px;
-   height: 30px;
-   border: 5px solid white;
-   box-sizing: border-box;
-   z-index: 10; /* Ensure corners are on top */
- }
- 
- .top-left {
-   top: 0;
-   left: 0;
-   border-right: none;
-   border-bottom: none;
- }
- 
- .top-right {
-   top: 0;
-   right: 0;
-   border-left: none;
-   border-bottom: none;
- }
- 
- .bottom-left {
-   bottom: 0;
-   left: 0;
-   border-right: none;
-   border-top: none;
- }
- 
- .bottom-right {
-   bottom: 0;
-   right: 0;
-   border-left: none;
-   border-top: none;
- }
- 
+}
+
+.result-text{
+ margin-top: 1rem;
+}
+.button-row{
+ width: 100%;
+ display: flex;
+ justify-content: space-between;
+ margin-top: 2rem;
+}
+.cta-button {
+ padding: 10px 20px;
+ border-radius: 5px;
+ cursor: pointer;
+ font-weight: 500;
+ font-size: small;
+ text-decoration: none;
+ color:#fff;
+ width: 47%;
+ text-align: center;
+}
+.cancel-btn{
+ background-color: transparent;
+ border:1px solid #58d7b5;
+}
+.next-btn{
+ background-color: #58d7b5;
+}
