@@ -43,7 +43,6 @@ const QrCodes = ({ searchInput }) => {
         const response = await axios.get(`${url}/api/qrcode/${userId}?page=${page}&limit=${limit}`, {
           headers: {
             Authorization: `Bearer ${token}`,
-            "ngrok-skip-browser-warning": "69420",
           },
         });
 
@@ -74,7 +73,6 @@ const QrCodes = ({ searchInput }) => {
         const response = await axios.get(`${url}/api/qrcode/search?name=${searchQuery}&page=${page}&limit=${limit}`, {
           headers: {
             Authorization: `Bearer ${token}`,
-            "ngrok-skip-browser-warning": "69420",
           },
         });
 
@@ -85,7 +83,6 @@ const QrCodes = ({ searchInput }) => {
         if (page === 1) {
           setQrCodes(response.data.qrCodes);
         } else {
-          //setQrCodes((prevQrCodes) => [...prevQrCodes, ...response.data.qrCodes]);
           setQrCodes(response.data.qrCodes);
         }
         setLoading(false);
