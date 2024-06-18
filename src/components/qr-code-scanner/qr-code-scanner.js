@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 function QrCodeScanner() {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
-  const [userId, setUserId] = useState(null);
+  const [userData, setUserData] = useState(null);
 
   const videoRef = useRef(null);
   const codeReaderRef = useRef(null);
@@ -23,10 +23,9 @@ function QrCodeScanner() {
         const response = await axios.get(`${process.env.REACT_APP_PRODUCTION_URL}/api/qrcode/details/${code}`, {
           headers: {
             Authorization: `Bearer ${Cookies.get("accessToken")}`,
-            "ngrok-skip-browser-warning": "6024",
           },
         });
-        setUserId(response?.data?.qrCode.user_id);
+        setUserData(response?.data?.qrCode);
         //console.log(response.data.qrCode.user_id);
       } catch (err) {
         console.log(err);
@@ -72,7 +71,7 @@ function QrCodeScanner() {
   window.addEventListener("popstate", function (event) {
     window.location.reload();
   });
-
+  console.log(userData);
   return (
     <div className="qr-scanner form-container">
       <h1>QR Code Scanner</h1>
@@ -82,15 +81,19 @@ function QrCodeScanner() {
         </div>
       ) : (
         <>
-          {" "}
-          <p style={{ color: "#58d7b5" }} className="result-text">
-            {userId ? `${code} This QR code Already Registered` : code}
-          </p>
+          {userData?.user_id ? (
+            <p style={{ color: "#58d7b5" }} className="result-text">
+              This QR code Already Registered
+            </p>
+          ) : (
+            <img alt="qr-code" src={userData?.image_url} style={{ width: "160px", borderRadius: "80px" }} />
+          )}
+
           <div className="button-row">
             <button onClick={() => navigate("/")} className="cta-button cancel-btn">
               Cancel
             </button>
-            <button disabled={userId} onClick={handleNextClick} className={userId ? "cta-button next-btn disabled-btn" : "cta-button next-btn "}>
+            <button disabled={userData?.user_id} onClick={handleNextClick} className={userData?.user_id ? "cta-button next-btn disabled-btn" : "cta-button next-btn "}>
               Next
             </button>
           </div>
@@ -100,5 +103,5 @@ function QrCodeScanner() {
     </div>
   );
 }
-
+//
 export default QrCodeScanner;

@@ -18,7 +18,8 @@ const QrCodes = ({ searchInput }) => {
   const [isEmptyResult, setIsEmptyResult] = useState(false);
 
   const location = useLocation();
-  const userId = location.state?.userId;
+  const userId = location.state?.userId || Cookies.get("userId");
+
   const navigate = useNavigate();
   const token = Cookies.get("accessToken");
 
@@ -83,6 +84,7 @@ const QrCodes = ({ searchInput }) => {
         if (page === 1) {
           setQrCodes(response.data.qrCodes);
         } else {
+          //setQrCodes((prevQrCodes) => [...prevQrCodes, ...response.data.qrCodes]);
           setQrCodes(response.data.qrCodes);
         }
         setLoading(false);

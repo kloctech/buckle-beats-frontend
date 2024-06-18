@@ -68,11 +68,14 @@ const LoginPage = () => {
       const { accessToken, refreshToken } = response.data;
 
       toast.success(response.data.resultMessage.en, { duration: 5000 });
-      // setMessage(response.data.resultMessage.en);
+
       console.log(response.data.user._id);
       Cookies.set("accessToken", accessToken, { expires: accessTokenExpirationTime });
       Cookies.set("refreshToken", refreshToken, { expires: refreshTokenExpirationTime });
+      Cookies.set("userId", response.data.user._id, { expires: accessTokenExpirationTime });
+
       setLoading(false);
+
       navigate("/", { state: { userId: response.data.user._id } });
     } catch (error) {
       // setMessage(error.response.data.resultMessage.en);
@@ -81,7 +84,6 @@ const LoginPage = () => {
     }
   };
 
-  //className={`${classNames[currentImageIndex]}`}
   return (
     <div className="login-main-container">
       <div className="login-container">
