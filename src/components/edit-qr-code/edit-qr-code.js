@@ -16,7 +16,7 @@ const EditQRCode = () => {
   const location = useLocation();
   const { qrCodeData } = location.state || {};
   const navigate = useNavigate();
-  const categories =["Electonics","Pets","Fashion","Grocery"]
+  
   const url = process.env.REACT_APP_PRODUCTION_URL;
   const token = Cookies.get("accessToken");
 
@@ -201,9 +201,9 @@ const EditQRCode = () => {
 
           <div className="form-group-login select-group">
             <select {...register("category")}>
-            {categories?.map((category, index) => ( 
-            <option key={index} value={category}>{category}</option>
-          ))}
+              <option value="" disabled>Category</option>
+              <option value="A">Category A</option>
+              <option value="B">Category B</option>
             </select>
           </div>
 
@@ -230,8 +230,8 @@ const EditQRCode = () => {
               type="submit" 
               className="cta-button edit-btn"
               style={{
-                backgroundColor: isEdited ? "" : "#5aa895",
-                cursor: isEdited ? "pointer" : "default"
+                backgroundColor: isEdited ? "#058D78" : "#5aa895",
+                cursor: isEdited ? "pointer" : "not-allowed"
               }}
               disabled={!isEdited}
             >
