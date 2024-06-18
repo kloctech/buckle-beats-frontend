@@ -1,7 +1,6 @@
 import React from "react";
 import Modal from '@mui/material/Modal';
 import Backdrop from '@mui/material/Backdrop';
-import Backdrop from '@mui/material/Backdrop';
 
 const EnableQRCode = ({ onConfirm, closeModal, openModal, heading, text, id, handleClose, buttonText, qr_planet_id, is_lost }) => {
   

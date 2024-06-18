@@ -141,7 +141,7 @@ const EditQRCode = () => {
               onClick={handleClick} 
             />
             <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
-              <h1 style={{ marginRight: 0 }}>Edit QR Details</h1>
+              <h1 style={{ margin: 0 }}>Edit QR Details</h1>
             </div>
           </div>
 
