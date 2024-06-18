@@ -137,11 +137,11 @@ const EditQRCode = () => {
         <form onSubmit={handleSubmit(onSubmitAddQRForm)} className="login-form">
           <div className="header-container">
             <BiArrowBack 
-              style={{ color: "#ffffff", fontSize: '20px', cursor: 'pointer' }} 
+              style={{ color: "#ffffff", fontSize: '20px', cursor: 'pointer',marginBottom: '10px' }} 
               onClick={handleClick} 
             />
             <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
-              <h1 style={{ margin: 0 }}>Edit QR Details</h1>
+              <h1 style={{ marginBottom: 10 }}>Edit QR Details</h1>
             </div>
           </div>
 
