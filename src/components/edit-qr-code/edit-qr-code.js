@@ -19,7 +19,7 @@ const EditQRCode = () => {
   
   const url = process.env.REACT_APP_PRODUCTION_URL;
   const token = Cookies.get("accessToken");
-
+  const categories  = ["Category","Electronics","Fashion","Pets","Grocery"]
   const extractCountryCodeAndNumber = (mobileNumber) => {
     const match = mobileNumber.match(/^(\+\d{1,4})\s*(\d{10})$/);
     if (match) {
@@ -55,12 +55,12 @@ const EditQRCode = () => {
     setValue("countryCode", countryCode);
     setValue("mobile_number", mobileNumber);
     setInitialValues({
-      name: qrCodeData.name,
-      email: qrCodeData.email,
+      name: qrCodeData?.name,
+      email: qrCodeData?.email,
       mobile_number: mobileNumber,
       countryCode: countryCode,
-      category: qrCodeData.category,
-      default_message: qrCodeData.default_message,
+      category: qrCodeData?.category,
+      default_message: qrCodeData?.default_message,
     });
   }, [countryCode, mobileNumber, setValue, qrCodeData]);
 
@@ -73,11 +73,11 @@ const EditQRCode = () => {
   const onSubmitAddQRForm = async (data) => {
     const mobile_number = `${data.countryCode} ${data.mobile_number}`;
     const payload = {
-      name: data.name,
-      email: data.email,
+      name: data?.name,
+      email: data?.email,
       mobile_number: mobile_number,
-      category: data.category,
-      default_message: data.default_message || qrCodeData?.default_message,
+      category: data?.category,
+      default_message: data?.default_message || qrCodeData?.default_message,
     };
     try {
       const response = await axios.put(`${url}/api/qrcode/${qrCodeData?.qr_planet_id}`, payload, {
@@ -86,10 +86,10 @@ const EditQRCode = () => {
           'Content-Type': 'application/json',
         },
       });
-      toast.success(response.data.resultMessage.en, { duration: 5000 });
+      toast.success(response?.data?.resultMessage.en, { duration: 5000 });
       navigate('/');
     } catch (error) {
-      toast.error(error.response.data.resultMessage.en);
+      toast.error(error?.response?.data?.resultMessage?.en);
     }
   };
 
