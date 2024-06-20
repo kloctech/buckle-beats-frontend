@@ -6,7 +6,8 @@ import WithLogoutButton from "../components/withLogout/withLogout";
 import ForgotPassword from "../components/forgot-password/forgot-password";
 import Hamburger from "../components/hamburger-searchbar/hamburger-searchbar";
 import EditQRCode from "../components/edit-qr-code/edit-qr-code";
-import AddQRCode from '../components/add-qr-code/add-qr-code'
+import AddQRCode from "../components/add-qr-code/add-qr-code";
+import QrCodeScanner from "../components/qr-code-scanner/qr-code-scanner";
 
 const routes = (
   <>
@@ -16,6 +17,7 @@ const routes = (
       <Route path="/forgot-password-link" element={<ForgotPassword />} />
       <Route path="/add-qr-code/:id" element={<AddQRCode />} />
       <Route path="/edit-qr-code/:id" element={<EditQRCode />} />
+      <Route path="/qr-scanner" element={<QrCodeScanner />} />
     </Route>
   </>
 );

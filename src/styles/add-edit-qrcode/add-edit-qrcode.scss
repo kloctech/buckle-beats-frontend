@@ -8,9 +8,9 @@
 
   &-box {
     background-color: #fff;
-    color: #183e51;
+    color: $background-color;
     padding: 1rem 1rem;
-    border: 1px solid #58d7b5;
+    border: 1px solid $primary-color;
     border-radius: 4px;
     margin-bottom: 1rem;
     width: calc(100% - 5px);
@@ -63,7 +63,7 @@
     background-color: #fff;
     color: #183e51;
     padding: 1.5rem 1rem;
-    border: 1px solid #58d7b5;
+    border: 1px solid $primary-color;
     border-radius: 4px;
     margin-bottom: 2rem;
     width: calc(100% - 5px);
@@ -106,7 +106,7 @@
   top: 6px;
   right: 9px;
   svg {
-    fill: #58d7b5;
+    fill: $primary-color;
     width: 21px;
   }
 }
@@ -128,10 +128,10 @@
 }
 .delete-btn {
   background-color: transparent;
-  border: 1px solid #58d7b5;
+  border: 1px solid $primary-color;
 }
 .edit-btn {
-  background-color: #58d7b5;
+  background-color: $primary-color;
 }
 .save-btn {
   padding: 10px 20px;
@@ -146,7 +146,7 @@
 }
 .cancel-button {
   background-color: transparent;
-  border: 1px solid #58d7b5;
+  border: 1px solid $primary-color;
 }
 .button-container {
   display: flex;
@@ -162,9 +162,9 @@
   // margin-bottom: 20px;
 
   @media (max-width: 768px) {
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    padding: 10px; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
   }
 }
