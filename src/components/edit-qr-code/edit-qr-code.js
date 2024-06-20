@@ -71,11 +71,11 @@ const EditQRCode = () => {
   const onSubmitAddQRForm = async (data) => {
     const mobile_number = `${data.countryCode} ${data.mobile_number}`;
     const payload = {
-      name: data.name,
-      email: data.email,
+      name: data?.name,
+      email: data?.email,
       mobile_number: mobile_number,
-      category: data.category,
-      default_message: data.default_message || qrCodeData?.default_message,
+      category: data?.category,
+      default_message: data?.default_message || qrCodeData?.default_message,
     };
     try {
       const response = await axios.put(`${url}/api/qrcode/${qrCodeData?.qr_planet_id}`, payload, {
@@ -84,10 +84,10 @@ const EditQRCode = () => {
           "Content-Type": "application/json",
         },
       });
-      toast.success(response.data.resultMessage.en, { duration: 5000 });
-      navigate("/");
+      toast.success(response?.data?.resultMessage?.en, { duration: 5000 });
+      navigate('/');
     } catch (error) {
-      toast.error(error.response.data.resultMessage.en);
+      toast.error(error?.response?.data?.resultMessage?.en);
     }
   };
 

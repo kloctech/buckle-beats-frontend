@@ -1,3 +1,4 @@
+
 @import "../../styles/variables/variable.scss";
 
 .header-flex-container {
@@ -19,7 +20,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    // width: 93%;
     margin: auto;
 
     .hamburger {
@@ -82,34 +82,8 @@
       }
     }
   }
-
-  // .menu {
-  //   background-color: $background-color;
-  //   border: 1px solid $border-color;
-  //   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  //   position: absolute;
-  //   top: 60px;
-  //   left: 0;
-  //   right: 0;
-  //   z-index: 1000;
-  //   width: 280px;
-
-  //   .menu-item {
-  //     cursor: pointer;
-  //   }
-
-  //   p {
-  //     color: $primary-color;
-  //     padding: 10px;
-  //     margin: 0;
-  //     border-bottom: 1px solid $border-color;
-
-  //     &:last-child {
-  //       border-bottom: none;
-  //     }
-  //   }
-  // }
 }
+
 .menu {
   &-wrapper {
     background: #183e51;
@@ -156,21 +130,30 @@
       position: absolute;
       top: 0;
       left: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
       padding: 4rem 2rem 2rem;
       width: 100%;
       opacity: 0;
+      transition: opacity 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
       &.is-visible {
         opacity: 1;
-        transition: opacity 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
         overflow-y: auto;
         overflow-x: hidden;
+      }
+      hr{   // updated
+        width: 100%;
+        color:#0dc392;
+        // border: px solid;
       }
     }
   }
   &-text,
   &-logout {
     color: #fff;
-    padding-bottom: 1rem;
+    // padding-bottom: 1rem;
     font-size: 17px;
   }
   &-logout {
@@ -206,6 +189,8 @@
     cursor: pointer;
     span {
       padding-right: 1rem;
+      position: absolute; //updted
+      right: 37px; //updated
       img {
         width: 14px;
         filter: brightness(0) invert(1);

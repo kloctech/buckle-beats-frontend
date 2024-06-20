@@ -92,7 +92,7 @@ const SetPassword = () => {
             </button>
             {errors.password && <span className="error">{errors.password.message}</span>}
           </div>
-          <div className={`password-container form-group ${errors.password ? "with-error" : ""}`}>
+          <div className={`password-container form-group ${errors.password && errors?.password?.message !=="Password is required" ? "with-error" : ""}`}>
             <input
               className="input-box"
               type={confirmPasswordVisible ? "text" : "password"}

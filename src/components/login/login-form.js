@@ -79,10 +79,11 @@ const LoginPage = () => {
       Cookies.set("accessToken", accessToken, { expires: accessTokenExpirationTime });
       Cookies.set("refreshToken", refreshToken, { expires: refreshTokenExpirationTime });
       Cookies.set("userId", response.data.user._id, { expires: accessTokenExpirationTime });
-
+      Cookies.set("userName",response?.data?.user?.name)
+      Cookies.set("userEmail",response?.data?.user?.email)
       setLoading(false);
 
-      navigate("/", { state: { userId: response.data.user._id } });
+      navigate("/manage-profile", { state: { userId: response.data.user._id} });
     } catch (error) {
       // setMessage(error.response.data.resultMessage.en);
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });

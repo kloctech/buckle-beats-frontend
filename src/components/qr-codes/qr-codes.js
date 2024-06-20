@@ -19,6 +19,7 @@ const QrCodes = ({ searchInput }) => {
 
   const location = useLocation();
   const userId = location.state?.userId || Cookies.get("userId");
+  
 
   const loadMoreButtonRef = useRef(null);
 
@@ -46,6 +47,7 @@ const QrCodes = ({ searchInput }) => {
         const response = await axios.get(`${url}/api/qrcode/${userId}?page=${page}&limit=${limit}`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            "ngrok-skip-browser-warning": "6024",
           },
         });
 
@@ -76,6 +78,7 @@ const QrCodes = ({ searchInput }) => {
         const response = await axios.get(`${url}/api/qrcode/search?name=${searchQuery}&page=${page}&limit=${limit}`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            "ngrok-skip-browser-warning": "6024",
           },
         });
 
