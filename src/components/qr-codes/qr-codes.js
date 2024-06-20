@@ -53,7 +53,6 @@ const QrCodes = ({ searchInput }) => {
         if (response.data.qrCodes.length === 0) {
           setIsEmptyResult(true);
         }
-        if (response.data.qrCodes.length < limit) setIsEmptyResult(true);
 
         if (page === 1) {
           setQrCodes(response.data.qrCodes);
