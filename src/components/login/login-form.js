@@ -69,14 +69,15 @@ const LoginPage = () => {
 
       toast.success(response.data.resultMessage.en, { duration: 5000 });
 
-      console.log(response.data.user._id);
+      console.log(response?.data.user?.email);
       Cookies.set("accessToken", accessToken, { expires: accessTokenExpirationTime });
       Cookies.set("refreshToken", refreshToken, { expires: refreshTokenExpirationTime });
       Cookies.set("userId", response.data.user._id, { expires: accessTokenExpirationTime });
-
+      Cookies.set("userName",response?.data.user?.name)
+      Cookies.set("userEmail",response?.data.user?.email)
       setLoading(false);
 
-      navigate("/", { state: { userId: response.data.user._id } });
+      navigate("/", { state: { userId: response.data.user._id,email:response?.data.user?.email,name:response?.data.user?.name} });
     } catch (error) {
       // setMessage(error.response.data.resultMessage.en);
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });

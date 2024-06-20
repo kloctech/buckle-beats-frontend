@@ -36,7 +36,10 @@
   justify-content: center;
   margin-bottom: 100px;
   height: 100vh;
+  
 }
+
+
 .qr-codes-container::-webkit-scrollbar {
   display: none;
 }
@@ -85,17 +88,16 @@
   display: flex;
   justify-content: space-evenly;
   padding: 10px 0;
-  background-color: $primary-color;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  position: fixed;
+  background-color: rgba(255,200,87,0.94);
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  position: absolute;
   max-width: 100%;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 30;
   opacity: 0.95;
-  
 @media screen and (min-width: 440px){ 
   position: absolute;
 }

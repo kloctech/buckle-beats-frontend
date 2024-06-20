@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "../../styles/manage-profile/manage-profile.scss";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -29,32 +29,37 @@ const ManageProfile = () => {
         toast.error("Failed to logout");
       }
     } catch (error) {
-      console.error("Error during logout:", error);
     }
   };
 
-  const getProfiles = async () => {
+  const getProfiles = useCallback(async () => {
     try {
       const response = await axios.get(`${url}/api/user/profiles`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
+          "ngrok-skip-browser-warning": "6024",
         },
       });
       setProfiles(response?.data?.profiles);
     } catch (error) {
-      console.error("Error fetching profiles:", error);
       toast.error("Failed to fetch profiles");
     }
-  };
+  }, [accessToken, url]);
 
   useEffect(() => {
     getProfiles();
-  }, []);
+  }, [getProfiles]);
 
-  const handleClick = (id) => {
-    console.log(id);
+  const accessTokenExpirationTime = 1;
+
+  const handleClick = (userId) => {
+    Cookies.set("userId", userId, { expires: accessTokenExpirationTime });
     navigate('/');
   };
+  
+  const handleInviteLink = () =>{
+    navigate('/send-invite')
+  }
 
   return (
     <div className="login-container">
@@ -70,7 +75,7 @@ const ManageProfile = () => {
               <h4>{item.name}</h4>
             </li>
           ))}
-          <li className="invite">
+          <li className="invite" onClick={handleInviteLink}>
             <div className="manage-profile-bg">
               <span>Invite</span>
             </div>
