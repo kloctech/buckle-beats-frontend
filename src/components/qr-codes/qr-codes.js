@@ -37,8 +37,6 @@ const QrCodes = ({ searchInput }) => {
     };
   }, [searchInput]);
 
-  const notMatchedItems = (newCodes) => {};
-
   const getQrCodesWithOutSearch = useCallback(
     async (page = 1) => {
       const url = process.env.REACT_APP_PRODUCTION_URL;
@@ -56,11 +54,6 @@ const QrCodes = ({ searchInput }) => {
           setIsEmptyResult(true);
         }
         if (response.data.qrCodes.length < limit) setIsEmptyResult(true);
-        console.log(qrCodes);
-        const existingIds = new Set(qrCodes.map((existingCode) => existingCode._id));
-
-        const unMatched = response.data.qrCodes.filter((newCode) => !existingIds.has(newCode._id));
-        console.log(unMatched);
 
         if (page === 1) {
           setQrCodes(response.data.qrCodes);

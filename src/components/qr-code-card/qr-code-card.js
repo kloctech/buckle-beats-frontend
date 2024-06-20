@@ -39,8 +39,7 @@ const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, up
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       handleClose();
       updateQrCodeStatus(qr_planet_id, !qrCodeData.is_lost); // Update the specific QR code status
-      // getQrCodesWithOutSearch(page, searchQuery); // Refresh the QR codes list with the correct parameters
-      window.location.reload();
+      getQrCodesWithOutSearch(page, searchQuery); // Refresh the QR codes list with the correct parameters
     } catch (error) {
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });
     }
