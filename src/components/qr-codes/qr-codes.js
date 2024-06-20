@@ -37,6 +37,8 @@ const QrCodes = ({ searchInput }) => {
     };
   }, [searchInput]);
 
+  const notMatchedItems = (newCodes) => {};
+
   const getQrCodesWithOutSearch = useCallback(
     async (page = 1) => {
       const url = process.env.REACT_APP_PRODUCTION_URL;
@@ -54,6 +56,12 @@ const QrCodes = ({ searchInput }) => {
           setIsEmptyResult(true);
         }
         if (response.data.qrCodes.length < limit) setIsEmptyResult(true);
+        console.log(qrCodes);
+        const existingIds = new Set(qrCodes.map((existingCode) => existingCode._id));
+
+        const unMatched = response.data.qrCodes.filter((newCode) => !existingIds.has(newCode._id));
+        console.log(unMatched);
+
         if (page === 1) {
           setQrCodes(response.data.qrCodes);
         } else {
@@ -143,26 +151,6 @@ const QrCodes = ({ searchInput }) => {
     navigate("/qr-scanner");
   };
 
-  // const OnClickLoadMore = () => {
-  //   const loadMoreButton = document.getElementsByClassName("load-more")[0];
-
-  //   if (loadMoreButton) {
-  //     loadMoreButton.addEventListener("click", () => {
-  //       console.log("scroll");
-  //       window.scrollTo({
-  //         top: document.documentElement.scrollHeight,
-  //         behavior: "smooth",
-  //       });
-  //     });
-  //   }
-
-  //   loadMoreButton.addEventListener("click", function () {
-  //     contentElement.scroll({
-  //       top: contentElement.scrollHeight,
-  //       behavior: "smooth",
-  //     });
-  //   });
-  // };
   const OnClickLoadMore = () => {
     const contentElement = itemListRef.current;
 
@@ -186,8 +174,7 @@ const QrCodes = ({ searchInput }) => {
           qrCodes.map((item) => <QrCodeCard key={item._id} qrCodeData={item} getQrCodesWithOutSearch={getQrCodesWithOutSearch} page={page} searchQuery={debouncedSearchInput} updateQrCodeStatus={updateQrCodeStatus} />)
         )}
       </div>
-      <br />
-      <br />
+
       {qrCodes.length >= limit && !isEmptyResult && (
         <p ref={loadMoreButtonRef} onClick={OnClickLoadMore} className="load-more">
           load more
