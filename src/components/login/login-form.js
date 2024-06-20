@@ -49,6 +49,13 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
+    const accessToken = Cookies.get("accessToken");
+    if (accessToken) {
+      navigate("/");
+    }
+  }, [navigate]);
+
+  useEffect(() => {
     const imageInterval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 4000);
@@ -69,7 +76,6 @@ const LoginPage = () => {
 
       toast.success(response.data.resultMessage.en, { duration: 5000 });
 
-      console.log(response.data.user._id);
       Cookies.set("accessToken", accessToken, { expires: accessTokenExpirationTime });
       Cookies.set("refreshToken", refreshToken, { expires: refreshTokenExpirationTime });
       Cookies.set("userId", response.data.user._id, { expires: accessTokenExpirationTime });
@@ -145,6 +151,5 @@ const LoginPage = () => {
     </div>
   );
 };
-//images[currentImageIndex]
-//className={`${getImageClassName()}`}
+
 export default LoginPage;

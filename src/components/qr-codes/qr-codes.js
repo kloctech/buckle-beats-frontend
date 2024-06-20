@@ -20,6 +20,8 @@ const QrCodes = ({ searchInput }) => {
   const location = useLocation();
   const userId = location.state?.userId || Cookies.get("userId");
 
+  const loadMoreButtonRef = useRef(null);
+
   const navigate = useNavigate();
   const token = Cookies.get("accessToken");
 
@@ -44,13 +46,14 @@ const QrCodes = ({ searchInput }) => {
         const response = await axios.get(`${url}/api/qrcode/${userId}?page=${page}&limit=${limit}`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            "ngrok-skip-browser-warning": "6024",
           },
         });
 
         if (response.data.qrCodes.length === 0) {
           setIsEmptyResult(true);
         }
-
+        if (response.data.qrCodes.length < limit) setIsEmptyResult(true);
         if (page === 1) {
           setQrCodes(response.data.qrCodes);
         } else {
@@ -74,6 +77,7 @@ const QrCodes = ({ searchInput }) => {
         const response = await axios.get(`${url}/api/qrcode/search?name=${searchQuery}&page=${page}&limit=${limit}`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            "ngrok-skip-browser-warning": "6024",
           },
         });
 
@@ -139,6 +143,37 @@ const QrCodes = ({ searchInput }) => {
     navigate("/qr-scanner");
   };
 
+  // const OnClickLoadMore = () => {
+  //   const loadMoreButton = document.getElementsByClassName("load-more")[0];
+
+  //   if (loadMoreButton) {
+  //     loadMoreButton.addEventListener("click", () => {
+  //       console.log("scroll");
+  //       window.scrollTo({
+  //         top: document.documentElement.scrollHeight,
+  //         behavior: "smooth",
+  //       });
+  //     });
+  //   }
+
+  //   loadMoreButton.addEventListener("click", function () {
+  //     contentElement.scroll({
+  //       top: contentElement.scrollHeight,
+  //       behavior: "smooth",
+  //     });
+  //   });
+  // };
+  const OnClickLoadMore = () => {
+    const contentElement = itemListRef.current;
+
+    if (contentElement) {
+      contentElement.scroll({
+        top: contentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div className="app">
       <div className={`qr-codes-container ${qrCodes.length === 0 ? "no-qr-codes" : ""}`} ref={itemListRef}>
@@ -151,6 +186,13 @@ const QrCodes = ({ searchInput }) => {
           qrCodes.map((item) => <QrCodeCard key={item._id} qrCodeData={item} getQrCodesWithOutSearch={getQrCodesWithOutSearch} page={page} searchQuery={debouncedSearchInput} updateQrCodeStatus={updateQrCodeStatus} />)
         )}
       </div>
+      <br />
+      <br />
+      {qrCodes.length >= limit && !isEmptyResult && (
+        <p ref={loadMoreButtonRef} onClick={OnClickLoadMore} className="load-more">
+          load more
+        </p>
+      )}
       {loading && <div>Loading more items...</div>}
       <div className="footer-buttons">
         <button className="shop-button">Shop Now</button>

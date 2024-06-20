@@ -31,6 +31,7 @@ const Hamburger = () => {
   const handleBackClick = () => {
     setSubmenuOpen(false);
   };
+
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
@@ -38,8 +39,13 @@ const Hamburger = () => {
       document.body.style.overflow = "auto";
     }
   }, [menuOpen]);
+
   const onClickLogout = async () => {
     const accessToken = Cookies.get("accessToken");
+    const allCookies = Cookies.get();
+    for (let cookie in allCookies) {
+      Cookies.remove(cookie);
+    }
     try {
       const response = await fetch(`${process.env.REACT_APP_PRODUCTION_URL}/api/user/logout`, {
         method: "POST",
@@ -57,8 +63,11 @@ const Hamburger = () => {
       } else {
         toast.error("Failed to logout");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   const handleMenuItemClick = (menuItem) => {
     setSelectedMenuItem(menuItem);
     setMenuOpen(false);
@@ -76,9 +85,11 @@ const Hamburger = () => {
         return null;
     }
   };
+
   const handleInputChange = (e) => {
     setSearchInput(e.target.value);
   };
+
   return (
     <div className="header-flex-container">
       <div className="main-qrcode-container">

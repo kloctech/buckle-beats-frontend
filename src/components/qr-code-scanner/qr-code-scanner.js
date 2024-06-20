@@ -26,7 +26,6 @@ function QrCodeScanner() {
           },
         });
         setUserData(response?.data?.qrCode);
-        //console.log(response.data.qrCode.user_id);
       } catch (err) {
         console.log(err);
       }
@@ -40,7 +39,12 @@ function QrCodeScanner() {
             setCode(code);
             setError("");
             codeReader.reset();
-            verifyQrCode(code);
+
+            if (code.length === 6 && result.getText().includes("https://bucklebeats.qrplanet.com")) {
+              verifyQrCode(code);
+            } else {
+              setError("Invalid QR code");
+            }
           }
           if (err && !(err instanceof NotFoundException)) {
             console.error("QR Scan Error:", err);
@@ -71,7 +75,7 @@ function QrCodeScanner() {
   window.addEventListener("popstate", function (event) {
     window.location.reload();
   });
-  console.log(userData);
+
   return (
     <div className="qr-scanner form-container">
       <h1>QR Code Scanner</h1>
@@ -81,27 +85,30 @@ function QrCodeScanner() {
         </div>
       ) : (
         <>
-          {userData?.user_id ? (
-            <p style={{ color: "#58d7b5" }} className="result-text">
-              This QR code Already Registered
-            </p>
+          {userData ? (
+            userData?.user_id ? (
+              <p style={{ color: "#58d7b5" }} className="result-text">
+                This QR code Already Registered
+              </p>
+            ) : (
+              <img alt="qr-code" src={userData?.image_url} style={{ width: "160px", borderRadius: "80px" }} />
+            )
           ) : (
-            <img alt="qr-code" src={userData?.image_url} style={{ width: "160px", borderRadius: "80px" }} />
+            <p style={{ color: "red" }}>{error}</p>
           )}
 
           <div className="button-row">
             <button onClick={() => navigate("/")} className="cta-button cancel-btn">
               Cancel
             </button>
-            <button disabled={userData?.user_id} onClick={handleNextClick} className={userData?.user_id ? "cta-button next-btn disabled-btn" : "cta-button next-btn "}>
+            <button disabled={userData?.user_id || error !== ""} onClick={handleNextClick} className={userData?.user_id || error !== "" ? "cta-button next-btn disabled-btn" : "cta-button next-btn "}>
               Next
             </button>
           </div>
         </>
       )}
-      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 }
-//
+
 export default QrCodeScanner;
