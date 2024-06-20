@@ -49,7 +49,6 @@ const Hamburger = () => {
     setSubmenuOpen(true);
   };
 
-
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
