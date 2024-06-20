@@ -27,7 +27,7 @@ const SurveyForm = () => {
             <div className="form-group-login textarea-group">
             <p>Where did you buy BuckleBeats from?</p>
             <textarea
-              rows="3"
+              rows="4"
               className="survey-form-text"
               name="default_message"
               placeholder="Leave a note here"
