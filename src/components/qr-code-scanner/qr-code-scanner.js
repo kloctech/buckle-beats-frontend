@@ -1,26 +1,59 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
-import '../../styles/qr-code-scanner/qr-code-scanner.scss'
+import React, { useState, useRef, useEffect } from "react";
+import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
+import "../../styles/qr-code-scanner/qr-code-scanner.scss";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie";
+
 function QrCodeScanner() {
-  const [result, setResult] = useState('');
-  const [error, setError] = useState('');
+  const [code, setCode] = useState("");
+  const [error, setError] = useState("");
+  const [userData, setUserData] = useState(null);
+
   const videoRef = useRef(null);
-  const codeReaderRef = useRef(null); // Use ref to store the code reader instance
+  const codeReaderRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const codeReader = new BrowserMultiFormatReader();
     codeReaderRef.current = codeReader;
 
-    codeReader.decodeFromVideoDevice(undefined, videoRef.current, (result, err) => {
-      if (result) {
-        setResult(result.getText());
-        setError('');
+    const verifyQrCode = async (code) => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_PRODUCTION_URL}/api/qrcode/details/${code}`, {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("accessToken")}`,
+          },
+        });
+        setUserData(response?.data?.qrCode);
+        //console.log(response.data.qrCode.user_id);
+      } catch (err) {
+        console.log(err);
       }
-      if (err && !(err instanceof NotFoundException)) {
-        console.error('QR Scan Error:', err);
-        setError('Error accessing camera or scanning QR code.');
+    };
+
+    const startDecoding = async () => {
+      try {
+        await codeReader.decodeFromVideoDevice(undefined, videoRef.current, (result, err) => {
+          if (result) {
+            const code = result.getText().split("/").pop();
+            setCode(code);
+            setError("");
+            codeReader.reset();
+            verifyQrCode(code);
+          }
+          if (err && !(err instanceof NotFoundException)) {
+            console.error("QR Scan Error:", err);
+            setError("Error accessing camera or scanning QR code.");
+          }
+        });
+      } catch (error) {
+        console.error("Camera initialization error:", error);
+        setError("Error initializing camera.");
       }
-    });
+    };
+
+    startDecoding();
 
     return () => {
       if (codeReaderRef.current) {
@@ -29,25 +62,46 @@ function QrCodeScanner() {
     };
   }, []);
 
-  useEffect(() => {
-    if (result && codeReaderRef.current) {
-      codeReaderRef.current.reset(); // Stop the video stream
+  const handleNextClick = () => {
+    if (code) {
+      navigate(`/add-qr-code/${code}`);
     }
-  }, [result]);
+  };
 
+  window.addEventListener("popstate", function (event) {
+    window.location.reload();
+  });
+  console.log(userData);
   return (
-    <div className="form-container">
+    <div className="qr-scanner form-container">
       <h1>QR Code Scanner</h1>
-      {!result ? (
+      {!code ? (
         <div className="video-container">
           <video ref={videoRef} autoPlay />
         </div>
       ) : (
-        <p style={{color:'#58d7b5'}}><a href={result}  style={{color:'#58d7b5'}}>{result}</a></p>
+        <>
+          {userData?.user_id ? (
+            <p style={{ color: "#58d7b5" }} className="result-text">
+              This QR code Already Registered
+            </p>
+          ) : (
+            <img alt="qr-code" src={userData?.image_url} style={{ width: "160px", borderRadius: "80px" }} />
+          )}
+
+          <div className="button-row">
+            <button onClick={() => navigate("/")} className="cta-button cancel-btn">
+              Cancel
+            </button>
+            <button disabled={userData?.user_id} onClick={handleNextClick} className={userData?.user_id ? "cta-button next-btn disabled-btn" : "cta-button next-btn "}>
+              Next
+            </button>
+          </div>
+        </>
       )}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 }
-
+//
 export default QrCodeScanner;

@@ -45,7 +45,7 @@
   background-color: #edeff3;
   border-radius: 5px;
   width: 140px;
-
+ position: relative;
   border: 1px solid#58D7B5;
 }
 
@@ -85,28 +85,33 @@
   display: flex;
   justify-content: space-evenly;
   padding: 10px 0;
-  background-color: rgba(255,200,87,0.94);
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
-  position: absolute;
+  background-color: $primary-color;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  position: fixed;
   max-width: 100%;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 30;
   opacity: 0.95;
+  
+@media screen and (min-width: 440px){ 
+  position: absolute;
+}
 }
 
 .shop-button {
   background: none;
   border: none;
-  color: #2d2f36;
-  padding: 10px 20px;
+  color:#222831;
   border-radius: 5px;
-  cursor: pointer;
+  width: 100px;
+  height: 30px;
   font-weight: 500;
   font-size: small;
-  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 5px;
 }
 .activate-qr-button {
   background-color: #222831;
@@ -121,9 +126,10 @@
   margin-top: 5px;
 }
 
-.activate-qr-button:hover {
-  background-color: #00a392;
-}
+
+// .activate-qr-button:hover {
+//   background-color: #00a392;
+// }
 .toggle-container {
   width: 30px;
   height: 13px;
