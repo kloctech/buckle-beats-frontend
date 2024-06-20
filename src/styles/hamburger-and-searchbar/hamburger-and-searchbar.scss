@@ -223,8 +223,13 @@
     width: 85%;
   }
 }
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 380px) {
   .mobile-header {
-    width: 89%;
+    width: 92%;
+  }
+}
+@media screen and (max-width: 340px) {
+  .mobile-header {
+    width: 100%;
   }
 }

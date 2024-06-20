@@ -49,6 +49,13 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
+    const accessToken = Cookies.get("accessToken");
+    if (accessToken) {
+      navigate("/");
+    }
+  }, [navigate]);
+
+  useEffect(() => {
     const imageInterval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 4000);
@@ -146,6 +153,5 @@ const LoginPage = () => {
     </div>
   );
 };
-//images[currentImageIndex]
-//className={`${getImageClassName()}`}
+
 export default LoginPage;

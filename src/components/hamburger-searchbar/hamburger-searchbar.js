@@ -49,6 +49,7 @@ const Hamburger = () => {
     setSubmenuOpen(true);
   };
 
+
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
@@ -59,6 +60,10 @@ const Hamburger = () => {
 
   const onClickLogout = async () => {
     const accessToken = Cookies.get("accessToken");
+    const allCookies = Cookies.get();
+    for (let cookie in allCookies) {
+      Cookies.remove(cookie);
+    }
     try {
       const response = await fetch(`${process.env.REACT_APP_PRODUCTION_URL}/api/user/logout`, {
         method: "POST",
@@ -75,7 +80,9 @@ const Hamburger = () => {
       } else {
         toast.error("Failed to logout");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleMenuItemClick = (menuItem) => {

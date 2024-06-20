@@ -21,6 +21,8 @@ const QrCodes = ({ searchInput }) => {
   const userId = location.state?.userId || Cookies.get("userId");
   
 
+  const loadMoreButtonRef = useRef(null);
+
   const navigate = useNavigate();
   const token = Cookies.get("accessToken");
 
@@ -87,7 +89,6 @@ const QrCodes = ({ searchInput }) => {
         if (page === 1) {
           setQrCodes(response.data.qrCodes);
         } else {
-          //setQrCodes((prevQrCodes) => [...prevQrCodes, ...response.data.qrCodes]);
           setQrCodes(response.data.qrCodes);
         }
         setLoading(false);
@@ -142,6 +143,17 @@ const QrCodes = ({ searchInput }) => {
     navigate("/qr-scanner");
   };
 
+  const OnClickLoadMore = () => {
+    const contentElement = itemListRef.current;
+
+    if (contentElement) {
+      contentElement.scroll({
+        top: contentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div className="app">
       <div className={`qr-codes-container ${qrCodes.length === 0 ? "no-qr-codes" : ""}`} ref={itemListRef}>
@@ -154,6 +166,12 @@ const QrCodes = ({ searchInput }) => {
           qrCodes.map((item) => <QrCodeCard key={item._id} qrCodeData={item} getQrCodesWithOutSearch={getQrCodesWithOutSearch} page={page} searchQuery={debouncedSearchInput} updateQrCodeStatus={updateQrCodeStatus} />)
         )}
       </div>
+
+      {qrCodes.length >= limit && !isEmptyResult && (
+        <p ref={loadMoreButtonRef} onClick={OnClickLoadMore} className="load-more">
+          load more
+        </p>
+      )}
       {loading && <div>Loading more items...</div>}
       <div className="footer-buttons">
         <button className="shop-button">Shop Now</button>
