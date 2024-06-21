@@ -9,7 +9,7 @@ import Logo from "../../assets/logo.png";
 import RightArrow from "../../assets/right-arrow.png";
 import { useNavigate } from "react-router-dom";
 import UpdatePassword from "../update-password/update-password ";
-
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -43,7 +43,11 @@ const Hamburger = () => {
     setPasswordSubmenuOpen(false);
     setSubmenuOpen(true);
   };
-
+  const handleBackFromSubmenu = () => {
+    setMenuOpen(true);
+    setPasswordSubmenuOpen(false);
+    setSubmenuOpen(false);
+  };
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
@@ -132,27 +136,25 @@ const Hamburger = () => {
 
         <div className={menuOpen ? "active menu-wrapper" : "inactive menu-wrapper"}>
           <div className="menu-container">
-            {!passwordSubmenuOpen && (
               <div className="close-menu" onClick={handleClosemenu}>
                 X
               </div>
-            )}
-            {passwordSubmenuOpen ? (
-              <div className={`submenu-password ${passwordSubmenuOpen ? "is-visible" : ""}`}>
-                <div className="menu-back" onClick={handleBackFromPassword}>
-                  Back
-                </div>
-                <UpdatePassword passwordSubmenuOpen={passwordSubmenuOpen} />
-              </div>
-            ) : (
-              <>
                 {submenuOpen ? (
-                  <h1 className="menu-wrapper-image" style={{ textAlign: "center" }}>Account Details</h1>
-                ) : (
+                 <div className="menu-wrapper-image">
+                  <h1  style={{ textAlign: "center" }}>Account Details</h1>
+                  <div className="menu-account menu-back" onClick={handleBackFromSubmenu}>
+                  <ArrowBackIosIcon />Back
+                  </div>
+                  </div>
+                ) : passwordSubmenuOpen ? (
+                  <div className="menu-wrapper-image menu-back" onClick={handleBackFromPassword}>
+                    <ArrowBackIosIcon />Back
+                </div>
+                ): (
                   <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
                 )}
                 {menuOpen && (
-                  <div className={`menu-list ${submenuOpen ? "submenu-visible" : ""}`}>
+                  <div className={`menu-list ${submenuOpen ? "submenu-visible" : ""}  ${passwordSubmenuOpen ? "sub-submenu-visible" : ""}`}>
                     <div className="menu-list-item">
                       <div className="menu-text">
                         <h4>ACCOUNT</h4>
@@ -201,9 +203,12 @@ const Hamburger = () => {
                         </span>
                       </div>
                     </div>
+                    <div className={`submenu-password ${passwordSubmenuOpen ? "is-visible" : ""}`}>
+                        <UpdatePassword />
+                    </div>
                   </div>
-                )}
-              </>
+              
+        
             )}
           </div>
         </div>
