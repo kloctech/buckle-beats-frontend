@@ -19,7 +19,16 @@ const EditQRCode = () => {
 
   const url = process.env.REACT_APP_PRODUCTION_URL;
   const token = Cookies.get("accessToken");
-  const categories = ["Electronics", "Fashion", "Pets", "Grocery"];
+  const categories = ["Everyday Essentials",
+    "Transportation", 
+    "Travel",
+    "Work & School",
+    "Electronics",
+    "Health",
+    "Clothing",
+    "Hobbies",
+    "Pet",
+    "Other"];
   const extractCountryCodeAndNumber = (mobileNumber) => {
     const match = mobileNumber.match(/^(\+\d{1,4})\s*(\d{10})$/);
     if (match) {
@@ -128,6 +137,7 @@ const EditQRCode = () => {
   const handleClick = () => {
     navigate("/");
   };
+ 
 
   return (
     <div className="login-main-container edit-qr">

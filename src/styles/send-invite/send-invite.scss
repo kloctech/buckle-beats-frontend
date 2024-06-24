@@ -1,0 +1,83 @@
+@import '../variables/variable.scss';
+.send-invite-main-container {
+//    display: flex;
+//    flex-direction: column;
+//    align-items: center;
+//  justify-content: center;
+   background-color: #f4f4f4;
+ }
+ 
+ @media screen and (max-width:'550px'){
+  .send-invite-main-container{
+    background-color: $background-color;
+  }
+ }
+ .send-invite-form {
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 350px;
+   background:$background-color;
+  //  padding: 2rem;
+  margin: auto;
+ 
+
+ }
+ .send-invite-form form{
+  margin-bottom: 100px;
+  @media  screen and (max-width:"900px") {
+    margin-bottom: 400px;
+  }
+  @media  screen and (max-width:"500px") {
+    margin-bottom: 300px;
+  }
+ }
+ 
+ 
+ .form-group{
+  position: relative;
+
+   margin-bottom:0.2rem;
+ }
+ .form-group.with-error {
+  margin-bottom: 22px; // Adjust the value as needed
+}
+
+
+//  .input-box {
+//    width: 100%;
+//    padding: 0.75rem;
+//    background-color: #f4f4f4;
+//    border: 1px solid #ccc;
+//    border-radius: 4px;
+//  }
+ 
+ .button {
+  //  width: 320px;
+  //  padding: 0.5rem;
+  //  background-color: #6bc6ae;
+  //  color: white;
+  //  border: 5px solid #434850;
+  //  border-radius:10px;
+  //  cursor: pointer;
+  //  font-size: 1rem;
+  @include button-style ;
+  width:300px;
+  // height: 60px;
+  text-align: center;
+
+ }
+ 
+ 
+ 
+ .message {
+   margin-top: 1rem;
+   color: green;
+ }
+ 
+ .error {
+   margin-top: 1rem;
+   color:$error-color
+ }
