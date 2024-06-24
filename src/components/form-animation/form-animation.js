@@ -6,7 +6,7 @@ const FormAnimation = ({ heading, icon, showQrCodeIcon }) => {
   return (
     <div className="form-animation">
       <div className="header-title">
-        <h1>Activate QR</h1>
+        <h1></h1>
         <Link to="/qr-scanner" className="close-menu">
           X
         </Link>

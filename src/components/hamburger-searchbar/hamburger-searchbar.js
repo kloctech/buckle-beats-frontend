@@ -9,6 +9,7 @@ import Logo from "../../assets/logo.png";
 import RightArrow from "../../assets/right-arrow.png";
 import { useNavigate } from "react-router-dom";
 import UpdatePassword from "../update-password/update-password ";
+import { BiArrowBack } from "react-icons/bi";
 import api from "../../middleware/api";
 
 const Hamburger = () => {
@@ -137,7 +138,7 @@ const Hamburger = () => {
             {passwordSubmenuOpen ? (
               <div className={`submenu-password ${passwordSubmenuOpen ? "is-visible" : ""}`}>
                 <div className="menu-back" onClick={handleBackFromPassword}>
-                  Back
+                  <BiArrowBack style={{ fontSize: "20px" }} />
                 </div>
                 <UpdatePassword passwordSubmenuOpen={passwordSubmenuOpen} />
               </div>
@@ -174,6 +175,42 @@ const Hamburger = () => {
                         <h4>QRs</h4>
                         <div className="menu-link" onClick={() => handleMenuItemClick("qr-codes-screen")}>
                           Activate & Manage QRs
+                        </div>
+                        <div className="menu-link" style={{ marginTop: "1rem" }}></div>
+                        <div className="menu-text">
+                          <h4>PREMIUM (Upgrade)</h4>
+                          <div className={`menu-link`}>
+                            Comming Soon.....
+                            {/* {!submenuOpen && (
+                            <span>
+                              <img src={RightArrow} alt="rightarrow Icon" />
+                            </span>
+                          )} */}
+                            <span>
+                              <img src={RightArrow} alt="rightarrow Icon" />
+                            </span>
+                          </div>
+                        </div>
+                        <div className="menu-text" style={{ marginTop: "10px" }}>
+                          <h4> SUPPORT</h4>
+                          <div className={`menu-link`}>
+                            Contact US
+                            <span>
+                              <img src={RightArrow} alt="rightarrow Icon" />
+                            </span>
+                          </div>
+                          <div className={`menu-link`} style={{ marginTop: "8px" }}>
+                            FAQs
+                            <span>
+                              <img src={RightArrow} alt="rightarrow Icon" />
+                            </span>
+                          </div>
+                          <div className={`menu-link`} style={{ marginTop: "8px" }}>
+                            T&Cs
+                            <span>
+                              <img src={RightArrow} alt="rightarrow Icon" />
+                            </span>
+                          </div>
                         </div>
                       </div>
                       <div className="menu-text menu-logout" onClick={onClickLogout}>
