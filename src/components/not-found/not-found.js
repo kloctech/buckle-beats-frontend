@@ -1,13 +1,19 @@
 import React from "react";
+import {Link} from "react-router-dom";
+import '../../styles/index/index.scss';
+import NotFoundGif from "../../assets/Notfound-gif.gif"
 
 const NotFound = () => {
   return (
-    <div style={{ margin: "auto", width: "100vw" }}>
-      <div>
-        <br />
-        <h2>404 - Not Found</h2>
-        <p>The page you are looking for does not exist.</p>
+    <div className="not-found-page">
+    <div className="login-container">
+      <div className="not-found-bg">
+        <img src={NotFoundGif} />
+        <h2>Oops something went wrong!</h2>
+        <p>We cannot find the page you are looking for.</p>
+        <Link to="/">Take me back</Link>
       </div>
+    </div>
     </div>
   );
 };
