@@ -10,6 +10,7 @@ import RightArrow from "../../assets/right-arrow.png";
 import { useNavigate } from "react-router-dom";
 import UpdatePassword from "../update-password/update-password ";
 import { BiArrowBack } from "react-icons/bi";
+import api from "../../middleware/api";
 
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -53,29 +54,26 @@ const Hamburger = () => {
   }, [menuOpen]);
 
   const onClickLogout = async () => {
-    const accessToken = Cookies.get("accessToken");
-    const allCookies = Cookies.get();
-    for (let cookie in allCookies) {
-      Cookies.remove(cookie);
-    }
     try {
-      const response = await fetch(`${process.env.REACT_APP_PRODUCTION_URL}/api/user/logout`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const response = await api.post(`${process.env.REACT_APP_PRODUCTION_URL}/api/user/logout`);
       if (response.ok) {
-        Cookies.remove("accessToken");
-        Cookies.remove("refreshToken");
         toast.success("Successfully logout");
         window.location.href = "/login";
       } else {
-        toast.error("Failed to logout");
+        //toast.error("Failed to logout");
+        window.location.href = "/login";
+        const allCookies = Cookies.get();
+        for (let cookie in allCookies) {
+          Cookies.remove(cookie);
+        }
       }
     } catch (error) {
       console.log(error);
+      window.location.href = "/login";
+      const allCookies = Cookies.get();
+      for (let cookie in allCookies) {
+        Cookies.remove(cookie);
+      }
     }
   };
 
@@ -102,7 +100,7 @@ const Hamburger = () => {
   };
 
   const handleClickNavigateProfiles = () => {
-    navigate('/manage-profile');
+    navigate("/manage-profile");
   };
 
   const handleUpdatePassword = () => {
@@ -140,14 +138,16 @@ const Hamburger = () => {
             {passwordSubmenuOpen ? (
               <div className={`submenu-password ${passwordSubmenuOpen ? "is-visible" : ""}`}>
                 <div className="menu-back" onClick={handleBackFromPassword}>
-                  <BiArrowBack style={{fontSize:"20px"}}/>
+                  <BiArrowBack style={{ fontSize: "20px" }} />
                 </div>
                 <UpdatePassword passwordSubmenuOpen={passwordSubmenuOpen} />
               </div>
             ) : (
               <>
                 {submenuOpen ? (
-                  <h1 className="menu-wrapper-image" style={{ textAlign: "center" }}>Account Details</h1>
+                  <h1 className="menu-wrapper-image" style={{ textAlign: "center" }}>
+                    Account Details
+                  </h1>
                 ) : (
                   <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
                 )}
@@ -173,46 +173,45 @@ const Hamburger = () => {
                       </div>
                       <div className="menu-text">
                         <h4>QRs</h4>
-                        <div className="menu-link" onClick={() => handleMenuItemClick("qr-codes-screen")} >
+                        <div className="menu-link" onClick={() => handleMenuItemClick("qr-codes-screen")}>
                           Activate & Manage QRs
                         </div>
-                        <div className="menu-link" style={{marginTop:'1rem'}}>
-                        </div>
+                        <div className="menu-link" style={{ marginTop: "1rem" }}></div>
                         <div className="menu-text">
-                        <h4>PREMIUM  (Upgrade)</h4>
-                        <div className={`menu-link`} >
-                          Comming Soon.....
-                          {/* {!submenuOpen && (
+                          <h4>PREMIUM (Upgrade)</h4>
+                          <div className={`menu-link`}>
+                            Comming Soon.....
+                            {/* {!submenuOpen && (
                             <span>
                               <img src={RightArrow} alt="rightarrow Icon" />
                             </span>
                           )} */}
-                          <span>
+                            <span>
                               <img src={RightArrow} alt="rightarrow Icon" />
                             </span>
+                          </div>
                         </div>
-                      </div>
-                      <div className="menu-text" style={{marginTop:'10px'}}>
-                        <h4> SUPPORT</h4>
-                        <div className={`menu-link`} >
-                         Contact US
-                        <span>
-                          <img src={RightArrow} alt="rightarrow Icon" />
-                        </span>
+                        <div className="menu-text" style={{ marginTop: "10px" }}>
+                          <h4> SUPPORT</h4>
+                          <div className={`menu-link`}>
+                            Contact US
+                            <span>
+                              <img src={RightArrow} alt="rightarrow Icon" />
+                            </span>
+                          </div>
+                          <div className={`menu-link`} style={{ marginTop: "8px" }}>
+                            FAQs
+                            <span>
+                              <img src={RightArrow} alt="rightarrow Icon" />
+                            </span>
+                          </div>
+                          <div className={`menu-link`} style={{ marginTop: "8px" }}>
+                            T&Cs
+                            <span>
+                              <img src={RightArrow} alt="rightarrow Icon" />
+                            </span>
+                          </div>
                         </div>
-                        <div className={`menu-link`} style={{marginTop:'8px'}}>
-                         FAQs
-                        <span>
-                          <img src={RightArrow} alt="rightarrow Icon" />
-                        </span>
-                        </div>
-                        <div className={`menu-link`} style={{marginTop:'8px'}}>
-                         T&Cs
-                        <span>
-                          <img src={RightArrow} alt="rightarrow Icon" />
-                        </span>
-                        </div>
-                      </div>
                       </div>
                       <div className="menu-text menu-logout" onClick={onClickLogout}>
                         Sign Out

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import "../../styles/qr-code/qr-code.scss";
 import Cookies from "js-cookie";
-import axios from "axios";
+import api from "../../middleware/api";
 import QrCodeCard from "../qr-code-card/qr-code-card";
 import NoDataIcon from "../../assets/no-data-found.png";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -19,12 +19,10 @@ const QrCodes = ({ searchInput }) => {
 
   const location = useLocation();
   const userId = location.state?.userId || Cookies.get("userId");
-  
 
   const loadMoreButtonRef = useRef(null);
 
   const navigate = useNavigate();
-  const token = Cookies.get("accessToken");
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -44,12 +42,7 @@ const QrCodes = ({ searchInput }) => {
 
       try {
         setLoading(true);
-        const response = await axios.get(`${url}/api/qrcode/${userId}?page=${page}&limit=${limit}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "ngrok-skip-browser-warning": "6024",
-          },
-        });
+        const response = await api.get(`${url}/api/qrcode/${userId}?page=${page}&limit=${limit}`);
 
         if (response.data.qrCodes.length === 0) {
           setIsEmptyResult(true);
@@ -66,7 +59,7 @@ const QrCodes = ({ searchInput }) => {
         setLoading(false);
       }
     },
-    [limit, token, userId]
+    [limit, userId]
   );
 
   const fetchQrCodes = useCallback(
@@ -75,12 +68,7 @@ const QrCodes = ({ searchInput }) => {
 
       try {
         setLoading(true);
-        const response = await axios.get(`${url}/api/qrcode/search?name=${searchQuery}&page=${page}&limit=${limit}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "ngrok-skip-browser-warning": "6024",
-          },
-        });
+        const response = await api.get(`${url}/api/qrcode/search?name=${searchQuery}&page=${page}&limit=${limit}`);
 
         if (response.data.qrCodes.length === 0) {
           setIsEmptyResult(true);
@@ -97,7 +85,7 @@ const QrCodes = ({ searchInput }) => {
         setLoading(false);
       }
     },
-    [limit, token]
+    [limit]
   );
 
   useEffect(() => {

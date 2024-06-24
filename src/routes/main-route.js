@@ -10,6 +10,7 @@ import EditQRCode from "../components/edit-qr-code/edit-qr-code";
 import AddQRCode from "../components/add-qr-code/add-qr-code";
 import QrCodeScanner from "../components/qr-code-scanner/qr-code-scanner";
 import SendInvite from "../components/send-invite/send-invite";
+import SurveyForm from "../components/survey-form/survey-form";
 
 const routes = (
   <>
@@ -21,7 +22,8 @@ const routes = (
       <Route path="/add-qr-code/:id" element={<AddQRCode />} />
       <Route path="/edit-qr-code/:id" element={<EditQRCode />} />
       <Route path="/qr-scanner" element={<QrCodeScanner />} />
-      <Route path="/send-invite" element={<SendInvite/>} />
+      <Route path="/send-invite" element={<SendInvite />} />
+      <Route path="/survey-form" element={<SurveyForm />} />
     </Route>
   </>
 );

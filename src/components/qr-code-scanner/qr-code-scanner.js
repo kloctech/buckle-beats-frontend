@@ -2,14 +2,13 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
 import "../../styles/qr-code-scanner/qr-code-scanner.scss";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-import Cookies from "js-cookie";
-import icon from '../../assets/problem.gif';
+import api from "../../middleware/api";
+import icon from "../../assets/problem.gif";
 import InvalidQrCode from "../invalid-qr-code/invalid-qr-code";
 
 function QrCodeScanner() {
   const [code, setCode] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   const [userData, setUserData] = useState(null);
   const [showFormAnimation, setShowFormAnimation] = useState(false);
 
@@ -19,18 +18,13 @@ function QrCodeScanner() {
 
   const verifyQrCode = useCallback(async (code) => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_PRODUCTION_URL}/api/qrcode/details/${code}`, {
-        headers: {
-          Authorization: `Bearer ${Cookies.get("accessToken")}`,
-        },
-      });
+      const response = await api.get(`${process.env.REACT_APP_PRODUCTION_URL}/api/qrcode/details/${code}`, {});
       const qrData = response?.data?.qrCode;
       setUserData(qrData);
       if (qrData && !qrData.user_id) {
       } else {
       }
-    } catch (err) {
-    }
+    } catch (err) {}
   }, []);
 
   const startDecoding = useCallback(async () => {
@@ -87,8 +81,7 @@ function QrCodeScanner() {
       navigate(`/add-qr-code/${code}`);
     }
   };
-
-
+  console.log(userData?.user_id || error !== "");
   return (
     <>
       {showFormAnimation ? (
@@ -97,13 +90,15 @@ function QrCodeScanner() {
           heading={heading}
           showQrCodeIcon={true}
           onClose={resetScanner} // Pass resetScanner as the onClose handler
-        /> 
+        />
       ) : (
         <div className="qr-scanner form-container">
           {!code && (
             <div className="header-title">
               <h1>Activate QR</h1>
-              <Link to="/" className="close-menu">X</Link>
+              <Link to="/" className="close-menu">
+                X
+              </Link>
             </div>
           )}
           {!code ? (
@@ -133,9 +128,9 @@ function QrCodeScanner() {
                 <button onClick={() => navigate("/")} className="cta-button cancel-btn">
                   Cancel
                 </button>
-                <button disabled={userData?.user_id || error !== ""} onClick={handleNextClick} className={userData?.user_id || error !== "" ? "cta-button next-btn disabled-btn" : "cta-button next-btn "}>
+                <button disabled={userData?.user_id} onClick={handleNextClick} className={userData?.user_id ? "cta-button next-btn disabled-btn" : "cta-button next-btn "}>
                   Next
-                </button> 
+                </button>
               </div>
             </>
           )}
