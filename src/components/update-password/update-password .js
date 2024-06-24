@@ -58,14 +58,19 @@ const UpdatePassword = ({ handleBackFromPassword,passwordSubmenuOpen}) => {
           <input
             type={showOldPassword ? "text" : "password"}
             placeholder="Old Password"
-            {...register("oldPassword", { required: "Old Password is required" })}
+            {...register("oldPassword", { required: "Old Password is required", pattern: {
+              value: passwordRegex,
+              message: "Password must be at least 8 characters long and contain a digit, an uppercase letter, and a special character.",
+            }, })}
           />
           <div className="eye-icon" onClick={() => setShowOldPassword(!showOldPassword)}>
             {showOldPassword ? <VisibilityOffTwoToneIcon /> : <VisibilityTwoToneIcon />}
           </div>
           {errors.oldPassword && <p className="err-msg">{errors.oldPassword.message}</p>}
         </div>
-        <div className="input-field password-field">
+        <div className={`input-field password-field ${
+            errors?.oldPassword  && errors?.oldPassword?.message !=="Old Password is required" ? "error-margin-top" : ""
+          }`}>
           <input
             type={showNewPassword ? "text" : "password"}
             placeholder="New Password"
