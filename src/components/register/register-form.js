@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../middleware/api";
 import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import "../../styles/register/register.scss";
@@ -90,11 +90,11 @@ const RegisterForm = () => {
     }
   }, [confirmPassword, password, setError, clearErrors]);
 
-  const onformSubmit = async (data) => {
+  const onFormSubmit = async (data) => {
     const url = process.env.REACT_APP_PRODUCTION_URL;
 
     try {
-      const response = await axios.post(`${url}/api/user`, {
+      const response = await api.post(`${url}/api/user`, {
         name: data.name,
         email: data.email,
         password: data.password,
@@ -115,23 +115,15 @@ const RegisterForm = () => {
       {isRegistred ? (
         <div className="form-container">
           <FaCheckCircle className="verification-message"></FaCheckCircle>
-          <h6 style={{ color: "#E4E9F1" }}>
-            Please check your email and complete the verification process to log in.
-          </h6>
+          <h6 style={{ color: "#E4E9F1" }}>Please check your email and complete the verification process to log in.</h6>
         </div>
       ) : (
         <div className="form-container">
           <div className={`${getBackgroundClassName()}`}></div>
           <h1>Welcome!</h1>
-          <form onSubmit={handleSubmit(onformSubmit)}>
+          <form onSubmit={handleSubmit(onFormSubmit)}>
             <div className="form-group">
-              <input
-                className="input-box"
-                type="text"
-                id="name"
-                {...register("name", { required: "Name is required" })}
-                placeholder="Name"
-              />
+              <input className="input-box" type="text" id="name" {...register("name", { required: "Name is required" })} placeholder="Name" />
               {errors.name && <span className="error">{errors.name.message}</span>}
             </div>
             <div className="form-group">
@@ -159,8 +151,7 @@ const RegisterForm = () => {
                   required: "Password is required",
                   pattern: {
                     value: passwordRegex,
-                    message:
-                      "Password must be at least 8 characters contains a digit, an uppercase letter, and a special character.",
+                    message: "Password must be at least 8 characters contains a digit, an uppercase letter, and a special character.",
                   },
                 })}
                 placeholder="Password"
@@ -170,7 +161,7 @@ const RegisterForm = () => {
               </button>
               {errors.password && <span className="error">{errors.password.message}</span>}
             </div>
-            <div className={`password-container form-group ${errors?.password?.message && errors?.password.message !=="Password is required" ? "with-error" : ""}`}>
+            <div className={`password-container form-group ${errors?.password?.message && errors?.password.message !== "Password is required" ? "with-error" : ""}`}>
               <input
                 className="input-box"
                 type={confirmPasswordVisible ? "text" : "password"}

@@ -5,11 +5,12 @@ import ProtectedRoute from "../middleware/protected-route";
 import WithLogoutButton from "../components/withLogout/withLogout";
 import ForgotPassword from "../components/forgot-password/forgot-password";
 import Hamburger from "../components/hamburger-searchbar/hamburger-searchbar";
+import ManageProfile from "../components/manage-profile/manage-profile";
 import EditQRCode from "../components/edit-qr-code/edit-qr-code";
-import AddQRCode from '../components/add-qr-code/add-qr-code';
-import SurveyForm  from "../components/survey-form/survey-form";
-import FormAnimation  from "../components/form-animation/form-animation";
-import Heart from "../assets/done_heart.gif";
+import AddQRCode from "../components/add-qr-code/add-qr-code";
+import QrCodeScanner from "../components/qr-code-scanner/qr-code-scanner";
+import SendInvite from "../components/send-invite/send-invite";
+import SurveyForm from "../components/survey-form/survey-form";
 
 const routes = (
   <>
@@ -17,10 +18,12 @@ const routes = (
       <Route exact path="/" element={<Hamburger />} />
       <Route element={<WithLogoutButton />} />
       <Route path="/forgot-password-link" element={<ForgotPassword />} />
+      <Route path="/manage-profile" element={<ManageProfile />} />
       <Route path="/add-qr-code/:id" element={<AddQRCode />} />
       <Route path="/edit-qr-code/:id" element={<EditQRCode />} />
+      <Route path="/qr-scanner" element={<QrCodeScanner />} />
+      <Route path="/send-invite" element={<SendInvite />} />
       <Route path="/survey-form" element={<SurveyForm />} />
-      <Route path="/result-form" element={<FormAnimation icon={Heart} heading="Your are all set - hooray!" />} />
     </Route>
   </>
 );

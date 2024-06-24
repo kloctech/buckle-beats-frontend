@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import "../../styles/qr-code/qr-code.scss";
 import Cookies from "js-cookie";
-import axios from "axios";
+import api from "../../middleware/api";
 import QrCodeCard from "../qr-code-card/qr-code-card";
 import NoDataIcon from "../../assets/no-data-found.png";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -20,8 +20,9 @@ const QrCodes = ({ searchInput }) => {
   const location = useLocation();
   const userId = location.state?.userId || Cookies.get("userId");
 
+  const loadMoreButtonRef = useRef(null);
+
   const navigate = useNavigate();
-  const token = Cookies.get("accessToken");
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -41,11 +42,7 @@ const QrCodes = ({ searchInput }) => {
 
       try {
         setLoading(true);
-        const response = await axios.get(`${url}/api/qrcode/${userId}?page=${page}&limit=${limit}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await api.get(`${url}/api/qrcode/${userId}?page=${page}&limit=${limit}`);
 
         if (response.data.qrCodes.length === 0) {
           setIsEmptyResult(true);
@@ -62,7 +59,7 @@ const QrCodes = ({ searchInput }) => {
         setLoading(false);
       }
     },
-    [limit, token, userId]
+    [limit, userId]
   );
 
   const fetchQrCodes = useCallback(
@@ -71,11 +68,7 @@ const QrCodes = ({ searchInput }) => {
 
       try {
         setLoading(true);
-        const response = await axios.get(`${url}/api/qrcode/search?name=${searchQuery}&page=${page}&limit=${limit}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await api.get(`${url}/api/qrcode/search?name=${searchQuery}&page=${page}&limit=${limit}`);
 
         if (response.data.qrCodes.length === 0) {
           setIsEmptyResult(true);
@@ -84,7 +77,6 @@ const QrCodes = ({ searchInput }) => {
         if (page === 1) {
           setQrCodes(response.data.qrCodes);
         } else {
-          //setQrCodes((prevQrCodes) => [...prevQrCodes, ...response.data.qrCodes]);
           setQrCodes(response.data.qrCodes);
         }
         setLoading(false);
@@ -93,7 +85,7 @@ const QrCodes = ({ searchInput }) => {
         setLoading(false);
       }
     },
-    [limit, token]
+    [limit]
   );
 
   useEffect(() => {
@@ -139,6 +131,17 @@ const QrCodes = ({ searchInput }) => {
     navigate("/qr-scanner");
   };
 
+  const OnClickLoadMore = () => {
+    const contentElement = itemListRef.current;
+
+    if (contentElement) {
+      contentElement.scroll({
+        top: contentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div className="app">
       <div className={`qr-codes-container ${qrCodes.length === 0 ? "no-qr-codes" : ""}`} ref={itemListRef}>
@@ -151,6 +154,12 @@ const QrCodes = ({ searchInput }) => {
           qrCodes.map((item) => <QrCodeCard key={item._id} qrCodeData={item} getQrCodesWithOutSearch={getQrCodesWithOutSearch} page={page} searchQuery={debouncedSearchInput} updateQrCodeStatus={updateQrCodeStatus} />)
         )}
       </div>
+
+      {qrCodes.length >= limit && !isEmptyResult && (
+        <p ref={loadMoreButtonRef} onClick={OnClickLoadMore} className="load-more">
+          load more
+        </p>
+      )}
       {loading && <div>Loading more items...</div>}
       <div className="footer-buttons">
         <button className="shop-button">Shop Now</button>

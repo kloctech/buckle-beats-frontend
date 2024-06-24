@@ -7,30 +7,43 @@ import toast from "react-hot-toast";
 import QrCodes from "../qr-codes/qr-codes";
 import Logo from "../../assets/logo.png";
 import RightArrow from "../../assets/right-arrow.png";
+import { useNavigate } from "react-router-dom";
+import UpdatePassword from "../update-password/update-password ";
+import api from "../../middleware/api";
 
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState("qr-codes-screen");
   const [submenuOpen, setSubmenuOpen] = useState(false);
+  const [passwordSubmenuOpen, setPasswordSubmenuOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
+  const navigate = useNavigate();
   const MenuItem2 = () => <div>Component for Menu Item 2</div>;
   const MenuItem3 = () => <div>Component for Menu Item 3</div>;
+  const userName = Cookies.get("userName");
+  const userEmail = Cookies.get("userEmail");
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
     setSubmenuOpen(false);
+    setPasswordSubmenuOpen(false);
   };
+
   const toggleSubmenu = () => {
     setSubmenuOpen(!submenuOpen);
   };
+
   const handleClosemenu = () => {
     setMenuOpen(false);
+    setPasswordSubmenuOpen(false);
   };
 
-  const handleBackClick = () => {
-    setSubmenuOpen(false);
+  const handleBackFromPassword = () => {
+    setPasswordSubmenuOpen(false);
+    setSubmenuOpen(true);
   };
+
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
@@ -38,27 +51,31 @@ const Hamburger = () => {
       document.body.style.overflow = "auto";
     }
   }, [menuOpen]);
-  const onClickLogout = async () => {
-    const accessToken = Cookies.get("accessToken");
-    try {
-      const response = await fetch(`${process.env.REACT_APP_PRODUCTION_URL}/api/user/logout`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      if (response.ok) {
-        Cookies.remove("accessToken");
-        Cookies.remove("refreshToken");
 
+  const onClickLogout = async () => {
+    try {
+      const response = await api.post(`${process.env.REACT_APP_PRODUCTION_URL}/api/user/logout`);
+      if (response.ok) {
         toast.success("Successfully logout");
         window.location.href = "/login";
       } else {
-        toast.error("Failed to logout");
+        //toast.error("Failed to logout");
+        window.location.href = "/login";
+        const allCookies = Cookies.get();
+        for (let cookie in allCookies) {
+          Cookies.remove(cookie);
+        }
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      window.location.href = "/login";
+      const allCookies = Cookies.get();
+      for (let cookie in allCookies) {
+        Cookies.remove(cookie);
+      }
+    }
   };
+
   const handleMenuItemClick = (menuItem) => {
     setSelectedMenuItem(menuItem);
     setMenuOpen(false);
@@ -76,9 +93,20 @@ const Hamburger = () => {
         return null;
     }
   };
+
   const handleInputChange = (e) => {
     setSearchInput(e.target.value);
   };
+
+  const handleClickNavigateProfiles = () => {
+    navigate("/manage-profile");
+  };
+
+  const handleUpdatePassword = () => {
+    setPasswordSubmenuOpen(true);
+    setSubmenuOpen(false);
+  };
+
   return (
     <div className="header-flex-container">
       <div className="main-qrcode-container">
@@ -101,42 +129,80 @@ const Hamburger = () => {
 
         <div className={menuOpen ? "active menu-wrapper" : "inactive menu-wrapper"}>
           <div className="menu-container">
-            <div className="close-menu" onClick={handleClosemenu}>
-              X
-            </div>
-            <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
-            {menuOpen && (
-              <div className={`menu-list  ${submenuOpen ? "submenu-visible" : ""}`}>
-                <div className="menu-list-item">
-                  <div className="menu-text">
-                    <h4>ACCOUNT</h4>
-                    <div className={`menu-link`} onClick={toggleSubmenu}>
-                      Manage Account
-                      {!submenuOpen && (
+            {!passwordSubmenuOpen && (
+              <div className="close-menu" onClick={handleClosemenu}>
+                X
+              </div>
+            )}
+            {passwordSubmenuOpen ? (
+              <div className={`submenu-password ${passwordSubmenuOpen ? "is-visible" : ""}`}>
+                <div className="menu-back" onClick={handleBackFromPassword}>
+                  Back
+                </div>
+                <UpdatePassword passwordSubmenuOpen={passwordSubmenuOpen} />
+              </div>
+            ) : (
+              <>
+                {submenuOpen ? (
+                  <h1 className="menu-wrapper-image" style={{ textAlign: "center" }}>
+                    Account Details
+                  </h1>
+                ) : (
+                  <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
+                )}
+                {menuOpen && (
+                  <div className={`menu-list ${submenuOpen ? "submenu-visible" : ""}`}>
+                    <div className="menu-list-item">
+                      <div className="menu-text">
+                        <h4>ACCOUNT</h4>
+                        <div className={`menu-link`} onClick={toggleSubmenu}>
+                          Manage Account
+                          {!submenuOpen && (
+                            <span>
+                              <img src={RightArrow} alt="rightarrow Icon" />
+                            </span>
+                          )}
+                        </div>
+                        <div className={`menu-link`} onClick={handleClickNavigateProfiles} style={{ marginTop: "10px" }}>
+                          <p>Switch Profile</p>
+                          <span>
+                            <img src={RightArrow} alt="rightarrow Icon" />
+                          </span>
+                        </div>
+                      </div>
+                      <div className="menu-text">
+                        <h4>QRs</h4>
+                        <div className="menu-link" onClick={() => handleMenuItemClick("qr-codes-screen")}>
+                          Activate & Manage QRs
+                        </div>
+                      </div>
+                      <div className="menu-text menu-logout" onClick={onClickLogout}>
+                        Sign Out
+                      </div>
+                    </div>
+
+                    <div className={`submenu ${submenuOpen ? "is-visible" : ""}`}>
+                      <div className="menu-text">{userName}</div>
+                      <hr />
+                      <div className="menu-text">{userEmail}</div>
+                      <hr />
+                      <div className={`menu-link menu-text`} onClick={handleUpdatePassword}>
+                        Update Password
+                        <span className="arrow">
+                          <img src={RightArrow} alt="rightarrow Icon" />
+                        </span>
+                      </div>
+                      <hr />
+                      <div className={`menu-link menu-text`}>
+                        Delete Account
                         <span>
                           <img src={RightArrow} alt="rightarrow Icon" />
                         </span>
-                      )}
+                      </div>
                     </div>
                   </div>
-                  <div className="menu-text">
-                    <h4>QRs</h4>
-                    <div className="menu-link" onClick={() => handleMenuItemClick("qr-codes-screen")}>
-                      Activate & Manage QRs
-                    </div>
-                  </div>
-                  <div className="menu-text menu-logout" onClick={onClickLogout}>
-                    Sign Out
-                  </div>
-                </div>
-
-                <div className={`submenu ${submenuOpen ? "is-visible" : ""}`}>
-                  <div className="menu-back menu-text" onClick={handleBackClick}>
-                    Back
-                  </div>
-                  <div className="menu-text">Romi Mathew</div>
-                </div>
-              </div>
+                )}
+              </>
             )}
           </div>
         </div>

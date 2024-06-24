@@ -16,8 +16,7 @@ import ForgotPasswordLink from "./components/forget-password-link/forgot-passwor
 import ForgotPassword from "./components/forgot-password/forgot-password";
 import { Toaster } from "react-hot-toast";
 import LostQRCode from "./components/lost-qrcode/lost-qrcode";
-// import QrCodeScanner from "./components/qr-code-scanner/qr-code-scanner";
-import QrCodeScanner from "./components/qr-code-scanner/qr-code-scanner";
+import SetPassword from "./components/set-password/set-password";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -42,10 +41,10 @@ const App = () => {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/account" element={<VerifyEmail />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/forgot-password-link" element={<ForgotPasswordLink/>} />
+        <Route path="/forgot-password-link" element={<ForgotPasswordLink />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path ='/qr-scanner' element = {<QrCodeScanner/>}/>
         <Route path="/qr-code/:id" element={<LostQRCode />} />
+        <Route path="/set-password" element={<SetPassword />} />
         {mainRoutes}
       </Routes>
     </Router>
