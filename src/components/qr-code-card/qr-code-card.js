@@ -3,7 +3,7 @@ import "../../styles/qr-code/qr-code.scss";
 
 import toast from "react-hot-toast";
 import EnableQRCode from "../enable-qrcode/enable-qrcode";
-import { FaUserEdit } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import api from "../../middleware/api";
 
@@ -52,7 +52,7 @@ const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, up
       <img src={qrCodeData?.image_url} alt={qrCodeData.name} className="qr-code-image" />
       <h5 style={{ fontSize: "12px", color: "#1B3E51", marginTop: "6px", fontWeight: "640" }}>{qrCodeData?.name}</h5>
       <div className="edit-detail">
-        <FaUserEdit onClick={handleEdit} />
+        <MdEdit onClick={handleEdit} />
       </div>
       <div className={`switch-container ${qrCodeData?.is_lost ? "switch-on" : ""}`}>
         <span className="lost-mode-text">Lost Mode</span>
