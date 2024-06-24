@@ -5,8 +5,7 @@ import "../../styles/survey-form/survey-form.scss";
 const FormAnimation = ({ heading, icon, showQrCodeIcon }) => {
   return (
     <div className="form-animation">
-      <div className="header-title">
-        <h1></h1>
+      <div style={{ justifyContent: "end" }} className="header-title">
         <Link to="/qr-scanner" className="close-menu">
           X
         </Link>
