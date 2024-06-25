@@ -43,7 +43,8 @@ const SendInvite = () => {
         </div>
         <div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <h1 style={{ textAlign: "center" }}>Send Invite</h1>
+            {/* <h1 style={{ textAlign: "center" }}>Send Invite</h1> */}
+            <h1 className="welcome-heading">Send Invite</h1>
 
             <div className="form-group-reg password-container">
               <input

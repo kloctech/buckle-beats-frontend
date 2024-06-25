@@ -145,7 +145,7 @@ const Hamburger = () => {
             ) : (
               <>
                 {submenuOpen ? (
-                  <h1 className="menu-wrapper-image" style={{ textAlign: "center" }}>
+                  <h1 className="menu-wrapper-image" style={{ textAlign: "center",color:'white'}}>
                     Account Details
                   </h1>
                 ) : (

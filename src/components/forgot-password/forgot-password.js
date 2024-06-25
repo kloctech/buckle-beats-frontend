@@ -75,7 +75,7 @@ const navigate = useNavigate ()
   return (
     <div className="forgot-password-main-container">
       <div className="forgot-password-form">
-        <h2 className="forgot-password-heading">Forgot Password</h2>
+        <h1 className="welcome-heading">Forgot Password</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group-reg password-container">
             <input

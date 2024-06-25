@@ -149,7 +149,7 @@ const EditQRCode = () => {
           <div className="header-container">
             <BiArrowBack style={{ color: "#ffffff", fontSize: "20px", cursor: "pointer", marginBottom: "10px" }} onClick={handleClick} />
             <div style={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
-              <h1 style={{ marginBottom: 10 }}>Edit QR Details</h1>
+              <h1 style={{ marginBottom: 10 }} className="welcome-heading">Edit QR Details</h1>
             </div>
           </div>
 

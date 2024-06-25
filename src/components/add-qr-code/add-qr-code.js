@@ -44,7 +44,7 @@ const AddQRCode = () => {
       {!nextPage ? (
         <div className="login-container">
           <form onSubmit={handleSubmit(onSubmitAddQRForm)} className="login-form">
-            <h1>Add QR Details</h1>
+            <h1 className="welcome-heading">Add QR Details</h1>
             <div className="form-group-login name-group">
               <input
                 id="name"

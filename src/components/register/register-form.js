@@ -120,7 +120,7 @@ const RegisterForm = () => {
       ) : (
         <div className="form-container">
           <div className={`${getBackgroundClassName()}`}></div>
-          <h1>Welcome!</h1>
+          <h1 className="welcome-heading">Welcome!</h1>
           <form onSubmit={handleSubmit(onFormSubmit)}>
             <div className="form-group">
               <input className="input-box" type="text" id="name" {...register("name", { required: "Name is required" })} placeholder="Name" />
