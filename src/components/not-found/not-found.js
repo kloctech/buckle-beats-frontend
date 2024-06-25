@@ -1,4 +1,7 @@
 import React from "react";
+import {Link} from "react-router-dom";
+import '../../styles/index/index.scss';
+import NotFoundGif from "../../assets/Notfound-gif.gif"
 
 const NotFound = () => {
   return (
