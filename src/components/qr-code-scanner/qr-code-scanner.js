@@ -81,7 +81,6 @@ function QrCodeScanner() {
       navigate(`/add-qr-code/${code}`);
     }
   };
-  console.log(userData?.user_id || error !== "");
   return (
     <>
       {showFormAnimation ? (
