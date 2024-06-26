@@ -143,12 +143,13 @@ const QrCodes = ({ searchInput }) => {
   };
 
   return (
-    <div className="app">
+    <div>
+ <div className="app">
       <div className={`qr-codes-container ${qrCodes.length === 0 ? "no-qr-codes" : ""}`} ref={itemListRef}>
         {qrCodes?.length === 0 ? (
           <div style={{ marginTop: "30vh", marginLeft: "0px" }}>
             <img src={NoDataIcon} alt="no-data-found" className="no-data-image" />
-            <h1>No data found</h1>
+            <h1>No QR code found</h1>
           </div>
         ) : (
           qrCodes.map((item) => <QrCodeCard key={item._id} qrCodeData={item} getQrCodesWithOutSearch={getQrCodesWithOutSearch} page={page} searchQuery={debouncedSearchInput} updateQrCodeStatus={updateQrCodeStatus} />)
@@ -161,13 +162,16 @@ const QrCodes = ({ searchInput }) => {
         </p>
       )}
       {loading && <div>Loading more items...</div>}
-      <div className="footer-buttons">
+   
+    </div>
+    <div className="footer-buttons">
         <button className="shop-button">Shop Now</button>
         <button className="activate-qr-button" onClick={handleClick}>
           Activate QR
         </button>
       </div>
     </div>
+   
   );
 };
 

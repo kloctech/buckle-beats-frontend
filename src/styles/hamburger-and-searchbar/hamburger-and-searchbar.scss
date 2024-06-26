@@ -233,3 +233,27 @@
     width: 100%;
   }
 }
+.account-details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+  // background-color:;
+}
+
+.menu-back {
+  cursor: pointer;
+  
+}
+
+.account-details-title {
+  color: white;
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.close-menu {
+  cursor: pointer;
+  color: white;
+}

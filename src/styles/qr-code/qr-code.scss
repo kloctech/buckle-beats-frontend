@@ -18,12 +18,19 @@
   flex-wrap: wrap;
   grid-template-columns: repeat(2, 1fr);
   gap: 17px;
-  z-index: 2;
+  height:75vh;
+  // z-index: 2;
   justify-content: center;
   overflow-y: scroll;
   scrollbar-width: thin;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  @media screen and (max-width:1025px){
+    height: auto;
+  }
+  @media  screen and (max-width:'500px') {
+    height: 68vh;
+  }
 
   &.no-qr-codes {
     display: flex;
@@ -89,12 +96,12 @@
   background-color: rgba(255, 200, 87, 0.94);
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
-  position: absolute;
+  position: fixed;
   max-width: 100%;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 30;
+  // z-index: 30;
   opacity: 0.95;
 
   @media screen and (min-width: 440px) {
