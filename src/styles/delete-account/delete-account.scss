@@ -1,0 +1,96 @@
+.checkbox-text {
+    display: block;
+    position: relative;
+    padding-left: 50px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    input{
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+    .checkmark {
+        position: absolute;
+        top: 6px;
+        left: 0;
+        height: 30px;
+    width: 30px;
+        border: 1px solid #fff;
+        border-radius: 3px;
+      }
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+      & input:checked ~ .checkmark:after {
+        display: block;
+      }
+      & .checkmark:after {
+        left: 10px;
+        top: 1px;
+        width: 9px;
+        height: 20px;
+        border: solid #58d7b5;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+     
+  }
+  
+  .delete-account{
+   
+    p {
+        color:#fff;
+        font-weight: 600;
+    font-size: 16.5px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+
+    }
+    label{
+        color:#fff;
+        font-weight: 800;
+        font-size: 16.5px;
+      }
+      .text-box{
+        font-weight: normal;
+      }
+      h5{
+        color:#fff;
+        margin-top:20px;
+        font-size: 16.5px;
+      }
+      .form-group-login{
+        margin-bottom: 15px;
+        
+      }
+
+      .input-field, button{
+        max-width: none!important;
+        width:100%;
+    }
+  }
+  .delete-menu{
+    
+    .menu-back{
+      display: flex;
+      width: 100%;
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+
+    }
+    h1{
+      width: 95%;
+      
+    }
+  }

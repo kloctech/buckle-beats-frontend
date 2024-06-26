@@ -94,9 +94,9 @@
     align-items: center;
     width: 100%;
     z-index: 40;
-    height: 110%;
+    height: 100%;
     top: 0;
-
+    overflow: auto;
     &.inactive {
       left: -100%;
     }

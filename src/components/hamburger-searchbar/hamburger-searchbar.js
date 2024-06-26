@@ -9,6 +9,7 @@ import Logo from "../../assets/logo.png";
 import RightArrow from "../../assets/right-arrow.png";
 import { useNavigate } from "react-router-dom";
 import UpdatePassword from "../update-password/update-password ";
+import DeleteAccount from "../delete-account/delete-account";
 import { BiArrowBack } from "react-icons/bi";
 import api from "../../middleware/api";
 
@@ -17,6 +18,7 @@ const Hamburger = () => {
   const [selectedMenuItem, setSelectedMenuItem] = useState("qr-codes-screen");
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const [passwordSubmenuOpen, setPasswordSubmenuOpen] = useState(false);
+  const [deletepasswordOpen, setdeletepasswordOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ const Hamburger = () => {
     setMenuOpen(!menuOpen);
     setSubmenuOpen(false);
     setPasswordSubmenuOpen(false);
+    setdeletepasswordOpen(false);
   };
 
   const toggleSubmenu = () => {
@@ -38,11 +41,13 @@ const Hamburger = () => {
   const handleClosemenu = () => {
     setMenuOpen(false);
     setPasswordSubmenuOpen(false);
+    setdeletepasswordOpen(false);
   };
 
   const handleBackFromPassword = () => {
     setPasswordSubmenuOpen(false);
     setSubmenuOpen(true);
+    setdeletepasswordOpen(false);
   };
 
   useEffect(() => {
@@ -106,8 +111,14 @@ const Hamburger = () => {
   const handleUpdatePassword = () => {
     setPasswordSubmenuOpen(true);
     setSubmenuOpen(false);
+    setdeletepasswordOpen(false);
   };
-
+  const  handleDeletePassword = () => {
+    setPasswordSubmenuOpen(false);
+    setSubmenuOpen(false);
+    setdeletepasswordOpen(true);
+  };
+ 
   return (
     <div className="header-flex-container">
       <div className="main-qrcode-container">
@@ -130,7 +141,7 @@ const Hamburger = () => {
 
         <div className={menuOpen ? "active menu-wrapper" : "inactive menu-wrapper"}>
           <div className="menu-container">
-            {!passwordSubmenuOpen && (
+            {!passwordSubmenuOpen && !deletepasswordOpen && (
               <div className="close-menu" onClick={handleClosemenu}>
                 X
               </div>
@@ -141,6 +152,14 @@ const Hamburger = () => {
                   <BiArrowBack style={{ fontSize: "20px" }} />
                 </div>
                 <UpdatePassword passwordSubmenuOpen={passwordSubmenuOpen} />
+              </div>
+            ) : deletepasswordOpen ? (
+              <div className={`delete-menu submenu-password ${deletepasswordOpen ? "is-visible" : ""}`}>
+                <div className="menu-back" onClick={handleBackFromPassword}>
+                  <BiArrowBack style={{ fontSize: "20px" }} />
+                  <h1 className="welcome-heading">Delete Account</h1>
+                </div>
+                <DeleteAccount />
               </div>
             ) : (
               <>
@@ -230,7 +249,7 @@ const Hamburger = () => {
                         </span>
                       </div>
                       <hr />
-                      <div className={`menu-link menu-text`}>
+                      <div className={`menu-link menu-text`} onClick={handleDeletePassword}>
                         Delete Account
                         <span>
                           <img src={RightArrow} alt="rightarrow Icon" />
