@@ -26,7 +26,7 @@ const SendInvite = () => {
       const response = await api.post(`${url}/api/user/send-invite-link`, { ...data });
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       reset();
-      navigate("/");
+      navigate("/manage-profile");
     } catch (error) {
       toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
     }
