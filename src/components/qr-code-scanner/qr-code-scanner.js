@@ -24,7 +24,9 @@ function QrCodeScanner() {
       if (qrData && !qrData.user_id) {
       } else {
       }
-    } catch (err) {}
+    } catch (err) {
+      
+    }
   }, []);
 
   const startDecoding = useCallback(async () => {
@@ -74,7 +76,7 @@ function QrCodeScanner() {
     }, 500);
   };
 
-  const heading = "Something has gone wrong, don't worry. Let's try again.";
+  const  heading =  userData?.user_id ? "This QR code is Already Registered" :"Something has gone wrong, don't worry. Let's try again.";
 
   const handleNextClick = () => {
     if (code) {
@@ -83,11 +85,12 @@ function QrCodeScanner() {
   };
   return (
     <>
-      {showFormAnimation ? (
+      {showFormAnimation  || userData?.user_id ? (
         <InvalidQrCode
           icon={icon}
           heading={heading}
           showQrCodeIcon={true}
+          userId = {userData?.user_id}
           onClose={resetScanner} // Pass resetScanner as the onClose handler
         />
       ) : (
@@ -113,24 +116,24 @@ function QrCodeScanner() {
             <>
               {userData ? (
                 userData?.user_id ? (
-                  <p style={{ color: "#58d7b5" }} className="result-text">
-                    This QR code is Already Registered
-                  </p>
+                  ""
                 ) : (
                   <img alt="qr-code" src={userData?.image_url} style={{ width: "160px", borderRadius: "80px" }} />
                 )
               ) : (
                 <p style={{ color: "red" }}>{error}</p>
               )}
+               {!userData?.user_id ? (
+                <div className="button-row">
+                  <button onClick={() => navigate("/")} className="cta-button cancel-btn">
+                    Cancel
+                  </button>
+                  <button onClick={handleNextClick} className="cta-button next-btn">
+                    Next
+                  </button>
+                </div>
+              ) : null}
 
-              <div className="button-row">
-                <button onClick={() => navigate("/")} className="cta-button cancel-btn">
-                  Cancel
-                </button>
-                <button disabled={userData?.user_id} onClick={handleNextClick} className={userData?.user_id ? "cta-button next-btn disabled-btn" : "cta-button next-btn "}>
-                  Next
-                </button>
-              </div>
             </>
           )}
         </div>

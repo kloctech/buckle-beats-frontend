@@ -2,7 +2,7 @@ import React from "react";
 import "../../styles/survey-form/survey-form.scss";
 import { Link } from "react-router-dom";
 
-const InvalidQrCode = ({ heading, icon, showQrCodeIcon, onClose }) => {
+const InvalidQrCode = ({ heading, icon, showQrCodeIcon, onClose,userId }) => {
   return (
     <div className="login-container"> 
       <div className="form-animation">
