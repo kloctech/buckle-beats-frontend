@@ -17,6 +17,7 @@ import ForgotPassword from "./components/forgot-password/forgot-password";
 import { Toaster } from "react-hot-toast";
 import LostQRCode from "./components/lost-qrcode/lost-qrcode";
 import SetPassword from "./components/set-password/set-password";
+import LinkingCoowner from "./components/linking-co-owner/linking-co-owner";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/account" element={<VerifyEmail />} />
+        <Route path = '/additional-user' element=  {<LinkingCoowner/>} />
         <Route path="*" element={<NotFound />} />
         <Route path="/forgot-password-link" element={<ForgotPasswordLink />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
