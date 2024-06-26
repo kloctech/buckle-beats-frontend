@@ -149,7 +149,7 @@ const QrCodes = ({ searchInput }) => {
         {qrCodes?.length === 0 ? (
           <div style={{ marginTop: "30vh", marginLeft: "0px" }}>
             <img src={NoDataIcon} alt="no-data-found" className="no-data-image" />
-            <h1>No QR code found</h1>
+            <h1>QR codes not found</h1>
           </div>
         ) : (
           qrCodes.map((item) => <QrCodeCard key={item._id} qrCodeData={item} getQrCodesWithOutSearch={getQrCodesWithOutSearch} page={page} searchQuery={debouncedSearchInput} updateQrCodeStatus={updateQrCodeStatus} />)
