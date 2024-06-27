@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import "../../styles/send-invite/send-invite.scss";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { BiArrowBack } from "react-icons/bi";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const SendInvite = () => {
   const {
@@ -38,8 +38,8 @@ const SendInvite = () => {
   return (
     <div className="send-invite-main-container">
       <div className="send-invite-form">
-        <div className="menu-back" style={{ marginRight: "220px" }}>
-          <BiArrowBack onClick={handleClick} style={{ fontSize: "20px", color: "#ffff" }} />
+        <div className="menu-back send-invite-menu-back" >
+          <ArrowBackIosIcon onClick={handleClick} style={{ fontSize: "20px", color: "#ffff" }} />
         </div>
         <div>
           <form onSubmit={handleSubmit(onSubmit)}>

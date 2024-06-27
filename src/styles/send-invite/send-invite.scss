@@ -22,16 +22,22 @@
    background:$background-color;
   //  padding: 2rem;
   margin: auto;
- 
-
+ }
+ .send-invite-menu-back{
+  height: 1.8rem;
+  width: 1rem;
+  margin-right: 17rem;
  }
  .send-invite-form form{
-  margin-bottom: 100px;
+  margin-bottom: 6.5rem;
   @media  screen and (max-width:"900px") {
     margin-bottom: 400px;
   }
   @media  screen and (max-width:"500px") {
     margin-bottom: 300px;
+  }
+  .send-invite-menu-back{
+    margin-right: 20rem;
   }
  }
  

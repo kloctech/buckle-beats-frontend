@@ -10,7 +10,7 @@ import RightArrow from "../../assets/right-arrow.png";
 import { useNavigate } from "react-router-dom";
 import UpdatePassword from "../update-password/update-password ";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-
+import api from "../../middleware/api";
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState("qr-codes-screen");
@@ -104,7 +104,7 @@ const Hamburger = () => {
 
   const handleClickNavigateProfiles = () => {
     navigate("/manage-profile");
-    handleBackToMainMenu();
+    // handleBackToMainMenu();
   };
 
   const handleUpdatePassword = () => {
@@ -139,14 +139,14 @@ const Hamburger = () => {
               </div>
                 {submenuOpen ? (
                  <div className="menu-wrapper-image">
-                  <h1  style={{ textAlign: "center" }}>Account Details</h1>
+                  <h1  style={{ textAlign: "center",color:'white' }}>Account Details</h1>
                   <div className="menu-account menu-back" onClick={handleBackFromSubmenu}>
-                  <ArrowBackIosIcon />Back
+                  <ArrowBackIosIcon />
                   </div>
                   </div>
                 ) : passwordSubmenuOpen ? (
                   <div className="menu-wrapper-image menu-back" onClick={handleBackFromPassword}>
-                    <ArrowBackIosIcon />Back
+                    <ArrowBackIosIcon />
                 </div>
                 ): (
                   <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
