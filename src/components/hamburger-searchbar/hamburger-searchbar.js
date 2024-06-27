@@ -12,7 +12,6 @@ import UpdatePassword from "../update-password/update-password ";
 import DeleteAccount from "../delete-account/delete-account";
 import { BiArrowBack } from "react-icons/bi";
 import api from "../../middleware/api";
-
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState("qr-codes-screen");
@@ -50,11 +49,11 @@ const Hamburger = () => {
     setdeletepasswordOpen(false);
   };
 
-  const handleBackToMainMenu = () => {
-    setSubmenuOpen(false);
+  const handleBackFromSubmenu = () => {
+    setMenuOpen(true);
     setPasswordSubmenuOpen(false);
+    setSubmenuOpen(false);
   };
-
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
@@ -111,7 +110,6 @@ const Hamburger = () => {
 
   const handleClickNavigateProfiles = () => {
     navigate("/manage-profile");
-    handleBackToMainMenu();
   };
 
   const handleUpdatePassword = () => {
@@ -147,45 +145,29 @@ const Hamburger = () => {
 
         <div className={menuOpen ? "active menu-wrapper" : "inactive menu-wrapper"}>
           <div className="menu-container">
-            {!passwordSubmenuOpen && !deletepasswordOpen && (
               <div className="close-menu" onClick={handleClosemenu}>
                 X
               </div>
-            )}
-            {passwordSubmenuOpen ? (
-              <div className={`submenu-password ${passwordSubmenuOpen ? "is-visible" : ""}`}>
-                <div className="menu-back" onClick={handleBackFromPassword}>
-                  <BiArrowBack style={{ fontSize: "20px" }} />
-                </div>
-                <UpdatePassword passwordSubmenuOpen={passwordSubmenuOpen} />
-              </div>
-            ) : deletepasswordOpen ? (
-              <div className={`delete-menu submenu-password ${deletepasswordOpen ? "is-visible" : ""}`}>
-                <div className="menu-back" onClick={handleBackFromPassword}>
-                  <BiArrowBack style={{ fontSize: "20px" }} />
-                  <h1 className="welcome-heading">Delete Account</h1>
-                </div>
-                <DeleteAccount />
-              </div>
-            ) : (
-              <>
                 {submenuOpen ? (
-                  <div className="account-details-header">
-                    <div className="menu-back" onClick={handleBackToMainMenu}>
-                      <BiArrowBack style={{ fontSize: "20px", color: 'white' }} />
-                    </div>
-                    <h1 className="menu-wrapper-image account-details-title">
-                      Account Details
-                    </h1>
-                    <div className="close-menu" onClick={handleClosemenu}>
-                      X
-                    </div>
+                 <div className="menu-wrapper-image">
+                  <h1  style={{ textAlign: "center",color:'white' }}>Account Details</h1>
+                  <div className="menu-account menu-back" onClick={handleBackFromSubmenu}>
+                  <BiArrowBack />
                   </div>
-                ) : (
+                  </div>
+                ) : passwordSubmenuOpen || deletepasswordOpen ? (
+                   <div className="menu-wrapper-image">
+                  
+                    {passwordSubmenuOpen ? <h1  style={{ textAlign: "center",color:'white' }}> Update Password</h1>:<h1 style={{ textAlign: "center",color:'white' }}>Delete Account</h1>}
+                   <div className="menu-account menu-back" onClick={handleBackFromPassword}>
+                   <BiArrowBack />
+                   </div>
+                   </div>
+                ): (
                   <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
                 )}
                 {menuOpen && (
-                  <div className={`menu-list ${submenuOpen ? "submenu-visible" : ""}`}>
+                  <div className={`menu-list ${submenuOpen ? "submenu-visible" : ""}  ${passwordSubmenuOpen || deletepasswordOpen ? "sub-submenu-visible" : ""}`}>
                     <div className="menu-list-item">
                       <div className="menu-text">
                         <h4>ACCOUNT</h4>
@@ -265,9 +247,14 @@ const Hamburger = () => {
                         </span>
                       </div>
                     </div>
+                    <div className={`submenu-password ${passwordSubmenuOpen || deletepasswordOpen ? "is-visible" : ""}`}>
+                      {deletepasswordOpen ?  <DeleteAccount />
+                       : <UpdatePassword />
+                      }
+                    </div>
                   </div>
-                )}
-              </>
+              
+        
             )}
           </div>
         </div>
