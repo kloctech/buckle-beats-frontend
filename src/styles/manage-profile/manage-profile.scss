@@ -15,7 +15,23 @@
       margin-bottom: 1rem;
     }
   }
-
+  &-modal {
+    p{
+   display: none;
+  }
+   .no-btn{
+    background-color: transparent!important;
+    border:1px solid #58d7b5!important;
+    color: #58d7b5!important;
+   }
+   .btn-wrapper{
+    justify-content: space-between!important;
+   }
+   .cta-button{
+    width:48%!important;
+   }
+  }
+  
   &-list {
     padding: 0;
     display: flex;
@@ -35,6 +51,7 @@
        display: flex;
        flex-direction: column;
        align-items: center;
+       cursor: pointer;
       .manage-profile-bg {
         width: 85px;
         height: 85px;
@@ -49,8 +66,11 @@
       }
       
       h4{
-        margin-top:6px;
         font-size: 14px;
+        width: 60%;
+        margin: 6px auto 10px;
+        text-align: center;
+        line-height: 1.5;
       }
       span {
         display: block;
@@ -89,13 +109,24 @@
     border: 0;
     text-decoration: underline;
     color: #fff;
+    margin-top: 0;
   }
-
-  .shop-button {
-    text-decoration: none;
-    color: #fff;
-    padding: 10px 35px;
-  }
+   .cta-button{
+    padding: 10px 10px;
+   }
+   &-icon{
+    right: -7px;
+    position: absolute;
+    top: -4px;
+    animation: blink 1s forwards;
+    cursor:pointer;
+    svg{
+      stroke: #fff;
+      fill: rgb(88, 215, 181);
+      width: 1.5em;
+      height: 1.5em;
+    }
+   }
   .close-menu{
     position: absolute;
     top: 3.4rem;
@@ -111,5 +142,16 @@
   @media(min-width: 600px){
     top: 1.4rem;
   }
+  }
+}
+
+@keyframes blink {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
