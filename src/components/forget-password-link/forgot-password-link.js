@@ -26,7 +26,9 @@ const ForgotPasswordLink = () => {
     <div className="forgot-password-main-container">
       <div className="form-container">
         <form onSubmit={handleSubmit(onSubmit)}>
-        <h2 className="welcome-heading" style={{marginBottom:"40px"}}>Forgot Password</h2>
+        {/* <h2 className="welcome-heading" style={{marginBottom:"40px"}}>Forgot Password</h2> */}
+        <h1 className="welcome-heading">Forgot Password</h1>
+    
           <div className="form-group">
             <input
               className="input-box"

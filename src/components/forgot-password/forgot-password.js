@@ -75,7 +75,7 @@ const navigate = useNavigate ()
   return (
     <div className="forgot-password-main-container">
       <div className="forgot-password-form">
-        <h2 className="forgot-password-heading">Forgot Password</h2>
+        <h1 className="welcome-heading">Forgot Password</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group-reg password-container">
             <input
@@ -100,7 +100,7 @@ const navigate = useNavigate ()
             </button>
             {errors.password && <span className="error">{errors.password.message}</span>}
           </div>
-          <div className={`password-container form-group ${errors.password  && errors.password.message !=="Password is required"? "with-error" : ""}`}>
+          <div className={`password-container form-group ${errors.password ? "with-error" : ""}`}>
             <input
               className="input-box"
               type={confirmPasswordVisible ? 'text' : 'password'}

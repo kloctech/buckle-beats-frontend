@@ -1,0 +1,49 @@
+@import '../verify-email/verify-email.scss';
+
+ 
+.main-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height:100vh;
+   width: 350px;
+   margin: auto;
+   background-color:$background-color; 
+   padding: 20px;
+   @media  screen and (max-width:'500px') {
+      height: 92.5vh;
+   }
+ }
+ 
+ .logo {
+   width: 12rem; // Adjust as necessary
+   margin-bottom: auto;
+ }
+ 
+ .content-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+ }
+ 
+
+ .accept-button {
+   padding: 10px 20px;
+   border-radius: 5px; 
+   cursor: pointer;
+   font-weight: 500;
+   font-size: small;
+   text-decoration: none;
+   color: #fff;
+   text-align: center;
+   width: 10rem;
+ }
+ p {
+   font-size: 16px;
+   color:$text-color
+ }
+ 
+ 

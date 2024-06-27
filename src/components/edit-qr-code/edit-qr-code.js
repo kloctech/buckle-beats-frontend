@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import axios from "axios";
-import Cookies from "js-cookie";
+import api from "../../middleware/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { BiArrowBack } from "react-icons/bi";
 import EnableQRCode from "../enable-qrcode/enable-qrcode";
 import "../../styles/add-edit-qrcode/add-edit-qrcode.scss";
+import Preloader from "../preloader/preloader";
 
 const EditQRCode = () => {
   const [qrcode, setQRcode] = useState(null);
   const [activeId, setActiveId] = useState(null);
   const [initialValues, setInitialValues] = useState({});
+  const [categoryList, setCategoryList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const location = useLocation();
   const { qrCodeData } = location.state || {};
   const navigate = useNavigate();
 
   const url = process.env.REACT_APP_PRODUCTION_URL;
-  const token = Cookies.get("accessToken");
-  const categories = ["Electronics", "Fashion", "Pets", "Grocery"];
+
   const extractCountryCodeAndNumber = (mobileNumber) => {
     const match = mobileNumber.match(/^(\+\d{1,4})\s*(\d{10})$/);
     if (match) {
@@ -52,17 +53,33 @@ const EditQRCode = () => {
   });
 
   useEffect(() => {
-    setValue("countryCode", countryCode);
-    setValue("mobile_number", mobileNumber);
-    setInitialValues({
-      name: qrCodeData?.name,
-      email: qrCodeData?.email,
-      mobile_number: mobileNumber,
-      countryCode: countryCode,
-      category: qrCodeData?.category,
-      default_message: qrCodeData?.default_message,
-    });
-  }, [countryCode, mobileNumber, setValue, qrCodeData]);
+    const getCategories = async () => {
+      try {
+        const response = await api.get(`${url}/api/qrcode/categories`);
+        setCategoryList(response.data.categories);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getCategories();
+  }, [url]);
+
+  useEffect(() => {
+    if (!loading) {
+      setValue("countryCode", countryCode);
+      setValue("mobile_number", mobileNumber);
+      setInitialValues({
+        name: qrCodeData?.name,
+        email: qrCodeData?.email,
+        mobile_number: mobileNumber,
+        countryCode: countryCode,
+        category: qrCodeData?.category,
+        default_message: qrCodeData?.default_message,
+      });
+    }
+  }, [countryCode, mobileNumber, setValue, qrCodeData, loading]);
 
   const watchedValues = useWatch({ control });
 
@@ -76,16 +93,12 @@ const EditQRCode = () => {
       mobile_number: mobile_number,
       category: data?.category,
       default_message: data?.default_message || qrCodeData?.default_message,
+      survey_ans: data?.survey_ans || "",
     };
     try {
-      const response = await axios.put(`${url}/api/qrcode/${qrCodeData?.qr_planet_id}`, payload, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await api.put(`${url}/api/qrcode/${qrCodeData?.qr_planet_id}`, payload);
       toast.success(response?.data?.resultMessage?.en, { duration: 5000 });
-      navigate('/');
+      navigate("/");
     } catch (error) {
       toast.error(error?.response?.data?.resultMessage?.en);
     }
@@ -108,11 +121,7 @@ const EditQRCode = () => {
 
   const handleDeleteQRCode = async () => {
     try {
-      const response = await axios.delete(`${url}/api/qrcode/${qrCodeData?.qr_planet_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await api.delete(`${url}/api/qrcode/${qrCodeData?.qr_planet_id}`);
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       navigate("/");
     } catch (error) {
@@ -129,6 +138,10 @@ const EditQRCode = () => {
     navigate("/");
   };
 
+  if (loading) {
+    return <Preloader />;
+  }
+
   return (
     <div className="login-main-container edit-qr">
       <div className="login-container">
@@ -136,7 +149,7 @@ const EditQRCode = () => {
           <div className="header-container">
             <BiArrowBack style={{ color: "#ffffff", fontSize: "20px", cursor: "pointer", marginBottom: "10px" }} onClick={handleClick} />
             <div style={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
-              <h1 style={{ marginBottom: 10 }}>Edit QR Details</h1>
+              <h1 style={{ marginBottom: 10 }} className="welcome-heading">Edit QR Details</h1>
             </div>
           </div>
 
@@ -173,6 +186,7 @@ const EditQRCode = () => {
 
           <div className="form-group-login mobile-group">
             <select {...register("countryCode")}>
+              <option value="+91">+91</option>
               <option value="+1">+1</option>
               <option value="+44">+44</option>
               <option value="+971">+971</option>
@@ -196,16 +210,11 @@ const EditQRCode = () => {
 
           <div className="form-group-login select-group">
             <select {...register("category")}>
-              {categories?.map(
-                (
-                  category,
-                  index // Ensure to use 'index' for unique keys
-                ) => (
-                  <option key={index} value={category}>
-                    {category}
-                  </option>
-                )
-              )}
+              {categoryList?.map((category, index) => (
+                <option key={index} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
             </select>
           </div>
 

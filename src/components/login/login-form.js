@@ -4,7 +4,6 @@ import "../../styles/login/login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
-import axios from "axios";
 import cat from "../../assets/Cat-gif.gif";
 import bag from "../../assets/bagimage.gif";
 import cycle from "../../assets/Bicycle-gif.gif";
@@ -12,7 +11,7 @@ import dog from "../../assets/dog-gif.gif";
 import { CircularProgress } from "@mui/material";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
-
+import api from "../../middleware/api";
 const images = [bag, cycle, cat, dog];
 const classNames = ["background-steps", "background-cycle-route", "background-paws", "background-paws"];
 
@@ -64,14 +63,14 @@ const LoginPage = () => {
   }, []);
 
   const onSubmitLoginForm = async (data) => {
-    const api = `${process.env.REACT_APP_PRODUCTION_URL}/api/user/login`;
+    const API = `${process.env.REACT_APP_PRODUCTION_URL}/api/user/login`;
     setLoading(true);
     // setMessage("");
-    const accessTokenExpirationTime = 1;
-    const refreshTokenExpirationTime = 1;
+    const accessTokenExpirationTime = 7;
+    const refreshTokenExpirationTime = 7;
 
     try {
-      const response = await axios.post(api, data);
+      const response = await api.post(API, data);
       const { accessToken, refreshToken } = response.data;
 
       toast.success(response.data.resultMessage.en, { duration: 5000 });
@@ -79,11 +78,11 @@ const LoginPage = () => {
       Cookies.set("accessToken", accessToken, { expires: accessTokenExpirationTime });
       Cookies.set("refreshToken", refreshToken, { expires: refreshTokenExpirationTime });
       Cookies.set("userId", response.data.user._id, { expires: accessTokenExpirationTime });
-      Cookies.set("userName",response?.data?.user?.name)
-      Cookies.set("userEmail",response?.data?.user?.email)
+      Cookies.set("userName", response?.data?.user?.name);
+      Cookies.set("userEmail", response?.data?.user?.email);
       setLoading(false);
 
-      navigate("/manage-profile", { state: { userId: response.data.user._id} });
+      navigate("/manage-profile", { state: { userId: response.data.user._id } });
     } catch (error) {
       // setMessage(error.response.data.resultMessage.en);
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });
@@ -142,7 +141,7 @@ const LoginPage = () => {
           </p>
           <img src={images[currentImageIndex]} className={`${getImageClassName()}`} alt="cycling images" />
           <button className="login-button" type="submit">
-            {loading ? <CircularProgress size={25} sx={{ color: "white" }} /> : "Login"}
+            {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "Login"}
           </button>
           <p className="signup-navigation-text">
             <Link to="/register">SignUp</Link>

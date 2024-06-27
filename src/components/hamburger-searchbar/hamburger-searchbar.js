@@ -57,29 +57,26 @@ const Hamburger = () => {
   }, [menuOpen]);
 
   const onClickLogout = async () => {
-    const accessToken = Cookies.get("accessToken");
-    const allCookies = Cookies.get();
-    for (let cookie in allCookies) {
-      Cookies.remove(cookie);
-    }
     try {
-      const response = await fetch(`${process.env.REACT_APP_PRODUCTION_URL}/api/user/logout`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const response = await api.post(`${process.env.REACT_APP_PRODUCTION_URL}/api/user/logout`);
       if (response.ok) {
-        Cookies.remove("accessToken");
-        Cookies.remove("refreshToken");
         toast.success("Successfully logout");
         window.location.href = "/login";
       } else {
-        toast.error("Failed to logout");
+        //toast.error("Failed to logout");
+        window.location.href = "/login";
+        const allCookies = Cookies.get();
+        for (let cookie in allCookies) {
+          Cookies.remove(cookie);
+        }
       }
     } catch (error) {
       console.log(error);
+      window.location.href = "/login";
+      const allCookies = Cookies.get();
+      for (let cookie in allCookies) {
+        Cookies.remove(cookie);
+      }
     }
   };
 
@@ -106,7 +103,8 @@ const Hamburger = () => {
   };
 
   const handleClickNavigateProfiles = () => {
-    navigate('/manage-profile');
+    navigate("/manage-profile");
+    handleBackToMainMenu();
   };
 
   const handleUpdatePassword = () => {
@@ -177,6 +175,37 @@ const Hamburger = () => {
                         <h4>QRs</h4>
                         <div className="menu-link" onClick={() => handleMenuItemClick("qr-codes-screen")}>
                           Activate & Manage QRs
+                        </div>
+                        <div className="menu-link" style={{ marginTop: "1rem" }}></div>
+                        <div className="menu-text">
+                          <h4>PREMIUM (Upgrade)</h4>
+                          <div className={`menu-link`}>
+                            Coming Soon.....
+                            <span>
+                              <img src={RightArrow} alt="rightarrow Icon" />
+                            </span>
+                          </div>
+                        </div>
+                        <div className="menu-text" style={{ marginTop: "10px" }}>
+                          <h4> SUPPORT</h4>
+                          <div className={`menu-link`}>
+                            Contact US
+                            <span>
+                              <img src={RightArrow} alt="rightarrow Icon" />
+                            </span>
+                          </div>
+                          <div className={`menu-link`} style={{ marginTop: "8px" }}>
+                            FAQs
+                            <span>
+                              <img src={RightArrow} alt="rightarrow Icon" />
+                            </span>
+                          </div>
+                          <div className={`menu-link`} style={{ marginTop: "8px" }}>
+                            T&Cs
+                            <span>
+                              <img src={RightArrow} alt="rightarrow Icon" />
+                            </span>
+                          </div>
                         </div>
                       </div>
                       <div className="menu-text menu-logout" onClick={onClickLogout}>

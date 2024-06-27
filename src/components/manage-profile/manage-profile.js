@@ -3,7 +3,7 @@ import "../../styles/manage-profile/manage-profile.scss";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
-import axios from "axios";
+import api from "../../middleware/api";
 
 const ManageProfile = () => {
   const [profiles1, setProfiles] = useState([]);
@@ -28,23 +28,17 @@ const ManageProfile = () => {
       } else {
         toast.error("Failed to logout");
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const getProfiles = useCallback(async () => {
     try {
-      const response = await axios.get(`${url}/api/user/profiles`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "ngrok-skip-browser-warning": "6024",
-        },
-      });
+      const response = await api.get(`${url}/api/user/profiles`);
       setProfiles(response?.data?.profiles);
     } catch (error) {
       toast.error("Failed to fetch profiles");
     }
-  }, [accessToken, url]);
+  }, [url]);
 
   useEffect(() => {
     getProfiles();
@@ -54,18 +48,20 @@ const ManageProfile = () => {
 
   const handleClick = (userId) => {
     Cookies.set("userId", userId, { expires: accessTokenExpirationTime });
-    navigate('/');
+    navigate("/");
   };
-  
-  const handleInviteLink = () =>{
-    navigate('/send-invite')
-  }
+
+  const handleInviteLink = () => {
+    navigate("/send-invite");
+  };
 
   return (
     <div className="login-container">
       <div className="manage-profile">
         <h1>Switch Profile</h1>
-        <Link to="/" className="close-menu">X</Link>
+        <Link to="/" className="close-menu">
+          X
+        </Link>
         <ul className="manage-profile-list">
           {profiles1?.map((item) => (
             <li key={item._id} onClick={() => handleClick(item._id)}>

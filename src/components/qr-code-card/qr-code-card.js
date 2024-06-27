@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "../../styles/qr-code/qr-code.scss";
-import Cookies from "js-cookie";
-import axios from "axios";
+
 import toast from "react-hot-toast";
 import EnableQRCode from "../enable-qrcode/enable-qrcode";
-import { FaUserEdit } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import api from "../../middleware/api";
 
 const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, updateQrCodeStatus }) => {
   const [qrcode, setQRcode] = useState(null);
@@ -31,11 +31,10 @@ const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, up
   };
 
   const handleTurnOn = async (qr_planet_id) => {
-    const token = Cookies.get("accessToken");
     const url = process.env.REACT_APP_PRODUCTION_URL;
 
     try {
-      const response = await axios.put(`${url}/api/qrcode/change-status`, { code: qr_planet_id }, { headers: { Authorization: `Bearer ${token}` } });
+      const response = await api.put(`${url}/api/qrcode/change-status`, { code: qr_planet_id });
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       handleClose();
       updateQrCodeStatus(qr_planet_id, !qrCodeData.is_lost); // Update the specific QR code status
@@ -47,12 +46,13 @@ const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, up
   const handleEdit = () => {
     navigate(`/edit-qr-code/${qrCodeData?.qr_planet_id}`, { state: { qrCodeData } });
   };
+
   return (
     <div className="qr-code-card">
       <img src={qrCodeData?.image_url} alt={qrCodeData.name} className="qr-code-image" />
       <h5 style={{ fontSize: "12px", color: "#1B3E51", marginTop: "6px", fontWeight: "640" }}>{qrCodeData?.name}</h5>
       <div className="edit-detail">
-        <FaUserEdit onClick={handleEdit} />
+        <MdEdit onClick={handleEdit} />
       </div>
       <div className={`switch-container ${qrCodeData?.is_lost ? "switch-on" : ""}`}>
         <span className="lost-mode-text">Lost Mode</span>
