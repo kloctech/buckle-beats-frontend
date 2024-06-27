@@ -7,7 +7,7 @@ import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import { useNavigate } from "react-router-dom";
 import "../../styles/update-passwor/update-password.scss";
 
-const UpdatePassword = ({ handleBackFromPassword, passwordSubmenuOpen }) => {
+const UpdatePassword = () => {
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -40,8 +40,8 @@ const UpdatePassword = ({ handleBackFromPassword, passwordSubmenuOpen }) => {
     }
   };
   return (
-    <div className={`submenu-password ${passwordSubmenuOpen ? "is-visible" : ""}`}>
-      <h1 className="welcome-heading">Update Password</h1>
+    <div  className="update-password">
+      <h1 style={{textAlign:'center',color:'white'}}>Update Password</h1>
       <form onSubmit={handleSubmit(handlePasswordUpdate)}>
         <div className="input-field password-field form-group">
           <input

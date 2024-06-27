@@ -94,7 +94,7 @@
     align-items: center;
     width: 100%;
     z-index: 40;
-    height: 110%;
+    height: 100%;
     top: 0;
 
     &.inactive {
@@ -110,10 +110,10 @@
     }
     .close-menu {
       position: absolute;
-      top: 1.5rem;
-      right: 1rem;
+      top: 4.2rem;
+      right: 2rem;
       color: #fff;
-      font-size: 1rem;
+      font-size: 1.2rem;
       font-weight: 800;
       background-color: #434850;
       padding: 10px 15px;
@@ -121,12 +121,12 @@
       cursor: pointer;
     }
     &-image {
-      margin: 2rem 2rem 1rem;
+      margin: 5rem 2rem 0;
       @media (min-width: 440px) {
         margin-right: 3rem;
       }
     }
-    .submenu {
+    .submenu,.submenu-password {
       position: absolute;
       top: 0;
       left: 100%;
@@ -138,16 +138,18 @@
       width: 100%;
       opacity: 0;
       transition: opacity 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
-      &.is-visible {
-        opacity: 1;
-        overflow-y: auto;
-        overflow-x: hidden;
-      }
-      hr{   // updated
-        width: 100%;
-        color:#0dc392;
-        // border: px solid;
-      }
+      
+    }
+    .submenu.is-visible,
+    .submenu-password.is-visible {
+      opacity: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .submenu  hr{   // updated
+      width: 100%;
+      color:#0dc392;
+      // border: px solid;
     }
   }
   &-text,
@@ -169,17 +171,20 @@
   }
 
   &-list {
-    padding: 1rem 2rem 2rem;
+    padding: 4rem 2rem 2rem;
     width: 100%;
     transform: translateX(0%);
     transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
     &.submenu-visible {
       transform: translateX(-100%);
     }
+    &.sub-submenu-visible{
+      transform: translateX(-200%);
+    }
     h4 {
       color: #fff;
       line-height: 2;
-      border-bottom: 1px solid #58d7b5;
+      border-bottom: 2px solid #58d7b5;
       font-size: 18px;
     }
   }
@@ -202,6 +207,16 @@
     text-decoration: underline;
     transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
     cursor: pointer;
+    font-size: 14px;
+    
+    svg{
+      height: 1.8rem;
+      width: 1rem;
+    }
+  }
+  &-account{
+    position: absolute;
+    top: 4.9rem;
   }
 }
 
@@ -232,28 +247,4 @@
   .mobile-header {
     width: 100%;
   }
-}
-.account-details-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 40px;
-  // background-color:;
-}
-
-.menu-back {
-  cursor: pointer;
-  
-}
-
-.account-details-title {
-  color: white;
-  margin: 0;
-  flex-grow: 1;
-  text-align: center;
-}
-
-.close-menu {
-  cursor: pointer;
-  color: white;
 }
