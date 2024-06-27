@@ -50,6 +50,11 @@ const Hamburger = () => {
     setdeletepasswordOpen(false);
   };
 
+  const handleBackToMainMenu = () => {
+    setSubmenuOpen(false);
+    setPasswordSubmenuOpen(false);
+  };
+
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
@@ -106,6 +111,7 @@ const Hamburger = () => {
 
   const handleClickNavigateProfiles = () => {
     navigate("/manage-profile");
+    handleBackToMainMenu();
   };
 
   const handleUpdatePassword = () => {
@@ -164,9 +170,17 @@ const Hamburger = () => {
             ) : (
               <>
                 {submenuOpen ? (
-                  <h1 className="menu-wrapper-image" style={{ textAlign: "center",color:'white'}}>
-                    Account Details
-                  </h1>
+                  <div className="account-details-header">
+                    <div className="menu-back" onClick={handleBackToMainMenu}>
+                      <BiArrowBack style={{ fontSize: "20px", color: 'white' }} />
+                    </div>
+                    <h1 className="menu-wrapper-image account-details-title">
+                      Account Details
+                    </h1>
+                    <div className="close-menu" onClick={handleClosemenu}>
+                      X
+                    </div>
+                  </div>
                 ) : (
                   <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
                 )}
@@ -199,12 +213,7 @@ const Hamburger = () => {
                         <div className="menu-text">
                           <h4>PREMIUM (Upgrade)</h4>
                           <div className={`menu-link`}>
-                            Comming Soon.....
-                            {/* {!submenuOpen && (
-                            <span>
-                              <img src={RightArrow} alt="rightarrow Icon" />
-                            </span>
-                          )} */}
+                            Coming Soon.....
                             <span>
                               <img src={RightArrow} alt="rightarrow Icon" />
                             </span>

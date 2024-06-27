@@ -55,7 +55,7 @@ const SurveyForm = ({ data }) => {
           <div className="survey-form">
             <div className="header-title">
               <h1>Activate QR</h1>
-              <Link to="/" className="close-menu">
+              <Link to="/qr-scanner" className="close-menu">
                 X
               </Link>
             </div>
