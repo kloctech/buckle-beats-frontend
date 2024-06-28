@@ -34,8 +34,10 @@ const DeleteAccount = () => {
   const allChecked = checkboxes.first && checkboxes.second && checkboxes.third;
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+    if (allChecked) {
+      setShowPassword(!showPassword);
+    }
+  }
 
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[.!@$%^&*])[^\s]{8,}$/;
 
@@ -140,12 +142,12 @@ const DeleteAccount = () => {
             disabled={!allChecked}
           />
           {showPassword ? (
-            <span className="eye-icon" onClick={togglePasswordVisibility}>
-              <VisibilityOffTwoToneIcon />
+            <span className="eye-icon" onClick={togglePasswordVisibility} >
+              <VisibilityOffTwoToneIcon  disabled ={!allChecked} style={{cursor: allChecked ? 'pointer' :'not-allowed'}}/>
             </span>
           ) : (
-            <span className="eye-icon" style={{ cursor: allChecked ? "pointer" : "not-allowed" }} onClick={togglePasswordVisibility}>
-              <VisibilityTwoToneIcon />
+            <span className="eye-icon" onClick={togglePasswordVisibility} disabled ={!allChecked} >
+              <VisibilityTwoToneIcon style={{cursor: allChecked ? 'pointer' :'not-allowed'}} />
             </span>
           )}
         </div>
