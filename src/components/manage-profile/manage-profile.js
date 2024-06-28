@@ -53,7 +53,7 @@ const ManageProfile = () => {
     setDeleteProfile(true);
   };
   const handleClick = (userId) => {
-    if(deleteProfile == true){
+    if(deleteProfile === true){
       setshowPopup(userId);
     }else{
       Cookies.set("userId", userId, { expires: accessTokenExpirationTime });
@@ -83,7 +83,7 @@ const ManageProfile = () => {
             <li key={item._id} onClick={() => handleClick(item._id)}>
               <div className="manage-profile-bg" >
                 <span>{item.name.charAt(0)}</span>   
-                {item.is_owner == false && deleteProfile && 
+                {item.is_owner === false && deleteProfile && 
                   <div className="manage-profile-icon">
                   <FiMinusCircle />
                   </div>
