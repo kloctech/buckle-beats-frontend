@@ -8,9 +8,9 @@ import { FiMinusCircle } from "react-icons/fi";
 import EnableQRCode from "../enable-qrcode/enable-qrcode";
 
 const ManageProfile = () => {
-  const [profiles1, setProfiles] = useState([]);
+  const [profiles, setProfiles] = useState([]);
   const [deleteProfile, setDeleteProfile] = useState(false);
-  const [showPopup, setshowPopup] = useState(null);
+  const [showPopup, setShowPopup] = useState(null);
   const accessToken = Cookies.get("accessToken");
   const url = process.env.REACT_APP_PRODUCTION_URL; // Ensure this is defined in your environment variables
   const navigate = useNavigate();
@@ -49,27 +49,43 @@ const ManageProfile = () => {
   }, [getProfiles]);
 
   const accessTokenExpirationTime = 1;
+
   const handleDeleteProfile = () => {
     setDeleteProfile(true);
   };
+
   const handleClick = (userId) => {
-    if(deleteProfile == true){
-      setshowPopup(userId);
-    }else{
+    if (deleteProfile) {
+      setShowPopup(userId);
+    } else {
       Cookies.set("userId", userId, { expires: accessTokenExpirationTime });
       navigate("/");
     }
-    
   };
 
   const handleInviteLink = () => {
     navigate("/send-invite");
   };
+
   const handleClose = () => {
-    setshowPopup(null);
+    setShowPopup(null);
     setDeleteProfile(false);
-    
   };
+
+  const handleDelete = async (userId) => {
+    try {
+     const response= await api.delete(`${url}/api/user/co-owner/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      toast.success(response.data.resultMessage.en, { duration: 5000 });
+      getProfiles(); // Refresh profiles list
+    } catch (error) {
+      toast.error(error.response.data.resultMessage.en);
+    }
+  };
+
   return (
     <div className="login-container">
       <div className="manage-profile">
@@ -78,21 +94,18 @@ const ManageProfile = () => {
           X
         </Link>
         <ul className="manage-profile-list">
-          {profiles1?.map((item) => (
-            <>
+          {profiles.map((item) => (
             <li key={item._id} onClick={() => handleClick(item._id)}>
-              <div className="manage-profile-bg" >
-                <span>{item.name.charAt(0)}</span>   
-                {item.is_owner == false && deleteProfile && 
+              <div className="manage-profile-bg">
+                <span>{item.name.charAt(0)}</span>
+                {item.is_owner === false && deleteProfile && (
                   <div className="manage-profile-icon">
-                  <FiMinusCircle />
+                    <FiMinusCircle />
                   </div>
-                }         
-              </div>         
+                )}
+              </div>
               <h4>{item.name}</h4>
             </li>
-             <EnableQRCode className="manage-profile-modal" handleClose={handleClose} openModal={showPopup} heading="Are you sure you want to delete?"  buttonText="Yes" showSecondarybtn />
-             </> 
           ))}
           <li className="invite" onClick={handleInviteLink}>
             <div className="manage-profile-bg">
@@ -104,12 +117,24 @@ const ManageProfile = () => {
           <button className="menu-logout" onClick={onClickLogout}>
             Sign Out
           </button>
-          <button onClick={handleDeleteProfile} className="cta-button" style={{backgroundColor:'#58d7b5'}}>
+          <button onClick={handleDeleteProfile} className="cta-button" style={{ backgroundColor: '#58d7b5' }}>
             Manage Profile
           </button>
         </div>
-       
       </div>
+      {showPopup && (
+        <EnableQRCode
+          className="manage-profile-modal"
+          handleDelete={handleDelete}
+          closeModal={setShowPopup}
+          openModal={!!showPopup}
+          heading="Are you sure you want to delete?"
+          buttonText="Yes"
+          showSecondarybtn
+          handleClose={handleClose}
+          userId={showPopup}
+        />
+      )}
     </div>
   );
 };
