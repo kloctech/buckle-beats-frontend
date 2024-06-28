@@ -108,10 +108,15 @@ const Hamburger = () => {
     setSearchInput(e.target.value);
   };
 
-  const handleClickNavigateProfiles = () => {
-    navigate("/manage-profile");
+  const handleClickNavigateProfiles = (event) => {
+    if (event) {
+      event.preventDefault();
+    }
+    setMenuOpen(false);
+    setTimeout(() => {
+      navigate("/manage-profile");
+    }, 700);
   };
-
   const handleUpdatePassword = () => {
     setPasswordSubmenuOpen(true);
     setSubmenuOpen(false);
