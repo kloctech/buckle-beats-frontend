@@ -35,7 +35,13 @@
   font-size: 1.5em;
   margin-top: 20px;
   flex-direction: column;
-
+  span{
+    text-align: center;
+    font-size: 16px;
+    width: 60%;
+    line-height: 1.5;
+    margin: 10px auto 17px;
+  }
   &.success {
     color: $primary-color;
     width: 100%;
