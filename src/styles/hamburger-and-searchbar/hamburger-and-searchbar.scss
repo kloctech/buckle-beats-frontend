@@ -110,7 +110,7 @@
     }
     .close-menu {
       position: absolute;
-      top: 4.2rem;
+      top: 2.7rem;
       right: 2rem;
       color: #fff;
       font-size: 1.2rem;
@@ -121,7 +121,7 @@
       cursor: pointer;
     }
     &-image {
-      margin: 5rem 2rem 0;
+      margin: 3.5rem 2rem 0;
       @media (min-width: 440px) {
         margin-right: 3rem;
       }
@@ -171,7 +171,7 @@
   }
 
   &-list {
-    padding: 4rem 2rem 2rem;
+    padding: 2rem 2rem 2rem;
     width: 100%;
     transform: translateX(0%);
     transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -216,7 +216,7 @@
   }
   &-account{
     position: absolute;
-    top: 4.9rem;
+    top: 3.3rem;
   }
 }
 
