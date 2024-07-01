@@ -2,7 +2,7 @@
 
 .form-container {
   text-align: center;
- max-width:350px;
+  max-width: 350px;
 }
 
 .video-container {
@@ -15,7 +15,7 @@
   border-radius: 50%;
   overflow: hidden;
   position: relative;
-  color:#58d7b5;
+  color: #58d7b5;
 }
 
 .video-container video {
@@ -26,9 +26,10 @@
 
 /* Adjustments for smaller screens */
 @media (max-width: 600px) {
-  .form-container{
+  .form-container {
     max-width: 450px;
   }
+
   .video-container {
     width: 70vw;
     height: 70vw;
@@ -49,7 +50,8 @@
   height: 30px;
   border: 5px solid white;
   box-sizing: border-box;
-  z-index: 10; /* Ensure corners are on top */
+  z-index: 10;
+  /* Ensure corners are on top */
 }
 
 .top-left {
@@ -79,37 +81,73 @@
   border-left: none;
   border-top: none;
 }
-@media(max-width:600px){
- .qr-scanner{
-   height: 100%;
-   max-width: inherit;
- }
+
+@media(max-width:600px) {
+  .qr-scanner {
+    height: 100%;
+    max-width: inherit;
+  }
 }
 
-.result-text{
- margin-top: 1rem;
+.result-text {
+  margin-top: 1rem;
 }
-.button-row{
- width: 100%;
- display: flex;
- justify-content: space-between;
- margin-top: 2rem;
+
+.button-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
 }
+
 .cta-button {
- padding: 10px 20px;
- border-radius: 5px;
- cursor: pointer;
- font-weight: 500;
- font-size: small;
- text-decoration: none;
- color:#fff;
- width: 47%;
- text-align: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: small;
+  text-decoration: none;
+  color: #fff;
+  width: 47%;
+  text-align: center;
 }
-.cancel-btn{
- background-color: transparent;
- border:1px solid #58d7b5;
+
+.cancel-btn {
+  background-color: transparent;
+  border: 1px solid #58d7b5;
 }
-.next-btn{
- background-color: #58d7b5;
+
+.next-btn {
+  background-color: #58d7b5;
+}
+
+.qr-bg {
+  position: relative;
+  width: 170px;
+  border-radius: 50%;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:after {
+    content: "";
+    width: 100%;
+    background-repeat: no-repeat;
+    background-image: url("../../assets/qr-activation.gif");
+    position: absolute;
+    top:0;
+    left:0;
+    background-size: 100%;
+    height: 100%;
+    background-position: center;
+  }
+
+  img {
+    width: 82%;
+    border-radius: 80px;
+    background: #fff;
+    padding: 8px;
+    z-index: 2;
+  }
 }

@@ -44,10 +44,9 @@ const ManageProfile = () => {
     getProfiles();
   }, [getProfiles]);
 
-  const accessTokenExpirationTime = 1;
 
   const handleClick = (userId) => {
-    Cookies.set("userId", userId, { expires: accessTokenExpirationTime });
+    Cookies.set("userId", userId);
     navigate("/");
   };
 

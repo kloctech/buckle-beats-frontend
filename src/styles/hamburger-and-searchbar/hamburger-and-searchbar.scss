@@ -96,7 +96,7 @@
     z-index: 40;
     height: 100%;
     top: 0;
-
+    overflow: auto;
     &.inactive {
       left: -100%;
     }
@@ -211,7 +211,7 @@
     
     svg{
       height: 1.8rem;
-      width: 1rem;
+      width: 1.3rem;
     }
   }
   &-account{
@@ -247,4 +247,28 @@
   .mobile-header {
     width: 100%;
   }
+}
+.account-details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+  // background-color:;
+}
+
+.menu-back {
+  cursor: pointer;
+  
+}
+
+.account-details-title {
+  color: white;
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.close-menu {
+  cursor: pointer;
+  color: white;
 }

@@ -40,8 +40,7 @@ const UpdatePassword = () => {
     }
   };
   return (
-    <div  className="update-password">
-      <h1 style={{textAlign:'center',color:'white'}}>Update Password</h1>
+    <div  className="update-password" style={{paddingTop:'2.5rem'}}>
       <form onSubmit={handleSubmit(handlePasswordUpdate)}>
         <div className="input-field password-field form-group">
           <input
