@@ -38,7 +38,7 @@ const SendInvite = () => {
   return (
     <div className="send-invite-main-container">
       <div className="send-invite-form">
-        <div className="menu-back" style={{ marginRight: "220px" }}>
+        <div className="menu-back send-invite-menu-back" >
           <BiArrowBack onClick={handleClick} style={{ fontSize: "20px", color: "#ffff" }} />
         </div>
         <div>

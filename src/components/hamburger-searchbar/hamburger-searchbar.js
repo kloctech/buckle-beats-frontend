@@ -9,14 +9,15 @@ import Logo from "../../assets/logo.png";
 import RightArrow from "../../assets/right-arrow.png";
 import { useNavigate } from "react-router-dom";
 import UpdatePassword from "../update-password/update-password ";
+import DeleteAccount from "../delete-account/delete-account";
 import { BiArrowBack } from "react-icons/bi";
 import api from "../../middleware/api";
-
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState("qr-codes-screen");
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const [passwordSubmenuOpen, setPasswordSubmenuOpen] = useState(false);
+  const [deletepasswordOpen, setdeletepasswordOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const Hamburger = () => {
     setMenuOpen(!menuOpen);
     setSubmenuOpen(false);
     setPasswordSubmenuOpen(false);
+    setdeletepasswordOpen(false);
   };
 
   const toggleSubmenu = () => {
@@ -38,18 +40,20 @@ const Hamburger = () => {
   const handleClosemenu = () => {
     setMenuOpen(false);
     setPasswordSubmenuOpen(false);
+    setdeletepasswordOpen(false);
   };
 
   const handleBackFromPassword = () => {
     setPasswordSubmenuOpen(false);
     setSubmenuOpen(true);
+    setdeletepasswordOpen(false);
   };
 
-  const handleBackToMainMenu = () => {
-    setSubmenuOpen(false);
+  const handleBackFromSubmenu = () => {
+    setMenuOpen(true);
     setPasswordSubmenuOpen(false);
+    setSubmenuOpen(false);
   };
-
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
@@ -104,16 +108,26 @@ const Hamburger = () => {
     setSearchInput(e.target.value);
   };
 
-  const handleClickNavigateProfiles = () => {
-    navigate("/manage-profile");
-    handleBackToMainMenu();
+  const handleClickNavigateProfiles = (event) => {
+    if (event) {
+      event.preventDefault();
+    }
+    setMenuOpen(false);
+    setTimeout(() => {
+      navigate("/manage-profile");
+    }, 700);
   };
-
   const handleUpdatePassword = () => {
     setPasswordSubmenuOpen(true);
     setSubmenuOpen(false);
+    setdeletepasswordOpen(false);
   };
-
+  const  handleDeletePassword = () => {
+    setPasswordSubmenuOpen(false);
+    setSubmenuOpen(false);
+    setdeletepasswordOpen(true);
+  };
+ 
   return (
     <div className="header-flex-container">
       <div className="main-qrcode-container">
@@ -136,37 +150,29 @@ const Hamburger = () => {
 
         <div className={menuOpen ? "active menu-wrapper" : "inactive menu-wrapper"}>
           <div className="menu-container">
-            {!passwordSubmenuOpen && (
               <div className="close-menu" onClick={handleClosemenu}>
                 X
               </div>
-            )}
-            {passwordSubmenuOpen ? (
-              <div className={`submenu-password ${passwordSubmenuOpen ? "is-visible" : ""}`}>
-                <div className="menu-back" onClick={handleBackFromPassword}>
-                  <BiArrowBack style={{ fontSize: "20px" }} />
-                </div>
-                <UpdatePassword passwordSubmenuOpen={passwordSubmenuOpen} />
-              </div>
-            ) : (
-              <>
                 {submenuOpen ? (
-                  <div className="account-details-header">
-                    <div className="menu-back" onClick={handleBackToMainMenu}>
-                      <BiArrowBack style={{ fontSize: "20px", color: 'white' }} />
-                    </div>
-                    <h1 className="menu-wrapper-image account-details-title">
-                      Account Details
-                    </h1>
-                    <div className="close-menu" onClick={handleClosemenu}>
-                      X
-                    </div>
+                 <div className="menu-wrapper-image">
+                  <h1  style={{ textAlign: "center",color:'white' }}>Account Details</h1>
+                  <div className="menu-account menu-back" onClick={handleBackFromSubmenu}>
+                  <BiArrowBack />
                   </div>
-                ) : (
+                  </div>
+                ) : passwordSubmenuOpen || deletepasswordOpen ? (
+                   <div className="menu-wrapper-image">
+                  
+                    {passwordSubmenuOpen ? <h1  style={{ textAlign: "center",color:'white' }}> Update Password</h1>:<h1 style={{ textAlign: "center",color:'white' }}>Delete Account</h1>}
+                   <div className="menu-account menu-back" onClick={handleBackFromPassword}>
+                   <BiArrowBack />
+                   </div>
+                   </div>
+                ): (
                   <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
                 )}
                 {menuOpen && (
-                  <div className={`menu-list ${submenuOpen ? "submenu-visible" : ""}`}>
+                  <div className={`menu-list ${submenuOpen ? "submenu-visible" : ""}  ${passwordSubmenuOpen || deletepasswordOpen ? "sub-submenu-visible" : ""}`}>
                     <div className="menu-list-item">
                       <div className="menu-text">
                         <h4>ACCOUNT</h4>
@@ -239,16 +245,21 @@ const Hamburger = () => {
                         </span>
                       </div>
                       <hr />
-                      <div className={`menu-link menu-text`}>
+                      <div className={`menu-link menu-text`} onClick={handleDeletePassword}>
                         Delete Account
                         <span>
                           <img src={RightArrow} alt="rightarrow Icon" />
                         </span>
                       </div>
                     </div>
+                    <div className={`submenu-password ${passwordSubmenuOpen || deletepasswordOpen ? "is-visible" : ""}`}>
+                      {deletepasswordOpen ?  <DeleteAccount />
+                       : <UpdatePassword />
+                      }
+                    </div>
                   </div>
-                )}
-              </>
+              
+        
             )}
           </div>
         </div>

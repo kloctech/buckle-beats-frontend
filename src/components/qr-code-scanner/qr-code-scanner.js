@@ -118,7 +118,9 @@ function QrCodeScanner() {
                 userData?.user_id ? (
                   ""
                 ) : (
-                  <img alt="qr-code" src={userData?.image_url} style={{ width: "160px", borderRadius: "80px" }} />
+                  <div className="qr-bg">
+                  <img alt="qr-code" src={userData?.image_url}  />
+                  </div>
                 )
               ) : (
                 <p style={{ color: "red" }}>{error}</p>
