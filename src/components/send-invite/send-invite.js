@@ -38,11 +38,13 @@ const SendInvite = () => {
   return (
     <div className="send-invite-main-container">
       <div className="send-invite-form">
-         <div className="send-invite-menu-back">
-      <BiArrowBack onClick={handleClick} style={{ fontSize: "20px", cursor:'pointer', color: "#ffffff", marginRight: '10rem' }} />
-      <h1 className="welcome-heading" style={{textAlign:'center' }}>Send Invite</h1>
-    </div>
-        <div>
+        <div className="menu-wrapper-image">
+         <h1 className="welcome-heading" style={{textAlign:'center' }}>Send Invite</h1>
+         <div className="menu-account menu-back" onClick={handleClick}>
+          <BiArrowBack  style={{ cursor:'pointer', color: "#ffffff" }} />
+         </div>
+       </div>
+
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* <h1 style={{ textAlign: "center" }}>Send Invite</h1> */}
 
@@ -81,7 +83,7 @@ const SendInvite = () => {
               Submit
             </button>
           </form>
-        </div>
+        
       </div>
     </div>
   );
