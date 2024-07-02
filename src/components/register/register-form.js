@@ -5,10 +5,10 @@ import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import "../../styles/register/register.scss";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import cat from "../../assets/Cat.gif";
+import cat from "../../assets/Cat-gif.gif";
 import bag from "../../assets/bagimage.gif";
-import dog from "../../assets/dog.gif";
-import cycle from "../../assets/Bicycle LT_1.gif";
+import cycle from "../../assets/Bicycle-gif.gif";
+import dog from "../../assets/dog-gif.gif";
 import toast from "react-hot-toast";
 import { FaCheckCircle } from "react-icons/fa";
 
@@ -53,13 +53,13 @@ const RegisterForm = () => {
   const getClassName = () => {
     switch (currentImageIndex) {
       case 0:
-        return "bag-icon";
+        return "bag-gif";
       case 1:
-        return "cycle-icon";
+        return "cycle-gif";
       case 2:
-        return "cat-icon";
+        return "cat-gif";
       case 3:
-        return "dog-icon";
+        return "dog-gif";
       default:
         return "";
     }
