@@ -18,7 +18,7 @@
   flex-wrap: wrap;
   grid-template-columns: repeat(2, 1fr);
   gap: 17px;
-  height:75vh;
+  max-height:75vh;
   // z-index: 2;
   justify-content: center;
   overflow-y: scroll;

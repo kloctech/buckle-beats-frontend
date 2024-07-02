@@ -54,15 +54,16 @@ const ManageProfile = () => {
     setDeleteProfile(true);
   };
 
-  const handleClick = (userId) => {
-    if (deleteProfile) {
-      setShowPopup(userId);
-    } else {
-      Cookies.set("userId", userId, { expires: accessTokenExpirationTime });
-      navigate("/");
-    }
-  };
-
+  // const handleClick = (userId, isOwner) => {
+  //   if (deleteProfile && !isOwner) {
+  //     setShowPopup(userId); // Open popup for deletion
+  //   } else {
+  //     if (!deleteProfile) {
+  //       Cookies.set("userId", userId, { expires: accessTokenExpirationTime });
+  //       navigate("/");
+  //     }
+  //   }
+  // };
   const handleInviteLink = () => {
     navigate("/send-invite");
   };
@@ -86,6 +87,18 @@ const ManageProfile = () => {
     }
   };
 
+  const handleProfileClick = (userId, isOwner) => {
+    if (!deleteProfile) {
+      Cookies.set("userId", userId, { expires: accessTokenExpirationTime });
+      navigate("/");
+    }
+  };
+  
+  const handleDeleteIconClick = (e, userId) => {
+    e.stopPropagation(); 
+    setShowPopup(userId);
+  };
+  
   return (
     <div className="login-container">
       <div className="manage-profile">
@@ -95,12 +108,12 @@ const ManageProfile = () => {
         </Link>
         <ul className="manage-profile-list">
           {profiles.map((item) => (
-            <li key={item._id} onClick={() => handleClick(item._id)}>
+            <li key={item._id} onClick={() => handleProfileClick(item._id, item.is_owner)}>
               <div className="manage-profile-bg">
                 <span>{item.name.charAt(0)}</span>
                 {item.is_owner === false && deleteProfile && (
                   <div className="manage-profile-icon">
-                    <FiMinusCircle />
+                    <FiMinusCircle onClick={(e) => handleDeleteIconClick(e, item._id)} />
                   </div>
                 )}
               </div>
@@ -137,6 +150,6 @@ const ManageProfile = () => {
       )}
     </div>
   );
-};
-
-export default ManageProfile;
+  
+}
+export default ManageProfile

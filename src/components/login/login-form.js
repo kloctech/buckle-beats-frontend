@@ -78,8 +78,9 @@ const LoginPage = () => {
       Cookies.set("accessToken", accessToken, { expires: accessTokenExpirationTime });
       Cookies.set("refreshToken", refreshToken, { expires: refreshTokenExpirationTime });
       Cookies.set("userId", response.data.user._id, { expires: accessTokenExpirationTime });
-      Cookies.set("userName", response?.data?.user?.name);
-      Cookies.set("userEmail", response?.data?.user?.email);
+      Cookies.set("userName", response?.data?.user?.name,{ expires: accessTokenExpirationTime });
+      Cookies.set("userEmail", response?.data?.user?.email,{ expires: accessTokenExpirationTime });
+      Cookies.set('loginUser',response.data.user._id, { expires: accessTokenExpirationTime })
       setLoading(false);
 
       navigate("/manage-profile", { state: { userId: response.data.user._id } });

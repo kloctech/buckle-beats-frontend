@@ -38,13 +38,15 @@ const SendInvite = () => {
   return (
     <div className="send-invite-main-container">
       <div className="send-invite-form">
-        <div className="menu-back send-invite-menu-back" >
-          <BiArrowBack onClick={handleClick} style={{ fontSize: "20px", color: "#ffff" }} />
-        </div>
-        <div>
+        <div className="menu-wrapper-image">
+         <h1 className="welcome-heading" style={{textAlign:'center' }}>Send Invite</h1>
+         <div className="menu-account menu-back" onClick={handleClick}>
+          <BiArrowBack  style={{ cursor:'pointer', color: "#ffffff" }} />
+         </div>
+       </div>
+
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* <h1 style={{ textAlign: "center" }}>Send Invite</h1> */}
-            <h1 className="welcome-heading">Send Invite</h1>
 
             <div className="form-group-reg password-container">
               <input
@@ -81,7 +83,7 @@ const SendInvite = () => {
               Submit
             </button>
           </form>
-        </div>
+        
       </div>
     </div>
   );

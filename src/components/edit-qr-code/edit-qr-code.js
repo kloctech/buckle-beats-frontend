@@ -7,6 +7,8 @@ import { BiArrowBack } from "react-icons/bi";
 import EnableQRCode from "../enable-qrcode/enable-qrcode";
 import "../../styles/add-edit-qrcode/add-edit-qrcode.scss";
 import Preloader from "../preloader/preloader";
+import Cookies from "js-cookie";
+
 
 const EditQRCode = () => {
   const [qrcode, setQRcode] = useState(null);
@@ -20,7 +22,8 @@ const EditQRCode = () => {
   const navigate = useNavigate();
 
   const url = process.env.REACT_APP_PRODUCTION_URL;
-
+  const userId = location.state?.userId || Cookies.get("userId");
+  const LoginId = location.state?.userId || Cookies.get("loginUser");
   const extractCountryCodeAndNumber = (mobileNumber) => {
     const match = mobileNumber.match(/^(\+\d{1,4})\s*(\d{10})$/);
     if (match) {
@@ -223,10 +226,14 @@ const EditQRCode = () => {
             {errors.default_message && <span className="error-message">{errors.default_message.message}</span>}
           </div>
 
-          <div className="button-row">
-            <button type="button" onClick={() => handleOpen("test")} className="cta-button delete-btn">
-              Delete
-            </button>
+          <div className="button-row" style={{ display: 'flex', justifyContent: userId === LoginId ? 'space-between' : 'center', alignItems: 'center' }}>
+            {
+              userId === LoginId ?  <button type="button" onClick={() => handleOpen("test")} className="cta-button delete-btn" 
+               >
+                Delete
+              </button>: null
+            }
+           
             <button
               type="submit"
               className="cta-button edit-btn"
