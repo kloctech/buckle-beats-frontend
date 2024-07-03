@@ -243,7 +243,7 @@ const EditQRCode = () => {
               }}
               disabled={!isEdited}
             >
-              Edit
+             Update
             </button>
           </div>
         </form>

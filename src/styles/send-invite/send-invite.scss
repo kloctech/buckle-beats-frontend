@@ -27,7 +27,7 @@
   .menu-wrapper-image {
     width: 100%;
     margin-bottom: 4.5rem;
-    padding: 0 1rem;
+    padding: 0 2rem;
     @media(min-width:440px){
       padding: 0 1.5rem;
       margin-right: 0;
@@ -75,12 +75,3 @@
 
 
 
-.message {
-  margin-top: 1rem;
-  color: green;
-}
-
-.error {
-  margin-top: 1rem;
-  color: $error-color
-}

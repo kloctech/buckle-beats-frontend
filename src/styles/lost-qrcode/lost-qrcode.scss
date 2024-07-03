@@ -5,7 +5,7 @@
   &-container {
     height: 100%;
     max-width: $max-width;
-    background-color: #222831;
+    background-color:$background-color;
     margin: auto;
     @include center-content;
     z-index: 1;
@@ -51,6 +51,7 @@
       font-weight: 400;
       text-align: center;
       margin-bottom: 0;
+      color: #183E51;
     }
   }
 
