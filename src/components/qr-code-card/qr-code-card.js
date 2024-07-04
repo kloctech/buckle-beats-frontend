@@ -6,6 +6,7 @@ import EnableQRCode from "../enable-qrcode/enable-qrcode";
 import { MdEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import api from "../../middleware/api";
+import DefaultQRCode from "../../assets/DefaultQrcode.png";
 
 const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, updateQrCodeStatus }) => {
   const [qrcode, setQRcode] = useState(null);
@@ -50,7 +51,7 @@ const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, up
   return (
     <div className="qr-code-card">
         <img 
-          src={qrCodeData?.image_url ? qrCodeData.image_url : "https://bucklebeats.qrplanet.com/q/yd6imn"} 
+          src={ qrCodeData.image_url || DefaultQRCode} 
           alt={qrCodeData?.name || "QR Code"} 
           className="qr-code-image" 
         />
