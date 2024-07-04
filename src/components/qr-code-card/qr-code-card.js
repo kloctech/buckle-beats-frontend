@@ -49,7 +49,11 @@ const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, up
 
   return (
     <div className="qr-code-card">
-      <img src={qrCodeData?.image_url} alt={qrCodeData.name} className="qr-code-image" />
+        <img 
+          src={qrCodeData?.image_url ? qrCodeData.image_url : "https://bucklebeats.qrplanet.com/q/yd6imn"} 
+          alt={qrCodeData?.name || "QR Code"} 
+          className="qr-code-image" 
+        />
       <h5 style={{ fontSize: "12px", color: "#1B3E51", marginTop: "6px", fontWeight: "640" }}>{qrCodeData?.name}</h5>
       <div className="edit-detail">
         <MdEdit onClick={handleEdit} />

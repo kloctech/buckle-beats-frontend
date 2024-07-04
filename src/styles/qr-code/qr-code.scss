@@ -29,7 +29,7 @@
     height: auto;
   }
   @media screen and (max-width:500px) {
-    height:69vh;
+    max-height:69vh;
   }
   &.no-qr-codes {
     display: flex;

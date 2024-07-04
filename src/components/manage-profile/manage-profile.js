@@ -51,7 +51,7 @@ const ManageProfile = () => {
   const accessTokenExpirationTime = 1;
 
   const handleDeleteProfile = () => {
-    setDeleteProfile(true);
+    setDeleteProfile(!deleteProfile);
   };
 
   // const handleClick = (userId, isOwner) => {
@@ -108,8 +108,8 @@ const ManageProfile = () => {
         </Link>
         <ul className="manage-profile-list">
           {profiles.map((item) => (
-            <li key={item._id} onClick={() => handleProfileClick(item._id, item.is_owner)}>
-              <div className="manage-profile-bg">
+            <li key={item._id} >
+              <div className="manage-profile-bg" onClick={() => handleProfileClick(item._id, item.is_owner)}>
                 <span>{item.name.charAt(0)}</span>
                 {item.is_owner === false && deleteProfile && (
                   <div className="manage-profile-icon">
@@ -120,8 +120,8 @@ const ManageProfile = () => {
               <h4>{item.name}</h4>
             </li>
           ))}
-          <li className="invite" onClick={handleInviteLink}>
-            <div className="manage-profile-bg">
+          <li className="invite" >
+            <div className="manage-profile-bg" onClick={handleInviteLink}>
               <span>Invite</span>
             </div>
           </li>

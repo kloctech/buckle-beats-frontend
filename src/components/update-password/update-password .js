@@ -6,12 +6,14 @@ import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import { useNavigate } from "react-router-dom";
 import "../../styles/update-passwor/update-password.scss";
+import { CircularProgress } from "@mui/material";
 
 const UpdatePassword = () => {
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+  const [loading, setLoading] = useState(false);
+  
   const navigate = useNavigate();
 
   const {
@@ -26,6 +28,7 @@ const UpdatePassword = () => {
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[.!@$%^&*])[^\s]{8,}$/;
 
   const handlePasswordUpdate = async (data) => {
+    setLoading(true)
     const payload = {
       oldPassword: data.oldPassword,
       newPassword: data.newPassword,
@@ -34,9 +37,11 @@ const UpdatePassword = () => {
       const response = await api.post(`${process.env.REACT_APP_PRODUCTION_URL}/api/user/change-password`, payload);
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       reset();
+      setLoading(false)
       navigate("/");
     } catch (error) {
       toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
+      setLoading(false)
     }
   };
   return (
@@ -50,7 +55,7 @@ const UpdatePassword = () => {
               required: "Old Password is required",
               pattern: {
                 value: passwordRegex,
-                message: "Password must be at least 8 characters long and contain a digit, an uppercase letter, and a special character.",
+                message: "Password must be at least 8 characters long and contains a digit, an uppercase letter, and a special character.",
               },
             })}
           />
@@ -90,7 +95,7 @@ const UpdatePassword = () => {
           </div>
           {errors.confirmPassword && <p className="err-msg">{errors.confirmPassword.message}</p>}
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit">{loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "Submit"}</button>
       </form>
     </div>
   );

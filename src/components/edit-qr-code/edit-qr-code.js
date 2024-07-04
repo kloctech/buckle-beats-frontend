@@ -8,6 +8,7 @@ import EnableQRCode from "../enable-qrcode/enable-qrcode";
 import "../../styles/add-edit-qrcode/add-edit-qrcode.scss";
 import Preloader from "../preloader/preloader";
 import Cookies from "js-cookie";
+import { CircularProgress } from "@mui/material";
 
 
 const EditQRCode = () => {
@@ -15,7 +16,7 @@ const EditQRCode = () => {
   const [activeId, setActiveId] = useState(null);
   const [initialValues, setInitialValues] = useState({});
   const [categoryList, setCategoryList] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const location = useLocation();
   const { qrCodeData } = location.state || {};
@@ -88,7 +89,8 @@ const EditQRCode = () => {
 
   const isEdited = Object.keys(initialValues).some((key) => watchedValues[key] !== initialValues[key]);
 
-  const onSubmitAddQRForm = async (data) => {
+  const onSubmitEditQRForm = async (data) => {
+    setLoading(true);
     const mobile_number = `${data.countryCode} ${data.mobile_number}`;
     const payload = {
       name: data?.name,
@@ -101,9 +103,11 @@ const EditQRCode = () => {
     try {
       const response = await api.put(`${url}/api/qrcode/${qrCodeData?.qr_planet_id}`, payload);
       toast.success(response?.data?.resultMessage?.en, { duration: 5000 });
+      setLoading(false)
       navigate("/");
     } catch (error) {
       toast.error(error?.response?.data?.resultMessage?.en);
+      setLoading(false);
     }
   };
 
@@ -144,11 +148,10 @@ const EditQRCode = () => {
   if (loading) {
     return <Preloader />;
   }
-
   return (
     <div className="login-main-container edit-qr">
       <div className="login-container">
-        <form onSubmit={handleSubmit(onSubmitAddQRForm)} className="login-form">
+        <form onSubmit={handleSubmit(onSubmitEditQRForm)} className="login-form">
           <div className="header-container">
             <BiArrowBack style={{ color: "#ffffff", fontSize: "20px", cursor: "pointer", marginBottom: "10px" }} onClick={handleClick} />
             <div style={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
@@ -243,7 +246,7 @@ const EditQRCode = () => {
               }}
               disabled={!isEdited}
             >
-             Update
+              {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "Update"}
             </button>
           </div>
         </form>
