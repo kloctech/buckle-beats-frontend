@@ -79,9 +79,12 @@
         background-color: #fff;
        }
       .input-field, button{
-        margin-bottom:1.5rem;
+       
         max-width: none!important;
         width:100%;
+    }
+    .input-field {
+      margin-bottom:1.5rem;
     }
   }
   .delete-menu{
@@ -105,4 +108,7 @@
   
   color: $error-color;
   font-size: $font-size-small;
+  }
+  .delete-menu-page{
+    height:100%;
   }

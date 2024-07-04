@@ -6,6 +6,9 @@
   //    align-items: center;
   //  justify-content: center;
   background-color: #f4f4f4;
+  display: flex;
+    height: 100%;
+    width: 100%;
 }
 
 @media screen and (max-width:'550px') {
@@ -16,13 +19,14 @@
 
 .send-invite-form {
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-  max-width: 350px;
-  background: $background-color;
-  padding: 0;
-  margin: auto;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background: #183e51;
+    padding: 0;
+    max-width: 350px;
+    margin: auto;
 
   .menu-wrapper-image {
     width: 100%;

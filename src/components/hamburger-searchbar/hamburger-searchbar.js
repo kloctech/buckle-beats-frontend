@@ -252,7 +252,7 @@ const Hamburger = () => {
                         </span>
                       </div>
                     </div>
-                    <div className={`submenu-password ${passwordSubmenuOpen || deletepasswordOpen ? "is-visible" : ""}`}>
+                    <div className={`submenu-password ${deletepasswordOpen ? "delete-menu-page" :""} ${passwordSubmenuOpen || deletepasswordOpen ? "is-visible" : ""}`}>
                       {deletepasswordOpen ?  <DeleteAccount />
                        : <UpdatePassword />
                       }
