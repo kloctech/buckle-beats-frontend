@@ -82,6 +82,7 @@ const ManageProfile = () => {
       });
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       getProfiles(); // Refresh profiles list
+      setDeleteProfile(false)
     } catch (error) {
       toast.error(error.response.data.resultMessage.en);
     }
@@ -145,6 +146,7 @@ const ManageProfile = () => {
           buttonText="Yes"
           showSecondarybtn
           handleClose={handleClose}
+          deleteProfile={deleteProfile}
           userId={showPopup}
         />
       )}
