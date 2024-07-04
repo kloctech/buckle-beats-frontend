@@ -5,6 +5,7 @@ import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
+import { CircularProgress } from "@mui/material";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +24,7 @@ const DeleteAccount = () => {
   });
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
   const handleCheckboxChange = (e) => {
     setCheckboxes({
@@ -53,6 +55,7 @@ const DeleteAccount = () => {
 
   const onSubmit = async (data) => {
     const token =  Cookies.get("accessToken");
+    setLoading(true)
 
     try {
       const response = await axios.delete(
@@ -74,12 +77,14 @@ const DeleteAccount = () => {
       Cookies.remove("userEmail")
 
       toast.success(response?.data?.resultMessage?.en, { duration: 5000 });
+      setLoading(false)
       navigate('/register')
       }
      
 
     } catch (error) {
       toast.error(error?.response?.data?.resultMessage?.en);
+      setLoading(false)
     }
   };
   return (
@@ -133,7 +138,7 @@ const DeleteAccount = () => {
               pattern: {
                 value: passwordRegex,
                 message:
-                  "Password must be at least 8 characters, contain a digit, an uppercase letter, and a special character.",
+                  "Password must be at least 8 characters, contains a digit, an uppercase letter, and a special character.",
               },
             })}
             value={password}
@@ -159,7 +164,7 @@ const DeleteAccount = () => {
           disabled={!allChecked || !password}
           style={{ cursor: allChecked && password ? "pointer" : "not-allowed" }}
         >
-          I Agree. Delete.
+          {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "I Agree.Delete"}
         </button>
       </form>
     </div>

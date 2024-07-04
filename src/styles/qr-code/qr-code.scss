@@ -28,6 +28,9 @@
   @media screen and (max-width:1025px){
     height: auto;
   }
+  @media screen and (max-width:500px) {
+    max-height:69vh;
+  }
   &.no-qr-codes {
     display: flex;
   }

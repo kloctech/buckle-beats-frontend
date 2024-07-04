@@ -51,7 +51,6 @@
        display: flex;
        flex-direction: column;
        align-items: center;
-       cursor: pointer;
       .manage-profile-bg {
         width: 85px;
         height: 85px;
@@ -59,6 +58,7 @@
         border-radius: 50%;
         position: relative;
         border: 6px solid #293d41;    
+        cursor: pointer;
       }
       &:nth-child(4n+2) .manage-profile-bg,
       &:nth-child(4n+3) .manage-profile-bg{

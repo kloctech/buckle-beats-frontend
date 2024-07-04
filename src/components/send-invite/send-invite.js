@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import api from "../../middleware/api";
 import { useForm } from "react-hook-form";
 // import Cookies from "js-cookie";
@@ -6,6 +6,7 @@ import "../../styles/send-invite/send-invite.scss";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
+import { CircularProgress } from "@mui/material";
 
 const SendInvite = () => {
   const {
@@ -16,19 +17,22 @@ const SendInvite = () => {
 
     formState: { errors },
   } = useForm();
-
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
   const onSubmit = async (data) => {
     const url = process.env.REACT_APP_PRODUCTION_URL;
+    setLoading(true)
     try {
       const response = await api.post(`${url}/api/user/send-invite-link`, { ...data });
       toast.success(response.data.resultMessage.en, { duration: 5000 });
+      setLoading(false)
       reset();
       navigate("/manage-profile");
     } catch (error) {
       toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
+      setLoading(false)  
     }
   };
 
@@ -80,7 +84,7 @@ const SendInvite = () => {
               {errors.email && <span className="error">{errors.email.message}</span>}
             </div>
             <button className="button" type="submit">
-              Submit
+            {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "Send"}
             </button>
           </form>
         

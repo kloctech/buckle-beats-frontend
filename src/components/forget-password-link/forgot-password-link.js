@@ -46,7 +46,7 @@ const ForgotPasswordLink = () => {
             />
             {errors.email && <p className="error">{errors.email.message}</p>}
           </div>
-          <button className="button" type="submit">
+          <button className="for-got-password-button" type="submit">
             Submit
           </button>
           <p className="Login">

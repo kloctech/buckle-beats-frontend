@@ -100,7 +100,7 @@ const navigate = useNavigate ()
             </button>
             {errors.password && <span className="error">{errors.password.message}</span>}
           </div>
-          <div className={`password-container form-group ${errors.password ? "with-error" : ""}`}>
+          <div className={`password-container form-group ${errors.password?.message  && errors?.password.message !== "Password is required" ? "with-error" : "" ? "with-error" : ""}`}>
             <input
               className="input-box"
               type={confirmPasswordVisible ? 'text' : 'password'}
@@ -120,7 +120,7 @@ const navigate = useNavigate ()
             </button>
             {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
           </div>
-          <button className="button" type="submit">
+          <button className="for-got-password-button" type="submit">
             Submit
           </button>
         </form>

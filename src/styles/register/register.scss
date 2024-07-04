@@ -81,7 +81,9 @@
 }
 
 .background-iamge-container-tyres {
+
   @include backgroudImageContainer("../../assets/tyre path@512p-25fps.gif", 0px, 30vh);
+  background-size: 33vh;
 }
 
 .background-iamge-container-steps {
@@ -161,12 +163,10 @@ margin-top: auto;
   }
 
   .background-iamge-container-paws {
-    left: -65px;
+    left: -24px;
     background-size: 44vh;
   }
-  .background-iamge-container-steps{
-    left: -160px;
-  }
+
 }
 
 .Login{

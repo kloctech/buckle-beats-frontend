@@ -185,13 +185,13 @@ const Hamburger = () => {
                           )}
                         </div>
                         <div className={`menu-link`} onClick={handleClickNavigateProfiles} style={{ marginTop: "10px" }}>
-                          <p>Switch Profile</p>
+                          Switch Profile
                           <span>
                             <img src={RightArrow} alt="rightarrow Icon" />
                           </span>
                         </div>
                       </div>
-                      <div className="menu-text">
+                      <div className="menu-text" style={{ marginTop: "1rem" }}>
                         <h4>QRs</h4>
                         <div className="menu-link" onClick={() => handleMenuItemClick("qr-codes-screen")}>
                           Activate & Manage QRs
@@ -206,7 +206,7 @@ const Hamburger = () => {
                             </span>
                           </div>
                         </div>
-                        <div className="menu-text" style={{ marginTop: "10px" }}>
+                        <div className="menu-text" style={{ marginTop: "1rem" }}>
                           <h4> SUPPORT</h4>
                           <div className={`menu-link`}>
                             Contact US
@@ -252,7 +252,7 @@ const Hamburger = () => {
                         </span>
                       </div>
                     </div>
-                    <div className={`submenu-password ${passwordSubmenuOpen || deletepasswordOpen ? "is-visible" : ""}`}>
+                    <div className={`submenu-password ${deletepasswordOpen ? "delete-menu-page" :""} ${passwordSubmenuOpen || deletepasswordOpen ? "is-visible" : ""}`}>
                       {deletepasswordOpen ?  <DeleteAccount />
                        : <UpdatePassword />
                       }

@@ -82,7 +82,7 @@ const SetPassword = () => {
                 required: "Password is required",
                 pattern: {
                   value: passwordRegex,
-                  message: "Password must be at least 8 characters long, contain a digit, an uppercase letter, a lowercase letter, and a special character",
+                  message: "Password must be at least 8 characters long, contains a digit, an uppercase letter, a lowercase letter, and a special character",
                 },
               })}
               placeholder="New Password"
@@ -108,7 +108,7 @@ const SetPassword = () => {
             </button>
             {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
           </div>
-          <button className="button" type="submit">
+          <button className="for-got-password-button" type="submit">
             Submit
           </button>
         </form>

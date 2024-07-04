@@ -6,6 +6,7 @@ import EnableQRCode from "../enable-qrcode/enable-qrcode";
 import { MdEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import api from "../../middleware/api";
+import DefaultQRCode from "../../assets/DefaultQrcode.png";
 
 const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, updateQrCodeStatus }) => {
   const [qrcode, setQRcode] = useState(null);
@@ -49,7 +50,11 @@ const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, up
 
   return (
     <div className="qr-code-card">
-      <img src={qrCodeData?.image_url} alt={qrCodeData.name} className="qr-code-image" />
+        <img 
+          src={ qrCodeData.image_url || DefaultQRCode} 
+          alt={qrCodeData?.name || "QR Code"} 
+          className="qr-code-image" 
+        />
       <h5 style={{ fontSize: "12px", color: "#1B3E51", marginTop: "6px", fontWeight: "640" }}>{qrCodeData?.name}</h5>
       <div className="edit-detail">
         <MdEdit onClick={handleEdit} />

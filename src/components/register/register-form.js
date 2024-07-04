@@ -11,12 +11,14 @@ import cycle from "../../assets/Bicycle-gif.gif";
 import dog from "../../assets/dog-gif.gif";
 import toast from "react-hot-toast";
 import { FaCheckCircle } from "react-icons/fa";
+import { CircularProgress } from "@mui/material";
 
 const RegisterForm = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isRegistred, setIsRegistred] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -92,7 +94,7 @@ const RegisterForm = () => {
 
   const onFormSubmit = async (data) => {
     const url = process.env.REACT_APP_PRODUCTION_URL;
-
+  setLoading(true);
     try {
       const response = await api.post(`${url}/api/user`, {
         name: data.name,
@@ -105,8 +107,10 @@ const RegisterForm = () => {
       });
       reset();
       setIsRegistred(true);
+      setLoading(false);
     } catch (error) {
       toast.error(error.response.data.resultMessage.en, { duration: 5000 });
+      setLoading(false);
     }
   };
 
@@ -181,7 +185,7 @@ const RegisterForm = () => {
               <img alt="dog" className={`${getClassName()}`} src={images[currentImageIndex]}></img>
             </div>
             <button type="submit" className="register-button">
-              SignUp
+            {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "SignUp"}
             </button>
             <p className="Login">
               <Link to="/Login">Already have an accout? Login</Link>
