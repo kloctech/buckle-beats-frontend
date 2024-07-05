@@ -20,7 +20,8 @@ const SetPassword = () => {
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  const [token, setToken] = useState("");
+  const [ownerToken, setOwnerToken] = useState("");
+  const [coOwnerToken, setCoOwnerToken] = useState("");
   const [code, setCode] = useState("");
 
   const password = watch("password");
@@ -28,7 +29,8 @@ const SetPassword = () => {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
-    setToken(searchParams.get("token"));
+    setOwnerToken(searchParams.get("owner-token"));
+    setCoOwnerToken(searchParams.get("co-owner-token"));
     setCode(searchParams.get("code"));
   }, []);
 
@@ -57,7 +59,7 @@ const SetPassword = () => {
     const url = process.env.REACT_APP_PRODUCTION_URL;
 
     try {
-      const response = await axios.post(`${url}/api/user/set-password`, { password: data.password, code: code, token: token });
+      const response = await axios.post(`${url}/api/user/set-password`, { password: data.password, code, ownerToken, coOwnerToken });
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       reset();
       navigate("/login");
@@ -92,7 +94,7 @@ const SetPassword = () => {
             </button>
             {errors.password && <span className="error">{errors.password.message}</span>}
           </div>
-          <div className={`password-container form-group ${errors.password && errors?.password?.message !=="Password is required" ? "with-error" : ""}`}>
+          <div className={`password-container form-group ${errors.password && errors?.password?.message !== "Password is required" ? "with-error" : ""}`}>
             <input
               className="input-box"
               type={confirmPasswordVisible ? "text" : "password"}
