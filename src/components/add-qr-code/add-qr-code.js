@@ -91,7 +91,7 @@ const AddQRCode = () => {
                 id="mobile_number"
                 placeholder="Mobile"
                 {...register("mobile_number", {
-                  required: false,
+                  required: "Mobile Number is required",
                   pattern: {
                     value: /^[0-9]{10}$/,
                     message: "Invalid mobile number",
@@ -103,7 +103,7 @@ const AddQRCode = () => {
             <div className="form-group-login select-group">
               <select
                 {...register("category", {
-                  required: false,
+                  required: "Category is required",
                 })}
                 defaultValue=""
               >
@@ -116,6 +116,8 @@ const AddQRCode = () => {
                   </option>
                 ))}
               </select>
+              {errors.category && <span className="error-message">{errors.category.message}</span>}
+
             </div>
             <div>
               <textarea
@@ -124,9 +126,12 @@ const AddQRCode = () => {
                 id="default_message"
                 name="default_message"
                 placeholder="Leave a note here, such as allergy information or care instructions. If your item is lost, this will help the finder take proper care of it and ensure its safe return"
-                {...register("default_message", { required: false })}
+                {...register("default_message", { required: "Default Message is required" })}
               />
+
             </div>
+            {errors?.default_message && <span className="error-message-add-edit-qr-code">{errors.default_message.message}</span>}
+
             <div className="button-container">
               <button onClick={() => navigate("/")} type="button" className="cta-button delete-btn">
                 Cancel

@@ -215,18 +215,24 @@ const EditQRCode = () => {
           </div>
 
           <div className="form-group-login select-group">
-            <select {...register("category")}>
+            <select {...register("category", {
+                  required: "Category is required",
+                })}>
               {categoryList?.map((category, index) => (
                 <option key={index} value={category.name}>
                   {category.name}
                 </option>
               ))}
             </select>
+            {errors.category && <span className="error-message">{errors.category.message}</span>}
+
           </div>
 
           <div>
-            <textarea rows="4" className="add-qr-box" name="default_message" placeholder="Default Message" {...register("default_message")} />
-            {errors.default_message && <span className="error-message">{errors.default_message.message}</span>}
+            <textarea rows="4" className="add-qr-box" name="default_message"                 
+            placeholder="Leave a note here, such as allergy information or care instructions. If your item is lost, this will help the finder take proper care of it and ensure its safe return"
+            {...register("default_message", { required: "Default Message is required" })}/>
+            {errors.default_message && <span className="error-message-add-edit-qr-code">{errors.default_message.message}</span>}
           </div>
 
           <div className="button-row" style={{ display: 'flex', justifyContent: userId === LoginId ? 'space-between' : 'center', alignItems: 'center' }}>

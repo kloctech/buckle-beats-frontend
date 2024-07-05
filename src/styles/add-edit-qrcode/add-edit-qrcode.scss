@@ -12,7 +12,7 @@
     padding: 1rem 1rem;
     border: 1px solid #FFC857;
     border-radius: 4px;
-    margin-bottom: 1rem;
+    // margin-bottom: 1rem;
     width: calc(100% - 5px);
 
     &::placeholder {
@@ -65,7 +65,7 @@
     padding: 1.5rem 1rem;
     border: 1px solid #FFC857;
     border-radius: 4px;
-    margin-bottom: 2rem;
+    // margin-bottom: 2rem;
     width: calc(100% - 5px);
 
     p {
@@ -152,6 +152,7 @@
 .button-container {
   display: flex;
   justify-content: space-between;
+  margin-top: 2rem;
 }
 .disabled-btn {
   background-color: $hover-color;
@@ -168,4 +169,12 @@
     width: 100%;
     padding: 10px;
   }
+}
+.error-message-add-edit-qr-code{
+
+  color:$error-color;
+  margin-bottom:1rem;
+  font-size: 12px;
+  margin-bottom: -1.4rem;
+
 }
