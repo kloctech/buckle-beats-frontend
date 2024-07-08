@@ -236,26 +236,30 @@ const EditQRCode = () => {
             {errors.default_message && <span className="error-message-add-edit-qr-code">{errors.default_message.message}</span>}
           </div>
 
-          <div className="button-row" style={{ display: 'flex', justifyContent: userId === LoginId ? 'space-between' : 'center', alignItems: 'center' }}>
-            {
-              userId === LoginId ?  <button type="button" onClick={() => handleOpen("test")} className="cta-button delete-btn" 
-               >
-                Delete
-              </button>: null
-            }
-           
-            <button
-              type="submit"
-              className="cta-button edit-btn"
-              style={{
-                backgroundColor: isEdited ? "" : "#5aa895",
-                cursor: isEdited ? "pointer" : "not-allowed",
-              }}
-              disabled={!isEdited}
-            >
-              {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "Update"}
-            </button>
-          </div>
+  <div className="button-row" style={{ display: 'flex', justifyContent: qrCodeData?.user_id === LoginId ? 'space-between' : 'center', alignItems: 'center' }}>
+  {qrCodeData?.user_id === LoginId && (
+    <button type="button" onClick={() => handleOpen("test")} className="cta-button delete-btn">
+      Delete
+    </button>
+  )}
+
+  <button
+    type="submit"
+    className="cta-button edit-btn"
+    style={{
+      backgroundColor: isEdited ? "" : "#5aa895",
+      cursor: isEdited ? "pointer" : "not-allowed",
+    }}
+    disabled={!isEdited}
+  >
+    {loading ? (
+      <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} />
+    ) : (
+      "Update"
+    )}
+  </button>
+</div>
+
         </form>
       </div>
 
