@@ -19,7 +19,6 @@ const EditQRCode = () => {
   const location = useLocation();
   const { qrCodeData } = location.state || {};
   const navigate = useNavigate();
-  const userId = location.state?.userId || Cookies.get("userId");
   const LoginId = location.state?.userId || Cookies.get("loginUser");
 
   const url = process.env.REACT_APP_PRODUCTION_URL;
