@@ -4,27 +4,26 @@ import api from "../../middleware/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { BiArrowBack } from "react-icons/bi";
+import { CircularProgress } from "@mui/material";
 import EnableQRCode from "../enable-qrcode/enable-qrcode";
 import "../../styles/add-edit-qrcode/add-edit-qrcode.scss";
 import Preloader from "../preloader/preloader";
 import Cookies from "js-cookie";
-import { CircularProgress } from "@mui/material";
-
-
 const EditQRCode = () => {
   const [qrcode, setQRcode] = useState(null);
   const [activeId, setActiveId] = useState(null);
   const [initialValues, setInitialValues] = useState({});
   const [categoryList, setCategoryList] = useState([]);
-  const [loading, setLoading] = useState(false);
-
+  const [loading, setLoading] = useState(true);
+ 
   const location = useLocation();
   const { qrCodeData } = location.state || {};
   const navigate = useNavigate();
-
-  const url = process.env.REACT_APP_PRODUCTION_URL;
   const userId = location.state?.userId || Cookies.get("userId");
   const LoginId = location.state?.userId || Cookies.get("loginUser");
+
+  const url = process.env.REACT_APP_PRODUCTION_URL;
+
   const extractCountryCodeAndNumber = (mobileNumber) => {
     const match = mobileNumber.match(/^(\+\d{1,4})\s*(\d{10})$/);
     if (match) {
@@ -89,8 +88,8 @@ const EditQRCode = () => {
 
   const isEdited = Object.keys(initialValues).some((key) => watchedValues[key] !== initialValues[key]);
 
-  const onSubmitEditQRForm = async (data) => {
-    setLoading(true);
+  const onSubmitAddQRForm = async (data) => {
+    setLoading(false)
     const mobile_number = `${data.countryCode} ${data.mobile_number}`;
     const payload = {
       name: data?.name,
@@ -106,8 +105,9 @@ const EditQRCode = () => {
       setLoading(false)
       navigate("/");
     } catch (error) {
+      setLoading(false)
+
       toast.error(error?.response?.data?.resultMessage?.en);
-      setLoading(false);
     }
   };
 
@@ -148,10 +148,11 @@ const EditQRCode = () => {
   if (loading) {
     return <Preloader />;
   }
+
   return (
     <div className="login-main-container edit-qr">
       <div className="login-container">
-        <form onSubmit={handleSubmit(onSubmitEditQRForm)} className="login-form">
+        <form onSubmit={handleSubmit(onSubmitAddQRForm)} className="login-form">
           <div className="header-container">
             <BiArrowBack style={{ color: "#ffffff", fontSize: "20px", cursor: "pointer", marginBottom: "10px" }} onClick={handleClick} />
             <div style={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
