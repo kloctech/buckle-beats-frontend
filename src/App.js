@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "./components/login/login-form";
+import DesktopLoginPage from "./components/desktop-login-page/desktop-login-page";
 import RegisterForm from "./components/register/register-form";
 // import { ThemeProvider } from "./theme-context";
 // import Navbar from "./components/navbar/navbar";
@@ -18,10 +19,12 @@ import { Toaster } from "react-hot-toast";
 import LostQRCode from "./components/lost-qrcode/lost-qrcode";
 import SetPassword from "./components/set-password/set-password";
 import LinkingCoowner from "./components/linking-co-owner/linking-co-owner";
+import { useMediaQuery } from 'react-responsive';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
-
+  const isDesktop = useMediaQuery({ minDeviceWidth: 767 });
+  const isMobile = useMediaQuery({ maxDeviceWidth: 766 });
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -38,7 +41,12 @@ const App = () => {
     <Router>
       <Toaster />
       <Routes>
+        {isDesktop && 
+        <Route path="/login" element={<DesktopLoginPage />} />
+        }
+        {isMobile && 
         <Route path="/login" element={<LoginPage />} />
+        }
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/account" element={<VerifyEmail />} />
         <Route path = '/additional-user' element=  {<LinkingCoowner/>} />

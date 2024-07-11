@@ -1,0 +1,113 @@
+.desktop {
+  &-main {
+    &-content {
+      display: flex;
+      height: 100%;
+    }
+    &-page {
+      background-color: #183e51;
+      padding: 1.5rem 3rem;
+      height: 100%;
+      overflow: hidden;
+
+      .background-common-styles,
+      .login-form img {
+        display: none;
+      }
+
+      .form-group-login input {
+        border-color: #000;
+        width:100%;
+        font-size: 14px;
+        &::placeholder{
+          color:#000;
+        }
+        &:focus, &:focus-visible{
+          outline:0;
+        }
+      }
+
+      .login-container {
+        background: #fff;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        height: 24em;
+        margin: -12.8125em 0 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        max-width: none;
+        overflow: hidden;
+        border-radius: 15px;
+      }
+      .login-main-container {
+        height: 100%;
+        position: static;
+      }
+      .login-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        .welcome-heading{
+          color: #183E51;
+        }
+        .signup-navigation-text{
+          display: none;
+        }
+        .forgot-password-login a{
+          color: #183D50;
+        }
+        .login-button{
+          margin-top: 1.5rem;
+          border: 1px solid #58d7b5;
+        }
+      }
+    }   
+  }
+  &-login-container {
+    height: 100%;
+    position: relative;
+    width: 295px;
+  }
+  &-login-list {
+    width: 55%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 2rem;
+    margin-top: -17em;
+    margin-left: auto;
+    margin-right: auto;
+    @media(min-width:1200px) {
+      padding-left: 6rem;
+    }
+    img{
+      width: 100%;
+    }
+  }
+}
+
+@media(min-width:1400px) {
+  .desktop {
+    &-main-page {
+      padding: 1.5rem 5rem;
+
+      .login-container {
+        border-radius: 23px;
+        height: 38em;
+        margin: -17.8125em 0 0;
+      }
+    }
+
+    &-login-container {
+      padding-left: 20px;
+      width: 360px;
+    }
+    &-login-list {
+      margin-top: -13em;
+    }
+  }
+}
