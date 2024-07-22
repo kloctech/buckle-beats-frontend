@@ -22,7 +22,6 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-  // const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -65,7 +64,6 @@ const LoginPage = () => {
   const onSubmitLoginForm = async (data) => {
     const API = `${process.env.REACT_APP_PRODUCTION_URL}/api/user/login`;
     setLoading(true);
-    // setMessage("");
     const accessTokenExpirationTime = 7;
     const refreshTokenExpirationTime = 7;
 
@@ -78,15 +76,14 @@ const LoginPage = () => {
       Cookies.set("accessToken", accessToken, { expires: accessTokenExpirationTime });
       Cookies.set("refreshToken", refreshToken, { expires: refreshTokenExpirationTime });
       Cookies.set("userId", response.data.user._id, { expires: accessTokenExpirationTime });
-      Cookies.set("userName", response?.data?.user?.name,{ expires: accessTokenExpirationTime });
-      Cookies.set("userEmail", response?.data?.user?.email,{ expires: accessTokenExpirationTime });
-      Cookies.set('loginUser',response.data.user._id, { expires: accessTokenExpirationTime })
+      Cookies.set("userName", response?.data?.user?.name, { expires: accessTokenExpirationTime });
+      Cookies.set("userEmail", response?.data?.user?.email, { expires: accessTokenExpirationTime });
+      Cookies.set("loginUser", response.data.user._id, { expires: accessTokenExpirationTime });
       setLoading(false);
 
       navigate("/manage-profile", { state: { userId: response.data.user._id } });
     } catch (error) {
-      // setMessage(error.response.data.resultMessage.en);
-      toast.error(error.response.data.resultMessage.en, { duration: 5000 });
+      toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
       setLoading(false);
     }
   };
@@ -140,7 +137,9 @@ const LoginPage = () => {
           <p className={`forgot-password-login ${errors.password ? "error-margin" : ""}`}>
             <Link to="/forgot-password-link">Forgot password?</Link>
           </p>
-          <img src={images[currentImageIndex]} className={`${getImageClassName()}`} alt="cycling images" />
+          <div style={{ height: "80px", position: "relative" }}>
+            <img style={{ position: "absolute", bottom: "0", left: "0" }} src={images[currentImageIndex]} className={`${getImageClassName()}`} alt="cycling images" />
+          </div>
           <button className="login-button" type="submit">
             {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "Login"}
           </button>

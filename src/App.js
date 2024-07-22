@@ -2,12 +2,6 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "./components/login/login-form";
 import RegisterForm from "./components/register/register-form";
-// import { ThemeProvider } from "./theme-context";
-// import Navbar from "./components/navbar/navbar";
-// import Home from "./pages/home";
-// import Blog from "./pages/blog";
-// import About from "./pages/about";
-// import BackgroundChanger from "./components/home/home";
 import Preloader from "./components/preloader/preloader";
 import NotFound from "./components/not-found/not-found";
 import VerifyEmail from "./components/verify-email/verify-email";
@@ -41,7 +35,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/account" element={<VerifyEmail />} />
-        <Route path = '/additional-user' element=  {<LinkingCoowner/>} />
+        <Route path="/additional-user" element={<LinkingCoowner />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/forgot-password-link" element={<ForgotPasswordLink />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
