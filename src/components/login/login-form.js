@@ -103,7 +103,7 @@ const LoginPage = () => {
               {...register("email", {
                 required: "Email is required",
                 pattern: {
-                  value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^\s]{8,32}$/,
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/,
                   message: "Invalid email address",
                 },
               })}
@@ -123,7 +123,7 @@ const LoginPage = () => {
                   message: "Password must be at least 8 characters long",
                 },
                 pattern: {
-                  value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[.!@$%^&*])[^\s]{8,}$/,
+                  value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^\s]{8,}$/,
                   message: "Password needs a number, an uppercase letter, and a symbol.",
                 },
               })}
