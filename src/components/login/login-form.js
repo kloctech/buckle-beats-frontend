@@ -4,10 +4,10 @@ import "../../styles/login/login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
-import cat from "../../assets/Cat-gif.gif";
+import cat from "../../assets/Cat.gif";
 import bag from "../../assets/bagimage.gif";
-import cycle from "../../assets/Bicycle-gif.gif";
-import dog from "../../assets/dog-gif.gif";
+import cycle from "../../assets/Bicycle LT_1.gif";
+import dog from "../../assets/dog.gif";
 import { CircularProgress } from "@mui/material";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
@@ -103,7 +103,7 @@ const LoginPage = () => {
               {...register("email", {
                 required: "Email is required",
                 pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/,
+                  value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^\s]{8,32}$/,
                   message: "Invalid email address",
                 },
               })}
