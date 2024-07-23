@@ -48,35 +48,31 @@
 .background-paws {
   background-image: url("../../assets/Paws.gif");
   background-size: 45vh;
-  margin-left: -45px;
 }
 
 .bag-gif {
   height: 100px;
   margin-bottom: -20px;
   background-size: cover;
-  margin-left: 21.5%;
 }
 
 .cat-gif {
   width: 120px;
   height: 120px;
   margin-bottom: -40px;
-  margin-left: 27%;
+  margin-left: -4%;
 }
 
 .dog-gif {
   width: 120px;
   height: 100px;
-  margin-bottom: -30px;
+  margin-bottom: -36px;
   background-size: cover;
-  margin-left: 32%;
 }
 .cycle-gif {
   width: 120px;
   height: 100px;
-  margin-bottom: -31px;
-  margin-left: 32%;
+  margin-bottom: -40px;
 }
 
 .login-content {
@@ -175,4 +171,11 @@
   height: 110px;
   margin-left: 21%;
   margin-bottom: -22px;
+}
+.gif-image-container {
+  height: 80px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

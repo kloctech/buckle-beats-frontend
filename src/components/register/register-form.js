@@ -181,8 +181,8 @@ const RegisterForm = () => {
               </button>
               {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
             </div>
-            <div style={{ height: "80px", position: "relative" }}>
-              <img style={{ position: "absolute", bottom: "0", left: "0" }} src={images[currentImageIndex]} className={`${getClassName()}`} alt="cycling images" />
+            <div className="gif-image-container">
+              <img src={images[currentImageIndex]} className={`${getClassName()}`} alt="cycling images" />
             </div>
             <button type="submit" className="register-button">
               {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "SignUp"}
