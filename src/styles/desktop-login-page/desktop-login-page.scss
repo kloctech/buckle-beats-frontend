@@ -11,14 +11,19 @@
       overflow: hidden;
 
       .background-common-styles,
-      .login-form img {
+      .background-img,
+      .login-form img,
+      .regestation-container img{
         display: none;
       }
 
-      .form-group-login input {
-        border-color: #000;
+      .form-group-login input,
+      .form-group input,
+      select , textarea {
+        border-color: #000!important;
         width:100%;
         font-size: 14px;
+        color:#000!important;
         &::placeholder{
           color:#000;
         }
@@ -26,14 +31,18 @@
           outline:0;
         }
       }
-
-      .login-container {
+      .forgot-password-main-container{
+        background-color: transparent;
+      }
+      .login-container, .regestation-container .form-container,
+      .main-qrcode-container, .forgot-password-main-container  .form-container
+      , .qr-scanner.form-container, .lostqrcode-container, .send-invite-form{
         background: #fff;
         position: absolute;
         top: 50%;
         left: 0;
-        height: 24em;
-        margin: -12.8125em 0 0;
+        height: 26em;
+        margin: -13.8125em 0 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -41,22 +50,38 @@
         max-width: none;
         overflow: hidden;
         border-radius: 15px;
+        padding: 0;
+        overflow: auto;
+        scrollbar-width: none;
+      }
+      .regestation-container form,
+      .forgot-password-main-container form {
+        padding: 0 20px;
+        width: 100%;
       }
       .login-main-container {
         height: 100%;
         position: static;
       }
+      .welcome-heading, .not-found-bg h2, .not-found-bg p {
+        color: #183E51;
+      }
+      .not-found-bg p{
+        margin-bottom: 1rem;
+      }
+
+      .signup-navigation-text a,
+      .Login a{
+        color: #183D50;
+      }
+      .Login{
+        margin-bottom: 0;
+      }
       .login-form {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 100%;
-        .welcome-heading{
-          color: #183E51;
-        }
-        .signup-navigation-text{
-          display: none;
-        }
+        width: 100%;  
         .forgot-password-login a{
           color: #183D50;
         }
@@ -65,49 +90,402 @@
           border: 1px solid #58d7b5;
         }
       }
+      .register-button, .register-button:hover,
+      .forgot-password-main-container .for-got-password-button
+       {
+        border: 1px solid #58d7b5;
+        width: 100%;
+      } 
+      .manage-profile {
+        background-color: #fff;
+        padding: 20px;
+        h1{
+          font-size: 19px;
+          margin-top: 0.7rem;
+        }
+        .manage-profile-list li h4{
+          color:#000;
+        }
+        .manage-profile-wrapper{
+          width: 86%;
+        }
+        .manage-profile-list li .manage-profile-bg{
+          border-width: 2px;
+        }
+        .manage-profile-list li span{
+          text-transform: uppercase;
+        }
+        .invite span{
+          text-transform: capitalize!important;
+        }
+        .close-menu{
+          top: 1.8rem;
+          right: 1.5rem;
+          font-size: 1rem;
+          padding: 3px 9px;
+        }
+        .cta-button{
+          padding: 5px;
+          font-size: 12px;
+          border-width:0;
+        }
+      }
+      .manage-profile .menu-logout{
+        color: #58d7b5;
+        font-size: 14px;
+        width: 47%;
+      }
+      .lostqrcode-main-container {
+        height: 100%;
+      }
+      .lostqrcode-title , .lostqrcode-content p{
+        color:#000;
+        font-size: 14px;;
+      }
+      .lostqrcode-content{
+        padding-bottom: 1rem;
+      }
+      .lostqrcode-image{
+        padding-top: 25px;
+      }
     }   
   }
-  &-login-container {
+  .cta-button{
+    border: 1px solid #58d7b5;
+  }
+  &-main-container {
     height: 100%;
     position: relative;
     width: 295px;
   }
-  &-login-list {
+  &-main-list {
     width: 55%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding-left: 2rem;
-    margin-top: -17em;
-    margin-left: auto;
-    margin-right: auto;
-    @media(min-width:1200px) {
-      padding-left: 6rem;
-    }
+    padding-left: 4rem;
+    z-index: 1;
     img{
       width: 100%;
     }
+    p{
+      font-size: 30px;
+      font-weight: bold;    
+      line-height: 1.2;
+      span{
+        font-weight: bold;
+      }
+      .text-1{
+        color: #58D7B5;
+
+      }
+      .text-2{
+        color: #FB6F68;
+      }
+      .text-3{
+        color: #FFC857;
+
+      }
+    }
+  }
+
+}
+@media(min-width:1200px) {
+  .desktop {
+    &-main-list {
+      width: 44%;
+      p{
+        font-size: 47px;
+      }
+    }
   }
 }
-
 @media(min-width:1400px) {
   .desktop {
     &-main-page {
       padding: 1.5rem 5rem;
 
-      .login-container {
+      .login-container, .regestation-container .form-container,
+      .main-qrcode-container, .forgot-password-main-container .form-container,
+      .qr-scanner.form-container, .lostqrcode-container, .send-invite-form{
         border-radius: 23px;
         height: 38em;
         margin: -17.8125em 0 0;
       }
     }
 
-    &-login-container {
+    &-main-container {
       padding-left: 20px;
       width: 360px;
     }
-    &-login-list {
-      margin-top: -13em;
+    &-main-list {
+      width: 48%;
+      p{
+        font-size: 60px;
+        max-width: 38rem;
+      }
+    }
+    
+  }
+}
+
+
+.desktop-protect-page {
+   .header-flex-container{
+    width: 100%;
+  }
+  .main-qrcode-container{
+    justify-content: flex-start;
+  
+  }
+  .mobile-header{
+    width: 100%;
+    padding: 20px!important;
+  }
+  .search-container{
+    width: 82%;
+  }
+  .search-input-wrapper , .search-container .search-input-wrapper input{
+    width: 100%!important;
+  }
+  .app{
+    background: #fff;
+    padding: 0 20px;
+    height: 100%;
+  }
+  .qr-code-card, .qr-codes-container{
+    width:100%;
+
+  }
+  .qr-codes-container {
+    overflow: auto;
+    scrollbar-width: none;
+    max-height: 47vh;
+  }
+  .delete-page-list{
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+  .delete-menu-page {
+    scrollbar-width: none;
+    padding-top: 1.5rem!important;
+    overflow: hidden!important;
+  }
+  
+  .delete-menu-page button{
+    border-width: 0;
+    margin-bottom: 1.5rem;
+  }
+  .delete-account-error{
+      display: block;
+  }
+  .checkbox-text{
+    padding-left: 42px;
+  }
+  .checkbox-text .checkmark{
+    height: 25px;
+    width: 25px;
+    border-color: #000;
+  }
+  .checkbox-text .checkmark:after{
+    left: 9px;
+    top: 2px;
+    width: 7px;
+    height: 16px;
+  }
+  .menu-list h4, .menu-linkmenu-link, .menu-link, .menu-logout, .menu-text{
+    color: #000;
+  }
+  .menu-wrapper-image {
+    margin: 2rem 2rem 0;
+   }
+   .menu-wrapper-image h1, .menu-back{
+    color: #000!important;
+    font-size: 17px;
+   }
+   .delete-account p, .checkbox-text{
+    color: #000;
+    font-size: 14px;
+   }
+  .delete-account {
+    height: 100%;
+   }
+   .menu-account {
+    top: 1.8rem;
+  } 
+  .menu-list-submenu {
+    overflow: hidden;
+  }
+  .menu-wrapper .submenu{
+    padding-top: 2rem;
+  }
+  .update-password{
+    padding-top: 0.5rem!important;
+  }
+  .update-password, .update-password button{
+    width:100%;
+    border-width: 0;
+  }
+  .menu-wrapper {
+    background-color: #fff;
+    scrollbar-width: none;
+  }
+  .menu-link span{
+    right: 18px;
+  }
+  .close-menu{
+    top: 1.8rem!important;
+    right: 1.5rem!important;
+    font-size: 1rem!important;
+    padding: 3px 9px!important;
+  }
+  .menu-link img{
+    filter: brightness(0) saturate(100%) invert(0%) sepia(100%) saturate(7435%) hue-rotate(286deg) brightness(107%) contrast(89%);
+  }
+  .edit-qr .login-form, .add-qr  .login-form{
+    justify-content: flex-start;
+    width: 100%;
+    overflow: auto;
+    scrollbar-width: none;
+  }
+  .edit-qr .header-container{
+    margin: 15px 0;
+  }
+  .delete-btn, .cancel-btn{
+    color:#58d7b5;
+  }
+  .login-form .header-container svg{
+    fill: #183E51;
+  }
+  .header-title{
+    padding: 2rem 2rem;
+  }
+  .header-title .close-menu{
+    width: 32px;
+    height: 32px;
+  }
+  .next-btn, .edit-btn {
+    border-width:0;
+  }
+  textarea::placeholder, .add-qr input::placeholder { 
+    color: rgb(117, 117, 117);
+  }
+  textarea::placeholder{
+    font-size: 12px;
+  }
+  .add-qr select::placeholder, .add-qr input::placeholder{
+    color: rgb(117, 117, 117)!important;
+  }
+  .add-qr-box{
+    padding: 13px 10px;
+    resize: none;
+    overflow: hidden;
+  }
+  .qr-scanner p{
+    color: #000!important;
+  }
+  .button-row{
+    padding: 0 2rem;
+  }
+  .video-container{
+    margin-top: 4rem;
+    width: 15vw;
+    height: 15vw;
+  }
+  .survey-form-list .form-group-login p{
+    color: #000;
+    margin: 3rem auto 1rem;
+    width: 85%;
+  }
+  .survey-form-list button, .send-invite-form button {
+    border-width: 0;
+  }
+  .send-invite-main-container{
+     height: auto;
+  }
+  .send-invite-form form{
+    padding: 0 1.5rem;
+  }
+  .send-invite-form{
+    justify-content: flex-start;
+  }
+  .send-invite-form .menu-back svg{
+    color:#000!important;
+  }
+  .password-field input , .password-container input{
+    border-color:#000!important;   
+    font-size: 14px;
+  }
+  .password-field input::placeholder, .password-container input::placeholder{
+    color: rgb(117, 117, 117)!important;
+  }
+  .form-animation p{
+    color: #000;
+    padding: 0 1.5rem;
+  }
+}
+
+@media(min-width:1400px) {
+  .desktop-protect-page {
+    .qr-codes-container {
+      overflow: auto;
+      max-height: 44vh;
     }
   }
+}
+
+.desktop-wrapper #modal-title, .desktop-wrapper .MuiBackdrop-root{
+  top: 50% !important;
+  left: 3rem!important;
+  height: 26.06em;
+  max-width: 295px!important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: -10.2em 0 0!important;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.desktop-wrapper #modal-title.MuiModal-root h3{
+  font-size: 17px!important;
+}
+.desktop-wrapper #modal-title.MuiModal-root p{
+  font-size: 13px!important;
+}
+@media(min-width:1400px) {
+  .desktop-wrapper #modal-title, .desktop-wrapper .MuiBackdrop-root{
+    left: 5rem!important;
+    border-radius: 22px;
+    height: 38.05em;
+  max-width: 360px!important;
+  margin: -14.2em 0 0 !important;
+  }
+}
+.desktop-header{
+  position: relative;
+}
+.desktop-wrapper{
+  overflow: hidden!important;
+}
+.desktop-video{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &:after{
+    content:"";
+    display: block;
+    width:100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background:linear-gradient(89.93deg, #222831 25.64%, rgba(34, 40, 49, 0) 140.94%)
+  }
+ video{
+  width: 100%;
+
+ }
 }

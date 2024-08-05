@@ -123,7 +123,7 @@ const RegisterForm = () => {
         </div>
       ) : (
         <div className="form-container">
-          <div className={`${getBackgroundClassName()}`}></div>
+          <div className={`background-img ${getBackgroundClassName()}`}></div>
           <h1 className="welcome-heading">Welcome!</h1>
           <form onSubmit={handleSubmit(onFormSubmit)}>
             <div className="form-group">
@@ -188,7 +188,7 @@ const RegisterForm = () => {
             {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "SignUp"}
             </button>
             <p className="Login">
-              <Link to="/Login">Already have an accout? Login</Link>
+              <Link to="/login">Already have an accout? Login</Link>
             </p>
           </form>
         </div>

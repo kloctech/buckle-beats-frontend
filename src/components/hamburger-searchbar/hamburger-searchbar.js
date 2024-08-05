@@ -149,7 +149,7 @@ const Hamburger = () => {
         </div>
 
         <div className={menuOpen ? "active menu-wrapper" : "inactive menu-wrapper"}>
-          <div className="menu-container">
+          <div className={`menu-container   ${submenuOpen  && 'menu-list-submenu' } ${deletepasswordOpen && 'delete-page-list'} ${passwordSubmenuOpen && 'menu-list-submenu' }`}>
               <div className="close-menu" onClick={handleClosemenu}>
                 X
               </div>
