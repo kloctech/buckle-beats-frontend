@@ -367,6 +367,10 @@
   .menu-list h4, .menu-linkmenu-link, .menu-link, .menu-logout, .menu-text{
     color: #000;
   }
+  .menu-text{
+    word-break: break-word;
+    text-align: center;
+  }
   .menu-wrapper-image {
     margin: 2rem 2rem 0;
    }
