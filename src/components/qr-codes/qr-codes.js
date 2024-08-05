@@ -147,7 +147,7 @@ const QrCodes = ({ searchInput }) => {
  <div className="app">
       <div className={`qr-codes-container ${qrCodes.length === 0 ? "no-qr-codes" : ""}`} ref={itemListRef}>
         {qrCodes?.length === 0 ? (
-          <div style={{ marginTop: "24vh", marginLeft: "0px" }}>
+          <div className="no-qr-code-wrapper" style={{ marginTop: "24vh", marginLeft: "0px" }}>
             <img src={NoDataIcon} alt="no-data-found" className="no-data-image" />
             <h1>QR codes not found</h1>
           </div>

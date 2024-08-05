@@ -107,15 +107,43 @@
         width: 100%;
       } 
       .regestation-container{
+        .form-container{
+          h6{
+           color: #183E51;
+           padding: 0 1rem;
+          }
+        }
          form{
           height: 70%;
+          .error{
+            font-size: 10px;
+          }
          }
          .Login{
           padding-bottom: 1rem;
          }
          .gif-image-container{
-          margin-top: -11px;
+          margin-top: -30px;
          }
+      }
+      .no-qr-codes{
+         .no-data-image{
+          filter:unset;
+         }
+         h1{
+          color: #000;
+          font-size: 15px;
+         }
+         
+      }
+      .lostqrcode-main-container{
+        width: 100%;
+        .lostqrcode-list li span{
+          color:#000;
+          word-wrap: break-word;
+          font-size: 14.3px;
+          width: 88%;
+        }
       }
       .manage-profile {
         background-color: #fff;
@@ -126,6 +154,7 @@
         }
         .manage-profile-list li h4{
           color:#000;
+          width:100%;
         }
         .manage-profile-wrapper{
           width: 86%;
@@ -210,13 +239,20 @@
   }
 
 }
+@media(max-width:1399px) {
+  .desktop-main-page{
+    .no-qr-code-wrapper{
+    margin-top:80px!important;
+    }
+  }
+}
 @media(min-width:1200px) {
   .desktop {
     &-main-list {
       width: 44%;
       p{
         font-size: 47px;
-      }
+      }  
     }
   }
 }
@@ -237,6 +273,9 @@
          height: auto;
         }
       }
+      .no-qr-code-wrapper{
+        margin-top:16vh!important;
+       }
     }
 
     &-main-container {
@@ -281,6 +320,13 @@
   .qr-code-card, .qr-codes-container{
     width:100%;
 
+  }
+  .qr-code-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    max-height: none;
   }
   .qr-codes-container {
     overflow: auto;
