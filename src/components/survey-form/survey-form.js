@@ -30,7 +30,6 @@ const SurveyForm = ({ data }) => {
 
     try {
       const response = await api.post(API, data);
-      console.log(response);
 
       setMessage("Your are all set - hooray!");
       setApiStatus(200);

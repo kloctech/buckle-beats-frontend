@@ -1,3 +1,5 @@
+
+@import '../variables//variable.scss';
 .survey-form {
   width: 100%;
 
@@ -105,5 +107,16 @@
     color: #fff;
     padding: 0 3.8rem;
     line-height: 1.6;
+  }
+  button{
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: small;
+    text-decoration: none;
+    color: #fff;
+    background-color: $primary-color;
+    text-align: center;
   }
 }

@@ -25,7 +25,7 @@ const UpdatePassword = () => {
   } = useForm();
   const newPassword = watch("newPassword", "");
 
-  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[.!@$%^&*])[^\s]{8,}$/;
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^\s]{8,}$/;
 
   const handlePasswordUpdate = async (data) => {
     setLoading(true)

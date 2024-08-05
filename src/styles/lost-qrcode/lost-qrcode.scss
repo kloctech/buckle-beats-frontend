@@ -3,7 +3,7 @@
 
 .lostqrcode {
   &-container {
-    height: 100%;
+    // height: 100%;
     max-width: $max-width;
     background-color:$background-color;
     margin: auto;
@@ -26,7 +26,7 @@
       font-size: 17.94px;
       font-weight: 400;
       text-align: center;
-      color: #fff;
+      color:$input-field-border;
       margin: 1.8rem 0;
     }
 
@@ -36,6 +36,11 @@
       text-align: center;
       color: #FB6F68;
       margin-bottom: 1rem;
+    }
+    span{
+      color:$error-color;
+      font-weight: 400;
+      font-size: 15.24px;
     }
   }
 
@@ -53,6 +58,7 @@
       margin-bottom: 0;
       color: #183E51;
     }
+   
   }
 
   &-list {
@@ -94,4 +100,16 @@
   .lostqrcode-container {
     max-width: 340px;
   }
+}
+.share-button{
+  padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border-color: $input-field-border;
+    font-weight: 500;
+    font-size: small;
+    text-decoration: none;
+    color: $input-field-border;
+     background-color: transparent;
+    text-align: center;
 }

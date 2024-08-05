@@ -209,7 +209,7 @@ const Hamburger = () => {
                         <div className="menu-text" style={{ marginTop: "1rem" }}>
                           <h4> SUPPORT</h4>
                           <div className={`menu-link`}>
-                            Contact US
+                            Contact us
                             <span>
                               <img src={RightArrow} alt="rightarrow Icon" />
                             </span>
