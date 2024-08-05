@@ -11,9 +11,7 @@
       overflow: hidden;
 
       .background-common-styles,
-      .background-img,
-      .login-form img,
-      .regestation-container img{
+      .background-img{
         display: none;
       }
 
@@ -82,11 +80,17 @@
         flex-direction: column;
         justify-content: center;
         width: 100%;  
+        .signup-navigation-text{
+          margin-bottom: 0;
+        }
+        .forgot-password-login {
+          margin: 0;
+        }
         .forgot-password-login a{
           color: #183D50;
         }
         .login-button{
-          margin-top: 1.5rem;
+          margin-top: 0;
           border: 1px solid #58d7b5;
         }
       }
@@ -96,6 +100,17 @@
         border: 1px solid #58d7b5;
         width: 100%;
       } 
+      .regestation-container{
+         form{
+          height: 70%;
+         }
+         .Login{
+          padding-bottom: 1rem;
+         }
+         .gif-image-container{
+          margin-top: -11px;
+         }
+      }
       .manage-profile {
         background-color: #fff;
         padding: 20px;
@@ -210,6 +225,11 @@
         border-radius: 23px;
         height: 38em;
         margin: -17.8125em 0 0;
+      }
+      .regestation-container{
+        form{
+         height: auto;
+        }
       }
     }
 
