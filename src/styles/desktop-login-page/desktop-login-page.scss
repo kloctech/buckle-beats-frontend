@@ -34,7 +34,7 @@
       }
       .login-container, .regestation-container .form-container,
       .main-qrcode-container, .forgot-password-main-container  .form-container
-      , .qr-scanner.form-container, .lostqrcode-container, .send-invite-form{
+      ,.forgot-password-main-container   .forgot-password-form ,.qr-scanner.form-container, .lostqrcode-container, .send-invite-form, .main-container{
         background: #fff;
         position: absolute;
         top: 50%;
@@ -61,8 +61,11 @@
         height: 100%;
         position: static;
       }
-      .welcome-heading, .not-found-bg h2, .not-found-bg p {
+      .welcome-heading, .not-found-bg h2, .not-found-bg p, .content-container p {
         color: #183E51;
+      }
+      .main-container img{
+        margin-top:2rem;
       }
       .not-found-bg p{
         margin-bottom: 1rem;
@@ -93,6 +96,9 @@
           margin-top: 0;
           border: 1px solid #58d7b5;
         }
+      }
+      .forgot-password-heading   {
+        color: #183E51;
       }
       .register-button, .register-button:hover,
       .forgot-password-main-container .for-got-password-button
@@ -221,7 +227,7 @@
 
       .login-container, .regestation-container .form-container,
       .main-qrcode-container, .forgot-password-main-container .form-container,
-      .qr-scanner.form-container, .lostqrcode-container, .send-invite-form{
+      .qr-scanner.form-container, .lostqrcode-container, .send-invite-form, .forgot-password-main-container   .forgot-password-form, .main-container {
         border-radius: 23px;
         height: 38em;
         margin: -17.8125em 0 0;
