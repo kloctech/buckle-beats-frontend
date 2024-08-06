@@ -188,9 +188,21 @@
       .lostqrcode-main-container {
         height: 100%;
       }
-      .lostqrcode-title , .lostqrcode-content p{
+      .lostqrcode-main-container p, .lostqrcode-title , .lostqrcode-content p{
         color:#000;
         font-size: 14px;;
+      }
+      .lostqrcode-main-container .login-button{
+        border: 0;
+      }
+      .lostqrcode-main-container textarea{
+        scrollbar-width: none;
+        padding: 10px!important;
+        font-size: 15px;
+      }
+      .lostqrcode-main-container textarea::placeholder{
+        font-size: 10px;
+        color: #183e51;
       }
       .lostqrcode-content{
         padding-bottom: 1rem;
@@ -498,6 +510,9 @@
   .form-animation p{
     color: #000;
     padding: 0 1.5rem;
+  }
+  .form-animation button{
+    border:0;
   }
 }
 
