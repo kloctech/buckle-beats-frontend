@@ -2,6 +2,7 @@
   width: 100%;
 
   &-list {
+    width:100%;
     padding: 0 2rem;
     text-align: center;
     button {
@@ -13,6 +14,7 @@
 }
 
 .form-group-login {
+  width:100%;
   &.textarea-group textarea {
     width: calc(100%);
     padding: 10px;
