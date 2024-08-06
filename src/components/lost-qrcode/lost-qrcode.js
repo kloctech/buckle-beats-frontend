@@ -4,7 +4,7 @@ import Logo from "../../assets/logo.png";
 import PhoneIcon from "../../assets/phone.png";
 import EmailIcon from "../../assets/email.png";
 import UserIcon from "../../assets/user.png";
-import sharelocation from '../../assets/location Icon.svg';
+// import sharelocation from '../../assets/location Icon.svg';
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useParams } from 'react-router-dom';
@@ -13,8 +13,8 @@ import { useForm } from "react-hook-form";
 const LostQRCode = () => {
   const [lostData, setLostdata] = useState(null);
   const { id } = useParams();
-  const [address, setAddress] = useState(null);
-  const [coords, setCoords] = useState(null);
+  // const [address, setAddress] = useState(null);
+  // const [coords, setCoords] = useState(null);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmitForm = async (formData) => {
@@ -68,40 +68,39 @@ const LostQRCode = () => {
   //   }
   // }, [coords]);
 
-  const handleGetLocation = () => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setCoords(position.coords);
-          toast.success('Location fetched successfully.');
-        },
-        (error) => {
-          switch(error.code) {
-            case error.PERMISSION_DENIED:
-              toast.error('User denied the request for Geolocation.');
-              break;
-            case error.POSITION_UNAVAILABLE:
-              toast.error('Location information is unavailable.');
-              break;
-            case error.TIMEOUT:
-              toast.error('The request to get user location timed out.');
-              break;
-            case error.UNKNOWN_ERROR:
-              toast.error('An unknown error occurred.');
-              break;
-          }
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 5000,
-          maximumAge: 0,
-        }
-      );
-    } else {
-      toast.error('Geolocation is not supported by this browser.');
-    }
-  };
-console.log(coords)
+  // const handleGetLocation = () => {
+  //   if ("geolocation" in navigator) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         setCoords(position.coords);
+  //         toast.success('Location fetched successfully.');
+  //       },
+  //       (error) => {
+  //         switch(error.code) {
+  //           case error.PERMISSION_DENIED:
+  //             toast.error('User denied the request for Geolocation.');
+  //             break;
+  //           case error.POSITION_UNAVAILABLE:
+  //             toast.error('Location information is unavailable.');
+  //             break;
+  //           case error.TIMEOUT:
+  //             toast.error('The request to get user location timed out.');
+  //             break;
+  //           case error.UNKNOWN_ERROR:
+  //             toast.error('An unknown error occurred.');
+  //             break;
+  //         }
+  //       },
+  //       {
+  //         enableHighAccuracy: true,
+  //         timeout: 5000,
+  //         maximumAge: 0,
+  //       }
+  //     );
+  //   } else {
+  //     toast.error('Geolocation is not supported by this browser.');
+  //   }
+  // };
   return (
     <div className="lostqrcode-container">
       {lostData !== null && (
@@ -147,17 +146,32 @@ console.log(coords)
               </li>
             )}
             {lostData.owner.email && (
-              <li>
-                <img src={EmailIcon} alt="Email Icon" />
-                <span>{lostData.owner.email}</span>
-              </li>
-            )}
-            {lostData.owner.mobileNumber && (
-              <li>
-                <img src={PhoneIcon} alt="Phone Icon" />
-                <span>{lostData.owner.mobileNumber}</span>
-              </li>
-            )}
+          <li>
+    <img src={EmailIcon} alt="Email Icon" />
+    <a
+      className="contact-link"
+      style={{textDecoration:"none",color:"red"}}
+      href={`https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=${lostData.owner.email}`}
+      target="_blank"
+      rel="nofollow noopener noreferrer"
+    >
+      <span>{lostData.owner.email}</span>
+    </a>
+  </li>
+)}
+  {lostData.owner.mobileNumber && (
+  <li>
+    <img src={PhoneIcon} alt="Phone Icon" />
+    <a style={{textDecoration:"none"}}
+      className="contact-link"
+      href={`tel:${lostData.owner.mobileNumber}`}
+      target="_blank"
+      rel="nofollow noopener noreferrer"
+    >
+      <span>{lostData.owner.mobileNumber}</span>
+    </a>
+  </li>
+)}
           </ul>
 
           <div className="lostqrcode-content">
@@ -172,9 +186,9 @@ console.log(coords)
               <div>
                 <p>If possible, proceed to the nearest Lost and Found reception and consent to share the location. Your proactive kindness truly makes a difference and strengthens our caring community.</p>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <button className="share-button" onClick={handleGetLocation}>
+                  {/* <button className="share-button" onClick={handleGetLocation}>
                     <img src={sharelocation} alt="location" /> Share location
-                  </button>
+                  </button> */}
                 </div>
               </div>
             )}

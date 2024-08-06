@@ -30,6 +30,7 @@ const SurveyForm = ({ data }) => {
 
     try {
       const response = await api.post(API, data);
+      console.log(response);
 
       setMessage("Your are all set - hooray!");
       setApiStatus(200);
@@ -44,7 +45,7 @@ const SurveyForm = ({ data }) => {
 
     setIsFormSubmitted(true);
   };
-
+console.log(apiStatus,message)
   return (
     <div className="login-container">
       {isFormSubmitted ? (

@@ -4,6 +4,7 @@ import "../../styles/survey-form/survey-form.scss";
 
 const FormAnimation = ({ heading, icon, showQrCodeIcon }) => {
   const navigate  = useNavigate()
+  console.log(icon,heading)
   return (
     <div className="form-animation">
       <div style={{ justifyContent: "end" }} className="header-title">
@@ -17,7 +18,7 @@ const FormAnimation = ({ heading, icon, showQrCodeIcon }) => {
         {icon && <img src={icon} alt="Icon" />}
       </div>
       {heading && <p>{heading}</p>}
-      {showQrCodeIcon ?  <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+      {!showQrCodeIcon ?  <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
         <button onClick={()=>navigate('/')}>Done</button>
         </div> : null}
     </div>
