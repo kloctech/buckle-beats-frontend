@@ -19,7 +19,7 @@ import DesktopRoutes from "./routes/desktop-route";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
-  const isDesktop = useMediaQuery({ minDeviceWidth: 767 })
+  const isDesktop = useMediaQuery({ minWidth: 767 })
   useEffect(() => {
     if(isDesktop){
       document.body.classList.add('desktop-wrapper');
