@@ -5,10 +5,10 @@ import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import "../../styles/register/register.scss";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import cat from "../../assets/Cat-gif.gif";
+import cat from "../../assets/Cat.gif";
 import bag from "../../assets/bagimage.gif";
-import cycle from "../../assets/Bicycle-gif.gif";
-import dog from "../../assets/dog-gif.gif";
+import cycle from "../../assets/Bicycle LT_1.gif";
+import dog from "../../assets/dog.gif";
 import toast from "react-hot-toast";
 import { FaCheckCircle } from "react-icons/fa";
 import { CircularProgress } from "@mui/material";
@@ -68,7 +68,7 @@ const RegisterForm = () => {
   };
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[.!@$%^&*])[^\s]{8,}$/;
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^\s]{8,32}$/;
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -94,7 +94,7 @@ const RegisterForm = () => {
 
   const onFormSubmit = async (data) => {
     const url = process.env.REACT_APP_PRODUCTION_URL;
-  setLoading(true);
+    setLoading(true);
     try {
       const response = await api.post(`${url}/api/user`, {
         name: data.name,
@@ -181,11 +181,11 @@ const RegisterForm = () => {
               </button>
               {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
             </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <img alt="dog" className={`${getClassName()}`} src={images[currentImageIndex]}></img>
+            <div className="gif-image-container">
+              <img src={images[currentImageIndex]} className={`${getClassName()}`} alt="cycling images" />
             </div>
             <button type="submit" className="register-button">
-            {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "SignUp"}
+              {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "SignUp"}
             </button>
             <p className="Login">
               <Link to="/Login">Already have an account? Login</Link>
