@@ -72,7 +72,7 @@ const LostQRCode = () => {
 
           <div className="lostqrcode-content">
             <p>You’re doing more than finding a lost item. Each time at BuckleBeats holds a precious story, waiting to be continued with your help.</p>
-            <p>Please consent to also sharing your location, and be a hero in this happy reunion. Your kindness truly makes a difference adn strengths our caring community.</p>
+            <p>Please consent to also sharing your location, and be a hero in this happy reunion. Your kindness truly makes a difference and strengths our caring community.</p>
           </div>
         </div>
       )}

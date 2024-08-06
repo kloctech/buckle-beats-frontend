@@ -54,7 +54,7 @@ const DesktopProtectedPage = () => {
           {renderContent()}
         </div>
         <div className="desktop-main-list">
-        <p><span class="text-1">y</span><span class="text-2">o</span><span class="text-3">u</span> ipsum doret two line text here</p>
+        {/* <p><span class="text-1">y</span><span class="text-2">o</span><span class="text-3">u</span> ipsum doret two line text here</p> */}
         </div>
       </div>
     </div>
