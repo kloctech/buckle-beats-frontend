@@ -343,7 +343,12 @@
   .qr-codes-container {
     overflow: auto;
     scrollbar-width: none;
-    max-height: 47vh;
+    max-height: 23vh;
+    
+  }
+  .load-more{
+    position: absolute;
+    bottom: -25px;
   }
   .delete-page-list{
     overflow-y: scroll;
@@ -515,12 +520,24 @@
     border:0;
   }
 }
-
+@media(min-width:1199px){
+  .desktop-protect-page {
+    .qr-codes-container {
+      max-height: 46vh;
+    }
+    .load-more{
+      bottom: -40px;
+    }
+  }
+}
 @media(min-width:1400px) {
   .desktop-protect-page {
     .qr-codes-container {
       overflow: auto;
-      max-height: 44vh;
+      max-height: 42vh;
+    }
+    .load-more{
+      bottom: -22px;
     }
   }
 }
