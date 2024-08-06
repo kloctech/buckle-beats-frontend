@@ -165,10 +165,10 @@ const EditQRCode = () => {
               placeholder="Name"
               {...register("name", {
                 required: "Name is required",
-                pattern: {
-                  value: /^[a-zA-Z\s'-]+$/,
-                  message: "Invalid name",
-                },
+                // pattern: {
+                //   value: /^[a-zA-Z\s'-]+$/,
+                //   message: "Invalid name",
+                // },
               })}
             />
             {errors.name && <span className="error-message">{errors.name.message}</span>}
