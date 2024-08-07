@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import "../../styles/lost-qrcode/lost-qrcode.scss";
 import Logo from "../../assets/logo.png";
@@ -16,14 +17,15 @@ const LostQRCode = () => {
   // const [address, setAddress] = useState(null);
   // const [coords, setCoords] = useState(null);
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   const onSubmitForm = async (formData) => {
     const url = process.env.REACT_APP_PRODUCTION_URL;
    
     try {
       const response = await axios.post(`${url}/api/user/send-message`, {
-       code:id,
-       message:formData?.message
+       code: id,
+       message: formData?.message
       });
       toast.success(response.data.resultMessage.en, { duration: 5000 });
     } catch (error) {
@@ -49,58 +51,18 @@ const LostQRCode = () => {
     fetchData();
   }, [id]);
 
-  // useEffect(() => {
-  //   if (coords) {
-  //     const { latitude, longitude } = coords;
-  //     axios.get(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`)
-  //       .then(response => {
-  //         if (response.data && response.data.display_name) {
-  //           const address = response.data.display_name;
-  //           setAddress(address);
-  //         } else {
-  //           toast.error('No address found for this location.');
-  //         }
-  //       })
-  //       .catch(error => {
-  //         toast.error('Error fetching address');
-  //         console.error('Error fetching address:', error);
-  //       });
-  //   }
-  // }, [coords]);
+  console.log(errors);
+ 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
 
-  // const handleGetLocation = () => {
-  //   if ("geolocation" in navigator) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         setCoords(position.coords);
-  //         toast.success('Location fetched successfully.');
-  //       },
-  //       (error) => {
-  //         switch(error.code) {
-  //           case error.PERMISSION_DENIED:
-  //             toast.error('User denied the request for Geolocation.');
-  //             break;
-  //           case error.POSITION_UNAVAILABLE:
-  //             toast.error('Location information is unavailable.');
-  //             break;
-  //           case error.TIMEOUT:
-  //             toast.error('The request to get user location timed out.');
-  //             break;
-  //           case error.UNKNOWN_ERROR:
-  //             toast.error('An unknown error occurred.');
-  //             break;
-  //         }
-  //       },
-  //       {
-  //         enableHighAccuracy: true,
-  //         timeout: 5000,
-  //         maximumAge: 0,
-  //       }
-  //     );
-  //   } else {
-  //     toast.error('Geolocation is not supported by this browser.');
-  //   }
-  // };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <div className="lostqrcode-container">
       {lostData !== null && (
@@ -128,9 +90,10 @@ const LostQRCode = () => {
                   style={{ padding: "1rem" }}
                   name="message"
                   placeholder="Leave a note here, such as allergy information or care instructions. If your item is lost, this will help the finder take proper care of it and ensure its safe return"
+                  defaultValue={lostData?.owner?.defaultMessage || ""}
                   {...register("message", { required: "Please enter the message" })}
                 />
-                {errors.default_message && <span>{errors.default_message.message}</span>}
+                {errors.message && <span style={{color:'rgb(250, 111, 104)' }}>{errors.message.message}</span>}
               </div>
               <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
                 <button className="login-button" style={{ width: '60%' }}>Send</button>
@@ -145,33 +108,48 @@ const LostQRCode = () => {
                 <span>{lostData.owner.name}</span>
               </li>
             )}
-            {lostData.owner.email && (
-          <li>
-    <img src={EmailIcon} alt="Email Icon" />
-    <a
-      className="contact-link"
-      style={{textDecoration:"none",color:"red"}}
-      href={`https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=${lostData.owner.email}`}
-      target="_blank"
-      rel="nofollow noopener noreferrer"
-    >
-      <span>{lostData.owner.email}</span>
-    </a>
-  </li>
-)}
-  {lostData.owner.mobileNumber && (
-  <li>
-    <img src={PhoneIcon} alt="Phone Icon" />
-    <a style={{textDecoration:"none"}}
-      className="contact-link"
-      href={`tel:${lostData.owner.mobileNumber}`}
-      target="_blank"
-      rel="nofollow noopener noreferrer"
-    >
-      <span>{lostData.owner.mobileNumber}</span>
-    </a>
-  </li>
-)}
+          {lostData.owner.email && (
+              <li>
+                {isMobile ? (
+                  <a
+                    className="contact-link"
+                    style={{ textDecoration: "none" }}
+                    href={`mailto:${lostData.owner.email}`}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                  >
+                    <img src={EmailIcon} alt="Email Icon" />
+                    <span>{lostData.owner.email}</span>
+                  </a>
+                ) : (
+                  <a
+                    className="contact-link"
+                    style={{ textDecoration: "none" }}
+                    href={`https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=${lostData.owner.email}`}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    onClick={() => console.log('Email link clicked')}
+                  >
+                    <img src={EmailIcon} alt="Email Icon" />
+                    <span>{lostData.owner.email}</span>
+                  </a>
+                )}
+              </li>
+            )}
+            {lostData.owner.mobileNumber && (
+              <li>
+                <a 
+                  style={{ textDecoration: "none" }}
+                  className="contact-link"
+                  href={`tel:${lostData.owner.mobileNumber}`}
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                >
+                  <img src={PhoneIcon} alt="Phone Icon" />
+                  <span>{lostData.owner.mobileNumber}</span>
+                </a>
+              </li>
+            )}
           </ul>
 
           <div className="lostqrcode-content">
@@ -200,3 +178,4 @@ const LostQRCode = () => {
 };
 
 export default LostQRCode;
+
