@@ -30,6 +30,7 @@ function QrCodeScanner() {
       }
     } catch (err) {
       // handle API errors
+      setError(err.response?.data?.resultMessage?.en)
     }
   }, []);
 
