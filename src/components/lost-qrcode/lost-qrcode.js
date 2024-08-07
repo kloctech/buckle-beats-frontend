@@ -35,20 +35,27 @@ const LostQRCode = () => {
 
   useEffect(() => {
     const url = process.env.REACT_APP_PRODUCTION_URL;
+    let isMounted = true;
 
     const fetchData = async () => {
       try {
         const response = await axios.get(`${url}/api/qrcode/owner-details/${id}`);
-        setTimeout(() => {
+        if (isMounted) {
           setLostdata(response.data);
           toast.success(response.data.resultMessage.en, { duration: 5000 });
-        }, 1000);
+        }
       } catch (error) {
-        toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
+        if (isMounted) {
+          toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
+        }
       }
     };
 
     fetchData();
+
+    return () => {
+      isMounted = false;
+    };
   }, [id]);
 
   console.log(errors);
