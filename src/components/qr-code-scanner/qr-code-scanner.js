@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
+import { BrowserMultiFormatReader } from "@zxing/library";
 import "../../styles/qr-code-scanner/qr-code-scanner.scss";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../../middleware/api";
@@ -49,9 +49,9 @@ function QrCodeScanner() {
             setShowFormAnimation(true);
           }
         }
-        if (err && !(err instanceof NotFoundException)) {
-          setError("Error accessing camera or scanning QR code.");
-        }
+        // if (err && !(err instanceof NotFoundException)) {
+        //   setError("Error accessing camera or scanning QR code.");
+        // }
       });
     } catch (error) {
       setError("Error initializing camera.");
@@ -143,9 +143,9 @@ function QrCodeScanner() {
                   </div>
                 )
               ) : (
-                <p style={{ color: "red" }}>{error}</p>
+                <p style={{color:'rgb(250, 111, 104)' }}>{error}</p>
               )}
-              {!userData?.user_id ? (
+              {!userData?.user_id  && !error ? (
                 <div className="button-row">
                   <button onClick={() => navigate("/")} className="cta-button cancel-btn">
                     Cancel
