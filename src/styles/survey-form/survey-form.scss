@@ -1,10 +1,9 @@
-
-@import '../variables//variable.scss';
+@import "../variables//variable.scss";
 .survey-form {
   width: 100%;
 
   &-list {
-    width:100%;
+    width: 100%;
     padding: 0 2rem;
     text-align: center;
     button {
@@ -16,7 +15,7 @@
 }
 
 .form-group-login {
-  width:100%;
+  width: 100%;
   &.textarea-group textarea {
     width: calc(100%);
     padding: 10px;
@@ -25,7 +24,7 @@
     box-sizing: border-box;
     resize: none;
     font-family: Lexend;
-    font-size: 12px;
+    font-size: 16px;
     &::placeholder {
       transform: translateY(25px);
       text-align: center;
@@ -110,7 +109,7 @@
     padding: 0 3.8rem;
     line-height: 1.6;
   }
-  button{
+  button {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
