@@ -31,7 +31,6 @@ const LinkingCoowner = () => {
     }
   };
 
-  console.log(ownertoken, coownertoken);
 
   return (
     <div className="main-container">

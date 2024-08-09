@@ -45,7 +45,6 @@ const SurveyForm = ({ data }) => {
 
     setIsFormSubmitted(true);
   };
-console.log(apiStatus,message)
   return (
     <div className="login-container">
       {isFormSubmitted ? (

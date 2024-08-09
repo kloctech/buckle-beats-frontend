@@ -7,7 +7,7 @@ import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import { useNavigate } from "react-router-dom";
 import "../../styles/update-passwor/update-password.scss";
 import { CircularProgress } from "@mui/material";
-
+import Cookies from "js-cookie";
 const UpdatePassword = () => {
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -37,8 +37,18 @@ const UpdatePassword = () => {
       const response = await api.post(`${process.env.REACT_APP_PRODUCTION_URL}/api/user/change-password`, payload);
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       reset();
+      
+      if(response){
+        Cookies.remove("accessToken");
+      Cookies.remove("refreshToken");
+      Cookies.remove("userId")
+      Cookies.remove("userName")
+      Cookies.remove("userEmail")
+
       setLoading(false)
-      navigate("/");
+      navigate('/login')
+      }
+     
     } catch (error) {
       toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
       setLoading(false)

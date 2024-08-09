@@ -5,7 +5,7 @@ import Logo from "../../assets/logo.png";
 import PhoneIcon from "../../assets/phone.png";
 import EmailIcon from "../../assets/email.png";
 import UserIcon from "../../assets/user.png";
-// import sharelocation from '../../assets/location Icon.svg';
+import sharelocation from '../../assets/location Icon.svg';
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useParams } from 'react-router-dom';
@@ -58,7 +58,6 @@ const LostQRCode = () => {
     };
   }, [id]);
 
-  console.log(errors);
  
   useEffect(() => {
     const handleResize = () => {
@@ -70,6 +69,35 @@ const LostQRCode = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+  const handleGetLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+
+          // Send location to the server if needed
+          const url = process.env.REACT_APP_PRODUCTION_URL;
+          axios.post(`${url}/api/user/share-location`, {
+            code: id,
+            lat:latitude,
+            lng:longitude,
+          })
+          .then(response => {
+            toast.success(response.data.resultMessage.en, { duration: 5000 });
+          })
+          .catch(error => {
+            toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
+          });
+        },
+        (error) => {
+          toast.error("Failed to get location. Please enable location services.", { duration: 5000 });
+        }
+      );
+    } else {
+      toast.error("Geolocation is not supported by this browser.", { duration: 5000 });
+    }
+  };
+ 
   return (
     <div className="lostqrcode-container">
       {lostData !== null && (
@@ -96,8 +124,8 @@ const LostQRCode = () => {
                   className="add-qr-box"
                   style={{ padding: "1rem" }}
                   name="message"
-                  placeholder="Leave a note here, such as allergy information or care instructions. If your item is lost, this will help the finder take proper care of it and ensure its safe return"
-                  defaultValue={lostData?.owner?.defaultMessage || ""}
+                  placeholder="Leave a note here, your contact details or mentions if you've left the item at Lost and Found reception.This helps the owner recover it more easily.Thank you!."
+                  // defaultValue={lostData?.owner?.defaultMessage || ""}
                   {...register("message", { required: "Please enter the message" })}
                 />
                 {errors.message && <span style={{color:'rgb(250, 111, 104)' }}>{errors.message.message}</span>}
@@ -135,7 +163,6 @@ const LostQRCode = () => {
                     href={`https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=${lostData.owner.email}`}
                     target="_blank"
                     rel="nofollow noopener noreferrer"
-                    onClick={() => console.log('Email link clicked')}
                   >
                     <img src={EmailIcon} alt="Email Icon" />
                     <span>{lostData.owner.email}</span>
@@ -169,11 +196,11 @@ const LostQRCode = () => {
 
             {!lostData?.owner?.qrIsLost && (
               <div>
-                <p>If possible, proceed to the nearest Lost and Found reception and consent to share the location. Your proactive kindness truly makes a difference and strengthens our caring community.</p>
+                <p>If possible, proceed to the nearest Lost and Found reception and consent to share the location. Your proactive kindness truly makes a difference and strengthens truly our caring community.</p>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  {/* <button className="share-button" onClick={handleGetLocation}>
+                  <button className="share-button" onClick={handleGetLocation}>
                     <img src={sharelocation} alt="location" /> Share location
-                  </button> */}
+                  </button>
                 </div>
               </div>
             )}
