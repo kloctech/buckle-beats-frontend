@@ -277,8 +277,9 @@
       .main-qrcode-container, .forgot-password-main-container .form-container,
       .qr-scanner.form-container, .lostqrcode-container, .send-invite-form, .forgot-password-main-container   .forgot-password-form, .main-container {
         border-radius: 23px;
-        height: 38em;
-        margin: -17.8125em 0 0;
+        height: 30em;
+        margin: -15.8125em 0 0;
+        width: 85%;
       }
       .regestation-container{
         form{
@@ -332,6 +333,15 @@
   .qr-code-card, .qr-codes-container{
     width:100%;
 
+  }
+  .form-icon .form-animation-image{
+    height:auto;
+  }
+  .form-animation p{
+    margin-top:0.7rem;
+  }
+  .add-qr .mobile-group select, .edit-qr .mobile-group select{
+    font-size: 14px!important;
   }
   .qr-code-card{
     display: flex;
@@ -534,14 +544,13 @@
   .desktop-protect-page {
     .qr-codes-container {
       overflow: auto;
-      max-height: 42vh;
+      max-height: 45vh;
     }
     .load-more{
       bottom: -22px;
     }
   }
 }
-
 .desktop-wrapper #modal-title, .desktop-wrapper .MuiBackdrop-root{
   top: 50% !important;
   left: 3rem!important;

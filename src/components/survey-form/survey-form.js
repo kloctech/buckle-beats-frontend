@@ -46,7 +46,7 @@ const SurveyForm = ({ data }) => {
     setIsFormSubmitted(true);
   };
   return (
-    <div className="login-container">
+    <div className="login-container form-icon">
       {isFormSubmitted ? (
         <FormAnimation icon={apiStatus === 200 ? Heart : Failed} heading={message} showQrCodeIcon={apiStatus === 200 ? false : true} />
       ) : (
