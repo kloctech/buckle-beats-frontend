@@ -12,7 +12,7 @@ import dog from "../../assets/dogIcon.gif";
 import toast from "react-hot-toast";
 import { FaCheckCircle } from "react-icons/fa";
 import { CircularProgress } from "@mui/material";
-
+const images = [bag, cycle, cat, dog];
 const RegisterForm = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isRegistred, setIsRegistred] = useState(false);
@@ -28,15 +28,15 @@ const RegisterForm = () => {
     clearErrors,
     formState: { errors },
   } = useForm();
-  const images = [bag, cycle, cat, dog];
+
 
   useEffect(() => {
     const imageInterval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 7000); // Change image every 7 seconds
+    }, 4000); // Change image every 7 seconds
 
     return () => clearInterval(imageInterval);
-  }, [images.length]);
+  }, []);
 
   const getBackgroundClassName = () => {
     switch (currentImageIndex) {
