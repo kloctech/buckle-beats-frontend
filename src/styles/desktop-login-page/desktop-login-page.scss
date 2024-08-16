@@ -17,6 +17,18 @@
       .verify-message {
         color:#000!important;
       }
+      .form-icon .form-animation-image{
+        height:auto;
+      }
+      .form-animation p{
+        margin-top:1rem;
+        color: #000;
+        padding: 0 1.5rem;
+
+      }
+      .form-desktop-icon{
+        height: auto;
+      }
       .form-group-login input,
       .form-group input,
       select , textarea {
@@ -34,7 +46,7 @@
       .forgot-password-main-container{
         background-color: transparent;
       }
-      .login-container, .regestation-container .form-container,
+      .login-container, .regestation-container .form-container,.verify-email-main-container,
       .main-qrcode-container, .forgot-password-main-container  .form-container
       ,.forgot-password-main-container   .forgot-password-form ,.qr-scanner.form-container, .lostqrcode-container, .send-invite-form, .main-container{
         background: #fff;
