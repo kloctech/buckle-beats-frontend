@@ -164,7 +164,7 @@ const DeleteAccount = () => {
           disabled={!allChecked || !password}
           style={{ cursor: allChecked && password ? "pointer" : "not-allowed" }}
         >
-          {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "I Agree.Delete"}
+          {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "I Agree. Delete"}
         </button>
       </form>
     </div>

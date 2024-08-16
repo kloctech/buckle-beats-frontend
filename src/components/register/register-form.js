@@ -119,7 +119,7 @@ const RegisterForm = () => {
       {isRegistred ? (
         <div className="form-container">
           <FaCheckCircle className="verification-message"></FaCheckCircle>
-          <h6 style={{ color: "#E4E9F1" }}>Please check your email and complete the verification process to log in.</h6>
+          <h6 className="verify-message" style={{ color: "#E4E9F1" }}>Please check your email and complete the verification process to log in.</h6>
         </div>
       ) : (
         <div className="form-container">
