@@ -46,6 +46,15 @@
       .forgot-password-main-container{
         background-color: transparent;
       }
+      .verify-email-container{
+        height: 100%;
+        width: 100%;
+        background: #fff;
+        color:#000;
+        .verification-message.error{
+          top:40%;
+        }
+      }
       .login-container, .regestation-container .form-container,.verify-email-main-container,
       .main-qrcode-container, .forgot-password-main-container  .form-container
       ,.forgot-password-main-container   .forgot-password-form ,.qr-scanner.form-container, .lostqrcode-container, .send-invite-form, .main-container{
@@ -284,12 +293,13 @@
     }
   }
 }
+
 @media(min-width:1400px) {
   .desktop {
     &-main-page {
       padding: 1.5rem 5rem;
 
-      .login-container, .regestation-container .form-container,
+      .login-container, .regestation-container .form-container, .verify-email-main-container,
       .main-qrcode-container, .forgot-password-main-container .form-container,
       .qr-scanner.form-container, .lostqrcode-container, .send-invite-form, .forgot-password-main-container   .forgot-password-form, .main-container {
         border-radius: 23px;
