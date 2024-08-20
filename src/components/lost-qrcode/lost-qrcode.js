@@ -133,7 +133,7 @@ const LostQRCode = () => {
                     className="add-qr-box"
                     style={{ padding: "1rem" }}
                     name="message"
-                    placeholder="Leave a note here, your contact details or mentions if you've left the item at Lost and Found reception. This helps the owner recover it more easily. Thank you!."
+                    placeholder="Leave a note here, your contact details or mention if you've left the item at Lost and Found reception. This helps the owner recover it more easily. Thank you!."
                     {...register("message", { required: "Please enter the message" })}
                   />
                   {errors.message && <span style={{color:'rgb(250, 111, 104)' }}>{errors.message.message}</span>}
