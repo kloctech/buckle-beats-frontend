@@ -58,8 +58,11 @@
 }
 
 .login-after-verify {
-  color: $border-color !important;
+  color: $border-color;
   font-size: 18px;
+  &:hover{
+    color: #58d7b5;
+  }
 }
 @media screen and (min-width: 440px) {
   .verify-email-main-container {
