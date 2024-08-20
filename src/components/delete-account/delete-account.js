@@ -29,6 +29,7 @@ const DeleteAccount = () => {
   });
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [checkboxError, setcheckboxError] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
 
@@ -86,15 +87,19 @@ const DeleteAccount = () => {
       setLoading(false)
     }
   };
+  const onError =  () => {
+    if(!allChecked){
+      setcheckboxError(true);
+    }
+  }
   return (
     <div className="delete-account">
-      <form className="account-form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="account-form" onSubmit={handleSubmit(onSubmit, onError)}>
         <p>Please read carefully: Action may be required to account deletion</p>
-        {errors.checkboxes?.first && <span className="delete-account-error checkbox-error">{errors.checkboxes?.first.message}</span>}
+        {checkboxError && !allChecked && <span className="delete-account-error checkbox-error">Please check all the boxes</span>}
         <Controller
         name="checkboxes.first"
         control={control}
-        rules={{ required: "Please Select" }}
         render={({ field }) => (
           <div className="form-group-login checkbox-group">
           <label className="checkbox-text">
@@ -110,11 +115,9 @@ const DeleteAccount = () => {
            
         )}
       />
-      {errors.checkboxes?.second && <span className="delete-account-error checkbox-error">{errors.checkboxes?.second.message}</span>}
         <Controller
         name="checkboxes.second"
         control={control}
-        rules={{ required: "Please Select" }}
         render={({ field }) => (
           <div className="form-group-login checkbox-group">
           <label className="checkbox-text">
@@ -131,11 +134,9 @@ const DeleteAccount = () => {
         </div>
         )}
       />
-         {errors.checkboxes?.third && <span className="delete-account-error checkbox-error">{errors.checkboxes?.third.message}</span>}
       <Controller
         name="checkboxes.third"
         control={control}
-        rules={{ required: "Please Select" }}
         render={({ field }) => (
           <div className="form-group-login checkbox-group">
           <label className="checkbox-text text-box">
@@ -182,6 +183,7 @@ const DeleteAccount = () => {
         {errors.password && (
           <span className="delete-account-error">{errors.password.message}</span>
         )}
+
         <button
           type="submit"
         >
