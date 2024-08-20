@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../styles/delete-account/delete-account.scss";
 import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import { CircularProgress } from "@mui/material";
@@ -12,28 +12,29 @@ import { useNavigate } from "react-router-dom";
 const DeleteAccount = () => {
   const {
     register,
+    control,
+    watch,
     handleSubmit,
     formState: { errors },
     setValue,
     trigger,
-  } = useForm();
-  const [checkboxes, setCheckboxes] = useState({
-    first: false,
-    second: false,
-    third: false,
+  } = useForm({
+    defaultValues: {
+      checkboxes: {
+        first: false,
+        second: false,
+        third: false,
+      },
+    },
   });
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
-  const handleCheckboxChange = (e) => {
-    setCheckboxes({
-      ...checkboxes,
-      [e.target.name]: e.target.checked,
-    });
-  };
 
-  const allChecked = checkboxes.first && checkboxes.second && checkboxes.third;
+  const watchedCheckboxes = watch('checkboxes');
+
+  const allChecked = watchedCheckboxes.first && watchedCheckboxes.second && watchedCheckboxes.third;
 
   const togglePasswordVisibility = () => {
     if (allChecked) {
@@ -52,11 +53,9 @@ const DeleteAccount = () => {
     setValue("password", e.target.value); 
     await trigger("password"); 
   };  
-
   const onSubmit = async (data) => {
     const token =  Cookies.get("accessToken");
     setLoading(true)
-
     try {
       const response = await axios.delete(
       `${process.env.REACT_APP_PRODUCTION_URL}/api/user`,
@@ -91,32 +90,54 @@ const DeleteAccount = () => {
     <div className="delete-account">
       <form className="account-form" onSubmit={handleSubmit(onSubmit)}>
         <p>Please read carefully: Action may be required to account deletion</p>
-        <div className="form-group-login checkbox-group">
+        {errors.checkboxes?.first && <span className="delete-account-error checkbox-error">{errors.checkboxes?.first.message}</span>}
+        <Controller
+        name="checkboxes.first"
+        control={control}
+        rules={{ required: "Please Select" }}
+        render={({ field }) => (
+          <div className="form-group-login checkbox-group">
           <label className="checkbox-text">
             My Buckle Beats will no longer work and cannot be reactivated.
             <input
               type="checkbox"
-              name="first"
-              checked={checkboxes.first}
-              onChange={handleCheckboxChange}
+              checked={field.value}
+              onChange={(e) => field.onChange(e.target.checked)}
             />
             <span className="checkmark"></span>
           </label>
         </div>
-        <div className="form-group-login checkbox-group">
+           
+        )}
+      />
+      {errors.checkboxes?.second && <span className="delete-account-error checkbox-error">{errors.checkboxes?.second.message}</span>}
+        <Controller
+        name="checkboxes.second"
+        control={control}
+        rules={{ required: "Please Select" }}
+        render={({ field }) => (
+          <div className="form-group-login checkbox-group">
           <label className="checkbox-text">
             Deleting my BuckleBeats account is permanent,{" "}
             <span className="text-box">and cannot be undone.</span>
             <input
               type="checkbox"
               name="second"
-              checked={checkboxes.second}
-              onChange={handleCheckboxChange}
+              checked={field.value}
+              onChange={(e) => field.onChange(e.target.checked)}
             />
             <span className="checkmark"></span>
           </label>
         </div>
-        <div className="form-group-login checkbox-group">
+        )}
+      />
+         {errors.checkboxes?.third && <span className="delete-account-error checkbox-error">{errors.checkboxes?.third.message}</span>}
+      <Controller
+        name="checkboxes.third"
+        control={control}
+        rules={{ required: "Please Select" }}
+        render={({ field }) => (
+          <div className="form-group-login checkbox-group">
           <label className="checkbox-text text-box">
             Account deletion will remove my account details and personal
             information. Tile may need to retain certain data, see Tile's
@@ -124,12 +145,14 @@ const DeleteAccount = () => {
             <input
               type="checkbox"
               name="third"
-              checked={checkboxes.third}
-              onChange={handleCheckboxChange}
+              checked={field.value}
+              onChange={(e) => field.onChange(e.target.checked)}
             />
             <span className="checkmark"></span>
           </label>
         </div>
+        )}
+      />
         <div className='input-field password-field'  style={{ marginBottom: errors.password ? '0rem' : '' }}>
         <input
             type={showPassword ? "text" : "password"}
@@ -161,8 +184,6 @@ const DeleteAccount = () => {
         )}
         <button
           type="submit"
-          disabled={!allChecked || !password}
-          style={{ cursor: allChecked && password ? "pointer" : "not-allowed" }}
         >
           {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "I Agree. Delete"}
         </button>
