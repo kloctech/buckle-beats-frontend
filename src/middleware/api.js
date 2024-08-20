@@ -8,7 +8,8 @@ api.interceptors.request.use(
   (config) => {
     const accessToken = Cookies.get("accessToken");
     if (accessToken) {
-      config.headers["Authorization"] = `Bearer ${accessToken}`;
+      config.headers["Authorization"] = `Bearer ${accessToken}`
+     config.headers["ngrok-skip-browser-warning"]= '6024';
     }
     return config;
   },
@@ -23,7 +24,7 @@ api.interceptors.response.use(
   },
   (error) => {
     console.log(error.response.status)
-    if (error.response && (error.response.status === 401 || error.response.status === 400)) {
+    if (error.response && (error.response.status === 401)) {
       Cookies.remove("accessToken");
 
         window.location.href = '/login';
