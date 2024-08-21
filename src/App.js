@@ -23,7 +23,9 @@ const App = () => {
   useEffect(() => {
     if(isDesktop){
       document.body.classList.add('desktop-wrapper');
-     }
+     }else {
+      document.body.classList.add('mobile-wrapper');
+    }
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1000);
