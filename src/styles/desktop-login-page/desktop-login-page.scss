@@ -62,15 +62,15 @@
         position: absolute;
         top: 50%;
         left: 0;
-        height: 26em;
-        margin: -13.8125em 0 0;
+        height: 35em;
+        margin: -18.8125em 0 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
         width: 100%;
         max-width: none;
         overflow: hidden;
-        border-radius: 15px;
+        border-radius: 10px;
         padding: 0;
         overflow: auto;
         scrollbar-width: none;
@@ -293,7 +293,18 @@
     }
   }
 }
-
+@media(min-width:1199px) {
+  .desktop {
+    &-main-page {
+      .login-container, .regestation-container .form-container, .verify-email-main-container,
+      .main-qrcode-container, .forgot-password-main-container .form-container,
+      .qr-scanner.form-container, .lostqrcode-container, .send-invite-form, .forgot-password-main-container   .forgot-password-form, .main-container {
+        height: 26em;
+        margin: -13.8125em 0 0;
+      }
+    }
+  }
+}
 @media(min-width:1400px) {
   .desktop {
     &-main-page {
@@ -302,9 +313,9 @@
       .login-container, .regestation-container .form-container, .verify-email-main-container,
       .main-qrcode-container, .forgot-password-main-container .form-container,
       .qr-scanner.form-container, .lostqrcode-container, .send-invite-form, .forgot-password-main-container   .forgot-password-form, .main-container {
-        border-radius: 23px;
-        height: 30em;
-        margin: -15.8125em 0 0;
+        border-radius: 10px;
+        height: 36em;
+        margin: -18.8125em 0 0;
         width: 85%;
       }
       .regestation-container{
@@ -379,7 +390,7 @@
   .qr-codes-container {
     overflow: auto;
     scrollbar-width: none;
-    // max-height: 23vh;
+    max-height: 35vh;
     
   }
   .load-more{
@@ -559,7 +570,17 @@
     width: auto;
     margin-left: 0.8rem;
   }
-  
+
+}
+@media(min-width:1023px){
+  .desktop-protect-page {
+    .qr-codes-container {
+      max-height: 50vh;
+    }
+    .load-more{
+      bottom: -50px;
+    }
+  }
 }
 @media(min-width:1199px){
   .desktop-protect-page {
