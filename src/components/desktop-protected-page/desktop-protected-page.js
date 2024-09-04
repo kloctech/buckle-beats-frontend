@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/desktop-login-page/desktop-login-page.scss";
-import DesktopLogo from "../../assets/desktoplogo.png";
+// import DesktopLogo from "../../assets/desktoplogo.png";
 import { useLocation, useParams  } from "react-router-dom";
 import ForgotPasswordLink from "../forget-password-link/forgot-password-link";
 import NotFound from "../not-found/not-found";
