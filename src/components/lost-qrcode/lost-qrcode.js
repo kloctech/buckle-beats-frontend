@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import "../../styles/lost-qrcode/lost-qrcode.scss";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/roam tracker logo.svg"
 import PhoneIcon from "../../assets/phone.png";
 import EmailIcon from "../../assets/email.png";
 import UserIcon from "../../assets/user.png";
@@ -258,7 +258,7 @@ const LostQRCode = () => {
               <div className="lostqrcode-content">
                 {lostData?.owner?.qrIsLost && (
                   <div>
-                    <p>You’re doing more than finding a lost item. Each item at BuckleBeats holds a precious story, waiting to be continued with your help.</p>
+                    <p>You’re doing more than finding a lost item. Each item at RoamSmartTracker holds a precious story, waiting to be continued with your help.</p>
                     <p>Please consent to also sharing your location, and be a hero in this happy reunion. Your kindness truly makes a difference and strengthens our caring community.</p>
                   </div>
                 )}

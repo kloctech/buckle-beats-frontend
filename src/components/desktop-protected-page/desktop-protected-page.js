@@ -12,6 +12,7 @@ import QrCodeScanner from "../qr-code-scanner/qr-code-scanner";
 import SendInvite from "../send-invite/send-invite";
 import SurveyForm from "../survey-form/survey-form";
 import DesktopVideo from "../../assets/DesktopVideo.mp4";
+import RoamSmartTracker from "../../../src/assets/Icon.svg";
 
 const DesktopProtectedPage = () => {
   const location = useLocation();
@@ -47,7 +48,7 @@ const DesktopProtectedPage = () => {
            </video>
         </div>
       <div className="desktop-header">
-        <img src={DesktopLogo} alt="BukleBeatsLogo" />
+        <img src={RoamSmartTracker}  style = {{width:'6%', backgroundColor: 'transparent'}} alt="BukleBeatsLogo" />
       </div>
       <div className="desktop-main-content">
         <div className="desktop-main-container">

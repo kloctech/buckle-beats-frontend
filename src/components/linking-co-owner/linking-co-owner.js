@@ -3,7 +3,7 @@ import axios from "axios";
 import '../../styles/linking-co-owner/linking-co-owner.scss';
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import BuckleBeats from '../../assets/logo.png';
+import Logo from "../../assets/roam tracker logo.svg"
 import { CircularProgress } from "@mui/material";
 
 const LinkingCoowner = () => {
@@ -34,7 +34,7 @@ const LinkingCoowner = () => {
 
   return (
     <div className="main-container">
-      <img className="logo" src={BuckleBeats} alt="BuckleBeats" />
+      <img className="logo" src={Logo} alt="RoamSmartTracker" />
       <div className="content-container">
         {ownertoken && coownertoken ? (
           <button className="accept-button next-btn"onClick={handleClickCoowner}>

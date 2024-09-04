@@ -1,6 +1,8 @@
 import React from "react";
 import "../../styles/desktop-login-page/desktop-login-page.scss";
-import DesktopLogo from "../../assets/desktoplogo.png";
+// import DesktopLogo from "../../assets/desktoplogo.png";
+import RoamSmartTracker from "../../../src/assets/Icon.svg";
+
 import { useLocation, useParams ,Link } from "react-router-dom";
 import LoginPage from "../login/login-form";
 import RegisterForm from "../register/register-form";
@@ -48,7 +50,14 @@ const DesktopPage = () => {
         </div>
       <div className="desktop-header">
         <Link to="/">
-        <img src={DesktopLogo} alt="BukleBeatsLogo" />
+        <img 
+  src={RoamSmartTracker} 
+  alt="RoamSmartTracker" 
+  style={{
+    width: '6%',
+    backgroundColor: 'transparent',
+  }} 
+/>
         </Link>
       </div>
       <div className="desktop-main-content">

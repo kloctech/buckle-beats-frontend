@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/hamburger-and-searchbar/hamburger-and-searchbar.scss";
 import { IoSearch } from "react-icons/io5";
-import BuckleBeatsIcon from "../../assets/Bucklebeats Icon.svg";
+import RoamSmartTracker from "../../../src/assets/Icon.svg";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import QrCodes from "../qr-codes/qr-codes";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/roam tracker logo.svg"
 import RightArrow from "../../assets/right-arrow.png";
 import { useNavigate } from "react-router-dom";
 import UpdatePassword from "../update-password/update-password ";
@@ -141,7 +141,7 @@ const Hamburger = () => {
             <div className="search-container">
               <div className="search-input-wrapper">
                 <input type="text" onChange={handleInputChange} />
-                <img src={BuckleBeatsIcon} alt="heart" className="search-bg-icon" />
+                <img src={RoamSmartTracker} alt="heart" className="search-bg-icon" />
                 <IoSearch className="search-icon" />
               </div>
             </div>
@@ -154,14 +154,14 @@ const Hamburger = () => {
                 X
               </div>
                 {submenuOpen ? (
-                 <div className="menu-wrapper-image">
+                 <div className="menu-wrapper-image1">
                   <h1  style={{ textAlign: "center",color:'white' }}>Account Details</h1>
                   <div className="menu-account menu-back" onClick={handleBackFromSubmenu}>
                   <BiArrowBack />
                   </div>
                   </div>
                 ) : passwordSubmenuOpen || deletepasswordOpen ? (
-                   <div className="menu-wrapper-image">
+                   <div className="menu-wrapper-image1">
                   
                     {passwordSubmenuOpen ? <h1  style={{ textAlign: "center",color:'white' }}> Update Password</h1>:<h1 style={{ textAlign: "center",color:'white' }}>Delete Account</h1>}
                    <div className="menu-account menu-back" onClick={handleBackFromPassword}>

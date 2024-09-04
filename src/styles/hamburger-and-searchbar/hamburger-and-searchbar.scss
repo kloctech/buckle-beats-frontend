@@ -86,7 +86,7 @@
 
 .menu {
   &-wrapper {
-    background: #183e51;
+    background: #183e51;;
     position: fixed;
     transition: all 0.6s linear;
     display: flex;
@@ -122,10 +122,20 @@
       cursor: pointer;
     }
     &-image {
+      width: 30%;
       margin: 3.5rem 2rem 0;
       @media (min-width: 440px) {
         margin-right: 3rem;
       }
+      
+    }
+    &-image1 {
+      // width: 30%;
+      margin: 3.5rem 2rem 0;
+      @media (min-width: 440px) {
+        margin-right: 3rem;
+      }
+      
     }
     .submenu,.submenu-password {
       position: absolute;
