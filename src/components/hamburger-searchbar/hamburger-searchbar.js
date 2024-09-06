@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/hamburger-and-searchbar/hamburger-and-searchbar.scss";
 import { IoSearch } from "react-icons/io5";
-import RoamSmartTracker from "../../../src/assets/Icon.svg";
+// import RoamSmartTracker from "../../../src/assets/Icon.svg";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import QrCodes from "../qr-codes/qr-codes";
@@ -141,7 +141,26 @@ const Hamburger = () => {
             <div className="search-container">
               <div className="search-input-wrapper">
                 <input type="text" onChange={handleInputChange} />
-                <img src={RoamSmartTracker} alt="heart" className="search-bg-icon" />
+                {/* <img src={RoamSmartTracker} alt="heart" className="search-bg-icon" /> */}
+                <svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84.98 79.3" className="search-bg-icon">
+  <defs>
+    {/* <style>
+      .cls-1 {
+      fill: #343D3C;
+
+      }
+      .cls-2{
+        fill:#9ab39f;
+      }
+    </style> */}
+  </defs>
+  <g id="Layer_1-2" data-name="Layer_1">
+    <g>
+      <path class="cls-2" d="M78.67,32.63l6.14,34.1c.11.61.17,1.22.17,1.84.02,5.84-4.69,10.59-10.53,10.61l-34.65.13c-19.24.07-35.75-13.68-39.16-32.62C-3.25,25.13,11.08,4.52,32.63.63s42.17,10.44,46.05,31.99Z"/>
+      <path class="cls-1" d="M61.17,35.77l3.4,19.01c.06.34.09.68.09,1.02,0,3.25-2.62,5.9-5.88,5.91l-19.31.05c-10.72.03-19.92-7.65-21.81-18.21-2.15-12.01,5.85-23.49,17.86-25.64,12.01-2.15,23.49,5.85,25.64,17.86Z"/>
+    </g>
+  </g>
+</svg>
                 <IoSearch className="search-icon" />
               </div>
             </div>
@@ -170,6 +189,7 @@ const Hamburger = () => {
                    </div>
                 ): (
                   <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
+                  
                 )}
                 {menuOpen && (
                   <div className={`menu-list ${submenuOpen ? "submenu-visible" : ""}  ${passwordSubmenuOpen || deletepasswordOpen ? "sub-submenu-visible" : ""}`}>

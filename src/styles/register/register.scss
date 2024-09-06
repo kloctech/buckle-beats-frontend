@@ -110,6 +110,9 @@ h1 {
   padding: 11px;
   margin-bottom: 20px;
   // margin-left: -22px;
+  font-size:$font-size-medium;
+  color: #000000;
+  font-weight: 500;
   border: 1px solid $border-color;
   border-radius: 5px;
 }
@@ -223,16 +226,17 @@ margin-top: auto;
   }
 
   h3 {
-    color: #183E51;
-    font-size: 22px;
+    color:#183E51;
+    font-size: 20.32px;
     text-align: center;
+    font-weight: 500;
     letter-spacing: 1px;
     margin-bottom: 1rem;
   }
 
   p {
     color: #183E51;
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
     letter-spacing: 1px;
     font-weight: 500;
@@ -242,16 +246,16 @@ margin-top: auto;
   .cta-button {
     width: 60%;
     padding: 0.5rem;
-    background-color: #6bc6ae;
-    border:1px solid #6bc6ae;
+    background-color: #93B8A1;
+    border:1px solid #93B8A1;
     color: white;
-    border-radius: 10px;
+    border-radius: 4.06px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 15.24px;
   }
 }
 @media(max-width:766px){
   .mobile-wrapper{
-    background-color: #183e51;
+    background-color:$background-color
   }
 }

@@ -1,6 +1,8 @@
 import React from "react";
 import "../../styles/desktop-login-page/desktop-login-page.scss";
 // import DesktopLogo from "../../assets/desktoplogo.png";
+import Logo from "../../assets/roam tracker logo.svg"
+
 import { useLocation, useParams  } from "react-router-dom";
 import ForgotPasswordLink from "../forget-password-link/forgot-password-link";
 import NotFound from "../not-found/not-found";
@@ -12,7 +14,7 @@ import QrCodeScanner from "../qr-code-scanner/qr-code-scanner";
 import SendInvite from "../send-invite/send-invite";
 import SurveyForm from "../survey-form/survey-form";
 import DesktopVideo from "../../assets/DesktopVideo.mp4";
-import RoamSmartTracker from "../../../src/assets/Icon.svg";
+// import RoamSmartTracker from "../../../src/assets/Icon.svg";
 
 const DesktopProtectedPage = () => {
   const location = useLocation();
@@ -48,7 +50,7 @@ const DesktopProtectedPage = () => {
            </video>
         </div>
       <div className="desktop-header">
-        <img src={RoamSmartTracker}  style = {{width:'6%', backgroundColor: 'transparent'}} alt="BukleBeatsLogo" />
+        <img src={Logo}  style = {{width:'6%', backgroundColor: 'transparent'}} alt="BukleBeatsLogo" />
       </div>
       <div className="desktop-main-content">
         <div className="desktop-main-container">

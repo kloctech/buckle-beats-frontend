@@ -35,7 +35,7 @@
       .burger {
         width: 100%;
         height: 2px;
-        background-color: $primary-color;
+        background-color:#93B8A1;
       }
     }
 
@@ -86,7 +86,7 @@
 
 .menu {
   &-wrapper {
-    background: #183e51;;
+    background: $background-color;;
     position: fixed;
     transition: all 0.6s linear;
     display: flex;
@@ -167,13 +167,13 @@
   &-logout {
     color: #fff;
     // padding-bottom: 1rem;
-    font-size: 17px;
+    font-size: 15.24px;
   }
   &-logout {
     margin-top: 1rem;
     color: #fff;
     text-decoration: underline;
-    font-weight: 700;
+    font-weight: 500;
     cursor: pointer;
   }
   &-container {
@@ -193,10 +193,11 @@
       transform: translateX(-200%);
     }
     h4 {
-      color: #fff;
+      color: #FFFFFF;
       line-height: 2;
-      border-bottom: 2px solid #58d7b5;
-      font-size: 18px;
+      border-bottom: 2px solid #80B8EA;
+      font-size: 17.94px;
+      font-weight:500 ;
     }
   }
   &-link {
@@ -282,4 +283,10 @@
 .close-menu {
   cursor: pointer;
   color: white;
+}
+.cls-1{
+  fill:$background-color;
+}
+.cls-2{
+  fill:#9ab39f;
 }

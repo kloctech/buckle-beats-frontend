@@ -131,7 +131,7 @@ const ManageProfile = () => {
           <button className="menu-logout" onClick={onClickLogout}>
             Sign Out
           </button>
-          <button onClick={handleDeleteProfile} className="cta-button" style={{ backgroundColor: '#58d7b5' }}>
+          <button onClick={handleDeleteProfile} className="cta-button" style={{ backgroundColor: '#93B8A1' }}>
             Manage Profile
           </button>
         </div>

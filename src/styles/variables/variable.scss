@@ -1,14 +1,15 @@
 // Color Variables
-$background-color: #183e51;
-$primary-color: #58d7b5;
+$background-color: #343D3C;
+
+$primary-color: #93B8A1;
 $secondary-color: #434850;
-$hover-color: #5aa895;
+$hover-color: #8ca58f;
 $error-color: rgb(250, 111, 104);
-$text-color: white;
+$text-color: #FFFFFF;
 $border-color: #ccc;
-$font-size-small: 12px;
-$font-size-medium: 16px;
-$input-field-border: #ffc857;
+$font-size-small: 13.1px;
+$font-size-medium: 16.38px;
+$input-field-border: #F9BC5E;
 
 // Dimensions
 $border-radius: 5px;
@@ -32,18 +33,20 @@ $max-width: 450px;
   border: 1px solid $border-color;
   border-radius: $border-radius;
   box-sizing: border-box;
+  font-weight: 500;
+  color: #000000;
 }
 
 @mixin button-style {
   background-color: $primary-color;
-  height: 45px;
+  height: 57.31px;
   width: 100%;
-  border: 5px solid $secondary-color;
+  border: 8.19px;
   color: $text-color;
   border-radius: 10px;
   cursor: pointer;
-  font-size: $font-size-medium;
-  font-weight: 700;
+  font-size: 20.47px;;
+  font-weight: 600;
 
   &:hover {
     background-color: $hover-color;

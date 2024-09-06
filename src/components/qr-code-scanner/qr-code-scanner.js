@@ -126,7 +126,7 @@ function QrCodeScanner() {
                   </p> }
               {!cameraAccessDenied && (
                 <div style={{ marginTop: "20px" }}>
-                  <p style={{ fontWeight: "200", color: "#fff" }}>
+                  <p className="heading ">
                     Scan Each QR via your phone individually to activate.
                   </p>
                 </div>

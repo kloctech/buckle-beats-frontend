@@ -5,7 +5,8 @@
       height: 100%;
     }
     &-page {
-      background-color: #183e51;
+      background-color:#343D3C;
+      ;
       padding: 1.5rem 3rem;
       height: 100%;
       overflow: hidden;
@@ -15,14 +16,14 @@
         display: none;
       }
       .verify-message {
-        color:#000!important;
+              color:#343D3C !important;
       }
       .form-icon .form-animation-image{
         height:auto;
       }
       .form-animation p{
         margin-top:1rem;
-        color: #000;
+        color:#343D3C;
         padding: 0 1.5rem;
 
       }
@@ -32,12 +33,13 @@
       .form-group-login input, .form-group-reg input,
       .form-group input,
       select , textarea {
-        border-color: #000!important;
+        border-color: #000000!important;
         width:100%;
-        font-size: 14px;
-        color:#000!important;
+        font-size: 16.38px;
+        font-weight: 400;
+        color:#000000!important;
         &::placeholder{
-          color:#000;
+          color:#000000;
         }
         &:focus, &:focus-visible{
           outline:0;
@@ -49,8 +51,9 @@
       .verify-email-container{
         height: 100%;
         width: 100%;
-        background: #fff;
-        color:#000;
+        background: #FFFFFF;
+            color:#343D3C;
+        ;
         .verification-message.error{
           top:40%;
         }
@@ -58,7 +61,7 @@
       .login-container, .regestation-container .form-container,.verify-email-main-container,
       .main-qrcode-container, .forgot-password-main-container  .form-container
       ,.forgot-password-main-container   .forgot-password-form ,.qr-scanner.form-container, .lostqrcode-container, .send-invite-form, .main-container{
-        background: #fff;
+        background: #FFFFFF;
         position: absolute;
         top: 50%;
         left: 0;
@@ -85,7 +88,9 @@
         position: static;
       }
       .welcome-heading, .not-found-bg h2, .not-found-bg p, .content-container p {
-        color: #183E51;
+        color:#343D3C;
+        font-weight: 500;
+        // font-size: 24.56px;
       }
       .main-container img{
         margin-top:2rem;
@@ -96,7 +101,10 @@
 
       .signup-navigation-text a,
       .Login a{
-        color: #183D50;
+        color: #343D3C;
+        font-weight: 400;
+        font-size: 13.1px;
+
       }
       .Login{
         margin-bottom: 0;
@@ -113,26 +121,42 @@
           margin: 0;
         }
         .forgot-password-login a{
-          color: #183D50;
+          color: #343D3C;
+          font-size: 13.1px;
+          font-weight: 400
+;
         }
         .login-button{
           margin-top: 0;
-          border: 1px solid #58d7b5;
+          height: 45px;
+          border-radius: 8.19px;
+          font-size: 16px;
+          border: 1px solid #93B8A1;
+          background-color: #84AB91;
         }
       }
       .forgot-password-heading   {
-        color: #183E51;
+        color: #343D3C;
       }
       .register-button, .register-button:hover,
       .forgot-password-main-container .for-got-password-button
        {
-        border: 1px solid #58d7b5;
+        border: 1px solid #93B8A1;
         width: 100%;
       } 
+
+      .register-button ,.for-got-password-button, .survey-form-list button {
+        height: 45px;
+        font-size: 16px;
+        border-radius: 8.19px;
+        background-color: #84AB91;
+
+      }
+     
       .regestation-container{
         .form-container{
           h6{
-           color: #183E51;
+           color: #343D3C;
            padding: 0 1rem;
           }
         }
@@ -162,7 +186,7 @@
       .lostqrcode-main-container{
         width: 100%;
         .lostqrcode-list li span{
-          color:#000;
+          color:#343D3C;
           word-wrap: break-word;
           font-size: 13.5px;
           width: 95%;
@@ -176,7 +200,7 @@
           margin-top: 0.7rem;
         }
         .manage-profile-list li h4{
-          color:#000;
+          color:#343D3C;
           width:100%;
         }
         .manage-profile-wrapper{
@@ -204,19 +228,30 @@
         }
       }
       .manage-profile .menu-logout{
-        color: #58d7b5;
-        font-size: 14px;
+        color: #343D3C;
+        font-size: 15.24px;
         width: 47%;
       }
       .lostqrcode-main-container {
         height: 100%;
       }
-      .lostqrcode-main-container p, .lostqrcode-title , .lostqrcode-content p{
-        color:#000;
-        font-size: 14px;;
+      .lostqrcode-title{
+        font-weight: 600;
+        color:#343D3C;
+
+      }
+      .lostqrcode-main-container p , .lostqrcode-content p{
+        
+        color:#343D3C;
+
+       font-size: 12px;
+        font-weight: 400;
       }
       .lostqrcode-main-container .login-button{
         border: 0;
+        background-color: #84AB91;
+        height: 45px;
+        font-size: 16px;
       }
       .lostqrcode-main-container textarea{
         scrollbar-width: none;
@@ -233,11 +268,17 @@
       }
       .lostqrcode-image{
         padding-top: 25px;
+        margin-left: 3rem;
       }
+       .location-image-logo{
+    padding-top: 25px;
+    margin-left: 5rem;
+  }
     }   
   }
+ 
   .cta-button{
-    border: 1px solid #58d7b5;
+    border: 1px solid #93B8A1;
   }
   &-main-container {
     height: 100%;
@@ -269,7 +310,7 @@
         color: #FB6F68;
       }
       .text-3{
-        color: #FFC857;
+        color: #F9BC5E;
 
       }
     }
@@ -347,6 +388,18 @@
 .desktop-protect-page {
    .header-flex-container{
     width: 100%;
+    .cls-1{
+      fill: #FFFFFF;
+    }
+    
+  }
+  .lost-mode-text{
+    font-size: 13.1px;
+  }
+  .submenu-password button{
+    height: 45px;
+    font-size: 16px;
+    font-weight: 500;
   }
   .main-qrcode-container{
     justify-content: flex-start;
@@ -390,7 +443,7 @@
   .qr-codes-container {
     overflow: auto;
     scrollbar-width: none;
-    max-height: 35vh;
+    // max-height: 35vh;
     
   }
   .load-more{
@@ -420,7 +473,7 @@
   .checkbox-text .checkmark{
     height: 25px;
     width: 25px;
-    border-color: #000;
+    border-color: #000000;
   }
   .checkbox-text .checkmark:after{
     left: 9px;
@@ -433,12 +486,13 @@
 
    }
    .menu-wrapper-image1 h1{
-    color: #000!important;
+    color: #343D3C!important;
     font-size: 16px;
+    font-weight: 600;
   padding-top: 2px;
    }
   .menu-list h4, .menu-linkmenu-link, .menu-link, .menu-logout, .menu-text{
-    color: #000;
+    color: #343D3C;
   }
   .submenu .menu-text{
     word-break: break-word;
@@ -448,11 +502,11 @@
     margin: 2rem 2rem 0;
    }
    .menu-wrapper-image h1, .menu-back{
-    color: #000!important;
+    color: #343D3C!important;
     font-size: 17px;
    }
    .delete-account p, .checkbox-text{
-    color: #000;
+    color: #343D3C;
     font-size: 14px;
    }
   .delete-account {
@@ -475,7 +529,7 @@
     border-width: 0;
   }
   .menu-wrapper {
-    background-color: #fff;
+    background-color: #FFFFFF;
     scrollbar-width: none;
   }
   .menu-link span{
@@ -500,7 +554,7 @@
     margin: 15px 0;
   }
   .delete-btn, .cancel-btn{
-    color:#58d7b5;
+    color:#343D3C;
   }
   .login-form .header-container svg{
     fill: #183E51;
@@ -516,13 +570,13 @@
     border-width:0;
   }
   textarea::placeholder, .add-qr input::placeholder { 
-    color: rgb(117, 117, 117);
+    color: #343D3C;
   }
   textarea::placeholder{
-    font-size: 12px;
+    font-size: 13.1px;
   }
   .add-qr select::placeholder, .add-qr input::placeholder{
-    color: rgb(117, 117, 117)!important;
+    color:#343D3C!important;
   }
   .add-qr-box{
     padding: 13px 10px;
@@ -530,8 +584,9 @@
     overflow: hidden;
   }
   .qr-scanner p{
-    color: #000!important;
+    color: #343D3C!important;
     padding:0 1rem;
+    font-size: 16px;
   }
   .button-row{
     padding: 0 2rem;
@@ -542,12 +597,15 @@
     height: 15vw;
   }
   .survey-form-list .form-group-login p{
-    color: #000;
+    color: #343D3C;
     margin: 3rem auto 1rem;
     width: 85%;
   }
   .survey-form-list button, .send-invite-form button {
     border-width: 0;
+    background-color: #84AB91;
+    height: 45px;
+    font-size: 16px;
   }
   .send-invite-main-container{
      height: auto;
@@ -559,18 +617,19 @@
     justify-content: flex-start;
   }
   .send-invite-form .menu-back svg{
-    color:#000!important;
+    color:#000000!important;
   }
   .password-field input , .password-container input{
-    border-color:#000!important;   
+    border-color:#000000!important;   
     font-size: 14px;
   }
   .password-field input::placeholder, .password-container input::placeholder{
-    color: rgb(117, 117, 117)!important;
+    color: #343D3C !important;
   }
   .form-animation p{
-    color: #000;
+    color: #343D3C;
     padding: 0 1.5rem;
+    font-size: 16px;
   }
   .form-animation button{
     border:0;

@@ -19,12 +19,12 @@
   &.textarea-group textarea {
     width: calc(100%);
     padding: 10px;
-    border: 1px solid #ffc857;
+   border: 1px solid #F9BC5E;
     border-radius: 5px;
     box-sizing: border-box;
     resize: none;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 17.84px;
     &::placeholder {
       transform: translateY(25px);
       text-align: center;
@@ -33,11 +33,11 @@
   }
   p {
     text-align: center;
-    color: #fff;
+    color: #FFFFFF;
     line-height: 1.7;
     margin: 0 auto 2rem;
     width: 62%;
-    font-size: 18px;
+    font-size: 17.94px;
   }
 }
 .header-title {
@@ -49,8 +49,8 @@
   padding: 2.5rem 2rem;
   h1 {
     margin-top: 0.2rem;
-    color: #58d7b5;
-    font-size: 25px;
+    color:$primary-color;
+    font-size: 24.56px;
 
     @media (min-width: 600px) {
       margin-top: 0;
@@ -105,9 +105,11 @@
   p {
     text-align: center;
     margin-top: 2.5rem;
-    color: #fff;
+    font-weight: 500;
+    color: #FFFFFF;
+    font-size: 18px;
     padding: 0 3.8rem;
-    line-height: 1.6;
+    line-height: 29.7px;
   }
   button {
     padding: 10px 20px;
@@ -119,5 +121,6 @@
     color: #fff;
     background-color: $primary-color;
     text-align: center;
+  border: 1px solid #93B8A1 ;
   }
 }

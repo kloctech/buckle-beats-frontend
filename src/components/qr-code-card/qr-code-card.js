@@ -55,7 +55,7 @@ const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, up
           alt={qrCodeData?.name || "QR Code"} 
           className="qr-code-image" 
         />
-      <h5 style={{ fontSize: "12px", color: "#1B3E51", marginTop: "6px", fontWeight: "640" }}>{qrCodeData?.name}</h5>
+      <h5 style={{ fontSize: "14.23px", color: "#183E51", marginTop: "6px", fontWeight: "500" }}>{qrCodeData?.name}</h5>
       <div className="edit-detail">
         <MdEdit onClick={handleEdit} />
       </div>

@@ -246,7 +246,7 @@ const EditQRCode = () => {
     type="submit"
     className="cta-button edit-btn"
     style={{
-      backgroundColor: isEdited ? "" : "#5aa895",
+      backgroundColor: isEdited ? "" : "#8ca58f",
       cursor: isEdited ? "pointer" : "not-allowed",
     }}
     disabled={!isEdited}

@@ -1,7 +1,8 @@
 import React from "react";
 import "../../styles/desktop-login-page/desktop-login-page.scss";
 // import DesktopLogo from "../../assets/desktoplogo.png";
-import RoamSmartTracker from "../../../src/assets/Icon.svg";
+// import RoamSmartTracker from "../../../src/assets/Icon.svg";
+import Logo from "../../assets/roam tracker logo.svg"
 
 import { useLocation, useParams ,Link } from "react-router-dom";
 import LoginPage from "../login/login-form";
@@ -51,7 +52,7 @@ const DesktopPage = () => {
       <div className="desktop-header">
         <Link to="/">
         <img 
-  src={RoamSmartTracker} 
+  src={Logo} 
   alt="RoamSmartTracker" 
   style={{
     width: '6%',

@@ -18,7 +18,7 @@
     text-align: center;
     width:50%;
     // margin-left: auto;
-    margin-left: 3rem;
+    margin-left: 5rem;
   }
 
   &-main-container {
@@ -27,7 +27,7 @@
 
     h3 {
       font-size: 17.94px;
-      font-weight: bold;
+      font-weight: 600;
       text-align: center;
       color:$input-field-border;
       margin: 1.8rem 0;
@@ -51,12 +51,12 @@
     background-color: #fff;
     color: #183E51;
     padding: 1.5rem 1rem;
-    border: 1px solid #58D7B5;
+    border: 1px solid #F9BC5E;
     border-radius: 4px;
 
     p {
-      font-size: 13px;
-      font-weight: 400;
+      font-size: 12px;
+      font-weight: 500;
       text-align: center;
       margin-bottom: 0;
       color: #183E51;
@@ -76,7 +76,7 @@
      align-items: center;
       span {
         font-size: 15.24px;
-        font-weight: 400;
+        font-weight: 500;
         text-align: left;
         color: #FFFFFF;
         padding-left: 10px;
@@ -115,4 +115,12 @@
     color: $input-field-border;
      background-color: transparent;
     text-align: center;
+}
+.location-image-logo{
+  padding-top: 40px;
+  text-align: center;
+  width:50%;
+  // margin-left: auto;
+  margin-left: 6rem;
+  margin-bottom: 1rem;
 }

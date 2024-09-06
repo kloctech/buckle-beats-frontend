@@ -61,7 +61,9 @@
 
   &-box {
     background-color: #fff;
-    color: #183e51;
+    color: #000000;
+    font-weight: 500;
+    font-size: 16.38px;
     padding: 1.5rem 1rem;
     border: 1px solid #FFC857;
     border-radius: 4px;
@@ -81,7 +83,9 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    color: rgb(117, 117, 117);
+    font-weight: 500;
+    color:#000000;
+    font-size: 16.38px;
   }
   .mobile-group {
     display: flex;
@@ -119,12 +123,13 @@
 }
 .cta-button {
   padding: 10px 20px;
-  border-radius: 5px;
+  // border-radius: 5px;
+  border: 1px solid #93B8A1;
   cursor: pointer;
   font-weight: 500;
-  font-size: small;
+  font-size: 13.1px;
   text-decoration: none;
-  color: #fff;
+  color: #FFFFFF;
   text-align: center;
 }
 .delete-btn {
@@ -177,4 +182,7 @@
   font-size: 12px;
   margin-bottom: -1.4rem;
 
+}
+.select-group{
+  color: #000000;
 }
