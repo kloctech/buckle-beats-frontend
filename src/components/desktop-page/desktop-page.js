@@ -55,7 +55,7 @@ const DesktopPage = () => {
   src={Logo} 
   alt="RoamSmartTracker" 
   style={{
-    width: '6%',
+   
     backgroundColor: 'transparent',
   }} 
 />

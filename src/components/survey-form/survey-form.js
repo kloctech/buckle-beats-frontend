@@ -61,7 +61,7 @@ const SurveyForm = ({ data }) => {
 
             <form onSubmit={handleSubmit(onSubmitAddQRForm)} className="survey-form-list">
               <div className="form-group-login textarea-group">
-                <p>Where did you buy BuckleBeats from?</p>
+                <p>Where did you buy Roam Smart Tracker from?</p>
                 <textarea rows="4" className="survey-form-text" name="default_message" placeholder="Leave a note here" {...register("default_message")} />
                 {errors.default_message && <span className="error-message">{errors.default_message.message}</span>}
               </div>

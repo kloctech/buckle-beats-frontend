@@ -103,7 +103,7 @@ const DeleteAccount = () => {
         render={({ field }) => (
           <div className="form-group-login checkbox-group">
           <label className="checkbox-text">
-            My Buckle Beats will no longer work and cannot be reactivated.
+            My Roam Smart Tracker will no longer work and cannot be reactivated.
             <input
               type="checkbox"
               checked={field.value}
@@ -121,7 +121,7 @@ const DeleteAccount = () => {
         render={({ field }) => (
           <div className="form-group-login checkbox-group">
           <label className="checkbox-text">
-            Deleting my BuckleBeats account is permanent,{" "}
+            Deleting my Roam Smart Tracker account is permanent,{" "}
             <span className="text-box">and cannot be undone.</span>
             <input
               type="checkbox"

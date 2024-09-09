@@ -50,7 +50,7 @@ const DesktopProtectedPage = () => {
            </video>
         </div>
       <div className="desktop-header">
-        <img src={Logo}  style = {{width:'6%', backgroundColor: 'transparent'}} alt="BukleBeatsLogo" />
+        <img src={Logo}  style = {{ backgroundColor: 'transparent'}} alt="BukleBeatsLogo" />
       </div>
       <div className="desktop-main-content">
         <div className="desktop-main-container">

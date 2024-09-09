@@ -340,8 +340,8 @@
       .login-container, .regestation-container .form-container, .verify-email-main-container,
       .main-qrcode-container, .forgot-password-main-container .form-container,
       .qr-scanner.form-container, .lostqrcode-container, .send-invite-form, .forgot-password-main-container   .forgot-password-form, .main-container {
-        height: 26em;
-        margin: -13.8125em 0 0;
+        height: 27em;
+        margin: -14.8125em 0 0;
       }
     }
   }
@@ -355,8 +355,8 @@
       .main-qrcode-container, .forgot-password-main-container .form-container,
       .qr-scanner.form-container, .lostqrcode-container, .send-invite-form, .forgot-password-main-container   .forgot-password-form, .main-container {
         border-radius: 10px;
-        height: 36em;
-        margin: -18.8125em 0 0;
+        height: 40em;
+        margin: -21.8125em 0 0;
         width: 85%;
       }
       .regestation-container{
@@ -653,7 +653,7 @@
 @media(min-width:1199px){
   .desktop-protect-page {
     .qr-codes-container {
-      max-height: 42vh;
+      max-height: 44vh;
     }
     .load-more{
       bottom: -35px;
@@ -700,6 +700,12 @@
 }
 .desktop-header{
   position: relative;
+
+  
+}
+.desktop-header img{
+  width: 150px;
+  height: 55px;
 }
 .desktop-wrapper{
   overflow: hidden!important;
