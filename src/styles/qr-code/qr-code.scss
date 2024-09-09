@@ -29,7 +29,7 @@
     height: auto;
   }
   @media screen and (max-width:500px) {
-    max-height:69vh;
+    max-height:65vh;
   }
   &.no-qr-codes {
     display: flex;
@@ -113,12 +113,13 @@
   background: none;
   border: none;
   color:#343D3C;
-  ;
+  white-space: nowrap;
   border-radius: 5px;
   width: 100px;
   height: 30px;
   font-weight: 500;
   font-size: 15.24px;
+
   cursor: pointer;
   margin-top: 5px;
 }

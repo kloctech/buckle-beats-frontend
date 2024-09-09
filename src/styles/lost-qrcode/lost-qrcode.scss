@@ -74,6 +74,10 @@
       padding-bottom: 0.8rem;
      display:flex;
      align-items: center;
+     img{
+      filter: brightness(0) saturate(100%) invert(97%) sepia(6%) saturate(7341%) hue-rotate(315deg) brightness(104%) contrast(95%);;
+
+     }
       span {
         font-size: 15.24px;
         font-weight: 500;

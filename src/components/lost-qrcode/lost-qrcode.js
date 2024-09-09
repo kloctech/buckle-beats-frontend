@@ -234,7 +234,7 @@ const LostQRCode = () => {
                       target="_blank"
                       rel="nofollow noopener noreferrer"
                     >
-                      <img src={EmailIcon} alt="Email Icon" />
+                      <img src={EmailIcon} alt="Email Icon" style={{filter:"brightness(0) saturate(100%) invert(97%) sepia(6%) saturate(7341%) hue-rotate(315deg) brightness(104%) contrast(95%);"}}/>
                       <span>{lostData.owner.email}</span>
                     </a>
                   )}
