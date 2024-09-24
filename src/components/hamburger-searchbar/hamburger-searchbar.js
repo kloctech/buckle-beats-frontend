@@ -12,6 +12,8 @@ import UpdatePassword from "../update-password/update-password ";
 import DeleteAccount from "../delete-account/delete-account";
 import { BiArrowBack } from "react-icons/bi";
 import api from "../../middleware/api";
+import { useMediaQuery } from 'react-responsive';
+
 const Hamburger = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState("qr-codes-screen");
@@ -20,7 +22,9 @@ const Hamburger = () => {
   const [deletepasswordOpen, setdeletepasswordOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
+  const isDesktop = useMediaQuery({ minWidth: 767 })
+
   const MenuItem2 = () => <div>Component for Menu Item 2</div>;
   const MenuItem3 = () => <div>Component for Menu Item 3</div>;
   const userName = Cookies.get("userName");
@@ -172,26 +176,34 @@ const Hamburger = () => {
               <div className="close-menu" onClick={handleClosemenu}>
                 X
               </div>
-                {submenuOpen ? (
-                 <div className="menu-wrapper-image1">
-                  <h1  style={{ textAlign: "center",color:'white' }}>Account Details</h1>
-                  <div className="menu-account menu-back" onClick={handleBackFromSubmenu}>
-                  <BiArrowBack />
-                  </div>
-                  </div>
-                ) : passwordSubmenuOpen || deletepasswordOpen ? (
-                   <div className="menu-wrapper-image1">
-                  
-                    {passwordSubmenuOpen ? <h1  style={{ textAlign: "center",color:'white' }}> Update Password</h1>:<h1 style={{ textAlign: "center",color:'white' }}>Delete Account</h1>}
-                   <div className="menu-account menu-back" onClick={handleBackFromPassword}>
-                   <BiArrowBack />
-                   </div>
-                   </div>
-                ): (
-                  <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
-                  
-                )}
-                {menuOpen && (
+              {submenuOpen ? (
+  <div className="menu-wrapper-image1">
+    <h1 style={{ textAlign: "center", color: "white" }}>Account Details</h1>
+    <div className="menu-account menu-back" onClick={handleBackFromSubmenu}>
+      <BiArrowBack />
+    </div>
+  </div>
+) : passwordSubmenuOpen || deletepasswordOpen ? (
+  <div className="menu-wrapper-image1">
+    {passwordSubmenuOpen ? (
+      <h1 style={{ textAlign: "center", color: "white" }}>Update Password</h1>
+    ) : (
+      <h1 style={{ textAlign: "center", color: "white" }}>Delete Account</h1>
+    )}
+    <div className="menu-account menu-back" onClick={handleBackFromPassword}>
+      <BiArrowBack />
+    </div>
+  </div>
+) : (
+  isDesktop ? (
+    < h1 className="menu-wrapper-image" style={{fontWeight:'600'}}>Settings</h1>
+  ) : (
+    <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
+
+  )
+)}
+
+              {menuOpen && (
                   <div className={`menu-list ${submenuOpen ? "submenu-visible" : ""}  ${passwordSubmenuOpen || deletepasswordOpen ? "sub-submenu-visible" : ""}`}>
                     <div className="menu-list-item">
                       <div className="menu-text">

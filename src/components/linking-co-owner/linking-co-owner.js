@@ -5,12 +5,15 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/roam tracker logo.svg"
 import { CircularProgress } from "@mui/material";
+import { useMediaQuery } from 'react-responsive';
 
 const LinkingCoowner = () => {
   const searchParams = new URLSearchParams(window.location.search);
   const ownertoken = searchParams.get("owner-token");
   const coownertoken = searchParams.get("co-owner-token");
   const [loading, setLoading] = useState(false);
+  const isDesktop = useMediaQuery({ minWidth: 767 })
+
   const navigate = useNavigate();
 
   const handleClickCoowner = async () => {
@@ -34,7 +37,8 @@ const LinkingCoowner = () => {
 
   return (
     <div className="main-container">
-      <img className="logo" src={Logo} alt="RoamSmartTracker" />
+      {!isDesktop ?<img className="logo" src={Logo} alt="RoamSmartTracker" />
+ : null}
       <div className="content-container">
         {ownertoken && coownertoken ? (
           <button className="accept-button next-btn"onClick={handleClickCoowner}>

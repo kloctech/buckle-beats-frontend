@@ -161,9 +161,13 @@ const LostQRCode = () => {
         lostData !== null && (
           <div className="lostqrcode-container">
             <div className="lostqrcode-main-container">
+              
+                        {isMobile ? (
               <div className="lostqrcode-image">
                 <img src={Logo} alt="BUKLEBEATS" />
               </div>
+            ) : null}
+
               <h3 className="lostqrcode-title">Thank You for Your Kindness!</h3>
               <h4>This item has been lost.</h4>
               {!lostData?.owner?.qrIsLost ? (

@@ -58,10 +58,11 @@
 }
 
 .login-after-verify {
-  color: $border-color;
+  color:$primary-color;
   font-size: 18px;
   &:hover{
-    color: #58d7b5;
+    color: $hover-color
+    
   }
 }
 @media screen and (min-width: 440px) {

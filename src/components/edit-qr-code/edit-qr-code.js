@@ -162,9 +162,9 @@ const EditQRCode = () => {
           <div className="form-group-login name-group">
             <input
               name="name"
-              placeholder="Name"
+              placeholder="Name of item"
               {...register("name", {
-                required: "Name is required",
+                required: "Name of item is required",
                 // pattern: {
                 //   value: /^[a-zA-Z\s'-]+$/,
                 //   message: "Invalid name",

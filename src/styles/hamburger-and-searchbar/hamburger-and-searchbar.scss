@@ -124,6 +124,7 @@
     &-image {
       width: 30%;
       margin: 3.5rem 2rem 0;
+      
       @media (min-width: 440px) {
         margin-right: 3rem;
       }
@@ -195,7 +196,7 @@
     h4 {
       color: #FFFFFF;
       line-height: 2;
-      border-bottom: 2px solid #80B8EA;
+      border-bottom: 2px solid #9ab39f;
       font-size: 17.94px;
       font-weight:500 ;
     }

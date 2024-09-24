@@ -62,7 +62,7 @@ const SurveyForm = ({ data }) => {
             <form onSubmit={handleSubmit(onSubmitAddQRForm)} className="survey-form-list">
               <div className="form-group-login textarea-group">
                 <p>Where did you buy Roam Smart Tracker from?</p>
-                <textarea rows="4" className="survey-form-text" name="default_message" placeholder="Leave a note here" {...register("default_message")} />
+                <textarea  rows="4" className="survey-form-text" name="default_message" placeholder="Leave a note here" {...register("default_message")} />
                 {errors.default_message && <span className="error-message">{errors.default_message.message}</span>}
               </div>
               <button className="login-button"> {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "Save"}</button>

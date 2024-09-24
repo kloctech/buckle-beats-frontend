@@ -261,7 +261,7 @@
       }
       .lostqrcode-main-container textarea::placeholder{
         font-size: 10px;
-        color: #183e51;
+        color:#000000;
       }
       .lostqrcode-content{
         padding-bottom: 1rem;
@@ -270,6 +270,8 @@
         padding-top: 25px;
         margin-left: 3rem;
       }
+      
+
        .location-image-logo{
     padding-top: 25px;
     margin-left: 5rem;
@@ -341,7 +343,7 @@
       .main-qrcode-container, .forgot-password-main-container .form-container,
       .qr-scanner.form-container, .lostqrcode-container, .send-invite-form, .forgot-password-main-container   .forgot-password-form, .main-container {
         height: 27em;
-        margin: -14.8125em 0 0;
+        margin: -13.8125em 0 0;
       }
     }
   }
@@ -579,7 +581,7 @@
     color:#343D3C!important;
   }
   .add-qr-box{
-    padding: 13px 10px;
+    padding: 10px 6px;
     resize: none;
     overflow: hidden;
   }
@@ -643,7 +645,7 @@
 @media(min-width:1023px){
   .desktop-protect-page {
     .qr-codes-container {
-      max-height: 50vh;
+      max-height: 30vh;
     }
     .load-more{
       bottom: -50px;
@@ -664,7 +666,7 @@
   .desktop-protect-page {
     .qr-codes-container {
       overflow: auto;
-      max-height: 45vh;
+      max-height: 55vh;
     }
     .load-more{
       bottom: -22px;
@@ -672,16 +674,16 @@
   }
 }
 .desktop-wrapper #modal-title, .desktop-wrapper .MuiBackdrop-root{
-  top: 50% !important;
+  top: 51% !important;
   left: 3rem!important;
   height: 26.06em;
-  max-width: 295px!important;
+  max-width: 275px!important;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: -10.2em 0 0!important;
   border-radius: 15px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color:transparent
 }
 .desktop-wrapper #modal-title.MuiModal-root h3{
   font-size: 17px!important;
@@ -693,8 +695,8 @@
   .desktop-wrapper #modal-title, .desktop-wrapper .MuiBackdrop-root{
     left: 5rem!important;
     border-radius: 22px;
-    height: 38.05em;
-  max-width: 360px!important;
+    height: 32.05em;
+  max-width: 310px!important;
   margin: -14.2em 0 0 !important;
   }
 }

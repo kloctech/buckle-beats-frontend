@@ -139,7 +139,8 @@ function QrCodeScanner() {
                   ""
                 ) : (
                   <div className="qr-bg">
-                    <img alt="qr-code" src={userData?.image_url} />
+              {userData.image_url ? <img alt="qr-code" src={userData.image_url} /> : null}
+
                   </div>
                 )
               ) : (
