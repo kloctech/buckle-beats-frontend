@@ -43,7 +43,7 @@ function QrCodeScanner() {
           setError("");
           codeReaderRef.current.reset();
 
-          if (code.length === 6 && result.getText().includes("https://bucklebeats.qrplanet.com")) {
+          if (code.length === 6 && result.getText().includes('https://qr.roamsmarttracker.com')) {
             verifyQrCode(code);
           } else {
             setShowFormAnimation(true);
