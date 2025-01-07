@@ -26,7 +26,7 @@ const LinkingCoowner = () => {
       const response = await axios.post(`${process.env.REACT_APP_PRODUCTION_URL}/api/user/link-co-owner`, data);
       toast.success(response?.data?.resultMessage?.en);
       setLoading(false)
-      navigate('/login');
+      navigate('/signin');
     } catch (error) {
       toast.error(error?.response?.data?.resultMessage?.en);
       setLoading(false)

@@ -9,7 +9,7 @@ function ProtectedRoute({ children }) {
     const token = Cookies.get("accessToken");
     if (!token) {
       Cookies.remove("accessToken");
-      navigate("/login");
+      navigate("/signin");
     }
   }, [navigate]);
 

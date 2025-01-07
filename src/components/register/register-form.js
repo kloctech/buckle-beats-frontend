@@ -188,7 +188,7 @@ const RegisterForm = () => {
               {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "SignUp"}
             </button>
             <p className="Login">
-              <Link to="/login">Already have an accout? Login</Link>
+              <Link to="/signin">Already have an accout? Login</Link>
             </p>
           </form>
         </div>

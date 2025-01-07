@@ -28,7 +28,7 @@ const ManageProfile = () => {
         Cookies.remove("accessToken");
         Cookies.remove("refreshToken");
         toast.success("Successfully logout");
-        window.location.href = "/login";
+        window.location.href = "/signin";
       } else {
         toast.error("Failed to logout");
       }

@@ -78,7 +78,7 @@ const DeleteAccount = () => {
 
       toast.success(response?.data?.resultMessage?.en, { duration: 5000 });
       setLoading(false)
-      navigate('/register')
+      navigate('/signup')
       }
      
 

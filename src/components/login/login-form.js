@@ -81,7 +81,7 @@ const LoginPage = () => {
       Cookies.set("loginUser", response.data.user._id, { expires: accessTokenExpirationTime });
       setLoading(false);
 
-      navigate("/manage-profile", { state: { userId: response.data.user._id } });
+      navigate("/qr-scanner", { state: { userId: response.data.user._id } });
     } catch (error) {
       toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
       setLoading(false);
@@ -144,7 +144,7 @@ const LoginPage = () => {
             {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "Login"}
           </button>
           <p className="signup-navigation-text">
-            <Link to="/register">SignUp</Link>
+            <Link to="/signup">SignUp</Link>
           </p>
         </form>
       </div>

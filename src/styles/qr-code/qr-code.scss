@@ -49,10 +49,14 @@
 }
 
 .qr-code-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   background-color: #FFFFFF;
   border-radius: 4.06px;
   width: 140px;
-  max-height: 149px;
+  max-height: none;
   position: relative;
   border: 0.4px solid $primary-color;
 }

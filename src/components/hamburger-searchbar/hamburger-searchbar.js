@@ -71,10 +71,10 @@ const Hamburger = () => {
       const response = await api.post(`${process.env.REACT_APP_PRODUCTION_URL}/api/user/logout`);
       if (response.ok) {
         toast.success("Successfully logout");
-        window.location.href = "/login";
+        window.location.href = "/signin";
       } else {
         //toast.error("Failed to logout");
-        window.location.href = "/login";
+        window.location.href = "/signin";
         const allCookies = Cookies.get();
         for (let cookie in allCookies) {
           Cookies.remove(cookie);
@@ -82,7 +82,7 @@ const Hamburger = () => {
       }
     } catch (error) {
       console.log(error);
-      window.location.href = "/login";
+      window.location.href = "/signin";
       const allCookies = Cookies.get();
       for (let cookie in allCookies) {
         Cookies.remove(cookie);

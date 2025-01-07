@@ -63,7 +63,7 @@ const navigate = useNavigate ()
       );
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       reset();
-      navigate('/login')
+      navigate('/signin')
 
     } catch (error) {
       toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });

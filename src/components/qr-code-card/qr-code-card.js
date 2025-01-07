@@ -49,7 +49,7 @@ console.log(qrCodeData)
   };
 
   return (
-    <div className="qr-code-card">
+    <div className="qr-code-card" >
         <img 
           src={ qrCodeData.image_url || DefaultQRCode} 
           alt={qrCodeData?.name || "QR Code"} 

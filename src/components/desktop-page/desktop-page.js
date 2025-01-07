@@ -21,9 +21,9 @@ const DesktopPage = () => {
   const { id } = useParams();
   const renderContent = () => {
     switch (location.pathname) {
-      case '/login':
+      case '/signin':
         return <LoginPage />;
-      case '/register':
+      case '/signup':
         return <RegisterForm />;
       case '/account':
         return <VerifyEmail />;

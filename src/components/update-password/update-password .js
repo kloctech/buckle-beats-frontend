@@ -46,7 +46,7 @@ const UpdatePassword = () => {
       Cookies.remove("userEmail")
 
       setLoading(false)
-      navigate('/login')
+      navigate('/signin')
       }
      
     } catch (error) {

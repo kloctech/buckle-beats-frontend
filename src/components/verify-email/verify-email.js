@@ -39,7 +39,7 @@ const VerifyEmail = () => {
               <FaCheckCircle className="verification-icon" />
               <span>{message}</span>
               <p>
-                <Link className="login-after-verify" to="/login">
+                <Link className="login-after-verify" to="/signin">
                   Login
                 </Link>
               </p>

@@ -43,8 +43,8 @@ const App = () => {
       <Routes>
       {isDesktop ? (
         <>
-            <Route path="/login" element={<DesktopPage />} />
-            <Route path="/register" element={<DesktopPage />} />
+            <Route path="/signin" element={<DesktopPage />} />
+            <Route path="/signup" element={<DesktopPage />} />
             <Route path="/account" element={<DesktopPage />} />
             <Route path="/additional-user" element={<DesktopPage />} />
             <Route path="*" element={<DesktopPage />} />
@@ -56,8 +56,8 @@ const App = () => {
             </>
         ) : (
           <>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterForm />} />
+            <Route path="/signin" element={<LoginPage />} />
+            <Route path="/signup" element={<RegisterForm />} />
             <Route path="/account" element={<VerifyEmail />} />
             <Route path="/additional-user" element={<LinkingCoowner />} />
             <Route path="*" element={<NotFound />} />

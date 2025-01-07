@@ -20,7 +20,7 @@ const Logout = () => {
         Cookies.remove("accessToken");
         Cookies.remove("refreshToken");
 
-        window.location.href = "/login";
+        window.location.href = "/signin";
       } else {
         console.error("Failed to logout");
       }
