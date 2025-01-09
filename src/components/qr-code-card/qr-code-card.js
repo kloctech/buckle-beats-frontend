@@ -30,7 +30,7 @@ const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, up
     setQRcode(null);
     setActiveId(null);
   };
-console.log(qrCodeData)
+// console.log(qrCodeData)
   const handleTurnOn = async (qr_planet_id) => {
     const url = process.env.REACT_APP_PRODUCTION_URL;
 

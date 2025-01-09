@@ -50,7 +50,7 @@ const ForgotPasswordLink = () => {
             Submit
           </button>
           <p className="Login">
-            <Link to="/signin">Login</Link>
+            <Link to="/signin">Signin</Link>
           </p>
         </form>
       </div>
