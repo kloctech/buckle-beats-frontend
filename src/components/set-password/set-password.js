@@ -62,7 +62,7 @@ const SetPassword = () => {
       const response = await axios.post(`${url}/api/user/set-password`, { password: data.password, code, ownerToken, coOwnerToken });
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       reset();
-      navigate("/signin");
+      navigate("/signin?redirect=activate-qr-code");
     } catch (error) {
       toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
     }

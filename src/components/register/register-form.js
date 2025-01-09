@@ -3,7 +3,7 @@ import api from "../../middleware/api";
 import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import "../../styles/register/register.scss";
-import { Link } from "react-router-dom";
+import { Link,useNavigate,useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import cat from "../../assets/catIcon.gif";
 import bag from "../../assets/bagimage.gif";
@@ -11,6 +11,7 @@ import cycle from "../../assets/bicycleICon.gif";
 import dog from "../../assets/dogIcon.gif";
 import toast from "react-hot-toast";
 import { FaCheckCircle } from "react-icons/fa";
+import Cookies from 'js-cookie'
 import { CircularProgress } from "@mui/material";
 const images = [bag, cycle, cat, dog];
 const RegisterForm = () => {
@@ -29,7 +30,10 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm();
 
-
+ const [searchParams] = useSearchParams();
+  const redirectUrl = searchParams.get('redirect');
+  // const [redirectUrl ,setRedirectUrl] = useState(redirect)
+  const navigate = useNavigate()
   useEffect(() => {
     const imageInterval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -37,7 +41,17 @@ const RegisterForm = () => {
 
     return () => clearInterval(imageInterval);
   }, []);
-
+ useEffect(() => {
+    const accessToken = Cookies.get("accessToken");
+    if (accessToken  ) {
+      if(redirectUrl){
+        navigate('/qr-scanner')
+      }
+      else{
+        navigate('/')
+      }
+    }
+  }, [navigate,redirectUrl]);
   const getBackgroundClassName = () => {
     switch (currentImageIndex) {
       case 0:
@@ -188,7 +202,7 @@ const RegisterForm = () => {
               {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "SignUp"}
             </button>
             <p className="Login">
-              <Link to="/signin">Already have an accout? Login</Link>
+              <Link  to={redirectUrl ? `/signin?redirect=${redirectUrl}` : '/signin'}>Already have an accout? Signin</Link>
             </p>
           </form>
         </div>

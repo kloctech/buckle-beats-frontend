@@ -7,10 +7,14 @@ import { Link } from "react-router-dom";
 const VerifyEmail = () => {
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [message, setMessage] = useState("");
+  const [redirectUrl ,setRedirectUrl] = useState("")
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get("code");
     const token = searchParams.get("token");
+    const redirect = searchParams.get('redirect'); 
+    setRedirectUrl(redirect) 
+    // console.log(redirect)
     if (code && token) {
       onClickVerifyEmail(code, token);
     }
@@ -39,7 +43,7 @@ const VerifyEmail = () => {
               <FaCheckCircle className="verification-icon" />
               <span>{message}</span>
               <p>
-                <Link className="login-after-verify" to="/signin">
+                <Link className="login-after-verify"     to={redirectUrl ? `/signin?redirect=${redirectUrl}` : '/signin'}>
                   Login
                 </Link>
               </p>

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { useForm } from "react-hook-form";
 import "../../styles/login/login.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,useSearchParams } from "react-router-dom";
 import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import cat from "../../assets/catIcon.gif";
@@ -24,9 +24,10 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  const [searchParams] = useSearchParams();
+  const redirectUrl = searchParams.get('redirect');
   const navigate = useNavigate();
-
+// console.log(redirect)
   const getImageClassName = () => {
     switch (currentImageIndex) {
       case 0:
@@ -49,9 +50,14 @@ const LoginPage = () => {
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
     if (accessToken) {
-      navigate("/");
+      if(redirectUrl){
+        navigate('/qr-scanner')
+      }
+      else{
+        navigate("/")
+      }
     }
-  }, [navigate]);
+  }, [navigate,redirectUrl]);
 
   useEffect(() => {
     const imageInterval = setInterval(() => {
@@ -81,7 +87,13 @@ const LoginPage = () => {
       Cookies.set("loginUser", response.data.user._id, { expires: accessTokenExpirationTime });
       setLoading(false);
 
-      navigate("/qr-scanner", { state: { userId: response.data.user._id } });
+      // navigate("/qr-scanner", { state: { userId: response.data.user._id } });
+      if (redirectUrl) {
+        navigate("/qr-scanner", { state: { userId:response?.data?.user._id } });
+    } else {
+        // Otherwise, navigate to the homepage
+        navigate("/manage-profile", { state: { userId:response?.data?.user._id } });
+    }
     } catch (error) {
       toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
       setLoading(false);
@@ -141,7 +153,7 @@ const LoginPage = () => {
             <img src={images[currentImageIndex]} className={`${getImageClassName()}`} alt="cycling images" />
           </div>
           <button className="login-button" type="submit">
-            {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "Login"}
+            {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "Signin"}
           </button>
           <p className="signup-navigation-text">
             <Link to="/signup">SignUp</Link>
