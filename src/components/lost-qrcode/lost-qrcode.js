@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../../styles/lost-qrcode/lost-qrcode.scss";
 import Logo from "../../assets/roam tracker logo.svg"
 import PhoneIcon from "../../assets/phone.png";
@@ -24,6 +23,68 @@ const LostQRCode = () => {
   const { id } = useParams();
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const hasScanned = useRef(false);
+
+  // Function to get device and OS information
+  const getDeviceInfo = () => {
+    const userAgent = navigator.userAgent;
+    let device = "desktop";
+    if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(userAgent)) {
+      device = "tablet";
+    } else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(userAgent)) {
+      device = "mobile";
+    }
+    return {
+      device,
+      os: navigator.platform
+    };
+  };
+
+  useEffect(() => {
+    if (hasScanned.current) return; // Skip if we've already scanned
+    
+    const scanQRCode = async () => {
+      try {
+        hasScanned.current = true; // Mark as scanned before making the request
+        const url = process.env.REACT_APP_PRODUCTION_URL;
+        const deviceInfo = getDeviceInfo();
+        
+        // Get geolocation if available
+        let locationData = {};
+        if (navigator.geolocation) {
+          try {
+            const position = await new Promise((resolve, reject) => {
+              navigator.geolocation.getCurrentPosition(resolve, reject);
+            });
+            locationData = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+          } catch (error) {
+            console.log('Location access denied or error:', error);
+          }
+        }
+
+        const scanData = {
+          ...locationData,
+          timestamp: new Date().toISOString(),
+          code: id,
+          redirects: 1,
+          device: deviceInfo.device,
+          os: deviceInfo.os,
+          country: Intl.DateTimeFormat().resolvedOptions().timeZone // Using timezone as a rough estimate of country
+        };
+        
+        const response = await axios.post(`${url}/api/qrcode/scan`, scanData);
+        console.log('TRIGGRED')
+        console.log('Scan recorded:', response.data);
+      } catch (error) {
+        console.error('Error recording scan:', error);
+      }
+    };
+
+    scanQRCode();
+  }, [id]); // Run when component mounts and when id changes
 
   // Function to format time as MM:SS
   const formatTime = (time) => {
@@ -262,7 +323,7 @@ const LostQRCode = () => {
               <div className="lostqrcode-content">
                 {lostData?.owner?.qrIsLost && (
                   <div>
-                    <p>You’re doing more than finding a lost item. Each item at RoamSmartTracker holds a precious story, waiting to be continued with your help.</p>
+                    <p>You're doing more than finding a lost item. Each item at RoamSmartTracker holds a precious story, waiting to be continued with your help.</p>
                     <p>Please consent to also sharing your location, and be a hero in this happy reunion. Your kindness truly makes a difference and strengthens our caring community.</p>
                   </div>
                 )}

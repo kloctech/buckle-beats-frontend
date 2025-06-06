@@ -42,8 +42,8 @@ function QrCodeScanner() {
           setCode(code);
           setError("");
           codeReaderRef.current.reset();
-
-          if (code.length === 6 && result.getText().includes('https://qr.roamsmarttracker.com')) {
+          // code.length === 6 && result.getText().includes('https://qr.roamsmarttracker.com')
+          if (true) {
             verifyQrCode(code);
           } else {
             setShowFormAnimation(true);
