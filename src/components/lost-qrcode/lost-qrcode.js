@@ -192,7 +192,7 @@ const LostQRCode = () => {
     return () => {
       isMounted = false;
     };
-  }, [id]);
+  }, [id,navigate]);
 
   useEffect(() => {
     const handleResize = () => {
