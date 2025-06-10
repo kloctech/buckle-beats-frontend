@@ -13,6 +13,7 @@ import location from '../../assets/location.gif';
 import heart from '../../assets/done_heart.gif';
 import LocationShare from "../location-share/location-share";
 import { FaCheckCircle } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 const LostQRCode = () => {
   const [lostData, setLostdata] = useState(null);
@@ -24,6 +25,7 @@ const LostQRCode = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const hasScanned = useRef(false);
+  const navigate = useNavigate();
 
   // Function to get device and OS information
   const getDeviceInfo = () => {
@@ -145,6 +147,24 @@ const LostQRCode = () => {
     }
   };
 
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await axios.get(`${url}/api/qrcode/owner-details/${id}`);
+      
+  //     // Check if user is not registered
+  //     if (response.data?.owner?.registered === false) {
+  //       toast.error("This QR code is not registered", { duration: 5000 });
+  //       return navigate("/"); // Redirect to home
+  //     }
+  
+  //     setLostdata(response.data);
+  //     toast.success(response.data.resultMessage.en, { duration: 5000 });
+  //   } catch (error) {
+  //     toast.error(error.response?.data?.resultMessage?.en || "Failed to load details", { duration: 5000 });
+  //   }
+  // };
+  
+
   useEffect(() => {
     const url = process.env.REACT_APP_PRODUCTION_URL;
     let isMounted = true;
@@ -152,6 +172,10 @@ const LostQRCode = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${url}/api/qrcode/owner-details/${id}`);
+        if (response.data?.owner?.registered === false) {
+          toast.error("This QR code is not registered", { duration: 5000 });
+          return navigate(`/add-qr-code/${id}`);
+        }
         if (isMounted) {
           setLostdata(response.data);
           toast.success(response.data.resultMessage.en, { duration: 5000 });
@@ -237,7 +261,7 @@ const LostQRCode = () => {
                   {canSendMessage && <p>Please use the message box below to alert them.</p>}
                 </>
               ) : null}
-              {lostData.owner.qrIsLost && (
+              {lostData?.owner?.qrIsLost && (
                 <div className="lostqrcode-box">
                   <p>{lostData.owner.defaultMessage}</p>
                 </div>
@@ -272,24 +296,24 @@ const LostQRCode = () => {
                 </>
               )}
                <ul className="lostqrcode-list">
-              {lostData.owner.name && (
+              {lostData?.owner?.name && (
                 <li>
                   <img src={UserIcon} alt="User Icon" />
-                  <span>{lostData.owner.name}</span>
+                  <span>{lostData?.owner?.name}</span>
                 </li>
               )}
-              {lostData.owner.email && (
+              {lostData?.owner?.email && (
                 <li>
                   {isMobile ? (
                     <a
                       className="contact-link"
                       style={{ textDecoration: "none" }}
-                      href={`mailto:${lostData.owner.email}`}
+                      href={`mailto:${lostData?.owner?.email}`}
                       target="_blank"
                       rel="nofollow noopener noreferrer"
                     >
                       <img src={EmailIcon} alt="Email Icon" />
-                      <span>{lostData.owner.email}</span>
+                      <span>{lostData?.owner?.email}</span>
                     </a>
                   ) : (
                     <a
@@ -300,22 +324,22 @@ const LostQRCode = () => {
                       rel="nofollow noopener noreferrer"
                     >
                       <img src={EmailIcon} alt="Email Icon" style={{filter:"brightness(0) saturate(100%) invert(97%) sepia(6%) saturate(7341%) hue-rotate(315deg) brightness(104%) contrast(95%);"}}/>
-                      <span>{lostData.owner.email}</span>
+                      <span>{lostData?.owner?.email}</span>
                     </a>
                   )}
                 </li>
               )}
-              {lostData.owner.mobileNumber && (
+              {lostData?.owner?.mobileNumber && (
                 <li>
                   <a 
                     style={{ textDecoration: "none" }}
                     className="contact-link"
-                    href={`tel:${lostData.owner.mobileNumber}`}
+                    href={`tel:${lostData?.owner?.mobileNumber}`}
                     target="_blank"
                     rel="nofollow noopener noreferrer"
                   >
                     <img src={PhoneIcon} alt="Phone Icon" />
-                    <span>{lostData.owner.mobileNumber}</span>
+                    <span>{lostData?.owner?.mobileNumber}</span>
                   </a>
                 </li>
               )}
