@@ -9,6 +9,8 @@ import EnableQRCode from "../enable-qrcode/enable-qrcode";
 import "../../styles/add-edit-qrcode/add-edit-qrcode.scss";
 import Preloader from "../preloader/preloader";
 import Cookies from "js-cookie";
+import countryCodes from "../../data/countryCodes.json";
+
 const EditQRCode = () => {
   const [qrcode, setQRcode] = useState(null);
   const [activeId, setActiveId] = useState(null);
@@ -67,22 +69,82 @@ const EditQRCode = () => {
     };
     getCategories();
   }, [url]);
-
   useEffect(() => {
-    if (!loading) {
-      setValue("countryCode", countryCode);
-      setValue("mobile_number", mobileNumber);
+  if (!loading && qrCodeData?.mobile_number) {
+    const fullMobile = qrCodeData.mobile_number.replace(/\s+/g, ""); // remove all spaces
+    const mobileNum = fullMobile.slice(-10); // last 10 digits
+    const countryCodeVal = fullMobile.slice(0, -10); // remaining part before mobile number
+
+    // Validate logic
+    const isValidMobile = /^[0-9]{10}$/.test(mobileNum); // Only digits and 10 digits
+    const isCountryCodePresent = countryCodeVal.length > 0;
+
+    if (isValidMobile && isCountryCodePresent) {
+      // Valid case
+      setValue("mobile_number", mobileNum);
+      setValue("countryCode", countryCodeVal);
+
       setInitialValues({
         name: qrCodeData?.name,
         email: qrCodeData?.email,
-        mobile_number: mobileNumber,
-        countryCode: countryCode,
+        mobile_number: mobileNum,
+        countryCode: countryCodeVal,
+        category: qrCodeData?.category,
+        default_message: qrCodeData?.default_message,
+      });
+    } else {
+      // Invalid case: set both fields as empty
+      setValue("mobile_number", "");
+      setValue("countryCode", "");
+
+      setInitialValues({
+        name: qrCodeData?.name,
+        email: qrCodeData?.email,
+        mobile_number: "",
+        countryCode: "",
         category: qrCodeData?.category,
         default_message: qrCodeData?.default_message,
       });
     }
-  }, [countryCode, mobileNumber, setValue, qrCodeData, loading]);
+  }
+}, [qrCodeData, loading, setValue]);
 
+// useEffect(() => {
+//   if (!loading && qrCodeData?.mobile_number) {
+//     const fullMobile = qrCodeData.mobile_number.replace(/\s+/g, ""); // remove all spaces
+//     const mobileNum = fullMobile.slice(-10); // last 10 digits
+//     const countryCodeVal = fullMobile.slice(0, -10); // everything before last 10 digits
+
+//     setValue("mobile_number", mobileNum);
+//     setValue("countryCode", countryCodeVal);
+
+//     setInitialValues({
+//       name: qrCodeData?.name,
+//       email: qrCodeData?.email,
+//       mobile_number: mobileNum,
+//       countryCode: countryCodeVal,
+//       category: qrCodeData?.category,
+//       default_message: qrCodeData?.default_message,
+//     });
+//   }
+// }, [qrCodeData, loading, setValue]);
+console.log(mobileNumber, "qrCoeData");
+console.log(countryCode, "countryCode");
+//   useEffect(() => {
+//     if (!loading) {
+//       setValue("countryCode", countryCode);
+//       setValue("mobile_number", mobileNumber);
+//       setInitialValues({
+//         name: qrCodeData?.name,
+//         email: qrCodeData?.email,
+//         mobile_number: mobileNumber,
+//         countryCode: countryCode,
+//         category: qrCodeData?.category,
+//         default_message: qrCodeData?.default_message,
+//       });
+//     }
+//   }, [countryCode, mobileNumber, setValue, qrCodeData, loading]);
+// console.log(qrCodeData, "qrCodeData");
   const watchedValues = useWatch({ control });
 
   const isEdited = Object.keys(initialValues).some((key) => watchedValues[key] !== initialValues[key]);
@@ -191,18 +253,28 @@ const EditQRCode = () => {
           </div>
 
           <div className="form-group-login mobile-group">
-            <select {...register("countryCode")}>
-              <option value="+91">+91</option>
-              <option value="+1">+1</option>
-              <option value="+44">+44</option>
-              <option value="+971">+971</option>
-            </select>
+            <select
+  className="country-select"
+  {...register("countryCode", {
+    // required: "Country code is required",
+    validate: (value) =>
+      countryCodes.some((code) => code.code === value) || "Invalid country code",
+  })}
+>
+  <option value=""></option>
+  {countryCodes.map((country, index) => (
+    <option key={index} value={country.code}>
+   {country.code}
+    </option>
+  ))}
+</select>
+
             <input
               id="mobile_number"
               name="mobile_number"
               placeholder="Mobile"
               {...register("mobile_number", {
-                required: "Mobile number is required",
+                // required: "Mobile number is required",
                 pattern: {
                   value: /^[0-9]{10}$/,
                   message: "Invalid mobile number",
