@@ -50,7 +50,8 @@ const EditQRCode = () => {
     setFilteredCodes(filtered);
   }, [query]);
   const { countryCode, mobileNumber } = extractCountryCodeAndNumber(qrCodeData?.mobile_number || "");
-
+console.log("countryCode", qrCodeData);
+;
   const {
     register,
     handleSubmit,
@@ -80,11 +81,12 @@ const EditQRCode = () => {
   }, [url]);
   useEffect(() => {
   if (!loading && qrCodeData?.mobile_number) {
-    const fullMobile = qrCodeData.mobile_number.replace(/\s+/g, ""); // remove all spaces
+    const fullMobile = qrCodeData.mobile_number; // remove all spaces
     const mobileNum = fullMobile.slice(-10); // last 10 digits
     const countryCodeVal = fullMobile.slice(0, -10); // remaining part before mobile number
-
+    // Set the values in the formc
     // Validate logic
+    console.log("countryCodeVal", countryCodeVal);
     const isValidMobile = /^[0-9]{10}$/.test(mobileNum); // Only digits and 10 digits
     const isCountryCodePresent = countryCodeVal.length > 0;
 
@@ -118,6 +120,8 @@ const EditQRCode = () => {
     }
   }
 }, [qrCodeData, loading, setValue,countryCode, mobileNumber]);
+console.log(countryCode)
+console.log(mobileNumber)
 // useEffect(() => {
 //   if (!loading && qrCodeData?.mobile_number) {
 //     const fullMobile = qrCodeData.mobile_number.replace(/\s+/g, ""); // remove all spaces
@@ -295,19 +299,23 @@ const EditQRCode = () => {
                      <div className="form-group-login mobile-group">           
                       <div className="custom-select-wrapper">            
                         <input  style={{fontSize:"14px"}}
-                        maxLength={5}
+                        maxLength={6}
 
                type="text"
                 placeholder="+"
                 value={query}
-                onChange={(e) => {
-                    const value = e.target.value;
-      if (/^\+?[0-9]*$/.test(value)) {
-        setQuery(value); // Only update state if value is valid
-      }
-                  setShowDropdown(true);
-                  setValue("countryCode", e.target.value);
-                }}
+               onChange={(e) => {
+  const value = e.target.value;
+
+  // Allow only "+", digits, and spaces
+  if (/^[+\d\s]*$/.test(value)) {
+    setQuery(value);
+    setValue("countryCode", value);
+  }
+
+  setShowDropdown(true);
+}}
+
                 onFocus={() => setShowDropdown(true)}
                 onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
               />
