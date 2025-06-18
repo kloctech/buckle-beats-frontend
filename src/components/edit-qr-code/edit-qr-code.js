@@ -17,7 +17,10 @@ const EditQRCode = () => {
   const [initialValues, setInitialValues] = useState({});
   const [categoryList, setCategoryList] = useState([]);
   const [loading, setLoading] = useState(true);
- 
+   const [query, setQuery] = useState("");
+  const [filteredCodes, setFilteredCodes] = useState(countryCodes);
+  const [showDropdown, setShowDropdown] = useState(false);
+
   const location = useLocation();
   const { qrCodeData } = location.state || {};
   const navigate = useNavigate();
@@ -38,7 +41,14 @@ const EditQRCode = () => {
       mobileNumber: mobileNumber,
     };
   };
-
+  useEffect(() => {
+    const filtered = countryCodes.filter(
+      (c) =>
+        c.name.toLowerCase().includes(query.toLowerCase()) ||
+        c.code.includes(query)
+    );
+    setFilteredCodes(filtered);
+  }, [query]);
   const { countryCode, mobileNumber } = extractCountryCodeAndNumber(qrCodeData?.mobile_number || "");
 
   const {
@@ -55,7 +65,6 @@ const EditQRCode = () => {
     },
     mode: "onChange",
   });
-
   useEffect(() => {
     const getCategories = async () => {
       try {
@@ -83,7 +92,7 @@ const EditQRCode = () => {
       // Valid case
       setValue("mobile_number", mobileNum);
       setValue("countryCode", countryCodeVal);
-
+      setQuery(countryCodeVal); // Set the query for the input box
       setInitialValues({
         name: qrCodeData?.name,
         email: qrCodeData?.email,
@@ -91,6 +100,7 @@ const EditQRCode = () => {
         countryCode: countryCodeVal,
         category: qrCodeData?.category,
         default_message: qrCodeData?.default_message,
+        // mobile_number:mobileNum,
       });
     } else {
       // Invalid case: set both fields as empty
@@ -100,15 +110,14 @@ const EditQRCode = () => {
       setInitialValues({
         name: qrCodeData?.name,
         email: qrCodeData?.email,
-        mobile_number: "",
-        countryCode: "",
+        mobile_number: mobileNumber,
+        countryCode: countryCode,
         category: qrCodeData?.category,
         default_message: qrCodeData?.default_message,
       });
     }
   }
-}, [qrCodeData, loading, setValue]);
-
+}, [qrCodeData, loading, setValue,countryCode, mobileNumber]);
 // useEffect(() => {
 //   if (!loading && qrCodeData?.mobile_number) {
 //     const fullMobile = qrCodeData.mobile_number.replace(/\s+/g, ""); // remove all spaces
@@ -128,8 +137,7 @@ const EditQRCode = () => {
 //     });
 //   }
 // }, [qrCodeData, loading, setValue]);
-console.log(mobileNumber, "qrCoeData");
-console.log(countryCode, "countryCode");
+
 //   useEffect(() => {
 //     if (!loading) {
 //       setValue("countryCode", countryCode);
@@ -144,7 +152,6 @@ console.log(countryCode, "countryCode");
 //       });
 //     }
 //   }, [countryCode, mobileNumber, setValue, qrCodeData, loading]);
-// console.log(qrCodeData, "qrCodeData");
   const watchedValues = useWatch({ control });
 
   const isEdited = Object.keys(initialValues).some((key) => watchedValues[key] !== initialValues[key]);
@@ -252,7 +259,7 @@ console.log(countryCode, "countryCode");
             {errors.email && <span className="error-message">{errors.email.message}</span>}
           </div>
 
-          <div className="form-group-login mobile-group">
+          {/* <div className="form-group-login mobile-group">
             <select
   className="country-select"
   {...register("countryCode", {
@@ -284,6 +291,65 @@ console.log(countryCode, "countryCode");
               inputMode="numeric"
             />
             {errors.mobile_number && <span className="error-message">{errors.mobile_number.message}</span>}
+          </div> */}
+                     <div className="form-group-login mobile-group">           
+                      <div className="custom-select-wrapper">            
+                        <input  style={{fontSize:"14px"}}
+                        maxLength={5}
+
+               type="text"
+                placeholder="+"
+                value={query}
+                onChange={(e) => {
+                    const value = e.target.value;
+      if (/^\+?[0-9]*$/.test(value)) {
+        setQuery(value); // Only update state if value is valid
+      }
+                  setShowDropdown(true);
+                  setValue("countryCode", e.target.value);
+                }}
+                onFocus={() => setShowDropdown(true)}
+                onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
+              />
+              {showDropdown && (
+                <ul className="dropdown-list">
+                  {filteredCodes.map((item, index) => (
+                    <li
+                      key={index}
+                      onClick={() => {
+                        setQuery(item.code);
+                        setValue("countryCode", item.code);
+                        setShowDropdown(false);
+                      }}
+                    >
+                      {item.code}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <input
+                type="hidden"
+                {...register("countryCode")}
+                value={query}
+              />
+              {errors.country_code && (
+                <span className="error-message">{errors.country_code.message}</span>
+              )}
+            </div>
+
+            <input
+              id="mobile_number"
+              placeholder="Mobile"
+              {...register("mobile_number", {
+                pattern: {
+                  value: /^[0-9]{10}$/,
+                  message: "Invalid mobile number",
+                },
+              })}
+            />
+            {errors.mobile_number && (
+              <span className="error-message">{errors.mobile_number.message}</span>
+            )}
           </div>
 
           <div className="form-group-login select-group">

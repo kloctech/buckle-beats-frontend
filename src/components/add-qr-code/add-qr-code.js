@@ -236,9 +236,14 @@ const AddQRCode = () => {
                 <input
                   type="text"
                   placeholder="+"
-                  value={query}
+                  value={query}  maxLength={5}
+
                   onChange={(e) => {
-                    setQuery(e.target.value);
+                    const value = e.target.value;
+      if (/^\+?[0-9]*$/.test(value)) {
+        setQuery(value); // Only update state if value is valid
+      }
+                    // setQuery(e.target.value);
                     setShowDropdown(true);
                     setValue("country_code", e.target.value); // sync with form
                   }}
@@ -261,7 +266,7 @@ const AddQRCode = () => {
                     ))}
                   </ul>
                 )}
-                <input
+                {/* <input
                   type="hidden"
                   {...register("country_code", {
                     // required: "Country code is required",
@@ -270,7 +275,7 @@ const AddQRCode = () => {
                 />
                 {errors.country_code && (
                   <span className="error-message">{errors.country_code.message}</span>
-                )}
+                )} */}
               </div>
 
               <input

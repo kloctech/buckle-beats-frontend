@@ -235,7 +235,6 @@ const LostQRCode = () => {
       toast.error("Geolocation is not supported by this browser.", { duration: 5000 });
     }
   };
-
   return (
     <>
       {sharingLocation ? (
@@ -330,19 +329,20 @@ const LostQRCode = () => {
                 </li>
               )}
               {lostData?.owner?.mobileNumber && (
-                <li>
-                  <a 
-                    style={{ textDecoration: "none" }}
-                    className="contact-link"
-                    href={`tel:${lostData?.owner?.mobileNumber}`}
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                  >
-                    <img src={PhoneIcon} alt="Phone Icon" />
-                    <span>{lostData?.owner?.mobileNumber}</span>
-                  </a>
-                </li>
-              )}
+  <li>
+    <a 
+      style={{ textDecoration: "none" }}
+      className="contact-link"
+      href={`tel:${lostData.owner.mobileNumber}`}
+      target="_blank"
+      rel="nofollow noopener noreferrer"
+    >
+{ lostData?.owner?.mobileNumber !==" " ?  <img src={PhoneIcon} alt="Phone Icon" /> : null }
+      <span>{lostData.owner.mobileNumber}</span>
+    </a>
+  </li>
+)}
+
             </ul>
               <div className="lostqrcode-content">
                 {lostData?.owner?.qrIsLost && (
