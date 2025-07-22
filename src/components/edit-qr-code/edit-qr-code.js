@@ -298,7 +298,7 @@ console.log(mobileNumber)
           </div> */}
                      <div className="form-group-login mobile-group">           
                       <div className="custom-select-wrapper">            
-                        <input  style={{fontSize:"14px"}}
+                        <input  style={{fontSize:"16px"}}
                         maxLength={6}
 
                type="text"

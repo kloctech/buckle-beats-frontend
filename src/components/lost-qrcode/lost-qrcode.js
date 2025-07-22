@@ -171,9 +171,15 @@ const LostQRCode = () => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${url}/api/qrcode/owner-details/${id}`);
+const response = await axios.get(`${url}/api/qrcode/owner-details/${id}`, {
+  headers: {
+    'ngrok-skip-browser-warning': '6024',
+  }
+});
+
+console.log(response);
         if (response.data?.owner?.registered === false) {
-          toast.error("This QR code is not registered", { duration: 5000 });
+          toast.success("This QR code is not registered", { duration: 5000 });
           return navigate(`/add-qr-code/${id}`);
         }
         if (isMounted) {

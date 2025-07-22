@@ -153,7 +153,7 @@ const LoginPage = () => {
             <img src={images[currentImageIndex]} className={`${getImageClassName()}`} alt="cycling images" />
           </div>
           <button className="login-button" type="submit">
-            {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "Signin"}
+            {loading ? <CircularProgress size={25} sx={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }} /> : "SignIn"}
           </button>
           <p className="signup-navigation-text">
             <Link to="/signup">SignUp</Link>
