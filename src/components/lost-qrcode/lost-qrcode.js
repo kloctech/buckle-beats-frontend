@@ -14,6 +14,7 @@ import heart from '../../assets/done_heart.gif';
 import LocationShare from "../location-share/location-share";
 import { FaCheckCircle } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const LostQRCode = () => {
   const [lostData, setLostdata] = useState(null);
@@ -171,17 +172,26 @@ const LostQRCode = () => {
 
     const fetchData = async () => {
       try {
-const response = await axios.get(`${url}/api/qrcode/owner-details/${id}`, {
-  headers: {
-    'ngrok-skip-browser-warning': '6024',
-  }
-});
-
-console.log(response);
-        if (response.data?.owner?.registered === false) {
+       // const response = await axios.get(`${url}/api/qrcode/owner-details/${id}`);
+        const response = await axios.get(`${url}/api/qrcode/owner-details/${id}`, {
+          headers: {
+            'ngrok-skip-browser-warning': '6024',
+          },
+        });
+       if (response.data?.owner?.registered === false) {
           toast.success("This QR code is not registered", { duration: 5000 });
-          return navigate(`/add-qr-code/${id}`);
+          const token = Cookies.get("accessToken");
+       // console.log(token,'token')
+          if (token) {
+            // User is logged in
+            return navigate(`/add-qr-code/${id}`);
+          } else {
+            // User not logged in, redirect to signup with redirect param
+            return navigate(`/signup`);
+          }
         }
+        
+        
         if (isMounted) {
           setLostdata(response.data);
           toast.success(response.data.resultMessage.en, { duration: 5000 });
