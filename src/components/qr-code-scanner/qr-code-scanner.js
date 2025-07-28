@@ -127,7 +127,11 @@ function QrCodeScanner() {
               {!cameraAccessDenied && (
                 <div style={{ marginTop: "20px" }}>
                   <p className="heading ">
-                    Scan Each QR via your phone individually to activate.
+                ⚠️  Scan the QR code on the back of the device in a well-lit
+                  area using your phone's main (rear) camera, holding it steady about
+                  6–8 inches away. If your browser has trouble detecting the code,
+                   try adjusting the angle slightly or close the browser and use your 
+                   phone's native camera app instead.
                   </p>
                 </div>
               )}
