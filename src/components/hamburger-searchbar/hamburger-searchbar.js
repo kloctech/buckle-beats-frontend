@@ -228,7 +228,7 @@ const Hamburger = () => {
                         <div className="menu-link" onClick={() => handleMenuItemClick("qr-codes-screen")}>
                           Activate & Manage QRs
                         </div>
-                        <div className="menu-link" style={{ marginTop: "1rem" }}></div>
+                        {/* <div className="menu-link" style={{ marginTop: "1rem" }}></div> */}
                         {/* <div className="menu-text">
                           <h4>PREMIUM (Upgrade)</h4>
                           <div className={`menu-link`}>
