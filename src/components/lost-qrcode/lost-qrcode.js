@@ -179,14 +179,15 @@ const LostQRCode = () => {
           },
         });
        if (response.data?.owner?.registered === false) {
-          toast.success("This QR code is not registered", { duration: 5000 });
           const token = Cookies.get("accessToken");
        // console.log(token,'token')
           if (token) {
             // User is logged in
+            toast.success("This QR code is not registered", { duration: 5000 });
             return navigate(`/add-qr-code/${id}`);
           } else {
             // User not logged in, redirect to signup with redirect param
+            toast.success("Please register your QR code by signing up below.", { duration: 5000 });
             return navigate(`/signup`);
           }
         }

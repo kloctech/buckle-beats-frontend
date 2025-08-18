@@ -229,7 +229,7 @@ const Hamburger = () => {
                           Activate & Manage QRs
                         </div>
                         <div className="menu-link" style={{ marginTop: "1rem" }}></div>
-                        <div className="menu-text">
+                        {/* <div className="menu-text">
                           <h4>PREMIUM (Upgrade)</h4>
                           <div className={`menu-link`}>
                             Coming Soon.....
@@ -237,28 +237,48 @@ const Hamburger = () => {
                               <img src={RightArrow} alt="rightarrow Icon" />
                             </span>
                           </div>
-                        </div>
+                        </div> */}
                         <div className="menu-text" style={{ marginTop: "1rem" }}>
                           <h4> SUPPORT</h4>
-                          <div className={`menu-link`}>
+                          <a
+                            href="https://roamsmarttracker.com/pages/contact"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="menu-link"
+                          >
                             Contact us
                             <span>
                               <img src={RightArrow} alt="rightarrow Icon" />
                             </span>
-                          </div>
-                          <div className={`menu-link`} style={{ marginTop: "8px" }}>
+                          </a>
+
+                          <a
+                            href="https://roamsmarttracker.com/a/docs/preview/layout_2/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="menu-link"
+                            style={{ marginTop: "8px" }}
+                          >
                             FAQs
                             <span>
                               <img src={RightArrow} alt="rightarrow Icon" />
                             </span>
-                          </div>
-                          <div className={`menu-link`} style={{ marginTop: "8px" }}>
+                          </a>
+
+                          <a
+                            href="https://roamsmarttracker.com/pages/terms-and-conditions"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="menu-link"
+                            style={{ marginTop: "8px" }}
+                          >
                             T&Cs
                             <span>
                               <img src={RightArrow} alt="rightarrow Icon" />
                             </span>
-                          </div>
+                          </a>
                         </div>
+
                       </div>
                       <div className="menu-text menu-logout" onClick={onClickLogout}>
                         Sign Out
