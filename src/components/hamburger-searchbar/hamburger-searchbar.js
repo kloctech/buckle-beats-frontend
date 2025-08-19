@@ -245,6 +245,7 @@ const Hamburger = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="menu-link"
+                            style={{ textDecoration: "none" }}
                           >
                             Contact us
                             <span>
@@ -257,7 +258,7 @@ const Hamburger = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="menu-link"
-                            style={{ marginTop: "8px" }}
+                            style={{ marginTop: "8px" ,textDecoration: "none"}}
                           >
                             FAQs
                             <span>
@@ -270,7 +271,7 @@ const Hamburger = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="menu-link"
-                            style={{ marginTop: "8px" }}
+                            style={{ marginTop: "8px" ,textDecoration: "none"}}
                           >
                             T&Cs
                             <span>
