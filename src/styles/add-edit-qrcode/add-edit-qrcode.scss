@@ -227,3 +227,29 @@
 .dropdown-list li:hover {
   background-color: #f0f0f0;
 }
+.form-group-login input,
+.form-group-login select,
+.form-group-login textarea {
+  width: 100%;
+  padding: 10px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  outline: none;
+  box-sizing: border-box;
+}
+
+// Fix width issue for select
+.form-group-login select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  // make sure arrow doesn’t steal width
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 35px; // extra space for arrow so width matches input
+}

@@ -259,3 +259,11 @@ margin-top: auto;
     background-color:$background-color
   }
 }
+
+.warning-message {
+  font-size: 14px;
+  font-weight: 400;
+  padding:0 10px 0;         /* reset */
+  text-align: center; /* align with heading */
+  line-height: 1.5;
+}

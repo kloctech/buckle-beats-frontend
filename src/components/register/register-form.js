@@ -14,6 +14,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import Cookies from 'js-cookie'
 import { CircularProgress } from "@mui/material";
 const images = [bag, cycle, cat, dog];
+
 const RegisterForm = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isRegistred, setIsRegistred] = useState(false);
@@ -133,7 +134,15 @@ const RegisterForm = () => {
       {isRegistred ? (
         <div className="form-container">
           <FaCheckCircle className="verification-message"></FaCheckCircle>
-          <h6 className="verify-message" style={{ color: "#E4E9F1" }}>Please check your email and complete the verification process to log in.</h6>
+          {/* <h6 className="verify-message" style={{ color: "#E4E9F1" }}>Please check your email (and your Spam/Junk folder) to complete the verification process.<br />
+      ⚠️ If our email landed in Spam/Junk, please mark it as “Not Spam” so you can receive important updates — including any lost & found alerts</h6> */}
+        <h6 className="verify-message" style={{ color: "#E4E9F1" }}>
+          Please check your email (and your Spam/Junk folder) to complete the verification process.
+        </h6>
+        <h6 className=" warning-message">
+          ⚠️ If our email landed in Spam/Junk, please mark it as “Not Spam” so you can receive important updates — including any lost & found alerts
+        </h6>
+
         </div>
       ) : (
         <div className="form-container">
