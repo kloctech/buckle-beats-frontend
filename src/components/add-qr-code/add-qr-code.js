@@ -256,43 +256,44 @@ const AddQRCode = () => {
     setNextPage(true);
   };
 
-  const getCategories = async () => {
-    try {
-      const response = await api.get(
-        `${process.env.REACT_APP_PRODUCTION_URL}/api/qrcode/categories`
-      );
-      setCategoryList(response.data.categories);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const getExistingQR = async () => {
-    if (!id) return;
-    try {
-      const response = await api.get(
-        `${process.env.REACT_APP_PRODUCTION_URL}/api/qrcode/${id}`
-      );
-      const qrData = response.data;
-
-      // Set form values
-      Object.keys(qrData).forEach((key) => {
-        if (qrData[key]) setValue(key, qrData[key]);
-      });
-
-      // Set query state so input shows country code
-      if (qrData.country_code) {
-        setQuery(qrData.country_code);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
+  // ✅ put functions inside useEffect to avoid missing dependency warning
   useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const response = await api.get(
+          `${process.env.REACT_APP_PRODUCTION_URL}/api/qrcode/categories`
+        );
+        setCategoryList(response.data.categories);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    const getExistingQR = async () => {
+      if (!id) return;
+      try {
+        const response = await api.get(
+          `${process.env.REACT_APP_PRODUCTION_URL}/api/qrcode/${id}`
+        );
+        const qrData = response.data;
+
+        // Set form values
+        Object.keys(qrData).forEach((key) => {
+          if (qrData[key]) setValue(key, qrData[key]);
+        });
+
+        // Set query state so input shows country code
+        if (qrData.country_code) {
+          setQuery(qrData.country_code);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
     getCategories();
     getExistingQR();
-  }, []);
+  }, [id, setValue]); // ✅ correct deps, no ESLint warning
 
   // filter country codes when query changes
   useEffect(() => {
