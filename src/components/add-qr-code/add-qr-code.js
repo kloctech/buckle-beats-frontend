@@ -26,7 +26,6 @@ const AddQRCode = () => {
     setValue,
     watch,
     formState: { errors },
-    clearErrors,
   } = useForm({
     defaultValues: {
       name: "",
