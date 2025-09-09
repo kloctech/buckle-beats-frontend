@@ -433,7 +433,7 @@
     margin-top:0.7rem;
   }
   .add-qr .mobile-group select, .edit-qr .mobile-group select{
-    font-size: 14px!important;
+    font-size: 16px!important;
   }
   .qr-code-card{
     display: flex;
@@ -622,10 +622,10 @@
   .send-invite-form .menu-back svg{
     color:#000000!important;
   }
-  .password-field input , .password-container input{
-    border-color:#000000!important;   
-    font-size: 14px;
-  }
+      .password-field input , .password-container input{
+        border-color:#000000!important;   
+        font-size: 16px;
+      }
   .password-field input::placeholder, .password-container input::placeholder{
     color: #343D3C !important;
   }
