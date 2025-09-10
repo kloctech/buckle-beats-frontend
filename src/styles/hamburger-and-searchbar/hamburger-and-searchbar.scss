@@ -205,6 +205,10 @@
     display: flex;
     justify-content: space-between;
     cursor: pointer;
+    /* ensure anchors and menu-link divs use the same color as Sign Out */
+    color: #fff;
+    text-decoration: none;
+    position: relative; /* allow absolute positioning of the arrow span */
     span {
       padding-right: 1rem;
       position: absolute; //updted
@@ -290,4 +294,14 @@
 }
 .cls-2{
   fill:#9ab39f;
+}
+
+/* Ensure anchor links inside the mobile menu use the same white color as Sign Out */
+@media screen and (max-width: 440px) {
+  .menu-wrapper .menu-list .menu-text a.menu-link,
+  .menu-wrapper .menu-list a.menu-link,
+  .menu-wrapper .menu-list .menu-link {
+    color: #fff;
+    text-decoration: none;
+  }
 }
