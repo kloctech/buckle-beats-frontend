@@ -179,7 +179,14 @@ const QrCodes = ({ searchInput }) => {
         {loading && <div>Loading more items...</div>}
       </div>
       <div className="footer-buttons">
-        <button className="shop-button">Shop Now</button>
+<a 
+  href="https://roamsmarttracker.com" 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  className="shop-button"
+>
+  Shop Now
+</a>
         <button className="activate-qr-button" onClick={handleClick}>
           Activate QR
         </button>

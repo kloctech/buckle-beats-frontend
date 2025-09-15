@@ -208,7 +208,7 @@
     /* ensure anchors and menu-link divs use the same color as Sign Out */
     color: #fff;
     text-decoration: none;
-    position: relative; /* allow absolute positioning of the arrow span */
+    // position: relative; /* allow absolute positioning of the arrow span */
     span {
       padding-right: 1rem;
       position: absolute; //updted

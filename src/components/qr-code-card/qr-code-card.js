@@ -36,7 +36,7 @@ const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, up
 
     try {
       const response = await api.put(`${url}/api/qrcode/change-status`, { code: qr_planet_id });
-      toast.success(response.data.resultMessage.en, { duration: 5000 });
+      toast.success(response.data.resultMessage.en, { duration: 1000 });
       handleClose();
       updateQrCodeStatus(qr_planet_id, !qrCodeData.is_lost); // Update the specific QR code status
       getQrCodesWithOutSearch(page, searchQuery); // Refresh the QR codes list with the correct parameters
