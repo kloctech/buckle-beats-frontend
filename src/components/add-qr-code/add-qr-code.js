@@ -214,7 +214,7 @@ const AddQRCode = () => {
                 className="add-qr-box"
                 placeholder="Leave a note here..."
                 {...register("default_message", {
-                  required: "Default Message is required",
+                  required: "This field is required",
                 })}
               />
               {errors.default_message && (
