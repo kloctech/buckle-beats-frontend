@@ -12,6 +12,7 @@ import { CircularProgress } from "@mui/material";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import api from "../../middleware/api";
+import { emailRegex } from "../../utils/constants";
 const images = [bag, cycle, cat, dog];
 const classNames = ["background-steps", "background-cycle-route", "background-paws", "background-paws"];
 
@@ -115,7 +116,7 @@ const LoginPage = () => {
               {...register("email", {
                 required: "Email is required",
                 pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  value: emailRegex,
                   message: "Invalid email address",
                 },
               })}

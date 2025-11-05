@@ -7,6 +7,7 @@ import { CircularProgress } from "@mui/material";
 import SurveyForm from "../survey-form/survey-form";
 import api from "../../middleware/api";
 import countryCodes from "../../data/countryCodes.json";
+import { emailRegex } from "../../utils/constants";
 
 const AddQRCode = () => {
   const [loading] = useState(false);
@@ -123,8 +124,7 @@ const AddQRCode = () => {
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
-                    value:
-                      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/,
+                    value: emailRegex,
                     message: "Invalid email address",
                   },
                 })}

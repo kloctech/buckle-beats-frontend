@@ -10,6 +10,7 @@ import "../../styles/add-edit-qrcode/add-edit-qrcode.scss";
 import Preloader from "../preloader/preloader";
 import Cookies from "js-cookie";
 import countryCodes from "../../data/countryCodes.json";
+import { emailRegex } from "../../utils/constants";
 
 const EditQRCode = () => {
   const [qrcode, setQRcode] = useState(null);
@@ -207,7 +208,7 @@ useEffect(() => {
               {...register("email", {
                 required: "Email is required",
                 pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/,
+                  value: emailRegex,
                   message: "Invalid email address",
                 },
               })}

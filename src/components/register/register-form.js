@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import { FaCheckCircle } from "react-icons/fa";
 import Cookies from 'js-cookie'
 import { CircularProgress } from "@mui/material";
+import { emailRegex } from "../../utils/constants";
 const images = [bag, cycle, cat, dog];
 
 const RegisterForm = () => {
@@ -82,7 +83,6 @@ const RegisterForm = () => {
     }
   };
 
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^\s]{8,32}$/;
 
   const togglePasswordVisibility = () => {

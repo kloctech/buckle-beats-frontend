@@ -5,6 +5,7 @@ import '../../styles/forgot-password/forgot-password.scss';
 import '../../styles/login/login.scss';
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { emailRegex } from "../../utils/constants";
 
 const ForgotPasswordLink = () => {
   const { register, handleSubmit,reset, formState: { errors } } = useForm();
@@ -39,7 +40,7 @@ const ForgotPasswordLink = () => {
               {...register('email', {
                 required: "Email is required",
                 pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                  value: emailRegex,
                   message: "Invalid email address"
                 }
               })}

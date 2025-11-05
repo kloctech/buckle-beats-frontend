@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { CircularProgress } from "@mui/material";
+import { emailRegex } from "../../utils/constants";
 
 const SendInvite = () => {
   const {
@@ -19,7 +20,6 @@ const SendInvite = () => {
   } = useForm();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
   const onSubmit = async (data) => {
     const url = process.env.REACT_APP_PRODUCTION_URL;
