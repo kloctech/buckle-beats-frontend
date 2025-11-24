@@ -473,7 +473,7 @@ const RegisterForm = () => {
                   })}
                 />
                 <p className="terms-text">
-                  Subscribe to latest news & offers.{" "}
+                  Subscribe to latest news & offers.No, we won't spam you- {" "}
                   <a
                     href="https://roamsmarttracker.co.uk/pages/privacy-policy"
                     target="_blank"
