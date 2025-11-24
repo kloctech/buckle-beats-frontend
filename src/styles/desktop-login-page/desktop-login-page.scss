@@ -324,6 +324,16 @@
     .no-qr-code-wrapper{
     margin-top:80px!important;
     }
+    .terms-text {
+    color: #343D3C !important;
+    font-weight:500;
+  }
+
+  .terms-text a {
+    color: #343D3C !important;
+    text-decoration: underline;
+    font-weight: 500;
+  }
   }
 }
 @media(min-width:1200px) {
