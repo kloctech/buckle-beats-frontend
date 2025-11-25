@@ -272,7 +272,7 @@ const RegisterForm = () => {
     return () => clearInterval(interval);
   }, []);
 
-  /* REDIRECT IF LOGGED IN */
+  /* REDIRECT */
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
     if (accessToken) {
@@ -280,14 +280,15 @@ const RegisterForm = () => {
     }
   }, [navigate, redirectUrl]);
 
-  /* PASSWORD REGEX */
   const passwordRegex =
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^\s]{8,32}$/;
 
   const password = watch("password");
   const confirmPassword = watch("confirmPassword");
+  const passwordHasValue = Boolean(password?.length);
+  const confirmPasswordHasValue = Boolean(confirmPassword?.length);
 
-  /* LIVE VALIDATE CONFIRM PASSWORD */
+  /* LIVE CONFIRM PASSWORD CHECK */
   useEffect(() => {
     if (confirmPassword && confirmPassword !== password) {
       setError("confirmPassword", {
@@ -316,9 +317,10 @@ const RegisterForm = () => {
       reset();
       setIsRegistred(true);
     } catch (error) {
-      toast.error(error.response?.data?.resultMessage?.en || "Something went wrong", {
-        duration: 5000,
-      });
+      toast.error(
+        error.response?.data?.resultMessage?.en || "Something went wrong",
+        { duration: 5000 }
+      );
     } finally {
       setLoading(false);
     }
@@ -347,96 +349,132 @@ const RegisterForm = () => {
           <FaCheckCircle className="verification-message" />
 
           <h6 className="verify-message" style={{ color: "#E4E9F1" }}>
-            Please check your email (and Spam/Junk folder) to complete verification.
+            Please check your email (and Spam/Junk folder) to complete
+            verification.
           </h6>
 
           <h6 className="warning-message">
-            ⚠️ If our email landed in Spam/Junk, mark as “Not Spam” to receive alerts.
+            ⚠️ If our email landed in Spam/Junk, mark as “Not Spam”.
           </h6>
         </div>
       ) : (
         <div className="form-container">
           <h1 className="welcome-heading">Welcome!</h1>
 
-          <form onSubmit={handleSubmit(onFormSubmit)}>
+          <form className="register-form" onSubmit={handleSubmit(onFormSubmit)}>
             {/* NAME */}
-            <div className="form-group">
+            <div
+              className={`register-form-group ${
+                errors.name ? "has-error" : ""
+              }`}
+            >
               <input
                 className="input-box"
                 placeholder="Name"
                 {...register("name", { required: "Name is required" })}
               />
-              {errors.name && <span className="error">{errors.name.message}</span>}
+              {errors.name && (
+                <span className="error">{errors.name.message}</span>
+              )}
             </div>
 
             {/* EMAIL */}
-            <div className="form-group">
+            <div
+              className={`register-form-group ${
+                errors.email ? "has-error" : ""
+              }`}
+            >
               <input
                 className="input-box"
                 placeholder="Email"
                 {...register("email", {
                   required: "Email is required",
-                  pattern: { value: emailRegex, message: "Invalid email address" },
-                })}
-              />
-              {errors.email && <span className="error">{errors.email.message}</span>}
-            </div>
-
-            {/* PASSWORD */}
-            <div className="password-container form-group">
-              <input
-                className="input-box"
-                type={passwordVisible ? "text" : "password"}
-                placeholder="Password"
-                {...register("password", {
-                  required: "Password is required",
                   pattern: {
-                    value: passwordRegex,
-                    message:
-                      "Password must be at least 8 characters, include one digit, one uppercase letter, and one special character.",
+                    value: emailRegex,
+                    message: "Invalid email address",
                   },
                 })}
               />
-              <button
-                type="button"
-                className="show-password"
-                onClick={() => setPasswordVisible(!passwordVisible)}
-              >
-                {passwordVisible ? <VisibilityOffTwoToneIcon /> : <VisibilityTwoToneIcon />}
-              </button>
+              {errors.email && (
+                <span className="error">{errors.email.message}</span>
+              )}
+            </div>
 
-              {errors.password && <span className="error">{errors.password.message}</span>}
+            {/* PASSWORD */}
+            <div
+              className={`password-container register-form-group ${
+                errors.password ? "has-error" : ""
+              }`}
+            >
+              <div className="password-input-wrapper">
+                <input
+                  className="input-box"
+                  type={passwordVisible ? "text" : "password"}
+                  placeholder="Password"
+                  {...register("password", {
+                    required: "Password is required",
+                    pattern: {
+                      value: passwordRegex,
+                      message:
+                        "Password must be at least 8 characters, include one digit, one uppercase letter, and one special character.",
+                    },
+                  })}
+                />
+                <button
+                  type="button"
+                  className="show-password"
+                  onClick={() => setPasswordVisible(!passwordVisible)}
+                >
+                  {passwordVisible || !passwordHasValue ? (
+                    <VisibilityTwoToneIcon />
+                  ) : (
+                    <VisibilityOffTwoToneIcon />
+                  )}
+                </button>
+              </div>
+
+              {errors.password && (
+                <span className="error">{errors.password.message}</span>
+              )}
             </div>
 
             {/* CONFIRM PASSWORD */}
-            <div className="password-container form-group">
-              <input
-                className="input-box"
-                type={confirmPasswordVisible ? "text" : "password"}
-                placeholder="Confirm Password"
-                {...register("confirmPassword", {
-                  required: "Confirm Password is required",
-                })}
-              />
-              <button
-                type="button"
-                className="show-password"
-                onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
-              >
-                {confirmPasswordVisible ? (
-                  <VisibilityOffTwoToneIcon />
-                ) : (
-                  <VisibilityTwoToneIcon />
-                )}
-              </button>
+            <div
+              className={`password-container register-form-group ${
+                errors.confirmPassword ? "has-error" : ""
+              }`}
+            >
+              <div className="password-input-wrapper">
+                <input
+                  className="input-box"
+                  type={confirmPasswordVisible ? "text" : "password"}
+                  placeholder="Confirm Password"
+                  {...register("confirmPassword", {
+                    required: "Confirm Password is required",
+                  })}
+                />
+                <button
+                  type="button"
+                  className="show-password"
+                  onClick={() =>
+                    setConfirmPasswordVisible(!confirmPasswordVisible)
+                  }
+                >
+                  {confirmPasswordVisible || !confirmPasswordHasValue ? (
+                    <VisibilityTwoToneIcon />
+                  ) : (
+                    <VisibilityOffTwoToneIcon />
+                  )}
+                </button>
+              </div>
 
               {errors.confirmPassword && (
                 <span className="error">{errors.confirmPassword.message}</span>
               )}
             </div>
 
-            {/* TERMS CHECKBOX */}
-            <div className="form-group terms-checkbox">
+            {/* TERMS CHECKBOX (MANDATORY) */}
+            <div className="register-form-group terms-checkbox">
               <label className="checkbox-container">
                 <input
                   type="checkbox"
@@ -449,11 +487,10 @@ const RegisterForm = () => {
                   <a
                     href="https://roamsmarttracker.co.uk/pages/terms-and-conditions"
                     target="_blank"
-                                          rel="noopener noreferrer"
-
+                    rel="noopener noreferrer"
+                    style={{ color: "blue" }}
                   >
                     BucleBeats T&C’s
-
                   </a>
                 </p>
               </label>
@@ -463,52 +500,45 @@ const RegisterForm = () => {
               )}
             </div>
 
-            {/* NEWSLETTER CHECKBOX */}
-            <div className="form-group terms-checkbox">
+            {/* NEWSLETTER CHECKBOX (OPTIONAL → NO VALIDATION) */}
+            <div className="register-form-group terms-checkbox">
               <label className="checkbox-container">
-                <input
-                  type="checkbox"
-                  {...register("acceptNewsletter", {
-                    required: "Please accept to proceed",
-                  })}
-                />
+                <input type="checkbox" {...register("acceptNewsletter")} />
                 <p className="terms-text">
-                  Subscribe to latest news & offers.No, we won't spam you- {" "}
-                  <a
-                    href="https://roamsmarttracker.co.uk/pages/privacy-policy"
-                    target="_blank"
-                    rel="noopener noreferrer"                  >  
-
-                    Unsubscribe anytime
-                  </a>
+                  Subscribe to latest news & offers. No, we won't spam you.Unsubscribe anytime.
                 </p>
               </label>
-
-              {errors.acceptNewsletter && (
-                <span className="error">{errors.acceptNewsletter.message}</span>
-              )}
             </div>
 
             {/* GIF */}
             <div className="gif-image-container">
-              <img src={images[currentImageIndex]} className={getClassName()} alt="" />
+              <img
+                src={images[currentImageIndex]}
+                className={getClassName()}
+                alt=""
+              />
             </div>
 
-            {/* SUBMIT BUTTON */}
-            <button
-              type="submit"
-              className="register-button"
-              disabled={loading}
-            >
+            {/* SUBMIT */}
+            <button type="submit" className="register-button" disabled={loading}>
               {loading ? (
-                <CircularProgress size={25} sx={{ color: "white", margin: "auto" }} />
+                <CircularProgress
+                  size={25}
+                  sx={{ color: "white", margin: "auto" }}
+                />
               ) : (
                 "SignUp"
               )}
             </button>
 
             <p className="Login">
-              <Link to={redirectUrl ? `/signin?redirect=${redirectUrl}` : "/signin"}>
+              <Link
+                to={
+                  redirectUrl
+                    ? `/signin?redirect=${redirectUrl}`
+                    : "/signin"
+                }
+              >
                 Already have an account? SignIn
               </Link>
             </p>
@@ -520,3 +550,4 @@ const RegisterForm = () => {
 };
 
 export default RegisterForm;
+

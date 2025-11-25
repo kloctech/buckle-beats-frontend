@@ -45,6 +45,13 @@
           outline:0;
         }
       }
+      .register-form .input-box{
+       border-color: #000000!important;
+       &::placeholder{
+          color:#000000;
+          font-weight: 400;
+        }
+      }
       .forgot-password-main-container{
         background-color: transparent;
       }
@@ -330,10 +337,13 @@
   }
 
   .terms-text a {
-    color: #343D3C !important;
+    color: blue($color: #000000) !important;
     text-decoration: underline;
     font-weight: 500;
   }
+ .register-form .terms-checkbox input[type=checkbox] {
+    border-color: #000000;
+ }
   }
 }
 @media(min-width:1200px) {

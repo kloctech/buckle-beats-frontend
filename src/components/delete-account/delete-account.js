@@ -41,7 +41,8 @@ const DeleteAccount = () => {
     if (allChecked) {
       setShowPassword(!showPassword);
     }
-  }
+  };
+  const shouldShowOffIcon = !showPassword && password?.length > 0;
 
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^\s]{8,}$/;
 
@@ -170,15 +171,17 @@ const DeleteAccount = () => {
             placeholder="Password"
             disabled={!allChecked}
           />
-          {showPassword ? (
-            <span className="eye-icon" onClick={togglePasswordVisibility} >
-              <VisibilityOffTwoToneIcon  disabled ={!allChecked} style={{cursor: allChecked ? 'pointer' :'not-allowed'}}/>
-            </span>
-          ) : (
-            <span className="eye-icon" onClick={togglePasswordVisibility} disabled ={!allChecked} >
-              <VisibilityTwoToneIcon style={{cursor: allChecked ? 'pointer' :'not-allowed'}} />
-            </span>
-          )}
+          <span
+            className="eye-icon"
+            onClick={togglePasswordVisibility}
+            style={{ cursor: allChecked ? "pointer" : "not-allowed" }}
+          >
+            {shouldShowOffIcon ? (
+              <VisibilityOffTwoToneIcon />
+            ) : (
+              <VisibilityTwoToneIcon />
+            )}
+          </span>
         </div>
         {errors.password && (
           <span className="delete-account-error">{errors.password.message}</span>

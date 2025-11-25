@@ -20,9 +20,11 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const passwordValue = watch("password", "");
   const [loading, setLoading] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [searchParams] = useSearchParams();
@@ -142,7 +144,11 @@ const LoginPage = () => {
               })}
             />
             <span className="toggle-password" onClick={togglePasswordVisibility}>
-              {showPassword ? <VisibilityOffTwoToneIcon /> : <VisibilityTwoToneIcon />}
+              {showPassword || !passwordValue?.length ? (
+                <VisibilityTwoToneIcon />
+              ) : (
+                <VisibilityOffTwoToneIcon />
+              )}
             </span>
             {errors.password && <span className="error-message">{errors.password.message}</span>}
           </div>

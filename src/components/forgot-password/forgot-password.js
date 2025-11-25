@@ -6,6 +6,7 @@ import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 import '../../styles/forgot-password/forgot-password.scss';
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+
 const ForgotPassword = () => {
   const {
     register,
@@ -24,11 +25,17 @@ const ForgotPassword = () => {
   const password = watch('password');
   const confirmPassword = watch('confirmPassword');
 
+  // ⭐ FIX: define missing variables
+  const passwordHasValue = !!password;
+  const confirmPasswordHasValue = !!confirmPassword;
+
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     setToken(searchParams.get("token"));
   }, []);
-const navigate = useNavigate ()
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (confirmPassword && confirmPassword !== password) {
       setError("confirmPassword", {
@@ -57,69 +64,92 @@ const navigate = useNavigate ()
         { password: data.password },
         {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       toast.success(response.data.resultMessage.en, { duration: 5000 });
       reset();
-      navigate('/signin')
-
+      navigate("/signin");
     } catch (error) {
-      toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
+      toast.error(error.response?.data?.resultMessage?.en, {
+        duration: 5000,
+      });
     }
   };
 
-  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^\s]{8,}$/;
+  const passwordRegex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^\s]{8,}$/;
 
   return (
     <div className="forgot-password-main-container">
       <div className="forgot-password-form">
         <h1 className="welcome-heading">Forgot Password</h1>
+
         <form onSubmit={handleSubmit(onSubmit)}>
+          {/* Password */}
           <div className="form-group-reg password-container">
             <input
               className="input-box"
-              type={passwordVisible ? 'text' : 'password'}
-              id="password"
-              {...register('password', {
-                required: 'Password is required',
+              type={passwordVisible ? "text" : "password"}
+              {...register("password", {
+                required: "Password is required",
                 pattern: {
                   value: passwordRegex,
-                  message: 'Password must be at least 8 characters long, contain a digit, an uppercase letter, a lowercase letter, and a special character',
+                  message:
+                    "Password must be at least 8 characters long, contain a digit, an uppercase letter, a lowercase letter, and a special character",
                 },
               })}
               placeholder="New Password"
             />
+
             <button
               type="button"
               className="show-password"
               onClick={togglePasswordVisibility}
             >
-              {passwordVisible ? <VisibilityOffTwoToneIcon /> : < VisibilityTwoToneIcon />}
+              {passwordVisible || !passwordHasValue ? (
+                <VisibilityTwoToneIcon />
+              ) : (
+                <VisibilityOffTwoToneIcon />
+              )}
             </button>
-            {errors.password && <span className="error">{errors.password.message}</span>}
+
+            {errors.password && (
+              <span className="error">{errors.password.message}</span>
+            )}
           </div>
-          <div className={`password-container form-group ${errors.password?.message  && errors?.password.message !== "Password is required" ? "with-error" : "" ? "with-error" : ""}`}>
+
+          {/* Confirm Password */}
+          <div className="password-container form-group">
             <input
               className="input-box"
-              type={confirmPasswordVisible ? 'text' : 'password'}
-              id="confirmPassword"
-              {...register('confirmPassword', {
-                required: 'Confirm Password is required',
-                validate: value => value === watch('password') || 'Passwords do not match',
+              type={confirmPasswordVisible ? "text" : "password"}
+              {...register("confirmPassword", {
+                required: "Confirm Password is required",
+                validate: (value) =>
+                  value === watch("password") || "Passwords do not match",
               })}
               placeholder="Confirm Password"
             />
+
             <button
               type="button"
               className="show-password"
               onClick={toggleConfirmPasswordVisibility}
             >
-              {confirmPasswordVisible ? <VisibilityOffTwoToneIcon /> : < VisibilityTwoToneIcon />}
+              {confirmPasswordVisible || !confirmPasswordHasValue ? (
+                <VisibilityTwoToneIcon />
+              ) : (
+                <VisibilityOffTwoToneIcon />
+              )}
             </button>
-            {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
+
+            {errors.confirmPassword && (
+              <span className="error">{errors.confirmPassword.message}</span>
+            )}
           </div>
+
           <button className="for-got-password-button" type="submit">
             Submit
           </button>

@@ -23,7 +23,9 @@ const UpdatePassword = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const newPassword = watch("newPassword", "");
+  const oldPasswordValue = watch("oldPassword", "");
+  const newPasswordValue = watch("newPassword", "");
+  const confirmPasswordValue = watch("confirmPassword", "");
 
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^\s]{8,}$/;
 
@@ -70,7 +72,11 @@ const UpdatePassword = () => {
             })}
           />
           <div className="eye-icon" onClick={() => setShowOldPassword(!showOldPassword)}>
-            {showOldPassword ? <VisibilityOffTwoToneIcon /> : <VisibilityTwoToneIcon />}
+            {showOldPassword || !oldPasswordValue?.length ? (
+              <VisibilityTwoToneIcon />
+            ) : (
+              <VisibilityOffTwoToneIcon />
+            )}
           </div>
           {errors.oldPassword && <p className="err-msg">{errors.oldPassword.message}</p>}
         </div>
@@ -87,7 +93,11 @@ const UpdatePassword = () => {
             })}
           />
           <div className="eye-icon" onClick={() => setShowNewPassword(!showNewPassword)}>
-            {showNewPassword ? <VisibilityOffTwoToneIcon /> : <VisibilityTwoToneIcon />}
+            {showNewPassword || !newPasswordValue?.length ? (
+              <VisibilityTwoToneIcon />
+            ) : (
+              <VisibilityOffTwoToneIcon />
+            )}
           </div>
           {errors.newPassword && <p className="err-msg">{errors.newPassword.message}</p>}
         </div>
@@ -97,11 +107,15 @@ const UpdatePassword = () => {
             placeholder="Confirm Password"
             {...register("confirmPassword", {
               required: "Confirm Password is required",
-              validate: (value) => value === newPassword || "The passwords do not match",
+              validate: (value) => value === newPasswordValue || "The passwords do not match",
             })}
           />
           <div className="eye-icon" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-            {showConfirmPassword ? <VisibilityOffTwoToneIcon /> : <VisibilityTwoToneIcon />}
+            {showConfirmPassword || !confirmPasswordValue?.length ? (
+              <VisibilityTwoToneIcon />
+            ) : (
+              <VisibilityOffTwoToneIcon />
+            )}
           </div>
           {errors.confirmPassword && <p className="err-msg">{errors.confirmPassword.message}</p>}
         </div>

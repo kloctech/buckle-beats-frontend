@@ -91,7 +91,11 @@ const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>
               placeholder="New Password"
             />
             <button type="button" className="show-password" onClick={togglePasswordVisibility}>
-              {passwordVisible ? <VisibilityOffTwoToneIcon /> : <VisibilityTwoToneIcon />}
+              {passwordVisible || !password?.length ? (
+                <VisibilityTwoToneIcon />
+              ) : (
+                <VisibilityOffTwoToneIcon />
+              )}
             </button>
             {errors.password && <span className="error">{errors.password.message}</span>}
           </div>
@@ -107,7 +111,11 @@ const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>
               placeholder="Confirm Password"
             />
             <button type="button" className="show-password" onClick={toggleConfirmPasswordVisibility}>
-              {confirmPasswordVisible ? <VisibilityOffTwoToneIcon /> : <VisibilityTwoToneIcon />}
+              {confirmPasswordVisible || !confirmPassword?.length ? (
+                <VisibilityTwoToneIcon />
+              ) : (
+                <VisibilityOffTwoToneIcon />
+              )}
             </button>
             {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
           </div>

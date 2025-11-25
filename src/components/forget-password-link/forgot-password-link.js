@@ -8,54 +8,55 @@ import toast from "react-hot-toast";
 import { emailRegex } from "../../utils/constants";
 
 const ForgotPasswordLink = () => {
-  const { register, handleSubmit,reset, formState: { errors } } = useForm();
-  
+
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
-    const url = process.env.REACT_APP_PRODUCTION_URL
+    const url = process.env.REACT_APP_PRODUCTION_URL;
     try {
-      const response = await axios.post(`${url}/api/user/forgot-password-link`, { email: data.email });
-      toast.success(response?.data?.resultMessage?.en,{ duration: 5000 })
-  reset()
-
+      const response = await axios.post(
+        `${url}/api/user/forgot-password-link`,
+        { email: data.email }
+      );
+      toast.success(response?.data?.resultMessage?.en, { duration: 5000 });
+      reset();
     } catch (error) {
-      toast.error(error.response?.data?.resultMessage?.en,{ duration: 5000 })
+      toast.error(error.response?.data?.resultMessage?.en, { duration: 5000 });
     }
   };
 
   return (
-    <div className="forgot-password-main-container">
-      <div className="form-container">
-        <form onSubmit={handleSubmit(onSubmit)}>
-        {/* <h2 className="welcome-heading" style={{marginBottom:"40px"}}>Forgot Password</h2> */}
-        <h1 className="welcome-heading">Forgot Password</h1>
-    
-          <div className="form-group">
-            <input
-              className="input-box"
-              // type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
-              {...register('email', {
-                required: "Email is required",
-                pattern: {
-                  value: emailRegex,
-                  message: "Invalid email address"
-                }
-              })}
-            />
-            {errors.email && <p className="error">{errors.email.message}</p>}
-          </div>
-          <button className="for-got-password-button" type="submit">
-            Submit
-          </button>
-          <p className="Login">
-            <Link to="/signin">Signin</Link>
-          </p>
-        </form>
+   <div className="forgot-password-main-container">
+  <div className="form-container">
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <h1 className="welcome-heading">Forgot Password</h1>
+
+      <div className="form-group">
+        <input
+          className="input-box"
+          placeholder="Email"
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: emailRegex,
+              message: "Invalid email address"
+            }
+          })}
+        />
+        {errors.email && <p className="error">{errors.email.message}</p>}
       </div>
-    </div>
+
+      <button className="for-got-password-button" type="submit">
+        Submit
+      </button>
+
+      <p className="Login">
+        <Link to="/signin">Signin</Link>
+      </p>
+    </form>
+  </div>
+</div>
+
   );
 };
 

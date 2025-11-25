@@ -397,3 +397,440 @@ margin-top: auto;
     margin-left: 30px !important;
   }
 }
+
+@import '../../index.scss';
+@import '../variables/variable.scss';
+@mixin input-styles {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  color: var(--text-color);
+}
+@mixin backgroudImageContainer($image,$lefPadding,$backgroundSize){
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+  opacity: 25%;
+  background-size: $backgroundSize;
+  left: $lefPadding;
+  background-image: url($image);
+}
+
+.regestation-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height:100vh;
+  max-width: 340px; 
+  // width: 90vw;       
+  margin: auto;
+  position: relative;
+  z-index: 1;
+  background-color: $background-color;
+  background-color: $background-color;
+  padding: 40px;
+  color: #1b2733;
+}
+
+.bag-icon{
+  width: 160px;
+  height: 100px;
+  margin: auto;
+  margin-bottom: -20px;
+  background-size: cover;
+  background-color: transparent;
+}
+.cycle-icon{
+  width: 160px;
+  // height: 80px;
+  margin: auto;
+  margin-bottom: -50px;
+  background-size: cover;
+  background-color: transparent;
+}
+.dog-icon{
+  width: 160px;
+  // height: 80px;
+  margin: auto;
+  margin-bottom: -46px;
+  background-size: cover;
+  background-color: transparent;
+}
+.cat-icon{
+  width: 160px;
+  // height: 80px;
+ 
+  margin-bottom: -50px;
+  background-size: cover;
+  background-color: transparent;
+  margin-left: 45px
+}
+.background-iamge-container-paws {
+  @include backgroudImageContainer('../../assets//Paws.gif',-10px,43vh);
+ 
+}
+
+.background-iamge-container-tyres {
+
+  @include backgroudImageContainer("../../assets/tyre path@512p-25fps.gif", 0px, 30vh);
+  background-size: 33vh;
+}
+
+.background-iamge-container-steps {
+  @include backgroudImageContainer('../../assets/steps.gif',-90px ,44vh ) 
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: larger;
+  font-weight: bold;
+  color: $text-color;
+}
+
+// input {
+//   @include input-styles;
+// }
+
+.register-form .input-box {
+  width: 100%;
+  padding: 11px;
+  margin-bottom: 0;
+  // margin-left: -22px;
+  font-size:$font-size-medium;
+  color: #000000;
+  font-weight: 500;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+
+  &:focus {
+    outline: none;
+    border-color: $border-color;
+    box-shadow: none;
+  }
+}
+.email-container{
+  margin-bottom: 20px;
+}
+.register-form .password-container {
+  margin-top: 0;
+}
+
+.register-form .password-input-wrapper {
+  position: relative;
+
+  .input-box {
+    padding-right: 45px; // leave room for visibility toggle
+  }
+}
+
+.register-form .show-password {
+  background: none;
+  border: none;
+  color: #232323;
+  font-size: 20px;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.forgot-password {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.register-button {
+ @include button-style ;
+ width:300px
+}
+.register-form .register-form-group {
+  margin-bottom: 1.2rem;
+}
+
+.register-form .register-form-group.has-error {
+  margin-bottom: 0.65rem;
+}
+
+.register-form .register-form-group .error {
+  position: static;
+  display: block;
+  margin-top: 6px;
+  color: $error-color;
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: normal;
+  text-align: left;
+}
+@media screen and (max-width:600px) {
+  .regestation-container{
+    background-color: $background-color;
+  }
+
+  .form-container {
+    height: 100vh;
+  }
+
+  .background-iamge-container-paws {
+    left: -24px;
+    background-size: 44vh;
+  }
+
+}
+
+.Login{
+  font-size: $font-size-small;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  // text-align: end;
+  a {
+    color: #1f6fe5;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+  .verification-message{
+    color: $primary-color;
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+/*modal*/
+
+#modal-title .MuiModal-backdrop,
+#modal-title.MuiModal-root {
+  max-width: $max-width;
+  width: 100%;
+  margin: auto;
+}
+
+#modal-title  .MuiModal-backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#modal-title.MuiModal-root {
+  .box-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    background-color: white;
+    padding: 40px 25px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h3 {
+    color:#183E51;
+    font-size: 20.32px;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #183E51;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+
+  .cta-button {
+    width: 60%;
+    padding: 0.5rem;
+    background-color: #93B8A1;
+    border:1px solid #93B8A1;
+    color: white;
+    border-radius: 4.06px;
+    cursor: pointer;
+    font-size: 15.24px;
+  }
+}
+@media(max-width:766px){
+  .mobile-wrapper{
+    background-color:$background-color
+  }
+}
+
+.warning-message {
+  font-size: 14px;
+  font-weight: 400;
+  padding:0 10px 0;         /* reset */
+  text-align: center; /* align with heading */
+  line-height: 1.5;
+  color:#FFFFFF;
+}.register-form .terms-checkbox {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+
+  .checkbox-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      width: 25px;
+      height: 25px;
+    }
+
+    .terms-text {
+      font-size: 14px;
+      color: #FFFFFF;
+      line-height: 18px;
+      padding-left: 8px;
+
+      a {
+        color: #1f6fe5;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .error {
+    color: #ff6b6b;
+    font-size: 12px;
+    margin-top: 12px;
+  }
+}
+
+.register-button:disabled {
+  background-color: #84AB91 !important;  /* SAME color */
+  border-color: #93B8A1 !important;      /* SAME color */
+                           /* Slight disabled effect */
+}
+/* Make both checkboxes identical size */
+.register-form .terms-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Align checkbox + text nicely */
+.register-form .checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* Make long text wrap without affecting checkbox size */
+.register-form .checkbox-container .terms-text {
+  margin: 0px;
+  padding: 0px;
+  text-align: left;
+  line-height: 18px;
+}
+.register-form .terms-checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  min-width: 18px;
+  min-height: 18px;
+  cursor: pointer;
+}
+
+.register-form .checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.register-form .checkbox-container .terms-text {
+  flex: 1;
+  line-height: 18px;
+}
+.register-form .terms-checkbox input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #FFFFFF;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  background: transparent;
+  margin-top: 3px; /* aligns with text */
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+/* Tick mark */
+.register-form .terms-checkbox input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 9px;
+  height: 16px;
+  border-right: 3px solid #93B8A1;
+  border-bottom: 3px solid #93B8A1;
+  transform: rotate(45deg);
+}
+
+/* Label alignment fix */
+.register-form .checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.register-form .terms-checkbox .error {
+   margin: 6px 0 0 38px;   /* aligns perfectly under text */
+  position: relative;     /* no absolute positioning */
+  display: block;         /* full width */
+  white-space: normal;    /* wraps naturally */
+  line-height: 1.3;
+}
+/* Mobile/iPhone FIX: keep checkbox error close to checkbox */
+@media (max-width: 600px) {
+  .register-form .terms-checkbox .error {
+    margin-top: 6px !important;
+    margin-left: 30px !important;
+  }
+}
+/* MacBook Pro screen color override */
+@media screen and (min-width: 1800px) and (max-width: 3000px) {
+  .terms-checkbox .terms-text,
+  .terms-checkbox .terms-text a {
+    color: #343D3C !important;
+  }
+   .register-form .terms-checkbox input[type="checkbox"] {
+    width: 25px !important;
+    height: 25px !important;
+    border-width: 2px !important;
+    margin-top: 3px !important;
+    border-color: #343D3C;
+  }
+}
