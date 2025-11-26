@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoginPage from "./components/login/login-form";
 import DesktopPage from "./components/desktop-page/desktop-page";
 import RegisterForm from "./components/register/register-form";
@@ -20,6 +21,20 @@ import DesktopRoutes from "./routes/desktop-route";
 const App = () => {
   const [loading, setLoading] = useState(true);
   const isDesktop = useMediaQuery({ minWidth: 767 })
+  
+  // Listener component to handle global unauthorized events emitted by api middleware
+  const AuthRedirectListener = () => {
+    const navigate = useNavigate();
+    useEffect(() => {
+      const handler = () => {
+        // perform client-side navigation (no full page reload)
+        navigate('/signin');
+      };
+      window.addEventListener('api:unauthorized', handler);
+      return () => window.removeEventListener('api:unauthorized', handler);
+    }, [navigate]);
+    return null;
+  };
   useEffect(() => {
     if(isDesktop){
       document.body.classList.add('desktop-wrapper');
@@ -39,6 +54,7 @@ const App = () => {
 
   return (
     <Router>
+      <AuthRedirectListener />
       <Toaster />
       <Routes>
       {isDesktop ? (

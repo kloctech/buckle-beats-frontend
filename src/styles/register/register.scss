@@ -423,11 +423,12 @@ margin-top: auto;
 }
 
 .regestation-container {
-  display: flex;
-  height: 100%;
+    display: flex;
+  height: auto;
   width: 100%;
   justify-content: center;
-  overflow: hidden;
+  overflow-y: auto !important;   /* allows scroll when errors open */
+  -webkit-overflow-scrolling: touch
 }
 
 .form-container {
@@ -568,7 +569,7 @@ h1 {
 }
 
 .register-form .register-form-group .error {
-  position: static;
+  position: static !important;
   display: block;
   margin-top: 6px;
   color: $error-color;
@@ -584,6 +585,7 @@ h1 {
 
   .form-container {
     height: 100vh;
+    min-height: 100vh;
   }
 
   .background-iamge-container-paws {
@@ -821,7 +823,7 @@ h1 {
   }
 }
 /* MacBook Pro screen color override */
-@media screen and (min-width: 1200px) and (max-width: 1800px) {
+@media screen and (min-width: 1200px) and (max-width: 2000px) {
   .terms-checkbox .terms-text,
   .terms-checkbox .terms-text a {
     color: #343D3C !important;
@@ -837,4 +839,6 @@ h1 {
     border-color: #343D3C;
   }
 }
+
+/* iPhone Keyboard Safe Handling */
 

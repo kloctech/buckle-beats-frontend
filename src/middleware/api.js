@@ -28,8 +28,15 @@ api.interceptors.response.use(
   },
   (error) => {
     if (error.response && error.response.status === 401) {
+      // Remove tokens locally and emit an event so the app can perform a client-side navigation
       Cookies.remove("accessToken");
-      window.location.href = '/signin';
+      Cookies.remove("refreshToken");
+      try {
+        window.dispatchEvent(new CustomEvent("api:unauthorized"));
+      } catch (e) {
+        // fallback to legacy redirect if CustomEvent isn't supported
+        window.location.href = '/signin';
+      }
     }
     // Handle CORS errors
     if (error.message?.includes('Network Error') || !error.response) {

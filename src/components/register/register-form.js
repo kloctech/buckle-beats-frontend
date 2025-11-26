@@ -358,7 +358,7 @@ const RegisterForm = () => {
           </h6>
         </div>
       ) : (
-        <div className="form-container">
+<div className="form-container" style={{ WebkitOverflowScrolling: "touch" }}>
           <h1 className="welcome-heading">Welcome!</h1>
 
           <form className="register-form" onSubmit={handleSubmit(onFormSubmit)}>
