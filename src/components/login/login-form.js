@@ -50,26 +50,39 @@ const LoginPage = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  useEffect(() => {
-    const accessToken = Cookies.get("accessToken");
-    if (accessToken) {
-      if(redirectUrl){
-        navigate('/qr-scanner')
-      }
-      else{
-        navigate("/")
-      }
+  // useEffect(() => {
+  //   const accessToken = Cookies.get("accessToken");
+  //   if (accessToken) {
+  //     if(redirectUrl){
+  //       navigate('/qr-scanner')
+  //     }
+  //     else{
+  //       navigate("/")
+  //     }
+  //   }
+  // }, [navigate,redirectUrl]);
+
+  // useEffect(() => {
+  //   const imageInterval = setInterval(() => {
+  //     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  //   }, 4000);
+
+  //   return () => clearInterval(imageInterval);
+  // }, []);
+ useEffect(() => {
+    const token = Cookies.get("accessToken");
+    const atLoginPage = window.location.pathname === "/login";
+
+    if (token && atLoginPage) {
+      redirectUrl ? navigate("/qr-scanner") : navigate("/");
     }
-  }, [navigate,redirectUrl]);
+  }, [navigate, redirectUrl]);
 
   useEffect(() => {
-    const imageInterval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 4000);
-
-    return () => clearInterval(imageInterval);
+    const interval = setInterval(() =>
+      setCurrentImageIndex((i) => (i + 1) % images.length), 4000);
+    return () => clearInterval(interval);
   }, []);
-
   const onSubmitLoginForm = async (data) => {
     const API = `${process.env.REACT_APP_PRODUCTION_URL}/api/user/login`;
     setLoading(true);

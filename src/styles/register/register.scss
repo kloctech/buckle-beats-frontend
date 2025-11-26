@@ -600,7 +600,7 @@ h1 {
   cursor: pointer;
   // text-align: end;
   a {
-    color: #1f6fe5;
+    color: #FFFFFF;
     text-decoration: none;
 
     &:hover {
@@ -821,12 +821,15 @@ h1 {
   }
 }
 /* MacBook Pro screen color override */
-@media screen and (min-width: 1800px) and (max-width: 3000px) {
+@media screen and (min-width: 1200px) and (max-width: 1800px) {
   .terms-checkbox .terms-text,
   .terms-checkbox .terms-text a {
     color: #343D3C !important;
   }
-   .register-form .terms-checkbox input[type="checkbox"] {
+.terms-checkbox .terms-text a {
+    color: blue !important;
+  }
+  .register-form .terms-checkbox input[type="checkbox"] {
     width: 25px !important;
     height: 25px !important;
     border-width: 2px !important;
@@ -834,3 +837,4 @@ h1 {
     border-color: #343D3C;
   }
 }
+
