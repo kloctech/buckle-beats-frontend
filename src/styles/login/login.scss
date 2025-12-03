@@ -180,4 +180,23 @@
   justify-content: center;
   align-items: center;
   z-index: -1;
+}.login-logo-container {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .login-logo-container {
+    display: flex;
+    position: absolute;
+    top: 40px;              /* adjust this to move up/down */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    justify-content: center;
+    pointer-events: none;  /* prevents blocking input fields */
+  }
+}
+.login-logo {
+  height: 50px;       /* adjust size */
+  width: auto;
 }

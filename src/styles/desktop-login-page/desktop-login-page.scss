@@ -730,6 +730,19 @@
   width: 150px;
   height: 55px;
 }
+.desktop-header {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;   /* horizontally centers the logo */
+  align-items: center;       /* vertically centers inside the header */
+  padding-top: 16px;         /* optional: adjust spacing from top */
+}
+
+.desktop-header img {
+  height: 60px;   /* adjust logo size */
+  width: auto;
+}
 .desktop-wrapper{
   overflow: hidden!important;
 }

@@ -9,6 +9,7 @@ import bag from "../../assets/bagimage.gif";
 import cycle from "../../assets/bicycleICon.gif";
 import dog from "../../assets/dogIcon.gif";
 import { CircularProgress } from "@mui/material";
+import Logo from '../../assets/Logo and describer white.png'
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import api from "../../middleware/api";
@@ -118,6 +119,10 @@ const LoginPage = () => {
 
   return (
     <div className="login-main-container">
+       <div className="login-logo-container">
+  <img src={Logo} alt="logo" className="login-logo" />
+</div>
+
       <div className="login-container">
         <form onSubmit={handleSubmit(onSubmitLoginForm)} className="login-form">
           <div className={`login-container background-common-styles ${classNames[currentImageIndex]}`}></div>
@@ -139,6 +144,7 @@ const LoginPage = () => {
             {errors.email && <span className="error-message">{errors.email.message}</span>}
           </div>
           <div className="form-group-login password-group">
+           
             <input
               type={showPassword ? "text" : "password"}
               id="password"
