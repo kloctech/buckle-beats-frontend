@@ -5,7 +5,7 @@ import { IoSearch } from "react-icons/io5";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import QrCodes from "../qr-codes/qr-codes";
-import Logo from "../../assets/roam tracker logo.svg"
+import Logo1 from '../../assets/Logo white.png'
 import RightArrow from "../../assets/right-arrow.png";
 import { useNavigate } from "react-router-dom";
 import UpdatePassword from "../update-password/update-password ";
@@ -198,7 +198,7 @@ const Hamburger = () => {
   isDesktop ? (
     < h1 className="menu-wrapper-image" style={{fontWeight:'600'}}>Settings</h1>
   ) : (
-    <img className="menu-wrapper-image" src={Logo} alt="BUKLEBEATS" />
+    <img className="menu-wrapper-image" src={Logo1} alt="BUKLEBEATS" />
 
   )
 )}
