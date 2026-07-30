@@ -79,12 +79,12 @@ const SurveyForm = ({ data }) => {
 
             <form onSubmit={handleSubmit(onSubmitAddQRForm)} className="survey-form-list">
               <div className="form-group-login textarea-group">
-                <p>For warranty purposes, where did you buy your Roam?</p>
+                <p>For warranty purposes, could you please let us know where you purchased your Roam and share the last four digits of your order number?</p>
                 <textarea
                   rows="4"
                   className="survey-form-text"
                   name="default_message"
-                  placeholder="E.g. Amazon, Roam website, Walmart, Costco, etc."
+                  placeholder="E.g. Amazon 7132 , Roam website 1203, Walmart 8882 , etc."
                   {...register("default_message", {
                     required: "This field is required",
                   })}
