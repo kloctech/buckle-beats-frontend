@@ -404,8 +404,24 @@ import { useForm } from "react-hook-form";
 import location from '../../assets/location.gif';
 import heart from '../../assets/done_heart.gif';
 import LocationShare from "../location-share/location-share";
-import { FaCheckCircle, FaWhatsapp } from "react-icons/fa"; 
+import { FaCheckCircle } from "react-icons/fa";
+import WhatsAppIcon from "../../assets/whatsapp.svg"; 
 import Cookies from 'js-cookie';
+
+const getFirstTextValue = (values) =>
+  values.find((value) => typeof value === "string" && value.trim())?.trim();
+
+const getFirstImageUrl = (...candidates) => {
+  for (const candidate of candidates) {
+    if (Array.isArray(candidate)) {
+      const nestedUrl = getFirstImageUrl(...candidate);
+      if (nestedUrl) return nestedUrl;
+    } else if (typeof candidate === "string" && candidate.trim()) {
+      return candidate.trim();
+    }
+  }
+  return "";
+};
 
 const LostQRCode = () => {
   const [lostData, setLostdata] = useState(null);
@@ -418,9 +434,51 @@ const LostQRCode = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const hasScanned = useRef(false);
   const navigate = useNavigate();
-console.log(lostData,'lost data')
-  // Safely extract the item/QR code name
-  const qrCodeName = lostData?.owner?.name || "item";
+
+  const matchedQrCode = lostData?.owner?.qrCodes?.find(
+    (qrCode) => qrCode?.qrCodeId === id
+  );
+
+  const qrCodeName =
+    getFirstTextValue([
+      matchedQrCode?.qrCodeName,
+      lostData?.owner?.qrCodeName,
+      lostData?.owner?.qrcodeName,
+      lostData?.owner?.qr_code_name,
+      lostData?.owner?.qrName,
+      lostData?.owner?.itemName,
+      lostData?.owner?.item_name,
+      lostData?.qrCode?.name,
+      lostData?.qrCode?.qrCodeName,
+      lostData?.qrcode?.name,
+      lostData?.qr_code?.name,
+      lostData?.name,
+      lostData?.itemName,
+    ]) || "item";
+
+  const registeredImageUrl = getFirstImageUrl(
+    matchedQrCode?.registeredImageUrls,
+    matchedQrCode?.registered_image_urls,
+    lostData?.owner?.registeredImageUrls,
+    lostData?.owner?.registered_image_urls,
+    lostData?.qrCode?.registeredImageUrls,
+    lostData?.qrCode?.registered_image_urls,
+    lostData?.registered_image_urls,
+    matchedQrCode?.registeredImageUrl,
+    matchedQrCode?.registered_image_url,
+    lostData?.owner?.registeredImageUrl,
+    lostData?.owner?.registered_image_url,
+    lostData?.qrCode?.registeredImageUrl,
+    lostData?.qrCode?.registered_image_url,
+    lostData?.registered_image_url,
+    matchedQrCode?.imageUrl,
+    matchedQrCode?.image_url,
+    lostData?.owner?.imageUrl,
+    lostData?.owner?.image_url,
+    lostData?.qrCode?.imageUrl,
+    lostData?.qrCode?.image_url,
+    lostData?.image_url
+  );
 
   const getDeviceInfo = () => {
     const userAgent = navigator.userAgent;
@@ -437,7 +495,7 @@ console.log(lostData,'lost data')
   const getWhatsAppLink = (phone) => {
     if (!phone) return "#";
     const cleanPhone = phone.replace(/[^\d]/g, ""); 
-    const message = encodeURIComponent(`Hello! I found your lost "${qrCodeName}" via RoamSmartTracker!`);
+    const message = encodeURIComponent(`Hello! Your lost ${qrCodeName} was found via https://app.roamsmarttracker.com/`);
     return `https://api.whatsapp.com/send/?phone=${cleanPhone}&text=${message}&type=phone_number&app_absent=0`;
   };
 
@@ -631,6 +689,11 @@ console.log(lostData,'lost data')
               )}
 
               <h3 className="lostqrcode-title">Thank You for Your Kindness!</h3>
+              {registeredImageUrl && (
+                <div className="lostqrcode-registered-image">
+                  <img src={registeredImageUrl} alt={qrCodeName} />
+                </div>
+              )}
               <h4>This {qrCodeName} has been lost.</h4>
               {!lostData?.owner?.qrIsLost && (
                 <>
@@ -719,7 +782,7 @@ console.log(lostData,'lost data')
                         target="_blank"
                         rel="nofollow noopener noreferrer"
                       >
-                        <FaWhatsapp className="lostqrcode-list-icon" size={22} />
+                        <img src={WhatsAppIcon} alt="WhatsApp" className="whatsapp-icon" />
                         <span>Chat on WhatsApp</span>
                       </a>
                     </li>

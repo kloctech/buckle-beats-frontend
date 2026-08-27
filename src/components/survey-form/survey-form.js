@@ -35,26 +35,42 @@ const SurveyForm = ({ data }) => {
   };
 
   const onSubmitAddQRForm = async (formData) => {
-    data.mobile_number = `${data.country_code} ${data.mobile_number}`;
-    data.survey_ans = formData.default_message;
-    delete data.country_code;
+    const payload = {
+      ...data,
+      mobile_number: `${data.country_code} ${data.mobile_number}`.trim(),
+      survey_ans: formData.default_message,
+    };
+    delete payload.country_code;
+
+    const imageFile = payload.image?.[0];
+    delete payload.image;
+
+    const registrationData = new FormData();
+    Object.entries(payload).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        registrationData.append(key, value);
+      }
+    });
+
+    if (imageFile) {
+      registrationData.append("image", imageFile);
+    }
 
     const API = `${process.env.REACT_APP_PRODUCTION_URL}/api/qrcode/register`;
     setLoading(true);
 
     try {
       const { ipAddress, country } = await getIpAndCountry();
-      data.ipAddress = ipAddress;
-      data.country = country;
-      const response = await api.post(API, data);
-      console.log(response);
+      registrationData.append("ipAddress", ipAddress);
+      registrationData.append("country", country);
+      await api.post(API, registrationData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       setMessage("You are all set - hooray!");
       setApiStatus(200);
       setLoading(false);
     } catch (error) {
-      console.log(error);
-
       setMessage("Something has gone wrong,don't worry. let's try again.");
       setApiStatus(500);
       setLoading(false);
@@ -79,12 +95,12 @@ const SurveyForm = ({ data }) => {
 
             <form onSubmit={handleSubmit(onSubmitAddQRForm)} className="survey-form-list">
               <div className="form-group-login textarea-group">
-                <p>For warranty purposes, where did you buy your Roam?</p>
+                <p>For warranty purposes, could you please let us know where you purchased your Roam and share the last four digits of your order number?</p>
                 <textarea
                   rows="4"
                   className="survey-form-text"
                   name="default_message"
-                  placeholder="E.g. Amazon, Roam website, Walmart, Costco, etc."
+                  placeholder="E.g. Amazon 7132 , Roam website 1203, Walmart 8882 , etc."
                   {...register("default_message", {
                     required: "This field is required",
                   })}

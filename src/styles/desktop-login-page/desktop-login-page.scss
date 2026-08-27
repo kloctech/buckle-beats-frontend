@@ -247,6 +247,9 @@
         color:#343D3C;
 
       }
+      .lostqrcode-registered-image img{
+        border: 1px solid #d9d9d9;
+      }
       .lostqrcode-main-container p , .lostqrcode-content p{
         
         color:#343D3C;
@@ -572,6 +575,25 @@
     overflow: auto;
     scrollbar-width: none;
   }
+  .add-qr .login-container {
+    justify-content: flex-start;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .add-qr .qr-image-upload {
+    width: 100%;
+  }
+  .add-qr .qr-image-upload-label {
+    background-color: #f4f4f4;
+    border: 1px solid #d9d9d9;
+  }
+  .add-qr .qr-image-upload-hint,
+  .add-qr .qr-image-upload-filename {
+    color: #343D3C;
+  }
+  .add-qr .qr-image-upload-limit {
+    color: #6b7372;
+  }
   .edit-qr .header-container{
     margin: 15px 0;
   }
@@ -619,10 +641,53 @@
     width: 15vw;
     height: 15vw;
   }
+  .survey-form-list {
+    text-align: center;
+  }
+  .survey-form-list .form-group-login.textarea-group {
+    align-items: center;
+  }
   .survey-form-list .form-group-login p{
     color: #343D3C;
     margin: 3rem auto 1rem;
     width: 85%;
+    text-align: center;
+  }
+  .survey-form-list .form-group-login textarea {
+    text-align: center;
+  }
+  .form-icon.login-container {
+    align-items: center;
+    justify-content: center;
+  }
+  .form-icon.login-container .form-animation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 260px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .form-icon.login-container .form-animation-image {
+    width: 240px !important;
+    height: 240px !important;
+    margin: 0 auto 0.5rem !important;
+    display: grid;
+    place-items: center;
+  }
+  .form-icon.login-container .form-animation-image .form-animation-bg {
+    inset: 0;
+    background-position: center center;
+  }
+  .form-icon.login-container .form-animation-image img {
+    margin: 0 auto;
+    display: block;
+    width: 78%;
+    height: 78%;
+    object-fit: contain;
+    object-position: center;
   }
   .survey-form-list button, .send-invite-form button {
     border-width: 0;
