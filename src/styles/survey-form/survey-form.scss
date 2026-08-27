@@ -16,6 +16,11 @@
 
 .form-group-login {
   width: 100%;
+  &.textarea-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   &.textarea-group textarea {
     width: calc(100%);
     padding: 10px;
@@ -25,6 +30,7 @@
     resize: none;
     font-family: Lexend;
     font-size: 17.84px;
+    text-align: center;
     &::placeholder {
       transform: translateY(25px);
       text-align: center;
@@ -75,6 +81,11 @@
 
 .form-animation {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   // h1 {
   //   visibility: hidden;
   // }
@@ -88,9 +99,15 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    flex-shrink: 0;
     img {
       position: relative;
       width: 55%;
+      height: 55%;
+      margin: 0 auto;
+      display: block;
+      object-fit: contain;
+      object-position: center;
     }
   }
   &-bg {

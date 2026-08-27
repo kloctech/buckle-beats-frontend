@@ -8,6 +8,7 @@ import SurveyForm from "../survey-form/survey-form";
 import api from "../../middleware/api";
 import countryCodes from "../../data/countryCodes.json";
 import { emailRegex } from "../../utils/constants";
+import { MdAddPhotoAlternate } from "react-icons/md";
 
 const AddQRCode = () => {
   const [loading] = useState(false);
@@ -17,6 +18,7 @@ const AddQRCode = () => {
   const [query, setQuery] = useState(""); // for filtering + displaying
   const [filteredCodes, setFilteredCodes] = useState(countryCodes);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [imagePreview, setImagePreview] = useState("");
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -26,6 +28,7 @@ const AddQRCode = () => {
     handleSubmit,
     setValue,
     watch,
+    trigger,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -35,13 +38,34 @@ const AddQRCode = () => {
       mobile_number: "",
       category: "",
       default_message: "",
+      image: null,
     },
   });
+
+  const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+  const selectedImage = watch("image");
+  const selectedImageFile = selectedImage?.[0];
+  const isValidSelectedImage =
+    !!selectedImageFile &&
+    selectedImageFile.type.startsWith("image/") &&
+    selectedImageFile.size <= MAX_IMAGE_SIZE;
 
   const onSubmitAddQRForm = async (formData) => {
     setData(formData);
     setNextPage(true);
   };
+
+  useEffect(() => {
+    if (!isValidSelectedImage) {
+      setImagePreview("");
+      return undefined;
+    }
+
+    const previewUrl = URL.createObjectURL(selectedImageFile);
+    setImagePreview(previewUrl);
+
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [isValidSelectedImage, selectedImageFile]);
 
   // ✅ put functions inside useEffect to avoid missing dependency warning
   useEffect(() => {
@@ -103,6 +127,54 @@ const AddQRCode = () => {
             className="login-form"
           >
             <h1 className="welcome-heading">Add QR Details</h1>
+
+            <div className="qr-image-upload">
+              <label className="qr-image-upload-label" htmlFor="qr-image">
+                {imagePreview ? (
+                  <img src={imagePreview} alt="Selected QR item" />
+                ) : (
+                  <span className="qr-image-upload-placeholder">
+                    <MdAddPhotoAlternate size={58} />
+                  </span>
+                )}
+              </label>
+              {isValidSelectedImage ? (
+                <div className="qr-image-upload-meta">
+                  <p className="qr-image-upload-filename" title={selectedImageFile.name}>
+                    {selectedImageFile.name}
+                  </p>
+                  <label htmlFor="qr-image" className="qr-image-upload-replace">
+                    Replace
+                  </label>
+                </div>
+              ) : (
+                <div className="qr-image-upload-meta">
+                  <p className="qr-image-upload-hint">Add image</p>
+                  <p className="qr-image-upload-limit">Max file size 5 MB</p>
+                </div>
+              )}
+              <input
+                id="qr-image"
+                type="file"
+                accept="image/*"
+                {...register("image", {
+                  validate: {
+                    fileType: (files) =>
+                      !files?.[0] ||
+                      files[0].type.startsWith("image/") ||
+                      "Please upload a valid image",
+                    fileSize: (files) =>
+                      !files?.[0] ||
+                      files[0].size <= MAX_IMAGE_SIZE ||
+                      "Image must be less than 5 MB",
+                  },
+                  onChange: () => trigger("image"),
+                })}
+              />
+              {errors.image && (
+                <span className="qr-image-upload-error">{errors.image.message}</span>
+              )}
+            </div>
 
             {/* --- NAME --- */}
             <div className="form-group-login name-group">

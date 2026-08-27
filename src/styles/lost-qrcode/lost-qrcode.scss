@@ -21,6 +21,20 @@
     margin-left: 5rem;
   }
 
+  &-registered-image {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+
+    img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      background-color: #fff;
+    }
+  }
+
   &-main-container {
 
     padding: 0 2rem;
@@ -78,6 +92,18 @@
       filter: brightness(0) saturate(100%) invert(97%) sepia(6%) saturate(7341%) hue-rotate(315deg) brightness(104%) contrast(95%);;
 
      }
+
+     .whatsapp-icon {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      filter: none;
+     }
+
+     .lostqrcode-list-icon {
+      flex-shrink: 0;
+      filter: brightness(0) saturate(100%) invert(97%) sepia(6%) saturate(7341%) hue-rotate(315deg) brightness(104%) contrast(95%);
+     }
       span {
         font-size: 15.24px;
         font-weight: 500;
@@ -127,4 +153,13 @@
   // margin-left: auto;
   margin-left: 6rem;
   margin-bottom: 1rem;
+}
+.whatsapp-link {
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s ease-in-out;
+  
+  &:hover {
+    opacity: 0.8;
+  }
 }

@@ -35,26 +35,42 @@ const SurveyForm = ({ data }) => {
   };
 
   const onSubmitAddQRForm = async (formData) => {
-    data.mobile_number = `${data.country_code} ${data.mobile_number}`;
-    data.survey_ans = formData.default_message;
-    delete data.country_code;
+    const payload = {
+      ...data,
+      mobile_number: `${data.country_code} ${data.mobile_number}`.trim(),
+      survey_ans: formData.default_message,
+    };
+    delete payload.country_code;
+
+    const imageFile = payload.image?.[0];
+    delete payload.image;
+
+    const registrationData = new FormData();
+    Object.entries(payload).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        registrationData.append(key, value);
+      }
+    });
+
+    if (imageFile) {
+      registrationData.append("image", imageFile);
+    }
 
     const API = `${process.env.REACT_APP_PRODUCTION_URL}/api/qrcode/register`;
     setLoading(true);
 
     try {
       const { ipAddress, country } = await getIpAndCountry();
-      data.ipAddress = ipAddress;
-      data.country = country;
-      const response = await api.post(API, data);
-      console.log(response);
+      registrationData.append("ipAddress", ipAddress);
+      registrationData.append("country", country);
+      await api.post(API, registrationData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       setMessage("You are all set - hooray!");
       setApiStatus(200);
       setLoading(false);
     } catch (error) {
-      console.log(error);
-
       setMessage("Something has gone wrong,don't worry. let's try again.");
       setApiStatus(500);
       setLoading(false);

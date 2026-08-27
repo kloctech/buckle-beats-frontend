@@ -8,6 +8,14 @@ import { useNavigate } from "react-router-dom";
 import api from "../../middleware/api";
 import DefaultQRCode from "../../assets/DefaultQrcode.png";
 
+const getQrImageSrc = (qrCodeData) => {
+  const registeredUrl =
+    qrCodeData?.registered_image_urls?.find(Boolean) ||
+    qrCodeData?.registered_image_url;
+
+  return registeredUrl || qrCodeData?.image_url || DefaultQRCode;
+};
+
 const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, updateQrCodeStatus }) => {
   const [qrcode, setQRcode] = useState(null);
   const [activeId, setActiveId] = useState(null);
@@ -51,7 +59,7 @@ const QrCodeCard = ({ qrCodeData, getQrCodesWithOutSearch, page, searchQuery, up
   return (
     <div className="qr-code-card" >
         <img 
-          src={ qrCodeData.image_url || DefaultQRCode} 
+          src={getQrImageSrc(qrCodeData)} 
           alt={qrCodeData?.name || "QR Code"} 
           className="qr-code-image" 
         />
